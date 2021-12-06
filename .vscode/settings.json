@@ -1,0 +1,8 @@
+{
+    "python.pythonPath": "C:\\Users\\loryb\\anaconda3\\python.exe",
+    "cSpell.words": [
+        "libsvm"
+    ],
+    "jupyter.jupyterServerType": "local",
+    "cmake.configureOnOpen": false
+}
