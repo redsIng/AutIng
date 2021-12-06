@@ -1,0 +1,6 @@
+0.8065 (+/-0.012) for {'replacer__n_neighbors': 2}
+
+Best parameters:
+{'replacer__n_neighbors': 2}
+
+Best score: 0.8065

@@ -1,0 +1,157 @@
+\babel@toc {italian}{}
+\babel@toc {italian}{}
+\contentsline {chapter}{\numberline {1}Introduzione}{5}{}%
+\contentsline {subsection}{\numberline {1.0.1}Definizioni}{5}{}%
+\contentsline {section}{\numberline {1.1}Struttura di Rete}{5}{}%
+\contentsline {subsubsection}{Reti di Accesso}{6}{}%
+\contentsline {subsubsection}{Rete punto - punto}{6}{}%
+\contentsline {subsubsection}{Rete Broadcast}{7}{}%
+\contentsline {subsubsection}{Mezzi fisici}{7}{}%
+\contentsline {subsubsection}{Accesso residenziale}{8}{}%
+\contentsline {paragraph}{DSL}{8}{}%
+\contentsline {paragraph}{Interner via cavo}{9}{}%
+\contentsline {paragraph}{FTTx}{10}{}%
+\contentsline {paragraph}{FTTx - Reti PON}{11}{}%
+\contentsline {paragraph}{Accesso aziendale}{11}{}%
+\contentsline {paragraph}{Accesso Wireless}{12}{}%
+\contentsline {subsubsection}{Hosts}{12}{}%
+\contentsline {subsubsection}{Nucleo di rete: Network Core}{12}{}%
+\contentsline {paragraph}{Commutazione a circuito: switching circuit}{13}{}%
+\contentsline {paragraph}{Commutazione a pacchetto: packet switching}{14}{}%
+\contentsline {paragraph}{Router}{16}{}%
+\contentsline {paragraph}{Commutazione a pacchetto vs Commutazione a circuito}{16}{}%
+\contentsline {paragraph}{Packet switching vs Message switching}{16}{}%
+\contentsline {paragraph}{Virtual Circuit Network}{17}{}%
+\contentsline {paragraph}{Datagram Network - Rete a datagramma}{17}{}%
+\contentsline {subsubsection}{Struttura di Internet: una reti di reti}{18}{}%
+\contentsline {subsubsection}{Ritardi, perdite e throughput nelle reti a commutazione di pacchetto}{20}{}%
+\contentsline {paragraph}{Ritardo di elaborazione}{21}{}%
+\contentsline {paragraph}{Ritardo di accodamento}{21}{}%
+\contentsline {paragraph}{Ritardo di trasmissione}{21}{}%
+\contentsline {paragraph}{Ritardo di propagazione}{22}{}%
+\contentsline {paragraph}{Ritardo trasmissione vs Ritardo propagazione}{22}{}%
+\contentsline {paragraph}{Ritardo di accodamento e perdita dei pacchetti}{22}{}%
+\contentsline {paragraph}{Perdita di pacchetti}{22}{}%
+\contentsline {subsubsection}{Throughput}{22}{}%
+\contentsline {section}{\numberline {1.2}Livelli dei protocolli e loro modelli di servizio}{23}{}%
+\contentsline {subsection}{\numberline {1.2.1}Entit{\`a}}{25}{}%
+\contentsline {subsection}{\numberline {1.2.2}Servizi}{25}{}%
+\contentsline {subsection}{\numberline {1.2.3}(N)-Protocol}{26}{}%
+\contentsline {subsection}{\numberline {1.2.4}Protocol Data Unit (PDU)}{26}{}%
+\contentsline {subsection}{\numberline {1.2.5}Modello OSI}{27}{}%
+\contentsline {paragraph}{Internet Protocol Stack}{28}{}%
+\contentsline {chapter}{\numberline {2}Application Layer}{33}{}%
+\contentsline {section}{\numberline {2.1}Architettura Applicazione di Rete}{33}{}%
+\contentsline {section}{\numberline {2.2}Comunicazione tra processi}{34}{}%
+\contentsline {paragraph}{Processi Client and Server}{34}{}%
+\contentsline {paragraph}{Interfaccia fra i processi e la rede del computer}{34}{}%
+\contentsline {subsubsection}{Indirizzamento dei processi}{34}{}%
+\contentsline {subsubsection}{Servizio di trasporto disponibile alle applicazioni}{35}{}%
+\contentsline {paragraph}{Trasferimento affidabile di dati:}{35}{}%
+\contentsline {paragraph}{Throughput}{35}{}%
+\contentsline {paragraph}{Timing}{35}{}%
+\contentsline {paragraph}{Sicurezza}{36}{}%
+\contentsline {subsubsection}{Servizi di trasporto offerti da Internet}{36}{}%
+\contentsline {paragraph}{Servizi TCP}{36}{}%
+\contentsline {paragraph}{Servizi di UDP}{36}{}%
+\contentsline {subsection}{\numberline {2.2.1}Web e HTTP}{36}{}%
+\contentsline {subsubsection}{Web}{36}{}%
+\contentsline {subsection}{\numberline {2.2.2}Protocollo HTTP}{37}{}%
+\contentsline {subsubsection}{Connessione HTTP}{37}{}%
+\contentsline {paragraph}{Connessione HTTP non persistente}{38}{}%
+\contentsline {paragraph}{Difetti connessioni HTTP non persistenti}{39}{}%
+\contentsline {paragraph}{Connessioni HTTP Persistenti}{39}{}%
+\contentsline {subsubsection}{Messaggio di richiesta HTTP}{39}{}%
+\contentsline {subsubsection}{Messaggio di risposta HTTP}{40}{}%
+\contentsline {subsubsection}{User-Server Interaction: Cookies}{41}{}%
+\contentsline {subsubsection}{Web Caching}{42}{}%
+\contentsline {subsubsection}{Get Condizionale}{43}{}%
+\contentsline {subsubsection}{Trasferimento di file: FTP}{44}{}%
+\contentsline {paragraph}{HTTP e FTP a contronto}{44}{}%
+\contentsline {subsubsection}{Comani e risposte FTP}{45}{}%
+\contentsline {section}{\numberline {2.3}Posta elettronica}{46}{}%
+\contentsline {paragraph}{SMTP}{46}{}%
+\contentsline {subsection}{\numberline {2.3.1}Confronto SMTP e HTTP}{47}{}%
+\contentsline {subsection}{\numberline {2.3.2}Formato messaggi mail}{48}{}%
+\contentsline {subsection}{\numberline {2.3.3}Mail Access Protocoll}{48}{}%
+\contentsline {paragraph}{POP3 - Post Office Protocol}{49}{}%
+\contentsline {paragraph}{IMAP}{50}{}%
+\contentsline {paragraph}{HTTP}{50}{}%
+\contentsline {section}{\numberline {2.4}DNS - Domain Name System}{50}{}%
+\contentsline {subsection}{\numberline {2.4.1}Servizi forniti dal DNS}{50}{}%
+\contentsline {paragraph}{Database distribuito gerarchicamente}{51}{}%
+\contentsline {paragraph}{DNS Caching}{52}{}%
+\contentsline {subsection}{\numberline {2.4.2}DNS Records and Messages}{53}{}%
+\contentsline {paragraph}{DNS Records}{53}{}%
+\contentsline {paragraph}{DNS Messages}{53}{}%
+\contentsline {paragraph}{Insert Records into the DNS Database}{54}{}%
+\contentsline {section}{\numberline {2.5}Peer-to-Peer (P2P) File Distribution}{54}{}%
+\contentsline {paragraph}{Scalablit{\`a} di un'architettura P2P}{54}{}%
+\contentsline {paragraph}{BitTorrent}{56}{}%
+\contentsline {chapter}{\numberline {3}Transport Layer}{73}{}%
+\contentsline {section}{\numberline {3.1}Introduzione}{73}{}%
+\contentsline {section}{\numberline {3.2}Servizi del livello di trasporto}{73}{}%
+\contentsline {section}{\numberline {3.3}Relazione tra livello di trasporto e di rete}{75}{}%
+\contentsline {section}{\numberline {3.4}Protocolli di livello di trasporto in Internet}{75}{}%
+\contentsline {section}{\numberline {3.5}Multiplexing e Demultiplexing}{75}{}%
+\contentsline {subsection}{\numberline {3.5.1}Connectionless Multiplexing e Demultiplexing}{76}{}%
+\contentsline {subsection}{\numberline {3.5.2}Connection-Oriented Multiplexing e Demultiplexing}{77}{}%
+\contentsline {subsection}{\numberline {3.5.3}Connectionless Transport: UDP}{77}{}%
+\contentsline {subsubsection}{UDP Segment Structure}{78}{}%
+\contentsline {subsubsection}{UDP Checksum}{78}{}%
+\contentsline {subsection}{\numberline {3.5.4}Principi di trasferimento dati affidabile}{79}{}%
+\contentsline {subsubsection}{Reliabe Data Transfer over a Perfectly Reliable Channel: \text {{\itshape {rdt1.0}}}}{79}{}%
+\contentsline {subsubsection}{Reliable Data Transfer over a Channel with Bit Errors: \text {{\itshape {rdt2.0}}}}{80}{}%
+\contentsline {subsubsection}{Reliable Data Transfer over a Channel with Bit and ACK Errors: \text {{\itshape {rdt2.1}}}}{81}{}%
+\contentsline {subsubsection}{Reliable Data Transfer, Bit and ACK Errors, NACK-free: \text {{\itshape {rdt2.2}}}}{82}{}%
+\contentsline {subsubsection}{Reliable Data Transfer over a Channel with Bit Errors: \text {{\itshape {rdt3.0}}}}{82}{}%
+\contentsline {section}{\numberline {3.6}Pipelined Protocol}{84}{}%
+\contentsline {subsection}{\numberline {3.6.1}Go-Back-N(GBN)}{85}{}%
+\contentsline {subsection}{\numberline {3.6.2}Selective Repeat (SR)}{87}{}%
+\contentsline {section}{\numberline {3.7}Connessione TCP}{88}{}%
+\contentsline {subsection}{\numberline {3.7.1}Struttura Segmento TCP}{89}{}%
+\contentsline {subsection}{\numberline {3.7.2}Numeri di sequenza e numeri di ACK}{90}{}%
+\contentsline {subsection}{\numberline {3.7.3}Stima RTT e Timeout}{90}{}%
+\contentsline {paragraph}{Stima di Round Trip Time RTT}{91}{}%
+\contentsline {paragraph}{Impostare e Gestire l'intervallo di Ritrasmissione}{91}{}%
+\contentsline {subsection}{\numberline {3.7.4}Trasferimento Affidabile di Dati}{92}{}%
+\contentsline {subsection}{\numberline {3.7.5}Fast Retrasmit}{92}{}%
+\contentsline {subsection}{\numberline {3.7.6}Flow Control}{93}{}%
+\contentsline {subsection}{\numberline {3.7.7}TCP Connection Management}{94}{}%
+\contentsline {subsection}{\numberline {3.7.8}Principi di Controllo di Congestione}{96}{}%
+\contentsline {subsubsection}{Cause e costo della congestione}{96}{}%
+\contentsline {paragraph}{Scenario 1: 2 mittenti e un router con buffer infiniti}{96}{}%
+\contentsline {paragraph}{Scenario 2: 2 mittenti e un router con buffer finiti}{96}{}%
+\contentsline {paragraph}{Scenario 3: 4 mittenti, router con buffer finito e molteplici path}{97}{}%
+\contentsline {subsection}{\numberline {3.7.9}Approcci al controllo di congestione}{98}{}%
+\contentsline {subsection}{\numberline {3.7.10}Controllo di congestione TCP}{99}{}%
+\contentsline {subsubsection}{Controllo di Congestione Classico}{99}{}%
+\contentsline {subsubsection}{Slow Start}{100}{}%
+\contentsline {subsubsection}{Fast Recovery}{101}{}%
+\contentsline {subsection}{\numberline {3.7.11}Controllo di congestion TCP: retrospettiva}{101}{}%
+\contentsline {subsection}{\numberline {3.7.12}Fairness}{101}{}%
+\contentsline {chapter}{\numberline {4}Network Layer}{127}{}%
+\contentsline {section}{\numberline {4.1}Introduzione}{127}{}%
+\contentsline {section}{\numberline {4.2}Control Plane}{128}{}%
+\contentsline {subsection}{\numberline {4.2.1}Control Plane: Approccio SDN }{128}{}%
+\contentsline {section}{\numberline {4.3}Network Service Model}{128}{}%
+\contentsline {section}{\numberline {4.4}Architettura di un Router}{129}{}%
+\contentsline {section}{\numberline {4.5}Switching}{130}{}%
+\contentsline {section}{\numberline {4.6}Output Port Processing}{131}{}%
+\contentsline {subsection}{\numberline {4.6.1}Dove si necessita di accodamento?}{131}{}%
+\contentsline {section}{\numberline {4.7}Input Queueing}{132}{}%
+\contentsline {section}{\numberline {4.8}Output Queueing}{132}{}%
+\contentsline {section}{\numberline {4.9}Quanto deve essere grande la bufferizzazione?}{133}{}%
+\contentsline {section}{\numberline {4.10}Formato di un Datagramma}{133}{}%
+\contentsline {section}{\numberline {4.11}IP Addressing}{135}{}%
+\contentsline {section}{\numberline {4.12}Ottenere un blocco di indirizzi}{136}{}%
+\contentsline {subsection}{\numberline {4.12.1}Protocollo di Configurazione Dinamico dell'Host}{136}{}%
+\contentsline {section}{\numberline {4.13}Ottenere un Datagramma da sorgente a destinazione}{138}{}%
+\contentsline {section}{\numberline {4.14}Network Address Translation (NAT) }{138}{}%
+\contentsline {chapter}{\numberline {5}Network Layer: Control Plane}{145}{}%
+\contentsline {section}{\numberline {5.1}Introduzione}{145}{}%
+\contentsline {section}{\numberline {5.2}Routing Algorithm}{146}{}%
+\contentsline {subsection}{\numberline {5.2.1}Introduzione ai Grafi}{147}{}%
+\contentsline {subsection}{\numberline {5.2.2}Classificazione Algoritmi di Routing}{147}{}%
+\contentsline {subsection}{\numberline {5.2.3}Algoritmo di Routing Link-State}{148}{}%
+\contentsline {subsection}{\numberline {5.2.4}Algoritmo di routing Distance-Vector(DV) }{151}{}%

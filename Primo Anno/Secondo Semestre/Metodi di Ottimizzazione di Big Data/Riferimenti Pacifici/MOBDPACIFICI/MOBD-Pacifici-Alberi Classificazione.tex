@@ -1,0 +1,1155 @@
+\documentclass{article}
+\usepackage[italian]{babel}
+\usepackage{amsmath,amssymb,graphicx,latexsym,theorem}
+
+%%%%%%%%%% Start TeXmacs macros
+\newcommand{\assign}{:=}
+\newcommand{\chapter}[1]{\medskip\bigskip--\noindent\textbf{\huge #1}}
+\newcommand{\nin}{\not\in}
+\newcommand{\textdots}{...}
+\newcommand{\tmdummy}{$\mbox{}$}
+\newcommand{\tmmathbf}[1]{\ensuremath{\boldsymbol{#1}}}
+\newcommand{\tmop}[1]{\ensuremath{\operatorname{#1}}}
+\newcommand{\tmstrong}[1]{\textbf{#1}}
+\newcommand{\tmtextbf}[1]{\text{{\bfseries{#1}}}}
+\newcommand{\tmtextup}[1]{\text{{\upshape{#1}}}}
+\newenvironment{itemizeminus}{\begin{itemize} \renewcommand{\labelitemi}{$-$}\renewcommand{\labelitemii}{$-$}\renewcommand{\labelitemiii}{$-$}\renewcommand{\labelitemiv}{$-$}}{\end{itemize}}
+\newenvironment{proof}{\noindent\textbf{Proof\ }}{\hspace*{\fill}$\Box$\medskip}
+\newenvironment{tmindent}{\begin{tmparmod}{1.5em}{0pt}{0pt}}{\end{tmparmod}}
+\newenvironment{tmparmod}[3]{\begin{list}{}{\setlength{\topsep}{0pt}\setlength{\leftmargin}{#1}\setlength{\rightmargin}{#2}\setlength{\parindent}{#3}\setlength{\listparindent}{\parindent}\setlength{\itemindent}{\parindent}\setlength{\parsep}{\parskip}} \item[]}{\end{list}}
+\newenvironment{tmparsep}[1]{\begingroup\setlength{\parskip}{#1}}{\endgroup}
+\newcounter{tmcounter}
+\newcommand{\custombinding}[1]{%
+  \setcounter{tmcounter}{#1}%
+  \addtocounter{tmcounter}{-1}%
+  \refstepcounter{tmcounter}}
+\newtheorem{definition}{Definition}
+{\theorembodyfont{\rmfamily}\newtheorem{example}{Example}}
+\newtheorem{notation}{Notation}
+{\theorembodyfont{\rmfamily}\newtheorem{note}{Note}}
+{\theorembodyfont{\rmfamily}\newtheorem{remark}{Remark}}
+%%%%%%%%%% End TeXmacs macros
+
+\begin{document}
+
+\part{Alberi di decisione}
+
+{\tableofcontents}
+
+{\center{\chapter{Alberi decisionali per la classificazione}}}
+
+\section{Introduzione}
+
+\paragraph{Apprendimento statistico}
+
+L'\tmtextbf{apprendimento statistico} sono delle tipologie di apprendimento
+che pu{\`o} essere svolta sia in maniera automatica sia tramite ML (Machine
+Learning).
+
+In parciolare si compone:
+\[ x^{(i)} \in \mathbb{R}^p \rightarrow \tmmathbf{\tmop{osservazione}}
+   (\tmop{punto}) \]
+\[ y^{(i)} \in \mathbb{R} \rightarrow \tmmathbf{\tmop{risposta}} \quad
+   \tmop{con} \quad i = 1, \ldots, n \]
+Definiamo il piano/spazio ottenuto dalle osservazione, \tmtextbf{spazio delle
+feature}.
+
+Il nostro obiettivo {\`e} quello di ottenere la funzione di uscita in funzione
+delle osserviazioni date. Questo processo viene detto \tmtextbf{inferire}.
+Formalmente:
+\[ y = f (x) \quad \tmop{con} x  \in \mathbb{R}^p \]
+Riassumendo il nostro problema, noti:
+\begin{itemize}
+  \item $(x^{(i)}, y^{(i)}) \tmop{con} i = 1, 2, \ldots, n$ osservazioni
+  disponibili$\rightarrow$\tmtextbf{Training set};
+  
+  \item $x^{(i)} \in \mathbb{R}^p \assign$variabili di input indipendenti o
+  anche dette \tmtextbf{feature};
+\end{itemize}
+Ottenere:
+\begin{itemize}
+  \item $y \in \mathbb{R} \assign$variabile di output / \tmtextbf{Class}
+  \tmtextbf{/ etichetta / label}.
+\end{itemize}
+In altre parole, dato $x \neq x^{(i)}$ qual {\`e} la sua uscita? Per
+rispondere a questa domanda {\`e} necessario che la $f (x)$ resistuisca
+esattamente $y^i = f (x^{(i)})$, cio{\`e} che ci sia un \tmtextbf{fitting} con
+i dati del \tmtextbf{TS (Training Set)}.
+
+Un modello di questo tipo {\`e} un \tmtextbf{modello di inferenza/predittivi}
+poich{\'e} permettono di intuire la prossima uscita e producono una $y$ data
+una certa $x$.
+
+\
+
+\paragraph{Apprendimento supervisionato}
+
+L'\tmtextbf{apprendimento supervisionato} {\`e} un tipo di apprendimento per
+cui l'uscita $y$ {\`e} associata un punto dello spazio delle feature.
+Graficamente:
+
+{\center{\raisebox{0.0\height}{\includegraphics[width=7.66724058769513cm,height=5.22766627312082cm]{MOBD-Pacifici-Alberi
+Classificazione-1.pdf}}}}
+
+\paragraph{Apprendimento non supervisionato}
+
+L'\tmtextbf{apprendimento non supervisionato} {\`e} caratterizzato dal fatto
+che non esiste in corrispondendo di una osservazione nello spazio delle
+feature la relativa uscita.
+
+\paragraph{Response}
+
+Il \tmtextbf{response} {\`e} l'uscita $y$ che si ottiene dal fitting con il
+TS.
+\begin{itemize}
+  La response pu{\`o} essere di due tiplogie:
+  
+  \item {\underline{qualitativa:}} la \tmtextbf{response} {\`e} discreta e
+  finita e il suo risultato {\`e} una \tmtextbf{classificazione} di punti in
+  classi/label. Si cerca quindi di assegnare una classe ad una nuova
+  osservazione conoscendo i dati a disposizione.
+  
+  Sono metodi basati su \tmtextbf{alberi di decisione.}
+  
+  \item {\underline{quantitativa:}} tipicamente {\`e} una uscita continua ed i
+  metodi pi{\`u} utilizzati sono la Regressione, Super Vector Machine, Reti
+  Neurali etc..
+\end{itemize}
+Quindi il nostre Data Set sar{\`a} composto dalle righe che corrispondono alle
+osservazioni, dalle colonne che sono gli attributi delle varie osservazioni ed
+a ogni riga, a cui corrispondere un'osservazone con i suoi attributi, {\`e}
+associrata una etichetta.
+
+\section{Alberi Decisionali}
+
+Gli alberi decisionali applicano ricorsivamente metodi euristici per creare
+delle divisioni nello spazio delle feature per mettere in evidenza un certo
+aspetto del dataset.
+
+Per ottenere una lbero decisionale dato uno spazio delle feature contenente le
+osservazioni, occorre:
+\begin{itemize}
+  \item \tmtextbf{Partizionare/stratificare/segmentare} lo spazio delle
+  feature in modo tale che le partizioni siano il pi{\`u} omogenee possibile
+  in base alla prevalenza o meno di etichette uguali;
+  
+  \item Si associa a ciascuna regione un'etichetta che corrispondendo
+  all'etichetta predominante nella regione anche in presenza di regioni miste;
+  
+  \item Ipotizzando che ci arrivi una nuova osservazione, essa cadr{\`a} nello
+  spazio delle feature all'interno di una regione $R_i$ (ottenuta dalle
+  precedenti partizioni) ed assumer{\`a} l'etichetta della regione
+  corrispondente;
+  
+  \item Si delimitano i confini delle regioni $R_i$ delle osservazioni e vi si
+  assegnano dei valori;
+  
+  \item L'albero che si former{\`a} sar{\`a} costituito da \tmtextbf{nodi
+  foglia} e \tmtextbf{nodi interni}:
+  \begin{itemize}
+    \item i \tmtextbf{nodi interni}, sono i \tmtextbf{test} che ci permettono
+    di classificare le osservazioni tramite la verifica degli attributi. In
+    particolare se si esamina una sola feauture il test viene detto
+    \tmtextbf{univariato (\textbar --)}; altrimenti
+    \tmtextbf{multivariato(/);}
+    
+    \item i \tmtextbf{nodi foglia} sono i risulati della nostra
+    classificazione a cui viene associata l'etichetta della regione $R_i a
+    \tmop{cui} \tmop{appartengono}$.
+  \end{itemize}
+\end{itemize}
+{\underline{\tmtextbf{N.B.:}}}
+\begin{itemize}
+  Confronto test univariato vs test multivariato:
+  
+  \item Nel caso di test univariato si potrebbero fare errori di
+  classificazione, ma l'albero risultante {\`e} pi{\`u} semplice;
+  
+  \item Nel caso di test multivariato non vi sono errori di classificazione
+  per etichette gi{\`a} note, ma {\`e} pi{\`u} soggetto ad errori rispetto al
+  caso univariato(\tmtextbf{errore di generalizzazione}), ma l'albero presenta
+  una complessit{\`a} maggiore data la presenza di numerosi nodi;
+\end{itemize}
+Gli attributi di un albero decisionale sono di due tipi:
+\begin{itemize}
+  \item \tmtextbf{categorici}: cio{\`e} qualitativi;
+  
+  \item \tmtextbf{continui}: cio{\`e} quantitativi;
+\end{itemize}
+Dal \tmtextbf{training data} cio{\`e} l'insieme degli attributi e dell'uscita,
+si ottiene l'\tmtextbf{albero decisionale}.
+
+{\center{\begin{figure}[h]
+  \raisebox{0.0\height}{\includegraphics[width=13.2380132493769cm,height=7.76480716253444cm]{MOBD-Pacifici-Alberi
+  Classificazione-2.pdf}}
+  \caption{}
+\end{figure}}}
+
+Ovviamente l'albero risultante varia in base all'ordine in cui i test vengono
+considerati.
+
+Ogni volta in cui si fa un test, si ha una divisione die punti del TS e il
+nostro obiettivo {\`e} quello di produrre degli insiemi pi{\`u} omogenei
+possibili su cui applicare il test set.
+{\center{\begin{figure}[h]
+  \raisebox{0.0\height}{\includegraphics[width=14.8741637150728cm,height=10.3557818444182cm]{MOBD-Pacifici-Alberi
+  Classificazione-3.pdf}}
+  \caption{}
+\end{figure}}}
+
+\paragraph{Pro vs Contro alberi di decisione}
+
+\begin{itemizeminus}
+  \item Facilit{\`a} da spiegare/interpretare e si mima il comportamento
+  umani;
+  
+  \item Facile da manovrare e le variabili sono di tipo qualitativo;
+  
+  \item Strumenti meno accurati;
+  
+  \item ''Nervosismo'': piccole variazioni di dati portanto ad alberi
+  differenti.
+\end{itemizeminus}
+Per ovviare a questa ultima problematica si ricorre a dei \tmtextbf{metodi di
+aggregazione} in cui si costruiscono diversi alberi per poi essere uniti tra
+loro.
+
+\paragraph{TDITD Family}
+
+La \tmtextbf{TDITD family} compende una serie di Top-Down Induction Decision
+Trees come il CART e ID3. Questi alberi utilizzando l'induzione, cio{\`e} la
+ricorsione, per creare degli split nello spazio delle feature. Tuttavia,
+questi potrebbero non rappresentare opportunamente le caratteristiche del
+dataset.
+
+In particolare, l'albero {\`e} usato per classificare i punti del test set
+secondo gli split e le labels. Questi alberi vengono detti \tmtextbf{top-down}
+poich{\'e}, partendndo dal nodo radice, determinano uno split risolvere un
+problema di ottimizzazione, in genere di minimo rispetto ad una misura di
+inpurit{\`a}, per poi applicare la stessa regola alle foglie appena generate.
+
+Questo tipo di classificazione, inoltre, viene detta \tmtextbf{greedy},
+poich{\'e} ogni divisione viene determinata in isolamento senza considerare i
+possibili impatti che si potrebbero avere nel furuo.
+
+In conclusione, questa famiglia di alberi soffre problemi di complessit{\`a}.
+
+\paragraph{Algoritmo di Hunt}
+
+{\noindent}\begin{tmparmod}{0pt}{0pt}{0em}%
+  \begin{tmparsep}{0em}%
+    {\tmstrong{Algoritmo }}{\smallskip}
+    
+    \begin{tmindent}
+      \tmtextbf{\begin{enumerate}
+        \item INIT:
+        
+        list:=\{training set\}
+        
+        node\_list:=\{root\}, Droot:=list: insieme delle propriet{\`a} che
+        soddisfano i test
+        
+        test\_pool:=\{{\textdots}\}
+        
+        \item Pick t $\in \tmop{node} \tmop{list}$
+        
+        \item Definire $D_t \subseteq \tmop{list}$/*punti del TS che
+        raggiungono il nodo t*/
+        
+        \item IF $D_t = \oslash$ THEN t {\`e} LEAF label t as ``*'' (null)
+        
+        \item IF $D_t$ ha elementi tutti di classe K THEN t {\`e} LEAF label t
+        as k
+        
+        \item IF $D_t$ ha elementi di classi diverse THEN
+        \begin{enumerate}
+          \item Choose test $\in \tmop{test} \_ \tmop{pool}$
+          
+          \item split di $D_t$ in sottoinsiemi $D_t^1, D_t^2, \ldots, D_t^p$
+          
+          \item update node\_list:= node\_list$\cup \{ t_1 \} \cup \{ t_2 \}
+          \cup \cdots \cup \{ t_p \}$
+        \end{enumerate}
+        \item node\_list := node\_list\textbackslash\{t\}
+        
+        \item IF node\_list=$\varnothing$ THEN STOP ELSE goto 1
+      \end{enumerate}}
+    \end{tmindent}
+  \end{tmparsep}
+\end{tmparmod}{\medskip}
+
+\paragraph{Algoritmo ID3}
+
+{\noindent}\begin{tmparmod}{0pt}{0pt}{0em}%
+  \begin{tmparsep}{0em}%
+    {\tmstrong{Algoritmo ID3 (idea)
+    
+    \tmtextbf{\begin{enumerate}
+      \item Selezione una ``window'' (sottoinsieme del TS);
+      
+      \item Costruisci un DT usando i punti della window;
+      
+      \item IF $\exists$ elementi $\in$ TS\textbackslash\{window\} che non
+      sono classificati correttamente THEN
+      
+      \qquad window:=window $\cup \tmop{questi} \tmop{elementi}$
+      
+      \quad ELSE Return DT and STOP
+    \end{enumerate}}}}{\smallskip}
+    
+    \begin{tmindent}
+      \ 
+    \end{tmindent}
+  \end{tmparsep}
+\end{tmparmod}{\medskip}
+
+\section{Errori negli alberi di classificazione}
+
+\begin{itemizeminus}
+  \item \tmtextbf{Errore di classificazione:=} sDato un DT, si ha errore di
+  classificazione se il numero di elementi del TS che vengono etichettato in
+  modo corretto. Una sua minimizzazione troppo marcata non porta ad un buon
+  albero poich{\'e} soffre dell'\tmtextbf{overfitting}. In aggiunta, nel caso
+  di \tmtextbf{overfitting}, si eliminano alcuni rami per avere un albero
+  pi{\`u} ``semplice'', \tmtextbf{Tree Pruning};
+  
+  \item \tmtextbf{Errore di generalizzazione:=} {\`e} un errore atterso che il
+  DT compie sui punti $\nin \tmop{TS}$. Viene stimato con il test set.
+\end{itemizeminus}
+
+\paragraph{Indici di (in)purity}
+
+Nella TDIDT ``family'' la costruzioni dei DT, di norma si sceglie la
+\tmtextbf{strategia greedy}: in ogni passo si sceglie il test che ottimiza un
+dato criterio disinteressandosi completamente di quello che pu{\`o} accadere
+in seguito.
+
+Tuttavia, vogliamo un certo livello di \tmtextbf{omogeneit{\`a}}. A tale scopo
+si introducono i \tmtextbf{purity indices} che indica quanto un sottoinsieme
+{\`e} omogeneo, cio{\`e} composto dalle stesse classi.
+
+{\underline{\tmtextbf{Errore di classificazione}}}
+
+Sia $p_i \in [0, 1]$ frequenza con cui l'etichetta $i$ comprare nell'insieme.
+Allora:
+\[ e = 1 - \max_i \{ p_i \} \longrightarrow \arg_i \max  \{ p_i \} \assign
+   \tmop{moda} \]
+\[ 0 \leqslant e \leqslant 1 - \frac{1}{k} \quad \tmop{con} k \assign \#
+   \tmop{di} \tmop{etichette} \]
+{\underline{\tmtextbf{Gini Index}}}
+\[ g = 1 - \sum_{i = 1}^k p_i^2 \hspace{3em} 0 \leqslant g \leqslant 1 -
+   \frac{1}{k} \]
+{\underline{\tmtextbf{Entropia}}}
+\[ E = - \sum_{i = 1}^k p_i \log_k (p_i) \qquad 0 \leqslant E \leqslant 1 \]
+\begin{proof}
+  \
+  
+  Si ha omogeneit{\`a} massima $p_i = 1, p_j = 0 \qquad \forall j \neq i$
+  
+  Per $p = \frac{1}{k} \quad \forall i$, si ha che:
+  \[ E = - \sum_{i = 1}^k \left( \frac{1}{k} \right) \log_k \left( \frac{1}{k}
+     \right) = \]
+  \[ = \sum_{i = 1}^k \left( \frac{1}{k} \right)  (- 1) \log_k \left(
+     \frac{1}{k} \right) = \]
+  \[ = \sum_{i = 1}^k \left( \frac{1}{k} \right) \log_k \left( \frac{1}{k}
+     \right)^{- 1} = \sum_{i = 1}^k \left( \frac{1}{k} \right) 1 = 1 \]
+  
+\end{proof}
+
+\begin{remark}
+  Noi vogliamo usare gli indici per capire il tipo di test da utilizzare per
+  generare foglie con un grado di omogeneit{\`a} maggiore. A tale scopo, si
+  sommano gli indici di impurit{\`a} dei figli:
+\end{remark}
+
+{\center{\begin{figure}[h]
+  \raisebox{0.0\height}{\includegraphics[width=11.899334251607cm,height=5.01913616686344cm]{MOBD-Pacifici-Alberi
+  Classificazione-4.pdf}}
+  \caption{}
+\end{figure}}}
+
+\paragraph{Test}
+
+Si possono effettuare vari tipi di test, i pi{\`u} comuni sono i seguenti:
+\begin{itemize}
+  \item \tmtextbf{ERR\_TEST}=$\sum_{j \quad \tmop{figlio}} \tmop{ERR} \_
+  \tmop{CLASS} (j) ;${\underline{si sceglie il test con indice minonre}}
+  
+  \item \tmtextbf{GINI\_TEST=}$\sum_{j \tmop{figlio}} \tmop{GINI} (j) 
+  \frac{n_j}{n}$\quad{\underline{si sceglie il test con indice minore}}
+  
+  In cui $n_j $ sono i punti nel nodo figlio e n i punti nel nodo padre
+  
+  \item \tmtextbf{INFOMATION GAIN\_TEST=} misura quando si guadagna in
+  omogeneit{\`a} negli insieme con un certo tipo di test:
+  \[ \tmop{INFORMATION} \_ \tmop{GAIN} \_ \tmop{TEST} = \tmop{ENTROPY}
+     (\tmop{padre}) - \sum_{j \quad \tmop{figlio}} \left( \frac{n_j}{n}
+     \right) \tmop{ENTROPY} (j) \]
+  {\underline{Si sceglie il test con indice maggiore;}}
+  
+  \item \tmtextbf{GAIN\_RATIO\_TEST=} equivale all'information gain test, ma
+  con un andamento uniforme:
+  \[ \tmop{GAIN} \_ \tmop{RATIO} \_ \tmop{TEST} = \frac{\tmop{INFORMATION} \_
+     \tmop{GAIN} \_ \tmop{TEST}}{\left[ - \sum_{j \tmop{figlio}} \left(
+     \frac{n_j}{n} \right) \log \left( \frac{n_j}{n} \right) \right]} \]
+  
+\end{itemize}
+
+
+\
+
+\
+
+\
+
+\section{Albero Ottimo di Classificazione}
+
+\paragraph{Introduzione}
+
+\
+
+Il problema di albero decisionale ottimale tenta di risolvere il problema di
+classificazione di un dataset creando un albero decisione per ottenere
+l'ottimalit{\`a} globale.
+
+\begin{example}
+  \
+  
+  {\center{\raisebox{0.0\height}{\includegraphics[width=13.0595238095238cm,height=8.23925947789584cm]{MOBD-Pacifici-Alberi
+  Classificazione-5.pdf}}}}
+\end{example}
+
+Assumiamo:
+\begin{itemize}
+  \item Sia dato un Training Data (X,Y) contenente $n$ osservazioni $(x_i,
+  y_i), i = 1, \ldots, n$ ognuna delle quali con $p$ feature;
+  
+  \item Modello univariato, cio{\`e} i test sono effettuati su un attributo
+  alla volta;
+  
+  \item  $y_i \in \{ 1, \ldots ., k \}$ K classi/etichette;
+  
+  \item Attributi/feature continue (quantitative) $x_i \in [0, 1]^p$;
+  
+  \item Criterio: min(errore di classificazione + complexity).
+\end{itemize}
+I metodi degli alberi decisionali tentano di effettuare una partizione
+ricorsiva $[0, 1]^p$ per ottenere delle regioni disgiunte che rappresentano
+l'albero decisionale. L'albero finale sar{\`a} formato da nodi foglia e nodi
+di diramazione:
+\begin{itemize}
+  \item I \tmtextbf{nodi di diramazione} si dividono con parametri
+  \tmtextbf{$a$} e \tmtextbf{$b$}. Per nu dato punto $i$, $a^T x_i < b_i$ il
+  punto seguir{\`a} la diramazione sinistra dal noto, altrminenti la destra;
+  
+  \item I \tmtextbf{nodi foglia} sono assegnati ad una classe che
+  determiner{\`a} la predizione di tutti i punti che cadono all'interno della
+  folgia. La classe viene assegnata in base alla moda della foglia.
+\end{itemize}
+
+
+\paragraph{Decisioni del problema}
+
+Nella creazion dell'albero, in ogni iterazione, dobbiamo effettuare un numero
+fissato di decisioni:
+\begin{itemize}
+  \item In ogni nodo dobbiamo decidere se dividere o fermaci;
+  
+  \item Dopo che abbiamo scelto di fermarci in un nodo, dobbiamo scegliere
+  l'etichetta da assegnare al nuovo nodo foglia;
+  
+  \item Dopo che abbiamo scelto di dividere, dobbiamo scegliere su quali delle
+  variabili effettuare il test;
+  
+  \item Quanndo classifichiamo i punti di traning secondo la costruzione
+  dell'albero, dobbiamo decidere a quali dei nodi foglia assegnare un punto
+  tale che la struttura dell'albero viene rispettata.
+\end{itemize}
+
+\paragraph{Struttura del problema}
+
+Consideriamo il problema di costruire un albero ottimale di decisione con la
+massimo profondit{\`a} di $D.$ Dato questo parametro:
+\begin{itemize}
+  \item Albero binario completo (sotto albero di);
+  
+  \item Profondit{\`a} fiddasa D$\Longrightarrow$\# nodi $2^{D + 1} - 1
+  =\mathbb{T}$
+\end{itemize}
+\begin{notation}
+  {\tmdummy}
+  
+  \begin{itemizeminus}
+    \item $t \in \{ T_B \cup T_L \} \backslash \{ 1 \}$;
+    
+    \item $p (t) \assign$nodo padre/genitore;
+    
+    \item $A (t)$ {\`e} l'\tmtextbf{insieme degli antenatii} del nodo t;
+    
+    \item $A_L (t), A_R (t)$ sono rispettivamente gli \tmtextbf{insiemi
+    antenati di sinistra e di destra}, presi, partendo dalla radice fino a t,
+    scegliendo rispettivamente la direzione destra o sinistra.;
+    
+    \item $A (t) = A_L (t) \cup A_R (t)$
+  \end{itemizeminus}
+\end{notation}
+
+Quindi dividiamo i nodi in:
+\begin{itemize}
+  \item \tmtextbf{Branch Nodes:} sono tutti i nodi $t \in T_B = \left\{ 1, 2,
+  \ldots, \left\lfloor \frac{T}{2} \right\rfloor \right\}$ che applicano la
+  diisione nella forma $a^T x  < b $ se lo soddisfano t seguir{\`a} il ramo
+  sinistro, altrimenti il desto.
+  {\center{\begin{figure}[h]
+    \raisebox{0.0\height}{\includegraphics[width=10.2631673881674cm,height=3.10640495867769cm]{MOBD-Pacifici-Alberi
+    Classificazione-6.pdf}}
+    \caption{}
+  \end{figure}}}
+  \item \tmtextbf{Leaf Nodes}: Sono tutti i nodi $t \in T_L = \left\{
+  \left\lceil \frac{T}{2} \right\rceil, \ldots, T \right\}$ formano una classe
+  di predizione per ogni punti che cade nel nodo foglia.
+  
+  \ 
+\end{itemize}
+
+\paragraph{Variabili}
+
+Supponiamo $t \in T_B$
+\begin{itemize}
+  \item $a_t \in \mathbb{R}^p $coefficiente del test $\longrightarrow a_t \in
+  \{ 0, 1 \}^p \quad \overline{x} \in [0, 1]^p \qquad \sum_{i = 1}^p a_t = 1$
+  \[ \left( a_{t } \cdot \overline{x} \right) \in [0, 1] \]
+  \item $b_t \in \mathbb{R} \longrightarrow b_t \in [0, 1]$ {\`e} uno scalare
+  
+  \item $d_t \in \{ 0, 1 \}$ variabile che indica se si effettua o no un test
+  $d_t \in \{ 0, 1 \}$
+\end{itemize}
+\begin{note}
+  \
+  
+  L'idea {\`e} quella di non permettere la divisione in un branch node. A
+  tale scopo utilizziamo la variabile $d_t$ per sapere su quale branch node si
+  applica la divisione. Se un nodo di diramazione non applica lo split, allora
+  viene modellato con $a_t = 0$ e $b_t = 0$.
+  
+  Di conseguenza, si forzano tutti a seguire il ramo destro del nodo $t$.
+  Questo permette all'albero non smettere di crescere.
+\end{note}
+
+\paragraph{Vincoli}
+
+$\begin{enumerate}
+  \item  \sum_{i = 1}^p a_{t, i} = d_t \qquad \forall t \in T_B \quad
+  \tmop{se} \tmop{effettuo} o \tmop{no} \tmop{il} \tmop{test}
+  
+  \item  0 \leqslant b_t \leqslant d_t \hspace{4em} \forall t \in T_B
+  
+  \item  d_t \leqslant d_{p (t)} \hspace{5em} \forall t \in T_B \quad
+  \tmop{rappresenta} \tmop{la} \tmop{coerenza} \tmop{con} d_t \tmop{se}
+  \tmop{non} \tmop{si} \tmop{effetua} \tmop{lo} \tmop{SPLIT} \tmop{no}
+  \tmop{split} .
+\end{enumerate}$
+
+\
+
+\paragraph{Allocazione}
+
+Il problema di \tmtextbf{allocazione} riguarda l'assegnazione dei punti del
+training set alle foglie dell'albero decisionale e associarli agli errori che
+sono indotti da questa struttura.
+
+\paragraph{Variabili}
+
+\begin{itemize}
+  \item Indichiamo con $z_{i t} = \{ 0, 1 \} \quad i = 1, \ldots, n, t \in
+  T_L$ se il punto $x_i$ appartiene o meglio alla foglia $t$;
+  
+  \item Per verificare se una foglia possiede dei punti. Utilizziamo:
+  \[ l_t \in \{ 0, 1 \} \quad t \in T_L \quad l_t = \left\{\begin{array}{l}
+       1 \quad \tmop{se} \tmop{la} \tmop{foglia} t \tmop{ha} \tmop{assegnati}
+       \tmop{dei} \tmop{punti}\\
+       0 \quad \tmop{altrimenti}
+     \end{array}\right. \]
+  \item Il numero minimo di punti in ogni foglia $N_{\min}$,
+\end{itemize}
+
+\paragraph{Vincoli}
+
+\begin{eqnarray*}
+  z_{i t} & \in & \{ 0, 1 \} \quad i = 1, \ldots, n \quad t \in T_L\\
+  \sum_{t \in T_L} z_{i t} & = & 1 \quad i = 1, \ldots, n \quad \tmop{deve}
+  \exists \tmop{una} \tmop{foglia} \tmop{per} \tmop{il} \tmop{punto} i\\
+  \sum_{i = 1}^n z_{i t} & \geqslant & N_{\min} l_t \quad t \in T_L \quad
+  \tmop{Una} \tmop{foglia} \tmop{deve} \tmop{essere} \tmop{sufficientemnte}
+  \tmop{popolata}
+\end{eqnarray*}
+A questo punto dobbiamo aggiungere dei vincoli di coerenza che impongono le
+divisioni richieste fino al raggiungimento della foglia:
+\begin{itemize}
+  \item Per i test \tmtextbf{non soddisfatti}, deve valere:\label{vinprob} (9)
+  \[ a_m^T x_i < b_i + M_1 (1 - z_{i t}) \quad i = 1, \ldots, n \quad \forall
+     t \in T_B, \forall m \in A_L (t) \]
+  \item Per i test \tmtextbf{soddisfatti}, deve valere:
+  \[ a_m^T x_i \geqslant b_i - M_2 (1 - z_{i t}) \quad i = 1, \ldots, n \quad
+     \forall t \in T_B, \forall m \in A_R (t) \]
+\end{itemize}
+\begin{note}
+  \label{epsilon}
+  
+  Il vincolo \ref{vinprob}(9) non {\`e} supportato dei risolutori. Quindi
+  occorre convertirlo in una forma che non utilizza la disuguaglianza stratta.
+  A tale scopo, aggiungiamo un fattore piccolo $\varepsilon$ e il vincolo
+  diventa:
+  \[ a_m^T x_i + \varepsilon \leqslant b_i + M_1 (1 - z_{i t}) \quad i = 1,
+     \ldots, n \quad \forall t \in T_B, \forall m \in A_L (t) \]
+  Tuttavia, se $\varepsilon$ {\`e} troppo piccolo, potrebbe casuare
+  \tmtextbf{instabilit{\`a}} numeriche, quindi occorre renderlo il pi{\`u}
+  grande possibile senza influenzare la soluzione in qualsiasi problema
+  valido.
+  
+  Occorre definire un $e_j$ per ogni feature $j$; il pi{\`u} gradnde valore
+  valido {\`e} la distanza diversa da 0 pi{\`u} piccola tra i valori adiacenti
+  della feature $j$:
+  \[ \varepsilon_j = \min \left\{ | x_j^{(i + 1)} - x_j^i | \quad x_j^{(i +
+     1)} \neq x_j^i \quad i = 1, \ldots, n - 1 \right\} \]
+  In cui $x_j^i$ {\`e} il pi{\`u} grande valore della feature $j$-esima.
+\end{note}
+
+Dall nota \ref{epsilon} possiamo utilizzare $\varepsilon$ nel vincolo, dove
+$\varepsilon_j$ corrisponde alla feature sul quale effettuiamo lo split:
+\[ a_m^T (x_i + \varepsilon) \leqslant b_m + M_1 (1 - z_{i t}) \quad i = 1,
+   \ldots, n \quad \forall t \in T_B, \forall m \in A_L (t) \]
+
+\paragraph{Scelta $M_1$ e $M_2$}
+
+$M_1$ e $M_2$ sono dette costanti big-M. Valutando i vincoli, sappiamo che:
+\begin{itemize}
+  \item  Il masismo valore di $a_m^T (x_i + \varepsilon) - b_m$ {\`e} $1 +
+  \varepsilon_{\max}$ in cui $\varepsilon_{\max} = \max_j \{ \varepsilon_j
+  \}$. Quindi vogliamo:
+  \[ M_1 \geqslant 1 + \varepsilon_{\max} \]
+  \item Il massimo valore di $b_t - a_t^T x_i$ {\`e} 1 e quindi possiamo
+  scegliere:
+  \[ M_2 \geqslant 1 \]
+\end{itemize}
+Ottenendo, in conclusione gli ultimi due vincoli:
+\[ a_m^T x_i + \varepsilon \leqslant b_i + (1 + \varepsilon_{\max}) (1 - z_{i
+   t}) \quad i = 1, \ldots, n \quad \forall t \in T_B, \forall m \in A_L (t)
+\]
+\[ a_m^T x_i \geqslant b_i - (1 - z_{i t}) \]
+
+\paragraph{Funzione Obiettivo}
+
+La funzione obiettivo che vogliamo determinare si basa su due criteri di
+minimizzazione riguardo:
+\begin{itemize}
+  \item la \tmtextbf{complessit{\`a} dell'albero}: corrisponde alla dimensione
+  dell'albero decisionale ed {\`e} fissata a priori da $D$;
+  
+  \item \tmtextbf{Errore di classificazione:} assegnamo ad un'etichetta non
+  corretta il costo di 1 e ad una corretta il costo 0;
+\end{itemize}
+
+\paragraph{Dati}
+
+Sia:
+\[ y_{\tmop{ik}} = \left\{\begin{array}{l}
+     + 1 \quad \tmop{se} y_i = k \quad \tmop{il} \tmop{punto} i \tmop{ha}
+     \tmop{etichetta} k\\
+     - 1 \quad \tmop{altrimenti}
+   \end{array}\right. \quad i = 1, \ldots, n ; k = 1, \ldots, K \]
+Inoltre, $N_{k t} \assign \tmop{il} \tmop{numero} \tmop{di} \tmop{punti}
+\tmop{per} l' \tmop{etichetta} k \tmop{nel} \tmop{nodo} t$ e $N_t \assign
+\tmop{il} \tmop{numero} \tmop{di} \tmop{punti} \tmop{nel} \tmop{nodo} t$:
+\[ N_t = \sum_{i = 1}^n z_{i t} \quad t \in T_L \]
+\[ N_{k t} = \frac{1}{2}  \sum_{i = 1}^n (1 + y_{i k}) z_{i k} \qquad k = 1,
+   \ldots, k \]
+
+\paragraph{Task - obiettivo}
+
+Vogliamo assegnare alle foglioe $t \in T_L$ con $l_t$=1 l'etichetta a lui
+associata. Essa {\`e} la mode delle etichette assegnate nel nodo $t$.
+
+Inoltre dobbiamo assegnare un'etichetta ad ogni nodo $t$ nell'albero, definita
+come:
+\[ c_t \in \{ 1, \ldots, K \} \]
+Ovviamente l'etichetta ottima {\`e} quella che corrisponde alla moda di in
+quel nodo, cio{\`e} alla frequenza in cui quella determinata etichetta compare
+nel nodo:
+\[ c_t = \arg \max_{k = 1, \ldots, K} \{ N_{\tmop{kt}} \} \]
+Al finte di tenere traccia della predizione di ogni nodo utilizziamo la
+variabile binaria $c_{\tmop{kt}}$:
+\[ c_{k t} = \left\{\begin{array}{l}
+     1 \qquad \tmop{se} l' \tmop{etichetta} \tmop{della} \tmop{foglia} t {\`e}
+     k\\
+     0 \qquad \tmop{altrimenti}
+   \end{array}\right. \]
+A questo punto ci dobbiamo assicurare che in ogni nodo ci sia una solo
+predizione. A tale scopo introduciamo il vincolo:
+\[ \sum_{k = 1}^K c_{k t} = l_t \quad \forall t \in T_L \]
+Dato che sappiamo come scegliere l'etichetta in maniera ottimale in ogni nodo,
+definiamo $L_t$ come l'\tmtextbf{errore di classificazione} in ogni nodo che
+risulta uguale al numero di punti nel nodo minore del numero di punti
+dell'etichetta p{\`u} comune:
+\[ L_t = N_t - \max_{k = 1, \ldots, K} \{ N_{k t} \} = \min_{k = 1, \ldots, K}
+   \{ N_t - N_{k t} \} \quad t \in T_L \]
+Che pu{\`o} essere linearizzato nel seguente modo:
+\begin{eqnarray*}
+  L_t & \geqslant & N_t - N_{k t} - M (1 - c_{k t}) \quad k = 1, \ldots, K
+  \quad \forall t \in T_L\\
+  L_t & \leqslant & N_t - N_{k t} + Mc_{k t} \hspace{3em} k = 1, \ldots, K
+  \quad \forall t \in T_L\\
+  L_t & \geqslant & 0 \qquad \forall t \in T_L
+\end{eqnarray*}
+Dove $M$ {\`e} una costante sufficientemente grande che rende il vincolo
+intattivo dipendendo dal valore di $c_{k t}$. Un possibile valore che possiamo
+prendere {\`e} $M = n$.
+
+Il costo totale dell'errore di classificazione {\`e} dato da $\sum_{t \in T }
+L_t$ e la complessit{\`a} {\`e} il numero di split nelll'albero, dato da
+$\sum_{t \in T_b} d_t$. A questo punto possiamo normalizzare l'errore di
+classificazione con una \tmtextbf{soglia di accuratezza} $\hat{L}$, ottenuta
+dalla semplice predizione dell'etichette pi{\`u} popolari dell'intero dataset
+rendendolo di conseguenza, indipendente dalla quantit{\`a} $\alpha$.
+
+Finalmente possiamo dunque scrivere la funzione obiettivo:
+\[ \min \frac{1}{\hat{L}}  \sum_{t \in T_L} L_t + \alpha \sum_{t \in T_B} d_t
+\]
+
+\paragraph{Riepilogo}
+
+Mettendo insieme tutte queste formulazioni delle sezioni precedenti possiamo
+scrivere il nostro modello OCT:
+\[ \min \frac{1}{\hat{L}}  \sum_{t \in T_L} L_t + \alpha \sum_{t \in T_B} d_t
+\]
+\begin{eqnarray*}
+  L_t & \geqslant & N_t - N_{k t} - M (1 - c_{k t}) \quad k = 1, \ldots, K
+  \quad \forall t \in T_L\\
+  L_t & \leqslant & N_t - N_{k t} + Mc_{k t} \hspace{3em} k = 1, \ldots, K
+  \quad \forall t \in T_L\\
+  L_t & \geqslant & 0 \qquad \forall t \in T_L\\
+  N_{k t} & = & \frac{1}{2}  \sum_{i = 1}^n (1 + y_{i k}) z_{i k} \qquad k =
+  1, \ldots, k\\
+  N_t & = & \sum_{i = 1}^n z_{i t} \qquad \forall t \in T_L\\
+  \sum_{k = 1}^K c_{k t} & = & l_t \quad \forall t \in T_L\\
+  a_m^T x_i & \geqslant & b_i - M_2 (1 - z_{i t}) \quad i = 1, \ldots, n \quad
+  \forall t \in T_B, \forall m \in A_R (t)\\
+  a_m^T x_i + \varepsilon & \leqslant & b_i + (1 + \varepsilon_{\max}) (1 -
+  z_{i t}) \quad i = 1, \ldots, n \quad \forall t \in T_B, \forall m \in A_L
+  (t)\\
+  \sum_{t \in T_L} z_{i t} & = & 1 \quad i = 1, \ldots, n \quad\\
+  \sum_{i = 1}^n z_{i t} & \leqslant & l_t \quad t \in T_L \quad\\
+  \sum_{i = 1}^n z_{i t} & \geqslant & N_{\min} l_t \quad t \in T_L \quad\\
+  \sum_{i = 1}^p a_{t, i} & = & d_t \qquad \forall t \in T_B\\
+  0 \leqslant & b_t & \leqslant d_t \hspace{4em} \forall t \in T_B\\
+  d_t & \leqslant & d_{p (t)} \hspace{4em} \forall t \in T_B\\
+  z_{i t}, l_t & \in & \{ 0, 1 \} \quad i = 1, \ldots, n \quad \forall t \in
+  T_L\\
+  a_{j t}, d_t & \in & \{ 0, 1 \} \quad j = 1, \ldots, p \quad \forall t \in
+  T_B
+\end{eqnarray*}
+\begin{remark}
+  \
+  
+  La difficolt{\`a} del modello {\`e} determinata dal numero di variabili
+  $z_{i t}$ in quale sono $n \cdot 2^D$.
+  
+  Inoltre, occorre specificare a priori tre parametri: la massima
+  profondit{\`a} dell'albero $D$, la dimensione minima della foglia $N_{\min}$
+  e il parametro di complessit{\`a}. Questa scelta viene detta
+  \tmtextbf{tuning} (sincronizzazione).
+  
+  Il tempo di calcolo di un OCT {\`e} nell'ordine dei minuti.
+\end{remark}
+
+\paragraph{Warm Starts}
+
+I risolutori traggono grande beneficio quando gli viene fornito una soluzione
+intera ammissibili come un \tmtextbf{warm start} per il processo di soluzione.
+
+Inserendo una forte soluzone di \tmtextbf{warm start} il risolutore
+incrementa notevolemnte la velocit{\`a} con cui {\`e} in grado di generare
+soluzioni fortemente ammissibili. Quindi fornisce un upper-bound iniziale
+sulla soluzione ottima che permette di effettuare l'azione di
+\tmtextbf{pruning} e inoltre fornisce un punto di partenza per la ricerca
+locale euristica.
+
+Se noi avessimo una soluzione generata per la profondit{\`a} $D$, questa
+soluzione {\`e} un valido \tmtextbf{warm start} per la profondit{\`a} $D + 1$.
+Questo {\`e} importante poich{\'e} la difficolt{\`a} del problema aumenta con
+il crescere della profondit{\`a} e quindi potrebbe risultare svantaggioro
+eseguire un problema MIO (Mixed-Integer-Optimization) con una piccola
+profondit{\`a} per generare un forte warm start.
+
+Quinsi, data una soluzione iniziale ammissibile {\`e} possibile confrontare la
+velocit{\`a} del solutore nel determinare una sluzine ottima.
+{\center{\begin{figure}[h]
+  \raisebox{0.0\height}{\includegraphics[width=11.899334251607cm,height=4.45875967466877cm]{MOBD-Pacifici-Alberi
+  Classificazione-7.pdf}}
+  \caption{A sinistra senza Warm star; a destra con}
+\end{figure}}}
+Comi si pu{\`o} evincere dall'immagine, si ha convergenza quando upperbound e
+lower bound coincidono.
+
+Tipicamente il warm start viene fornito da un algoritmo diverso.
+
+\section{Addestramento di un OCT}
+
+Addestrare una OCT consiste nello scegliere i parametri adatti al modello che
+vogliamo classificare. Questa azione viene detta \tmtextbf{tuning} dei
+parametri e coinvolge la scelta di $N_{\min}, D, \alpha$ per minimizzare
+l'\tmtextbf{erorre di training} e la \tmtextbf{complessit{\`a} dell'albero}
+\[ \min \frac{1}{\hat{L}} \sum_{t \in T_L} L_t + \alpha \sum_{t \in T_B} d_t
+\]
+\begin{remark}
+  {\tmdummy}
+  
+  \begin{itemize}
+    \item $\alpha$:= {\`e} il fattore di importanze se {\`e}
+    =0$\longrightarrow$overfitting
+  \end{itemize}
+\end{remark}
+
+\begin{note}
+  \
+  
+  Un tipico approccio per la scelta di $\alpha$ {\`e} quello di discretizzare
+  lo spazio di ricerca e i test di ogni valore. 
+\end{note}
+
+Nell'addestramento di un OCT occorre scegliere la \tmtextbf{prodondit{\`a}}
+dell'alber $D_{\max}$ da cui si genereranno da $D = 1$(3 nodi) fino a
+$D_{\max}$.
+
+Possiamo riscrivere il problema di minimizzazione nel seguente modo. Posto $E
+\assign \tmop{errore} \tmop{di} \tmop{training}$ $S \assign \tmop{complessit}
+{\`a} \tmop{dell}' \tmop{albero}$:
+\[ \min E \]
+\[ S \leqslant C \]
+con $C$ {\`e} una costante che corrisponde al massimo numero di split $(2^D -
+1)$.
+
+{\center{\raisebox{0.0\height}{\includegraphics[width=14.8741637150728cm,height=13.7064639905549cm]{MOBD-Pacifici-Alberi
+Classificazione-8.pdf}}}}
+
+\custombinding{1}{\noindent}\begin{tmparmod}{0pt}{0pt}{0em}%
+  \begin{tmparsep}{0em}%
+    {\tmstrong{Algoritmo \tmtextup{1}}}{\smallskip}
+    
+    \begin{tmindent}
+      {\rendercode{1. Scegli $D_{\max}$ e $N_{\min}$;
+      
+      2. For D=1,..,$D_{\max}$ do:
+      \begin{itemize}
+        \item For C = 1,{\textdots}, $2^D - 1$ do:
+        \begin{itemize}
+          \item Run TDITD con $\alpha = 0$ e $N_{\min}$. Effettua prune a
+          profondit{\`a} $D$,max numero di split = C. Inserisci la soluzione
+          nel pool di warm start:
+          
+          \item Scegli il candidato pi{\`u} accurato sul validation set nel
+          pool di warm start;
+          
+          \item Risolvi $\tmop{Pb} (C)$ con profondit{\`a} D e C split usando
+          il warm start selezionato. Inserisci la soluzione nel pool di warm
+          start;
+        \end{itemize}
+      \end{itemize}
+      3. Post-process: rimuovi le soluzioni non ottime per OCT-MIO per alcun
+      valore di $\alpha$. Determina quindi le soluzioni non dominate e rimuovi
+      le altre.
+      
+      4. Selezione le soluzioni migliori sul validation set e determina il
+      range di $\alpha$.}}
+    \end{tmindent}
+  \end{tmparsep}
+\end{tmparmod}{\medskip}
+
+\section{OCT: Modelli Multivariati}
+
+\subsection{Introduzione}
+
+Fino ad ora abbiamo considerato alberi di decisione che utilizzano una singola
+variabile nei loro split ad ogni noto. Questi alberi vengono detti
+\tmtextbf{alberi decisionali univariati.} Ora cerchiamo di estendere questo
+insieme di alberi decisionali al caso \tmtextbf{multivariato}, cio{\`e} nel
+caso in cui negli split di ogni nodo si prendono in considerazione pi{\`u}
+variabili. Questi alberi decisionali multivariati, vengono detti
+\tmtextbf{OCT-H}.
+
+\subsection{Formulazione di OCT-H}
+
+Negli alberi decisionali multivariati, non siamo pi{\`u} vincolari a scegliere
+una singola variabile negli stima, ma possiamo scegliere un generico iperpiano
+negli split di ogni nodo. Andiamo, ora, a riscrivere i vincoli del nostro
+problema{\textdots}
+
+Le variabili $a_t$ sono usate per modellare lo split in ongi nodo ed in
+particolare $\in [- 1, 1]^p$:
+\[ a_{t j} \in [- 1, 1] \]
+\[ b_t \in [- 1, 1] \]
+Come nel caso univariato, le variaibli $d_t$ rappresentano la presenza o meno
+di uno split.
+\[ \sum_{j = 1}^p | a_{t j} | \leqslant d_t \]
+La problematica di questo vincolo {\`e} che {\`e} diventato non pi{\`u}
+lineare. A tale scopo linearizzo tramite delle variabili ausiliarie
+$\hat{a}_{j t} \geqslant 0 \quad \forall t \in T_B, j = 1, \ldots, p$
+ottenendo:
+\[ \hat{a}_{j t} \geqslant a_{j t} ; \hat{a}_{j t} \geqslant - a_{j t} \quad j
+   = 1, \ldots, p \quad \forall t \in T_B \]
+Quindi:
+\[ \sum_{j = 1}^p \widehat{a_{j t}} \leqslant d_t \]
+Inoltre, abbiamo la variabile $b_t$ che ci indica la presenza di punti dopo la
+diramazione:
+\[ - d_t \leqslant b_t \leqslant d_t \quad \forall t \in T_B \]
+I \tmtextbf{vincoli di consistenza}, mi garantiscono l'assegnamente del punto
+nel nodo e diventano:
+\begin{eqnarray*}
+  a_m^T x_i & \geqslant & b_m - M (1 - z_{i t}) \quad \forall i = 1, \ldots, n
+  \quad \forall t \in T_B \quad \forall m \in A_L (t)\\
+  a_m^T x_i + \mu & \leqslant & b_m + M (1 - z_{\tmop{it}}) \quad \forall i =
+  1, \ldots, n \quad \forall t \in T_B \quad \forall m \in A_R (t)
+\end{eqnarray*}
+$\mu = 5 \cdot 10^{- 3}$ quantit{\`a} piccola e di norma si utilizza $M = 2 +
+\mu$;
+\begin{eqnarray*}
+  M \leqslant \max (a_m^T x_i - b_m) & = & 2 \quad\\
+  a_m^T x_i + \mu & \leqslant & b_m + (2 + \mu)  (1 - z_{i t}) \quad \forall i
+  = 1, \ldots, n \quad \forall t \in T_L \quad \forall m \in A_L (t)
+\end{eqnarray*}
+\begin{flushleft}
+  Varia anche la funzione obiettivo poich{\'e} la complessit{\`a} dell'albero
+  varia: vogliamo tenere in considerazione l'uso di test con pi{\`u}
+  attributi.
+\end{flushleft}
+
+Introduco $s_{j t} \in \{ 0, 1 \} \quad \forall t \in T_B, j = 1, \ldots, p$:
+\[ s_{j t} = \left\{\begin{array}{l}
+     1 \quad \tmop{se} \tmop{al} \tmop{nodo} t \in T_B \tmop{utilizzo} j
+     \tmop{per} \tmop{la} \tmop{definizione} \tmop{dello} \tmop{split} t\\
+     0 \quad \tmop{altrimenti}
+   \end{array}\right. \]
+\[ s_{j t} \geqslant | a_{j t} | \]
+\begin{note}
+  \
+  
+  Nel caso in cui $a_{j t} \neq 0 \longrightarrow s_{j t} = 1$
+  
+  Nel caso in cui $a_{j t} = 0 \longrightarrow s_{j t} = 0$
+\end{note}
+
+Linearizzando il vincolo non lineare:
+\[ - s_{j t} \leqslant a_{j t} \leqslant s_{j t} \quad \forall t \in T_B, j =
+   1, \ldots, p \]
+Al fine di ottenere una maggiore efficienza si aggiungono altri due vincoli
+per rendere $s_{j t}$ compatibile con $d_{j t}$:
+\[ s_{j t} \leqslant d_t \]
+\[ \sum_{j = 1}^p s_{j t} \geqslant d_t \]
+Quindi la funzione obiettivo nel caso OCT-H diventa:
+\[ \min \frac{1}{\hat{L}} \sum_{t \in T_L} L_t + \alpha \sum_{t \in T_B} 
+   \sum_{j = 1}^p s_{j t} \]
+
+\subsection{Warm Start OCT-H}
+
+Negli OCT-H come Warm start si utilizza un'euristica greedy appartenente alla
+TDIDT family. Per determinare il migliore split, invece di utilizzare gli
+impurity index, si utilizza, sui punti ``sopravvissuti'' al nodo $t \in T_B$
+un OCT-H a profondit{\`a} $D = 1$.
+
+\subsection{Tuning degli Iperparametri}
+
+Nella scelta degli iperparametrei si utilizza la stessa procedura di OCT con
+la differenza che:
+\[ \tmop{OCT} \longrightarrow C_{\max} = 2^D - 1 \]
+\[ \tmop{OCT} - H \longrightarrow C_{\max} = p (2^D - 1) \]
+
+{\center{\
+
+\chapter{Classificazione Robusta}}}
+
+\section{Introduzione}
+
+Nel caso in cui ci fosse incertezza sui dati, si ha un peggioramento delle
+prestazioni del classificatore. A tale scopo vogliamo delle procedure che
+rendano il classificatore pi{\`u} robuto rispetto a delle piccole incertezze.
+L'approccio standard {\`e} la \tmtextbf{regolarizzazione} che si basa sulle
+funzioni di penalit{\`a} per diminuire l'overfitting. UN altro approccio {\`e}
+quello di utilizzare l'\tmtextbf{ottimizzazione robusta.}
+
+\section{Robust Classification}
+
+Il problema di ottimmizzazione {\`e} del timo:
+\[ \max c (x, y) \]
+\[ g (x, u) \leqslant 0^m \]
+\[ x \in X \]
+In cui:x
+\begin{itemize}
+  \item $x \assign$variabili di decisione;
+  
+  \item $u = \tmop{parametri} ;$
+  
+  \item $g (x, u) \leqslant 0^m$:= vincoli di diseguaglianza.
+\end{itemize}
+I \tmtextbf{parametri} $u$ possono essere:
+\begin{itemize}
+  \item {\underline{fissati}}$\longrightarrow$problema di ottimizzazione
+  incerti;
+  
+  \item {\underline{incerti}}$\longrightarrow u \in U$ insieme di
+  incerteza{\`o}
+\end{itemize}
+.Cerchiamo la soluzione ottima nel caso peggiore.
+
+\section{Approccio MaxMin}
+
+\begin{eqnarray*}
+  \max_{x \in X} & \min_{u \in U} & \{ c (x, u) : g (x, u) \leqslant 0^m \}
+\end{eqnarray*}
+Se $| U | = + \infty$ allora si hanno infiniti vincoli che pososno essere
+ridotti ad un numero finito.
+
+\begin{definition}
+  {\underline{Problema Norma Duale}}
+  
+  La norma duale {\`e} un numero reale associato ad una funzione lineare
+  definita sullo spazio vettoriale $X.$
+  
+  Se $X =\mathbb{R}^n$: una funzione lineare generia $f = a^T x$
+  \[ z_q = \sup \{ | f (x) | : \| x \|_q < 1 \} \]
+  \[ z_q = \max \{ a^T x : \| x \|_q \leqslant 1, x \in \mathbb{R}^n \} \]
+  Si pu{\`o} dimostrare che la soluzione di questo problema {\`e}:
+  \[ z_q = \| a \|_{q^{\ast}} \quad \tmop{con} q^{\ast} = \frac{q}{q - 1}
+     \quad \tmop{se} q \neq 1 \]
+  \[ z_q = \| a \|_{\infty} \quad \tmop{Se} q = 1 \]
+  Si pu{\`o} estenedere questo problema nella norma di $f (x)$ ristretta da un
+  qualsiasi numero $\rho > 0$. Ottenendo:
+  \begin{eqnarray*}
+    z_q & = & \max \{ a^T x : \| x \|_q \leqslant \rho : x \in \mathbb{R}^n \}
+    =\\
+    & = & \max \{ a^T \rho y : \| y \|_q \leqslant 1, y \in \mathbb{R}^n \}
+    =\\
+    & = & \rho \| a \|_{q^{\ast}}
+  \end{eqnarray*}
+\end{definition}
+
+\section{Uncertainty Set}
+
+L'\tmtextbf{insieme di incertezza} pu{\`o} essere utilizzato per modellare
+\tmtextbf{l'incertezza delle feautre.} Poich{\'e} l'incertezza nelle feature
+{\`e} dovuto a mancanza id dati, errori di manipolazioni e errori di misura
+vogliamo costruire un modello di ottimizzazione per il classificatore che sia
+una \tmtextbf{controparte robusta} del modello OCT.
+
+A tale scopo, supponiamo che:
+\[ x_i \in \mathbb{R}^p {\`e} \tmop{il} \tmop{valore} \tmop{esatto} \]
+\[ (x_i + \Delta x_i) \quad \forall i = 1, \ldots, n \quad \tmop{Training}
+   \tmop{data} \tmop{effettivo} \]
+con $\Delta x_i \assign$perturbazione dell'$i -$esimo dato.
+
+A questo punto, possiamo definire un insieme delle perturbazioni:
+\[ \Delta X = \{ \Delta x_1, \ldots, \Delta x_n \} \in \mathbb{R}^{p \times n}
+\]
+Ottenendo:
+\[ U_x = \{ \Delta x \in \mathbb{R}^{p \times n} : \| \Delta X_i \|_q
+   \leqslant \rho, i = 1, \ldots, n \} \]
+Il termine $\rho$ viene detto \tmtextbf{parametro di magnitudo(incertezza)} e
+viene scelto tramite cross validation.
+
+\section{Modello MIP (Programmazione Intera Mista)}
+
+Se consideriamo un albero binario non compelto, esso sara formato da
+$\left\lceil \frac{\#D}{2} \right\rceil$. Fissata la struttura, il numero di
+nodi $T$ {\`e} dispari ed abbiamo:
+\[ \# \tmop{Foglie} = \left\lceil \frac{T}{2} \right\rceil \]
+I nodi sono numerati in modo che $k = 1, 2, \ldots, \left\lfloor \frac{T}{2}
+\right\rfloor, \left\lceil \frac{T}{2} \right\rceil, \ldots, T$.
+
+Al poso delle vairabili $d_t = \left\{\begin{array}{l}
+  1 \tmop{split} \tmop{nel} \tmop{nodo} t\\
+  0 \tmop{altirmenti}
+\end{array}\right.$, si utilizza:
+\[ \delta_k = \left\{\begin{array}{l}
+     1 \tmop{se} \tmop{non} \tmop{si} \tmop{ha} \tmop{lo} \tmop{split}
+     \tmop{al} \tmop{nodo} k\\
+     0 \tmop{altrimenti}
+   \end{array}\right. \]
+
+\subsection{Vincoli Strutturali}
+
+\begin{enumerate}
+  \item $\delta_k = 1$\quad k=$\left\lceil \frac{T}{2} \right\rceil, \ldots, T
+  ;$
+  
+  \item $\delta_k \geqslant \delta_n \quad k = 1, \ldots, T : u \in A (k)$;
+  
+  \item $\delta_k + \sum_{i = 1}^P a_{k, i} = 1 \qquad k = 1, 2, \ldots, T$
+\end{enumerate}
+
+\subsection{Allocazione Punti nelle Foglie}
+
+\[ z_{i, k} \in \{ 0, 1 \} \quad i = 1, \ldots, n \quad k = 1, \ldots, T \]
+\begin{remark}
+  \[ z_{\tmop{ik}} = 1 \Longleftrightarrow \tmop{assegno} \tmop{punto} i
+     \tmop{al} \tmop{nodo} k \]
+\end{remark}
+
+\tmtextbf{{\underline{Vincoli}}}
+\begin{itemize}
+  \item $\sum_{k = 1}^T z_{i k} = 1$\qquad i=1,..,n
+  
+  \item $z_{i k} \leqslant \delta_k \hspace{3em} i = 1, \ldots, n \quad k = 1,
+  \ldots, T$
+  
+  \item $\sum_{i = 1}^n z_{i k} \geqslant N_{\min} l_k \quad l_k \in \{ 0, 1
+  \} \quad k = 1, \ldots, T \quad l_k = 1 \tmop{se} \tmop{la} \tmop{foglia}
+  \tmop{popolata} \tmop{da} \tmop{punti}$
+  
+  \item $z_{i k} + \delta_u \leqslant 1 \quad i = 1, \ldots, n ; k = 1,
+  \ldots, T ; u \in A (k)$
+  
+  \item $l_k + \sum_{u \in A (k)} \delta_u \geqslant \delta_k \qquad k = 1,
+  \ldots, T.$
+\end{itemize}
+
+\subsection{Funzione Obiettivo}
+
+Assumiamo 2 classi $y_i \in \{ - 1 ; + 1 \} \quad \forall i = 1, \ldots, n$
+
+\tmtextbf{Variabili}
+\[ g_k, h_k \in \mathbb{Z}_{\geqslant 0} (\mathbb{R} \geqslant 0)
+   \tmop{contano} \tmop{il} \tmop{numero} \tmop{di} \tmop{punti}
+   \tmop{assegnati} a k \tmop{che} \tmop{assumo} \pm 1 \]
+\[ (\tmop{numero} \tmop{di} - 1 \tmop{in} k) \hspace{3em} g_k = \frac{1}{2} 
+   \sum_{i = 1}^n z_{i k} (1 - y_i) \qquad \forall k \in T \]
+\[ (\tmop{numero} \tmop{di} 1 \tmop{in} k) \quad h_k = \frac{1}{2} \sum_{i =
+   1}^n z_{i k} (1 + y_i) \]
+Vincoli:
+\[ (\alpha) f_k \leqslant g_k + M [w_k + (1 - l_k)] \qquad (\gamma) f_k
+   \geqslant - M [1 - w_k + (1 - l_k)] \]
+\[ (\beta) f_k \leqslant h_k + M [1 - w_k + (1 - l_k)] \qquad (\varepsilon)
+   f_k \geqslant h_k - M [w_k + (1 - l_k)] \]
+Se $l_k = 0 \longrightarrow \tmop{vincoli} \tmop{soddisfatti}$
+
+Se $l_k = 1$:
+\[ w_k \in \{ 0, 1 \} \qquad k = 1, \ldots, T \]
+Se $w_k = 0$\quad$\beta e \gamma$ sono soddisfatti banalmente, ma i vincoli
+attivi $\alpha, \varepsilon$ impongono:
+\[ h_k \leqslant f_k \leqslant g_k \]
+Se $w_k = 1$ $\alpha . \varepsilon$ vengono soddisfatti e rimangono attivi gli
+altri due e impongono:
+\[ g_k \leqslant f_k \leqslant h_k \]
+Quindi l'insieme $f_k$ contiene tutti i punti malclassificati e quindi pu{\`o}
+rappresentare la funzione da minimizzare:
+\[ \min \left[ \sum_{k = 1}^T f_k + \alpha \sum^T_{k = 1} (1 - \delta_k)
+   \right] \]
+\tmtextbf{{\underline{Coerenza dei Test}}}
+\[ a_u^T x_i \leqslant b_u + M (1 - z_{i k}) \quad u \in A_l (k) \quad \forall
+   i = 1, \ldots, l \]
+\[ a_u^T x_i \geqslant b_u - M (1 - z_{i k}) \quad u \in A_R (k) \quad \forall
+   i = 1, \ldots, l \]
+
+\section{Robustezza vs. Incertezza delle feauture}
+
+\
+
+\end{document}

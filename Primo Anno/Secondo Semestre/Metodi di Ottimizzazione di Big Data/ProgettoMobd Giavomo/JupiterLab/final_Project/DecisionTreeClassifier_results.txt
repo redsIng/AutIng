@@ -1,0 +1,14 @@
+0.5053 (+/-0.016) for {'imputer__n_neighbors': 2, 'replacer__n_neighbors': 2}
+0.5051 (+/-0.016) for {'imputer__n_neighbors': 2, 'replacer__n_neighbors': 5}
+0.5049 (+/-0.017) for {'imputer__n_neighbors': 2, 'replacer__n_neighbors': 10}
+0.5079 (+/-0.021) for {'imputer__n_neighbors': 5, 'replacer__n_neighbors': 2}
+0.5075 (+/-0.022) for {'imputer__n_neighbors': 5, 'replacer__n_neighbors': 5}
+0.5080 (+/-0.021) for {'imputer__n_neighbors': 5, 'replacer__n_neighbors': 10}
+0.5088 (+/-0.020) for {'imputer__n_neighbors': 10, 'replacer__n_neighbors': 2}
+0.5089 (+/-0.019) for {'imputer__n_neighbors': 10, 'replacer__n_neighbors': 5}
+0.5083 (+/-0.020) for {'imputer__n_neighbors': 10, 'replacer__n_neighbors': 10}
+
+Best parameters:
+{'imputer__n_neighbors': 10, 'replacer__n_neighbors': 5}
+
+Best score: 0.5089

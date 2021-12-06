@@ -1,0 +1,6 @@
+0.8205 (+/-0.018) for {'classifier__C': 50, 'classifier__class_weight': None, 'classifier__gamma': 0.01, 'imputer__n_neighbors': 2, 'replacer__n_neighbors': 2}
+
+Best parameters:
+{'classifier__C': 50, 'classifier__class_weight': None, 'classifier__gamma': 0.01, 'imputer__n_neighbors': 2, 'replacer__n_neighbors': 2}
+
+Best score: 0.8205

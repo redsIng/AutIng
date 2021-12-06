@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage[italian]{babel}
+\usepackage{amssymb,theorem}
+
+%%%%%%%%%% Start TeXmacs macros
+\newcounter{nnanswer}
+\def\thennanswer{\unskip}
+{\theorembodyfont{\rmfamily}\newtheorem{answer*}[nnanswer]{Answer}}
+\newcounter{nnquestion}
+\def\thennquestion{\unskip}
+{\theorembodyfont{\rmfamily}\newtheorem{question*}[nnquestion]{Question}}
+%%%%%%%%%% End TeXmacs macros
+
+\begin{document}
+
+{\center{\part*{DOMANDE TEORIA OSC I}}}
+\begin{question*}
+  Descrivere brevemente l'equazione di Hamilton-Jacaobi Bellman. Dimostrare
+  che HJB fornisce condizioni necessarie di ottimalit{\`a}.
+\end{question*}
+
+\begin{answer*}
+  L'equazione di Hamilton Jacobi Bellman {\`e}:
+  \[ \left\{\begin{array}{l}
+       - \frac{\partial V}{\partial t}^{\ast} (x (t), t) = \min_{u (t)}
+       \left\{ l (x (t), u (t), t) + \frac{\partial V}{\partial x}^{\ast} (x
+       (t), t) f (x (t), u (t), t) \right\}\\
+       V^{\ast} (x, T) = m (x)
+     \end{array}\right. \quad \forall x \in \mathbb{R}^n, t \in [t_0, T] \]
+  Permette di rappresentare la funzione valore ottima di un problema di
+  controllo ottimo di Bolza:
+  \[ \left\{\begin{array}{l}
+       \min_u J (u) = \min_u \left\{ \int_{t_0}^T l (x (\tau), u (\tau), \tau)
+       d \tau + m (x (T)) \right\}\\
+       \dot{x} = f (x, u, t)\\
+       x (t_0) = x_0
+     \end{array}\right. \]
+  Generalmente questa equazione non {\`e} lineare e la sua soluzione {\`e}
+  proprio la funzione valore ottima che rispetta l'equazioene di Hellman del
+  problema dato e, quindi, rappresentante le decisioni ottime da effettuare
+  partendo da un determinato stato e tempo iniziale. In particolare,
+  l'equazione HJB fornisce condizioni necessarie di ottimalit{\`a}. A tale
+  scopo definiamo la funzione valore per il problema di Bolza:
+  \[ V^{\ast} (x (t), t) = \min_{u (\tau), \tau \in [\tau .T]} \left\{
+     \int_t^T l (x (s), u (s), s) d s + m (x (T)) \right\} \]
+  \[ = \min_{u (\tau), \tau \in [t, T]} \left\{ \int_t^{t + \Delta t} l (x
+     (s), u (s), s) d s + \int_{t + \Delta t}^T l (x (s), u (s), s) d s + m (x
+     (T)) \right\} \]
+  \[ = \min_{u (\tau), \tau \in [t, T]} \left\{ \int_t^{t + \Delta t} l (x
+     (s), u (s), s) d s + V^{\ast} (x (t + \Delta t), t + \Delta t) \right\}
+  \]
+  Da questa espressione ricaviamo la sua corrispondente espressione
+  differenziale sviluppando al primo ordine la funzione valore:
+  \[ \left\{\begin{array}{l}
+       0 = \min_{u (t)} \left\{ l (x (t), u (t), t) + - \frac{\partial
+       V}{\partial t}^{\ast} (x (t), t) + \frac{\partial V}{\partial x}^{\ast}
+       (x (t), t) f (x (t), u (t), t) \right\}\\
+       V^{\ast} (x, T) = m (x)
+     \end{array}\right. \quad \forall x \in \mathbb{R}^n, t \in [t_0, T] \]
+  Dato che dobbiamo determinare la soluzione per ogni istante di tempo e per
+  ogni stato, si ottiene l'equazione HJB:
+  \[ \left\{\begin{array}{l}
+       - \frac{\partial V}{\partial t}^{\ast} (x (t), t) = \min_{u (t)}
+       \left\{ l (x (t), u (t), t) + \frac{\partial V}{\partial x}^{\ast} (x
+       (t), t) f (x (t), u (t), t) \right\}\\
+       V^{\ast} (x, T) = m (x)
+     \end{array}\right. \quad \forall x \in \mathbb{R}^n, t \in [t_0, T] \]
+\end{answer*}
+
+\
+
+\end{document}
