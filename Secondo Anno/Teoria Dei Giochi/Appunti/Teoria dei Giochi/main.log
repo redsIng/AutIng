@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.10) (preloaded format=pdflatex 2021.11.21)  30 NOV 2021 19:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.10) (preloaded format=pdflatex 2021.11.21)  7 DEC 2021 00:52
 entering extended mode
-**"c:/Users/loryb/Desktop/Magistrale-Tor-Vergata/Secondo Anno/Teoria Dei Giochi/Appunti/Teoria dei Giochi/main.tex"
-(c:/Users/loryb/Desktop/Magistrale-Tor-Vergata/Secondo Anno/Teoria Dei Giochi/Appunti/Teoria dei Giochi/main.tex
+**"c:/Users/loryb/Desktop/AutIng/Secondo Anno/Teoria Dei Giochi/Appunti/Teoria dei Giochi/main.tex"
+(c:/Users/loryb/Desktop/AutIng/Secondo Anno/Teoria Dei Giochi/Appunti/Teoria dei Giochi/main.tex
 LaTeX2e <2021-11-15>
 L3 programming layer <2021-11-12> (C:\Program Files\MiKTeX\tex/latex/base\article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
@@ -545,12 +545,12 @@ Overfull \hbox (21.13568pt too wide) in paragraph at lines 552--577
 [13 <./images//2021-11-30-17-45-45.png> <./images//2021-11-30-17-46-14.png> <./images//Image0001.JPG> <./images//Image0002.JPG>] [14 <./images//Image0003.JPG> <./images//Image0004.JPG> <./images//Image0005.JPG> <./images//Image0006.JPG>] [15 <./images//Image0007.JPG> <./images//Image0008.JPG> <./images//Image0009.JPG> <./images//Image0010.JPG>] [16 <./images//Image0011.JPG> <./images//Image0012.JPG>] (main.aux) ) 
 Here is how much of TeX's memory you used:
  4744 strings out of 478699
- 78379 string characters out of 2856818
+ 78267 string characters out of 2856818
  418007 words of memory out of 3000000
  22748 multiletter control sequences out of 15000+600000
  406737 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,14n,62p,655b,374s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,14n,62p,639b,374s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
 Output written on main.pdf (16 pages, 115577553 bytes).
 PDF statistics:
