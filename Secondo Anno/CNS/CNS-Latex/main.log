@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.10) (preloaded format=pdflatex 2021.11.21)  6 DEC 2021 20:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.10) (preloaded format=pdflatex 2021.11.21)  7 DEC 2021 00:44
 entering extended mode
-**"c:/Users/loryb/Desktop/Magistrale-Tor-Vergata/Secondo Anno/CNS/CNS-Latex/main.tex"
-(c:/Users/loryb/Desktop/Magistrale-Tor-Vergata/Secondo Anno/CNS/CNS-Latex/main.tex
+**"c:/Users/loryb/Desktop/AutIng/Secondo Anno/CNS/CNS-Latex/main.tex"
+(c:/Users/loryb/Desktop/AutIng/Secondo Anno/CNS/CNS-Latex/main.tex
 LaTeX2e <2021-11-15>
 L3 programming layer <2021-11-12> (C:\Program Files\MiKTeX\tex/latex/base\article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
@@ -1234,14 +1234,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 1768--1769
 [67 <./Images//2021-12-06-10-47-59.png>] (main.aux) ) 
 Here is how much of TeX's memory you used:
  18500 strings out of 478699
- 371698 string characters out of 2856818
- 649581 words of memory out of 3000000
+ 371570 string characters out of 2856818
+ 649579 words of memory out of 3000000
  36140 multiletter control sequences out of 15000+600000
  422102 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,12n,89p,939b,421s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 84i,12n,89p,923b,421s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti0700.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1000.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0600.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1000.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on main.pdf (67 pages, 4890119 bytes).
+Output written on main.pdf (67 pages, 4890081 bytes).
 PDF statistics:
  966 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
