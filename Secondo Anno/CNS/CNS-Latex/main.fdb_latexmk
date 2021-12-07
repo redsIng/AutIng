@@ -1,10 +1,10 @@
 # Fdb version 3
-["makeindex main.idx"] 1638817854 "main.idx" "main.ind" "main" 1638834266
+["makeindex main.idx"] 1638817854 "main.idx" "main.ind" "main" 1638834983
   "main.idx" 1638834252 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
-  "main.ind"
   "main.ilg"
-["pdflatex"] 1638834251 "c:/Users/loryb/Desktop/AutIng/Secondo Anno/CNS/CNS-Latex/main.tex" "main.pdf" "main" 1638834266
+  "main.ind"
+["pdflatex"] 1638834251 "c:/Users/loryb/Desktop/AutIng/Secondo Anno/CNS/CNS-Latex/main.tex" "main.pdf" "main" 1638834983
   "C:/Program Files/MiKTeX/fonts/tfm/jknappen/ec/ecbi1000.tfm" 993058306 2900 ce550da2a8b866861d2ce2b29bee03eb ""
   "C:/Program Files/MiKTeX/fonts/tfm/jknappen/ec/ecbx1000.tfm" 993058356 3200 328792ff19833a39406f06fa0555a6dc ""
   "C:/Program Files/MiKTeX/fonts/tfm/jknappen/ec/ecbx1200.tfm" 993058358 3200 b8d69bc738e5ef3e08cefeef3109ff56 ""
@@ -282,14 +282,14 @@
   "Images//substilug.png" 1638834153 249071 1ef5ce5cacaa195e9842738ea6f1d8ce ""
   "Images//triplets.png" 1638834153 15552 9f8ea2f2791bfafce9029a850739d8b8 ""
   "Images//weakSuffix.png" 1638834153 38336 c37bdab4b3872428e9f38da7253538e6 ""
-  "c:/Users/loryb/Desktop/AutIng/Secondo Anno/CNS/CNS-Latex/main.tex" 1638834234 155992 cf268485e94ca47d5113a9fdd9b51c56 ""
+  "c:/Users/loryb/Desktop/AutIng/Secondo Anno/CNS/CNS-Latex/main.tex" 1638834981 155992 cf268485e94ca47d5113a9fdd9b51c56 ""
   "main.aux" 1638834263 17927 d2352590679a9f922ead5b80618fb9de "pdflatex"
   "main.ind" 1638834153 0 d41d8cd98f00b204e9800998ecf8427e "makeindex main.idx"
-  "main.tex" 1638834234 155992 cf268485e94ca47d5113a9fdd9b51c56 ""
+  "main.tex" 1638834981 155992 cf268485e94ca47d5113a9fdd9b51c56 ""
   "main.toc" 1638834263 11445 7678d48de3d01f43ba5ce1ea4154d41d "pdflatex"
   (generated)
-  "main.idx"
-  "main.aux"
   "main.pdf"
-  "main.toc"
   "main.log"
+  "main.aux"
+  "main.idx"
+  "main.toc"
