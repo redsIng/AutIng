@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.10) (preloaded format=pdflatex 2021.11.21)  7 DEC 2021 00:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.10) (preloaded format=pdflatex 2021.11.21)  7 DEC 2021 19:02
 entering extended mode
 **"c:/Users/loryb/Desktop/AutIng/Secondo Anno/CNS/CNS-Latex/main.tex"
 (c:/Users/loryb/Desktop/AutIng/Secondo Anno/CNS/CNS-Latex/main.tex
@@ -1092,158 +1092,179 @@ Overfull \hbox (47.34138pt too wide) in paragraph at lines 1466--1467
 <Images//2021-11-22-14-56-02.png, id=360, 682.04813pt x 454.69875pt>
 File: Images//2021-11-22-14-56-02.png Graphic file (type png)
 <use Images//2021-11-22-14-56-02.png>
-Package pdftex.def Info: Images//2021-11-22-14-56-02.png  used on input line 1475.
+Package pdftex.def Info: Images//2021-11-22-14-56-02.png  used on input line 1476.
 (pdftex.def)             Requested size: 409.23204pt x 272.82135pt.
 <Images//2021-11-22-15-01-49.png, id=361, 356.0803pt x 85.82062pt>
 File: Images//2021-11-22-15-01-49.png Graphic file (type png)
 <use Images//2021-11-22-15-01-49.png>
-Package pdftex.def Info: Images//2021-11-22-15-01-49.png  used on input line 1480.
+Package pdftex.def Info: Images//2021-11-22-15-01-49.png  used on input line 1481.
 (pdftex.def)             Requested size: 249.25452pt x 60.074pt.
  [56 <./Images//2021-11-22-14-46-59.png> <./Images//2021-11-22-14-56-02.png>]
-Overfull \hbox (31.76038pt too wide) in paragraph at lines 1498--1500
+Overfull \hbox (31.76038pt too wide) in paragraph at lines 1499--1501
 \T1/cmr/m/n/10 togravare e CV rap-p-re-senza l'hash per il con-trollo di in-tegrità. Un es-em-pio è \T1/cmr/bx/n/10 TLS_RSA_WITH_NULL_MD5 
  []
 
 <Images//2021-12-02-15-48-45.png, id=366, 433.62pt x 331.99031pt>
 File: Images//2021-12-02-15-48-45.png Graphic file (type png)
 <use Images//2021-12-02-15-48-45.png>
-Package pdftex.def Info: Images//2021-12-02-15-48-45.png  used on input line 1504.
+Package pdftex.def Info: Images//2021-12-02-15-48-45.png  used on input line 1507.
 (pdftex.def)             Requested size: 260.17401pt x 199.19571pt.
 <Images//2021-12-02-15-57-06.png, id=367, 411.03563pt x 322.20375pt>
 File: Images//2021-12-02-15-57-06.png Graphic file (type png)
 <use Images//2021-12-02-15-57-06.png>
-Package pdftex.def Info: Images//2021-12-02-15-57-06.png  used on input line 1505.
+Package pdftex.def Info: Images//2021-12-02-15-57-06.png  used on input line 1508.
 (pdftex.def)             Requested size: 246.62328pt x 193.32373pt.
 
-Overfull \hbox (33.64769pt too wide) in paragraph at lines 1503--1507
-[][] 
+Overfull \hbox (18.64769pt too wide) in paragraph at lines 1506--1510
+[] 
  []
 
 <Images//2021-12-02-16-26-53.png, id=368, 505.89pt x 232.61906pt>
 File: Images//2021-12-02-16-26-53.png Graphic file (type png)
 <use Images//2021-12-02-16-26-53.png>
-Package pdftex.def Info: Images//2021-12-02-16-26-53.png  used on input line 1509.
+Package pdftex.def Info: Images//2021-12-02-16-26-53.png  used on input line 1512.
 (pdftex.def)             Requested size: 505.88875pt x 232.61848pt.
 [57 <./Images//2021-11-22-15-01-49.png> <./Images//2021-12-02-15-48-45.png> <./Images//2021-12-02-15-57-06.png>] [58 <./Images//2021-12-02-16-26-53.png>]
 <Images//2021-12-03-18-48-36.png, id=375, 712.91344pt x 243.91125pt>
 File: Images//2021-12-03-18-48-36.png Graphic file (type png)
 <use Images//2021-12-03-18-48-36.png>
-Package pdftex.def Info: Images//2021-12-03-18-48-36.png  used on input line 1546.
+Package pdftex.def Info: Images//2021-12-03-18-48-36.png  used on input line 1549.
 (pdftex.def)             Requested size: 356.45584pt x 121.95532pt.
 <Images//2021-12-03-18-59-15.png, id=376, 737.00343pt x 267.24844pt>
 File: Images//2021-12-03-18-59-15.png Graphic file (type png)
 <use Images//2021-12-03-18-59-15.png>
-Package pdftex.def Info: Images//2021-12-03-18-59-15.png  used on input line 1555.
+Package pdftex.def Info: Images//2021-12-03-18-59-15.png  used on input line 1558.
 (pdftex.def)             Requested size: 368.50081pt x 133.62389pt.
  [59 <./Images//2021-12-03-18-48-36.png> <./Images//2021-12-03-18-59-15.png>]
 <Images//2021-12-04-12-00-50.png, id=380, 376.40625pt x 241.65282pt>
 File: Images//2021-12-04-12-00-50.png Graphic file (type png)
 <use Images//2021-12-04-12-00-50.png>
-Package pdftex.def Info: Images//2021-12-04-12-00-50.png  used on input line 1573.
+Package pdftex.def Info: Images//2021-12-04-12-00-50.png  used on input line 1576.
 (pdftex.def)             Requested size: 225.84547pt x 144.9928pt.
 <Images//2021-12-04-15-26-00.png, id=381, 185.19188pt x 182.93344pt>
 File: Images//2021-12-04-15-26-00.png Graphic file (type png)
 <use Images//2021-12-04-15-26-00.png>
-Package pdftex.def Info: Images//2021-12-04-15-26-00.png  used on input line 1601.
+Package pdftex.def Info: Images//2021-12-04-15-26-00.png  used on input line 1604.
 (pdftex.def)             Requested size: 185.1914pt x 182.93298pt.
  [60 <./Images//2021-12-04-12-00-50.png>]
 <Images//2021-12-04-15-43-15.png, id=385, 461.47406pt x 274.02374pt>
 File: Images//2021-12-04-15-43-15.png Graphic file (type png)
 <use Images//2021-12-04-15-43-15.png>
-Package pdftex.def Info: Images//2021-12-04-15-43-15.png  used on input line 1607.
+Package pdftex.def Info: Images//2021-12-04-15-43-15.png  used on input line 1610.
 (pdftex.def)             Requested size: 276.88655pt x 164.41551pt.
- [61 <./Images//2021-12-04-15-26-00.png> <./Images//2021-12-04-15-43-15.png>]
-<Images//2021-12-04-16-42-43.png, id=390, 371.88937pt x 124.96687pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 1613--1614
+
+ []
+
+<Images//2021-12-07-16-22-29.png, id=386, 742.27313pt x 104.64093pt>
+File: Images//2021-12-07-16-22-29.png Graphic file (type png)
+<use Images//2021-12-07-16-22-29.png>
+Package pdftex.def Info: Images//2021-12-07-16-22-29.png  used on input line 1620.
+(pdftex.def)             Requested size: 445.36732pt x 62.78502pt.
+[61 <./Images//2021-12-04-15-26-00.png> <./Images//2021-12-04-15-43-15.png> <./Images//2021-12-07-16-22-29.png>]
+<Images//2021-12-04-16-42-43.png, id=391, 371.88937pt x 124.96687pt>
 File: Images//2021-12-04-16-42-43.png Graphic file (type png)
 <use Images//2021-12-04-16-42-43.png>
-Package pdftex.def Info: Images//2021-12-04-16-42-43.png  used on input line 1622.
+Package pdftex.def Info: Images//2021-12-04-16-42-43.png  used on input line 1648.
 (pdftex.def)             Requested size: 223.13533pt x 74.9807pt.
-<Images//2021-12-04-17-01-29.png, id=391, 422.32782pt x 170.13562pt>
+ [62 <./Images//2021-12-04-16-42-43.png>]
+<Images//2021-12-04-17-01-29.png, id=395, 422.32782pt x 170.13562pt>
 File: Images//2021-12-04-17-01-29.png Graphic file (type png)
 <use Images//2021-12-04-17-01-29.png>
-Package pdftex.def Info: Images//2021-12-04-17-01-29.png  used on input line 1642.
+Package pdftex.def Info: Images//2021-12-04-17-01-29.png  used on input line 1668.
 (pdftex.def)             Requested size: 253.39864pt x 102.08215pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1644--1645
+Underfull \hbox (badness 10000) in paragraph at lines 1670--1671
 
  []
 
-<Images//2021-12-04-17-21-53.png, id=392, 390.70969pt x 247.67531pt>
+<Images//2021-12-04-17-21-53.png, id=396, 390.70969pt x 247.67531pt>
 File: Images//2021-12-04-17-21-53.png Graphic file (type png)
 <use Images//2021-12-04-17-21-53.png>
-Package pdftex.def Info: Images//2021-12-04-17-21-53.png  used on input line 1656.
+Package pdftex.def Info: Images//2021-12-04-17-21-53.png  used on input line 1682.
 (pdftex.def)             Requested size: 234.42761pt x 148.60632pt.
-[62 <./Images//2021-12-04-16-42-43.png> <./Images//2021-12-04-17-01-29.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1672--1673
+
+Underfull \hbox (badness 10000) in paragraph at lines 1698--1699
 
  []
 
-[63 <./Images//2021-12-04-17-21-53.png>]
-<Images//2021-12-05-18-56-31.png, id=399, 818.30719pt x 428.35031pt>
+[63 <./Images//2021-12-04-17-01-29.png> <./Images//2021-12-04-17-21-53.png>]
+<Images//2021-12-05-18-56-31.png, id=400, 818.30719pt x 428.35031pt>
 File: Images//2021-12-05-18-56-31.png Graphic file (type png)
 <use Images//2021-12-05-18-56-31.png>
-Package pdftex.def Info: Images//2021-12-05-18-56-31.png  used on input line 1730.
+Package pdftex.def Info: Images//2021-12-05-18-56-31.png  used on input line 1756.
 (pdftex.def)             Requested size: 409.15259pt x 214.17462pt.
-<Images//2021-12-05-19-01-56.png, id=400, 409.53pt x 242.40562pt>
+ [64]
+<Images//2021-12-05-19-01-56.png, id=404, 409.53pt x 242.40562pt>
 File: Images//2021-12-05-19-01-56.png Graphic file (type png)
 <use Images//2021-12-05-19-01-56.png>
-Package pdftex.def Info: Images//2021-12-05-19-01-56.png  used on input line 1734.
+Package pdftex.def Info: Images//2021-12-05-19-01-56.png  used on input line 1760.
 (pdftex.def)             Requested size: 245.7199pt x 145.44447pt.
- [64 <./Images//2021-12-05-18-56-31.png>]
-<Images//2021-12-05-19-03-04.png, id=404, 400.49625pt x 272.51813pt>
+<Images//2021-12-05-19-03-04.png, id=405, 400.49625pt x 272.51813pt>
 File: Images//2021-12-05-19-03-04.png Graphic file (type png)
 <use Images//2021-12-05-19-03-04.png>
-Package pdftex.def Info: Images//2021-12-05-19-03-04.png  used on input line 1738.
+Package pdftex.def Info: Images//2021-12-05-19-03-04.png  used on input line 1764.
 (pdftex.def)             Requested size: 240.29959pt x 163.51213pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1743--1745
+Underfull \hbox (badness 10000) in paragraph at lines 1769--1771
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 1745--1746
+[65 <./Images//2021-12-05-18-56-31.png> <./Images//2021-12-05-19-01-56.png> <./Images//2021-12-05-19-03-04.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1771--1772
 
  []
 
-<Images//2021-12-06-10-26-26.png, id=405, 441.14813pt x 320.69812pt>
+<Images//2021-12-06-10-26-26.png, id=409, 441.14813pt x 320.69812pt>
 File: Images//2021-12-06-10-26-26.png Graphic file (type png)
 <use Images//2021-12-06-10-26-26.png>
-Package pdftex.def Info: Images//2021-12-06-10-26-26.png  used on input line 1747.
+Package pdftex.def Info: Images//2021-12-06-10-26-26.png  used on input line 1773.
 (pdftex.def)             Requested size: 176.45612pt x 128.27696pt.
-[65 <./Images//2021-12-05-19-01-56.png> <./Images//2021-12-05-19-03-04.png> <./Images//2021-12-06-10-26-26.png>]
-<Images//2021-12-06-10-31-01.png, id=409, 462.22687pt x 277.78781pt>
+<Images//2021-12-06-10-31-01.png, id=410, 462.22687pt x 277.78781pt>
 File: Images//2021-12-06-10-31-01.png Graphic file (type png)
 <use Images//2021-12-06-10-31-01.png>
-Package pdftex.def Info: Images//2021-12-06-10-31-01.png  used on input line 1751.
+Package pdftex.def Info: Images//2021-12-06-10-31-01.png  used on input line 1777.
 (pdftex.def)             Requested size: 231.11287pt x 138.89355pt.
-<Images//2021-12-06-10-46-11.png, id=410, 453.19313pt x 264.99pt>
+[66 <./Images//2021-12-06-10-26-26.png> <./Images//2021-12-06-10-31-01.png>]
+<Images//2021-12-06-10-46-11.png, id=415, 453.19313pt x 264.99pt>
 File: Images//2021-12-06-10-46-11.png Graphic file (type png)
 <use Images//2021-12-06-10-46-11.png>
-Package pdftex.def Info: Images//2021-12-06-10-46-11.png  used on input line 1762.
+Package pdftex.def Info: Images//2021-12-06-10-46-11.png  used on input line 1788.
 (pdftex.def)             Requested size: 226.59601pt x 132.49467pt.
-<Images//2021-12-06-10-47-59.png, id=411, 403.5075pt x 246.1697pt>
+<Images//2021-12-06-10-47-59.png, id=416, 403.5075pt x 246.1697pt>
 File: Images//2021-12-06-10-47-59.png Graphic file (type png)
 <use Images//2021-12-06-10-47-59.png>
-Package pdftex.def Info: Images//2021-12-06-10-47-59.png  used on input line 1766.
+Package pdftex.def Info: Images//2021-12-06-10-47-59.png  used on input line 1792.
 (pdftex.def)             Requested size: 242.10637pt x 147.70294pt.
- [66 <./Images//2021-12-06-10-31-01.png> <./Images//2021-12-06-10-46-11.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1768--1769
+
+Underfull \hbox (badness 10000) in paragraph at lines 1794--1795
 
  []
 
-[67 <./Images//2021-12-06-10-47-59.png>] (main.aux) ) 
+[67 <./Images//2021-12-06-10-46-11.png> <./Images//2021-12-06-10-47-59.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1819--1820
+
+ []
+
+<Images//2021-12-07-14-30-09.png, id=421, 411.78844pt x 268.00125pt>
+File: Images//2021-12-07-14-30-09.png Graphic file (type png)
+<use Images//2021-12-07-14-30-09.png>
+Package pdftex.def Info: Images//2021-12-07-14-30-09.png  used on input line 1821.
+(pdftex.def)             Requested size: 247.07495pt x 160.80197pt.
+[68 <./Images//2021-12-07-14-30-09.png>] (main.aux) ) 
 Here is how much of TeX's memory you used:
- 18500 strings out of 478699
- 371570 string characters out of 2856818
- 649579 words of memory out of 3000000
- 36140 multiletter control sequences out of 15000+600000
+ 18516 strings out of 478699
+ 372120 string characters out of 2856818
+ 649581 words of memory out of 3000000
+ 36154 multiletter control sequences out of 15000+600000
  422102 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,12n,89p,923b,421s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti0700.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1000.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0600.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1000.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\loryb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on main.pdf (67 pages, 4890081 bytes).
+Output written on main.pdf (68 pages, 5065818 bytes).
 PDF statistics:
- 966 PDF objects out of 1000 (max. 8388607)
+ 971 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 541 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 551 words of extra memory for PDF output out of 10000 (max. 10000000)
 

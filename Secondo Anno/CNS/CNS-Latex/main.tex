@@ -1466,10 +1466,11 @@ La fase di ripresa della sessione: \emph{Re-Keying} cioè si aggiornano i segret
 	\includegraphics*[scale=0.8]{2021-11-22-14-46-59.png}
 \end{center}
 Se possiamo negoziare qualcosa e questo non è protetto , allora posso modificare la negoziazione. Ne è un esempio
-il \textbf{Downgrade Attack}: l'inizializzazione non (\emph{Client Hello , Server Hello}) è in PT. Ora l'attackent può cambiare la
+il \textbf{Downgrade Attack}: l'inizializzazione non (\emph{Client Hello , Server Hello}) è in PT. Ora l'attacker può cambiare la
 versione di SSL ad un a versione precedente. Quindi il server crede che si possa utilizzare solo la versione vecchia, convincendo anche
 il Client: abbiamo modificato il protocollo da utilizzare con tutte le sue vulnerabilità e messo a rischio la comunicazione.
 \textbf{La negoziazione deve essere affidabile.}
+
 \subsection{Handshake Messages}
 \begin{center}
 	\includegraphics[scale=0.6]{2021-11-22-14-56-02.png}
@@ -1499,7 +1500,9 @@ il Client: abbiamo modificato il protocollo da utilizzare con tutte le sue vulne
 		            Un esempio è \textbf{TLS\_RSA\_WITH\_NULL\_MD5}
 	      \end{enumerate}
 \end{itemize}
-
+\begin{remark}
+	Se utilizzo \textbf{RSA Key Transport} non ho bisogno di effettuare il \emph{Server Key Exchange} ma invio il certificato come spiegato più avanti.
+\end{remark}
 \begin{tabular}{cc}
 	\includegraphics[scale=0.6]{2021-12-02-15-48-45.png} &
 	\includegraphics[scale=0.6]{2021-12-02-15-57-06.png}
@@ -1607,6 +1610,30 @@ Diffie Hellman key agreement è un protocollo per lo scambio di chiavi in manier
 	\includegraphics[scale=0.6]{2021-12-04-15-43-15.png}
 \end{center}
 Questo algoritmo non implementa un sistema crittografico a chiave pubblica e quindi non si possono trasferire i dati cifrati con la chiave pubblica del ricevitore. Inoltre, non si pososno firmare i dati con la chiave privata.\newline A questo scopo, venne introdotto RSA.
+\paragraph{Varianti}\mbox{}\\
+\begin{itemize}
+	\item \textbf{Anonymous Diffie-Hellman}:\begin{enumerate}
+		\item I valori X e Y sono generati a runtime e non autenticati;
+		\item Soffre di MITM;
+		\item  Non vi è garanzia dell'autenticità degli end-points;
+		\begin{center}
+			\includegraphics[scale=0.6]{2021-12-07-16-22-29.png}
+		\end{center}
+	\end{enumerate}
+	\item \textbf{(Fixed) Diffie-Hellman}:\begin{enumerate}
+		\item I parametri pubblici di Diffie-Hellman \(g^x\ e\ g^y\) sono statici e firmati da un certification authority (nome e PK di Diffie-Hellman):
+		\item impossibile effettuare un MITM attack;
+		\item I parametri sono statici e quindi soggetti a brute-force attack;
+	\end{enumerate}
+\end{itemize}
+La seconda versione di Diffie-Hellman è più robusta ma vogliamo che, nel caso in cui dovessimo cambiare chiave in ogni sessione, non dobbiamo contattare il CA per ottenre un nuovo certificato valido. La soluzione a questo problema è dato da \textbf{Ephimeral Diffie-Hellman}.
+\paragraph{Ephimeral Diffie-Hellman}\mbox{}\\
+L'utente firma con il suo nome il suo valore pubblico \(g^x \mod{p}\). Ciò non significa che sta facendo un \emph{sel signed certificate} poiché sta usando il suo nome ed un valore del DH che non è il suo. Se l'utente manda sia questo certificato firmato da solo che un altro pacchetto firmato dal CA stiamo in sicurezza. \newline
+Con \(g^x \mod{p}\) firmato da CA siamo sicuri dal MITM, con quello firmato da alice possiamo generare dei fresh secret ogni volta, evitando problemi del fixed DH, ovvore: o mi scade il certificato e possono scoprire il segreto rileggendo le vecchie consersazioni o che trovano tramite brute force \(g^x\). Quindi:\begin{enumerate}
+	\item Prendo \(g^x \mod{p}\) e lo fimro usando il mio nome;
+	\item Prendo la mia chiave pubblica e la faccio firmare con il mio nome da un CA
+\end{enumerate}
+Questi processi vengono fatti localmente. Se anche avessi una rottura del sistema, gli scambi rimarrebbero sicuri. Viene utilizzato in TLS v.1.3.
 \subsubsection{Algoritmo RSA}
 RSA è un algoritmo di crittografia asimmerica che si basa sul fattorizzazione dei numeri primi: dato N, numero prodotto dalla moltiplicazione di 2 numeri primi molto grandi per cui è difficile trovare la sua fattorizzazone.
 Per l'encryption e decryption si sfrutta il principio della \textbf{Modular exponentiation}:\begin{itemize}
@@ -1616,7 +1643,6 @@ Per l'encryption e decryption si sfrutta il principio della \textbf{Modular expo
 \begin{remark}
 	Il messaggio è più corto di N.
 \end{remark}
-\newpage
 \paragraph{RSA Principle}
 \begin{center}
 	\includegraphics[scale=0.6]{2021-12-04-16-42-43.png}
@@ -1790,5 +1816,9 @@ PKI è il tool set che serve a realizzare un public key certificate. Il formato 
 	\item \textbf{User Public Key}: La chiave pubblica che verrà presentata a chi userà il sistema. Viene specificato l'algoritmo che sarà utilizzato nel caso di RSA verrà specificato il modulo N, l'esponente pubblico ed altro;
 	\item \textbf{CA Digital Signature}: la firma del certificate Authority.
 \end{itemize}
-
+Il problema di PKI è dovuto a chi rilascia i certifricati poiché molti di loro potrebbero rilasciare certificati falsi. Un certificato viene detto falso se contine un nome valido, ma una chiave pubblica falsa.\newline
+\begin{center}
+	\includegraphics[scale=0.6]{2021-12-07-14-30-09.png}
+\end{center}
+Per mitigare questo fenomeno, ipotizziamo che il certificate authoritiy non è più trsusted, si utilizza un DB generale con tutti i certificati che tutti possono consultare. Ciò implica che anche i veri proprietari del certificato possono controllare e vedere se qualcuino usa il proprio nome senza il consenso. Questo immenso DB viene detto \textbf{Certificate Transparencey DB} che ha le caratteristiche di essere \textbf{unico,scalabile e raggiungibile.} Nel caso in cui gli attacker
 \end{document}

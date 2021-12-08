@@ -136,18 +136,20 @@
 \contentsline {paragraph}{Differenze digital signature e MAC}{60}{}%
 \contentsline {subsubsection}{\numberline {13.4.7}Algoritmi per Asymmetric Criptography}{60}{}%
 \contentsline {subsubsection}{\numberline {13.4.8}Diffie-Hellman Key Agreement}{61}{}%
-\contentsline {subsubsection}{\numberline {13.4.9}Algoritmo RSA}{61}{}%
+\contentsline {paragraph}{Varianti}{61}{}%
+\contentsline {paragraph}{Ephimeral Diffie-Hellman}{62}{}%
+\contentsline {subsubsection}{\numberline {13.4.9}Algoritmo RSA}{62}{}%
 \contentsline {paragraph}{RSA Principle}{62}{}%
 \contentsline {paragraph}{Calcolo della funzione di Eulero}{62}{}%
-\contentsline {paragraph}{Conseguenze Periodicità}{62}{}%
-\contentsline {paragraph}{RSA Construction}{62}{}%
-\contentsline {paragraph}{Extended EuclideanAlgorithm}{63}{}%
+\contentsline {paragraph}{Conseguenze Periodicità}{63}{}%
+\contentsline {paragraph}{RSA Construction}{63}{}%
+\contentsline {paragraph}{Extended EuclideanAlgorithm}{64}{}%
 \contentsline {paragraph}{Come calcolare RSA Inverso}{64}{}%
 \contentsline {paragraph}{Digital Certificates and Public Key Infrastructure}{64}{}%
 \contentsline {subparagraph}{Problema}{64}{}%
-\contentsline {paragraph}{RSA Key Transport}{64}{}%
-\contentsline {subsubsection}{\numberline {13.4.10}Certification Authority}{65}{}%
-\contentsline {paragraph}{Funzionamento}{65}{}%
+\contentsline {paragraph}{RSA Key Transport}{65}{}%
+\contentsline {subsubsection}{\numberline {13.4.10}Certification Authority}{66}{}%
+\contentsline {paragraph}{Funzionamento}{66}{}%
 \contentsline {paragraph}{Approccio pratico TLS-RSA Key transport}{67}{}%
 \contentsline {paragraph}{Certificate Chain}{67}{}%
-\contentsline {paragraph}{PKI: Public Key Infrasrtructer}{67}{}%
+\contentsline {paragraph}{PKI: Public Key Infrasrtructer}{68}{}%
