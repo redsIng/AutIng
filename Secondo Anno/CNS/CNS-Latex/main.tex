@@ -33,11 +33,10 @@
 
 \tableofcontents
 \newpage
-\part{Parte 1- First Midterm}
-\section{Definizioni e basi sulla crittografia simmetrica}
-L'obiettivo della crittografia è quello di trasformare i dati in un qualcosa di incomprensibile al fine di garantire confidenzialità e sicurezza. Questa trasformazione deve essere \textbf{reversibile}. Ne è un esempio la crittografia simmetrica in cui si utilizza una chiave che viene utilizzata sia per cifrare che decifrare i dati.
+\part{Parte 1- First Mid-term}
+\section{Definizioni e basi sulla crittografia simmetrica} L'obiettivo della crittografia è quello di trasformare i dati in un qualcosa di incomprensibile al fine di garantire confidenzialità e sicurezza. Questa trasformazione deve essere \textbf{reversibile}. Ne è un esempio la crittografia simmetrica in cui si utilizza una chiave che viene utilizzata sia per cifrare che decifrare i dati.
 La chiave, come appena detto, serve a cifrare e decifrare i dati e perciò deve essere privata, cioè conosciuta solo da coloro che sono impegnati nella trasmissione. Tuttavia, per permettere la cifratura/decifratura, si necessitano di algoritmi che devono essere noti, cioè pubblici.
-L'agoritmo che cifra e decifra viene detto \textbf{chiper}. L'iter che viene eseguito è il seguente:
+L'lgoritmo che cifra e decifra viene detto \textbf{chiper}. L'iter che viene eseguito è il seguente:
 \begin{itemize}
 	\item Il testo non cifrato \textbf{plaintext} P viene cifrato tramite l'algoritmo pubblico (chiper);
 	\item Il chiper è una funzione del tipo \(C=ENC(K,P)\) che produce il messaggio cifrato \textbf{chipertext} C ed inviato al destinatario;
@@ -46,14 +45,12 @@ L'agoritmo che cifra e decifra viene detto \textbf{chiper}. L'iter che viene ese
 \begin{center}
 	\includegraphics[scale=0.4]{encryption-decryption-diffrences}
 \end{center}
-\subsection{Substitution cipher}
-Il \textbf{substitution cipher} è un algoritmo di cifratura che, preso un plaintext, sosituisce ad ogni lettera un'altra lettera dell'alfabeto. Questo algoritmo è facile da decifrare e poco sicuro poiché è possibile capire la chiave utilizzata (lo schema utilizzato per sostituire le lettere) a mano, ma anche tramite un \emph{frequency analysis} che conta la frequenza delle lettere in una parola. Una volta ottenuta questa frequenza, la si confronta con quella delle parole dell'alfabeto utilizzato e, così facendo, risulta immediato risalire al testo originario.
+\subsection{Substitution cipher} Il \textbf{substitution cipher} è un algoritmo di cifratura che, preso un plaintext, sosituisce ad ogni lettera un'altra lettera dell'alfabeto. Questo algoritmo è facile da decifrare e poco sicuro poiché è possibile capire la chiave utilizzata (lo schema utilizzato per sostituire le lettere) a mano, ma anche tramite un \emph{frequency analysis} che conta la frequenza delle lettere in una parola. Una volta ottenuta questa frequenza, la si confronta con quella delle parole dell'alfabeto utilizzato e, così facendo, risulta immediato risalire al testo originario.
 Un'altra problematica è che questo cipher non preserva la confidenzialità, poiché lo \textbf{stesso} plaintext presenta lo \textbf{stesso} cipher text. Ne sono un esempio le immagini:
 \begin{center}
 	\includegraphics[scale=0.3]{substilug}
 \end{center}
-\subsection{One time pad-Vernam cipher}
-Il \textbf{one time pad} (Vernam cipher) è un algoritmo di cifratura che consiste nella creazione del ciphertext effettuando uno XOR\footnote{l'operazione di XOR funziona come segue: \includegraphics[scale=0.3]{XOR}
+\subsection{One time pad-Vernam cipher} Il \textbf{one time pad} (Vernam cipher) è un algoritmo di cifratura che consiste nella creazione del ciphertext effettuando uno XOR\footnote{l'operazione di XOR funziona come segue: \includegraphics[scale=0.3]{XOR}
 } tra il plaintext e una chiave casuale lungua quanto il messaggio da inviare. Definendo \(M\) il plaintext e \(K\) la chiave, possiamo definire l'operazione di cifratura:
 \begin{center}
 	\(CT=ENC(K,M)=M\bigoplus K\)
@@ -99,8 +96,7 @@ Quindi, sapendo che il chipertext è costante, che si utilizza un PSEUDO random 
 			}}
 	\end{algorithmic}
 \end{algorithm}
-\subsection{Definizioni di Sicurezza}
-Per valutare la qualità di un cipher occorre dare delle definizioni chiave che non possono essere di carattere "assoluto", ma che definiscano con precisione la sicurezza rispetto ad un modello di avversario. Questo perché un cipher può essere sicuro contro un attaccante che è abilitato ad accedere solo al chipertext ma non contro quelli che possono vedere sia porzioni di plain/cipher text. Come convenzione si utilizza un \textbf{modello} rappresentante lo scenario in cui si deve raggiunge l'\textbf{obiettivo}.
+\subsection{Definizioni di Sicurezza} Per valutare la qualità di un cipher occorre dare delle definizioni chiave che non possono essere di carattere "assoluto", ma che definiscano con precisione la sicurezza rispetto ad un modello di avversario. Questo perché un cipher può essere sicuro contro un attaccante che è abilitato ad accedere solo al chipertext ma non contro quelli che possono vedere sia porzioni di plain/cipher text. Come convenzione si utilizza un \textbf{modello} rappresentante lo scenario in cui si deve raggiunge l'\textbf{obiettivo}.
 A livello internazionale si utilizza come baseline di sicurezza:
 \begin{center}
 	\textbf{IND-CPA}
@@ -145,7 +141,7 @@ Nel mondo reali i ciphers possono essere divisi in due categorie:\begin{itemize}
 	\item \textbf{BLOCK ciphers in STREAM MODE}: \newline AES-CTR\@;
 \end{itemize}
 \subsection{Stream Ciphers}
-Lo \textbf{stream cipher} richiede una chiave simmetrica di lunghezza finita scelta casualemente (\(K\)), mentre la chiave utilizzata per la cifratura e la decifratura viene scelto dalla base della chiave simmetrica casuale tramite un algoritmo (\textbf{PRNG(K)} pseudorandom (\textbf{keystream} $K'$)). Per questi motivi, viene detto un cipher one time pad "approssimato".
+Lo \textbf{stream cipher} richiede una chiave simmetrica di lunghezza finita scelta casualemente (\(K\)), mentre la chiave utilizzata per la cifratura e la decifratura viene scelto dalla base della chiave simmetrica casuale tramite un algoritmo (\textbf{PRNG (K)} pseudorandom (\textbf{keystream} $K'$)). Per questi motivi, viene detto un cipher one time pad "approssimato".
 \begin{center}
 	\includegraphics[scale=0.5]{Stream Cipher}
 \end{center}
@@ -1501,7 +1497,20 @@ il Client: abbiamo modificato il protocollo da utilizzare con tutte le sue vulne
 	      \end{enumerate}
 \end{itemize}
 \begin{remark}
-	Se utilizzo \textbf{RSA Key Transport} non ho bisogno di effettuare il \emph{Server Key Exchange} ma invio il certificato come spiegato più avanti.
+	Se utilizzo \textbf{RSA Key Transport} non ho bisogno di effettuare il \emph{Server Key Exchange} ma invio il certificato come spiegato più avanti. Quindi, utilizzo:\begin{enumerate}
+		\item Client Hello\(\rightarrow\);
+		\item Server Hello\(\leftarrow \);
+		\item Certificate \(\leftarrow \);
+		\item Server Hello Done \(\leftarrow\);
+		\item Client Key Exchange	\(\rightarrow \);
+	\end{enumerate}
+	Nel caso in cui si utilizza Ephimeral Diffie-Hellman (spiegato in segutio), si utilizza:\begin{enumerate}
+		\item Client Hello\(\rightarrow \);
+		\item Server Hello\(\leftarrow \);
+		\item Certificate \(\rightarrow\); (contiene (Nome pubblico, chiave publica firmata) )
+		\item Server Key Exchange \(\leftarrow \);(certificato firmato)
+		\item Client Key Exchange \(\rightarrow \);
+	\end{enumerate}
 \end{remark}
 \begin{tabular}{cc}
 	\includegraphics[scale=0.6]{2021-12-02-15-48-45.png} &
@@ -1613,18 +1622,18 @@ Questo algoritmo non implementa un sistema crittografico a chiave pubblica e qui
 \paragraph{Varianti}\mbox{}\\
 \begin{itemize}
 	\item \textbf{Anonymous Diffie-Hellman}:\begin{enumerate}
-		\item I valori X e Y sono generati a runtime e non autenticati;
-		\item Soffre di MITM;
-		\item  Non vi è garanzia dell'autenticità degli end-points;
-		\begin{center}
-			\includegraphics[scale=0.6]{2021-12-07-16-22-29.png}
-		\end{center}
-	\end{enumerate}
+		      \item I valori X e Y sono generati a runtime e non autenticati;
+		      \item Soffre di MITM;
+		      \item  Non vi è garanzia dell'autenticità degli end-points;
+		            \begin{center}
+			            \includegraphics[scale=0.6]{2021-12-07-16-22-29.png}
+		            \end{center}
+	      \end{enumerate}
 	\item \textbf{(Fixed) Diffie-Hellman}:\begin{enumerate}
-		\item I parametri pubblici di Diffie-Hellman \(g^x\ e\ g^y\) sono statici e firmati da un certification authority (nome e PK di Diffie-Hellman):
-		\item impossibile effettuare un MITM attack;
-		\item I parametri sono statici e quindi soggetti a brute-force attack;
-	\end{enumerate}
+		      \item I parametri pubblici di Diffie-Hellman \(g^x\ e\ g^y\) sono statici e firmati da un certification authority (nome e PK di Diffie-Hellman):
+		      \item impossibile effettuare un MITM attack;
+		      \item I parametri sono statici e quindi soggetti a brute-force attack;
+	      \end{enumerate}
 \end{itemize}
 La seconda versione di Diffie-Hellman è più robusta ma vogliamo che, nel caso in cui dovessimo cambiare chiave in ogni sessione, non dobbiamo contattare il CA per ottenre un nuovo certificato valido. La soluzione a questo problema è dato da \textbf{Ephimeral Diffie-Hellman}.
 \paragraph{Ephimeral Diffie-Hellman}\mbox{}\\
