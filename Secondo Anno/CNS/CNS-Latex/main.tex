@@ -1815,7 +1815,7 @@ In molti scenari, l'end user certificate non è rilasciato da un root certificat
 	\item La certificate chain semplifica la gestione delle chiavi e il controllo dei certificati raggruppando i CA in una struttra ad albero dove si può verificare l'intera catena.
 \end{itemize}
 Ogni utente fidato possiede il basi constraints extension, dove si può leggere CA. Tutti gli utenti con CA false non hanno permesso di utilizzare la propria chiaave privata per firmare altri certificati. In questa maniera, un certificato illegittimo della catena può essere facilmente riconoscibile.
-\paragraph{PKI: Public Key Infrasrtructer}\mbox{}\\
+\paragraph{PKI: Public Key Infrasrtructre}\mbox{}\\
 PKI è il tool set che serve a realizzare un public key certificate. Il formato tipico è X.509. Ha la struttura:\begin{center}
 	Version|CA Identity|User identity|User public key|CA Digital Signature
 \end{center}
@@ -1829,5 +1829,6 @@ Il problema di PKI è dovuto a chi rilascia i certifricati poiché molti di loro
 \begin{center}
 	\includegraphics[scale=0.6]{2021-12-07-14-30-09.png}
 \end{center}
-Per mitigare questo fenomeno, ipotizziamo che il certificate authoritiy non è più trsusted, si utilizza un DB generale con tutti i certificati che tutti possono consultare. Ciò implica che anche i veri proprietari del certificato possono controllare e vedere se qualcuino usa il proprio nome senza il consenso. Questo immenso DB viene detto \textbf{Certificate Transparencey DB} che ha le caratteristiche di essere \textbf{unico,scalabile e raggiungibile.} Nel caso in cui gli attacker
+Per mitigare questo fenomeno, ipotizziamo che il certificate authoritiy non è più trsusted, si utilizza un DB generale con tutti i certificati che tutti possono consultare. Ciò implica che anche i veri proprietari del certificato possono controllare e vedere se qualcuino usa il proprio nome senza il consenso. Questo immenso DB viene detto \textbf{Certificate Transparencey DB} che ha le caratteristiche di essere \textbf{unico,scalabile e raggiungibile.} Nel caso in cui gli attacker\dots (DA CONTINUARE)
+
 \end{document}
