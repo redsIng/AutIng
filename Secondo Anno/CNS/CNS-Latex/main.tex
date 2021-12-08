@@ -1,6 +1,8 @@
-\documentclass{article}
+\documentclass{book}
 \usepackage[utf8]{inputenc}
 \usepackage{amssymb}
+\usepackage{blindtext}
+
 \usepackage[english]{babel}
 \usepackage{graphicx}
 \usepackage{wrapfig}
@@ -34,7 +36,7 @@
 \tableofcontents
 \newpage
 \part{Parte 1- First Mid-term}
-\section{Definizioni e basi sulla crittografia simmetrica} L'obiettivo della crittografia è quello di trasformare i dati in un qualcosa di incomprensibile al fine di garantire confidenzialità e sicurezza. Questa trasformazione deve essere \textbf{reversibile}. Ne è un esempio la crittografia simmetrica in cui si utilizza una chiave che viene utilizzata sia per cifrare che decifrare i dati.
+\chapter{Definizioni e basi sulla crittografia simmetrica} L'obiettivo della crittografia è quello di trasformare i dati in un qualcosa di incomprensibile al fine di garantire confidenzialità e sicurezza. Questa trasformazione deve essere \textbf{reversibile}. Ne è un esempio la crittografia simmetrica in cui si utilizza una chiave che viene utilizzata sia per cifrare che decifrare i dati.
 La chiave, come appena detto, serve a cifrare e decifrare i dati e perciò deve essere privata, cioè conosciuta solo da coloro che sono impegnati nella trasmissione. Tuttavia, per permettere la cifratura/decifratura, si necessitano di algoritmi che devono essere noti, cioè pubblici.
 L'lgoritmo che cifra e decifra viene detto \textbf{chiper}. L'iter che viene eseguito è il seguente:
 \begin{itemize}
@@ -45,12 +47,12 @@ L'lgoritmo che cifra e decifra viene detto \textbf{chiper}. L'iter che viene ese
 \begin{center}
 	\includegraphics[scale=0.4]{encryption-decryption-diffrences}
 \end{center}
-\subsection{Substitution cipher} Il \textbf{substitution cipher} è un algoritmo di cifratura che, preso un plaintext, sosituisce ad ogni lettera un'altra lettera dell'alfabeto. Questo algoritmo è facile da decifrare e poco sicuro poiché è possibile capire la chiave utilizzata (lo schema utilizzato per sostituire le lettere) a mano, ma anche tramite un \emph{frequency analysis} che conta la frequenza delle lettere in una parola. Una volta ottenuta questa frequenza, la si confronta con quella delle parole dell'alfabeto utilizzato e, così facendo, risulta immediato risalire al testo originario.
+\chapter{Substitution cipher} Il \textbf{substitution cipher} è un algoritmo di cifratura che, preso un plaintext, sosituisce ad ogni lettera un'altra lettera dell'alfabeto. Questo algoritmo è facile da decifrare e poco sicuro poiché è possibile capire la chiave utilizzata (lo schema utilizzato per sostituire le lettere) a mano, ma anche tramite un \emph{frequency analysis} che conta la frequenza delle lettere in una parola. Una volta ottenuta questa frequenza, la si confronta con quella delle parole dell'alfabeto utilizzato e, così facendo, risulta immediato risalire al testo originario.
 Un'altra problematica è che questo cipher non preserva la confidenzialità, poiché lo \textbf{stesso} plaintext presenta lo \textbf{stesso} cipher text. Ne sono un esempio le immagini:
 \begin{center}
 	\includegraphics[scale=0.3]{substilug}
 \end{center}
-\subsection{One time pad-Vernam cipher} Il \textbf{one time pad} (Vernam cipher) è un algoritmo di cifratura che consiste nella creazione del ciphertext effettuando uno XOR\footnote{l'operazione di XOR funziona come segue: \includegraphics[scale=0.3]{XOR}
+\chapter{One time pad-Vernam cipher} Il \textbf{one time pad} (Vernam cipher) è un algoritmo di cifratura che consiste nella creazione del ciphertext effettuando uno XOR\footnote{l'operazione di XOR funziona come segue: \includegraphics[scale=0.3]{XOR}
 } tra il plaintext e una chiave casuale lungua quanto il messaggio da inviare. Definendo \(M\) il plaintext e \(K\) la chiave, possiamo definire l'operazione di cifratura:
 \begin{center}
 	\(CT=ENC(K,M)=M\bigoplus K\)
@@ -80,7 +82,7 @@ Riguardo all'ultimo punto, per ottenere una chiave pseudorandomica si utilizza u
 	\item Tutti questi primi 3 aspetti, nella crittografica, sono assolutamenti da evitare, se possibile.
 \end{itemize}
 Al contrario per ottenere una chiave veramente casuale si utilizzano i \textbf{TRNG} (Truly Random Number Generator) in cui si prendono fenomeni fisici per estrarre la casualità. Ne possono essere un esempio il rumore atmosferico e il rumore termico dei resistori.
-\subsection{One Time Pad-The Attacker}
+\chapter{One Time Pad-The Attacker}
 Ipotizziamo di avere un \textbf{One Time Pad} con un PRNG.Finché l'algoritmo utilizzato per generare le chiavi non è noto sembra essere tutto abbastanza sicuro tuttavia ciò non è possibile poiché, per ipotesi, è pubblico. Inoltre, se ricevessimo due messaggi \emph{M1} e \emph{M2} la situazione cambierebbe:
 \begin{center}
 	\(M1\bigoplus M2 = (S\bigoplus K_i)(S\bigoplus K_{i+1}) = K_i\bigoplus K_{i+1}\)
@@ -96,7 +98,7 @@ Quindi, sapendo che il chipertext è costante, che si utilizza un PSEUDO random 
 			}}
 	\end{algorithmic}
 \end{algorithm}
-\subsection{Definizioni di Sicurezza} Per valutare la qualità di un cipher occorre dare delle definizioni chiave che non possono essere di carattere "assoluto", ma che definiscano con precisione la sicurezza rispetto ad un modello di avversario. Questo perché un cipher può essere sicuro contro un attaccante che è abilitato ad accedere solo al chipertext ma non contro quelli che possono vedere sia porzioni di plain/cipher text. Come convenzione si utilizza un \textbf{modello} rappresentante lo scenario in cui si deve raggiunge l'\textbf{obiettivo}.
+\chapter{Definizioni di Sicurezza} Per valutare la qualità di un cipher occorre dare delle definizioni chiave che non possono essere di carattere "assoluto", ma che definiscano con precisione la sicurezza rispetto ad un modello di avversario. Questo perché un cipher può essere sicuro contro un attaccante che è abilitato ad accedere solo al chipertext ma non contro quelli che possono vedere sia porzioni di plain/cipher text. Come convenzione si utilizza un \textbf{modello} rappresentante lo scenario in cui si deve raggiunge l'\textbf{obiettivo}.
 A livello internazionale si utilizza come baseline di sicurezza:
 \begin{center}
 	\textbf{IND-CPA}
@@ -107,7 +109,7 @@ In cui:\begin{itemize}
 	\item \textbf{CPA}: Chosen PlainText Attack
 \end{itemize}
 
-\subsection{IND-CPA Game}
+\chapter{IND-CPA Game}
 Andiamo ora a definire il modello e l'obiettivo di IND-CPA.Assumiamo la presenza di una vittima ed di un avversario.L'avvrsario è a conoscenza del cipher utilizzato e del plaintext.
 \begin{itemize}
 	\item \textbf{IND-PHASE}:
@@ -124,7 +126,7 @@ Andiamo ora a definire il modello e l'obiettivo di IND-CPA.Assumiamo la presenza
 	      \end{enumerate}
 	\item \textbf{GOAL}: Se l'avversario deve inviare ulteriori messaggi alla vittima per capire quale sia il plaintext, allora il cipher è sicuro. Altrimenti, il cipher viene detto \textbf{broken}.
 \end{itemize}
-\subsection{IND-CPA:Conseguenze}
+\chapter{IND-CPA:Conseguenze}
 Come abbiamo già detto, un avversario non deve essere in grado di calcolare qualsiasi informazione su un plaintext anche se potessa aver accesso ad oracolo di cifratura. Riformulando:
 \begin{center}
 	\textbf{Un avversario, dati due plaintexts di stessa lunghezza e dato un ciphertext il quale contiene un messaggio scelto randomicamente tra i due, non dovrebbe essere in grado di distinguere quale dei due sia.}
@@ -134,13 +136,13 @@ Le conseguenze di IND-CPA sono che:
 	\item La cifratura deve essere randomizzata. Quindi uno stessa messaggio deve restituire diversi ciphertext e quest'ultimo deve essere casuale e quindi indistinguibile.
 	\item Se si ripete una sottostringa, deve essere cifrata di due ciphertext differenti.
 \end{itemize}
-\section{Stream-Cipher e WEP}
+\chapter{Stream-Cipher e WEP}
 Nel mondo reali i ciphers possono essere divisi in due categorie:\begin{itemize}
 	\item \textbf{STREAM ciphers}: \newline Deboli: RCA;\newline Forti: Salsa20,ChaCha20;
 	\item \textbf{BLOCK Ciphers}: \newline Deboli: DES,3DES;\newline Forti: AES\@;
 	\item \textbf{BLOCK ciphers in STREAM MODE}: \newline AES-CTR\@;
 \end{itemize}
-\subsection{Stream Ciphers}
+\chapter{Stream Ciphers}
 Lo \textbf{stream cipher} richiede una chiave simmetrica di lunghezza finita scelta casualemente (\(K\)), mentre la chiave utilizzata per la cifratura e la decifratura viene scelto dalla base della chiave simmetrica casuale tramite un algoritmo (\textbf{PRNG (K)} pseudorandom (\textbf{keystream} $K'$)). Per questi motivi, viene detto un cipher one time pad "approssimato".
 \begin{center}
 	\includegraphics[scale=0.5]{Stream Cipher}
@@ -152,13 +154,13 @@ Le funzioni di cifratura e decifratura rimangono invariate:
 \end{center}
 Se si ripete una sottostringa, il chipertext cambia. Tuttavia, se il messaggio viene cifrato due volte, il chipertext si ripeterà dato che il cipher utilizzato è deterministico. Ne è un esempio RC4.\newline
 Quindi la problematica è nel fatto che la chiave è statica.
-\subsection{Initialization Vectors (IV) in Strem Ciphers}
+\chapter{Initialization Vectors (IV) in Strem Ciphers}
 Al fine di garantire \textbf{sicurezza semantica} si introducono gli \textbf{initialization vectors IV}. Esso è un valore casuale differente per ogni messaggio che garantisce l'unicità del ciphertext.
 In particolare, si IV viene compinato con la chiave dal cipher PRNG (K||V); ne viene fatto lo XOR con il plaintext, ottenendo il chipertext a cui si aggiunge l'initialization vector IV. Quest'ultimo risulterà sempre diverso e la non conoscenza di IV \textbf{NON} è un requisito di sicurezza.
 \begin{center}
 	\includegraphics[scale= 0.35]{IVStreamCipher.png}
 \end{center}
-\subsection{WEP}
+\chapter{WEP}
 L'esempio di WEP è utile a capire perché un buon algoritmo di cifratura non è abbastanza a rendere sicuro un sistema.Inanzitutto, iniziamo con il definire gli obbiettivi preposti da WEP:
 \begin{itemize}
 	\item Autenticazione:
@@ -181,8 +183,8 @@ Avendo, quindi assunto che RC4 è forte, allora WEP è sicuro finché IV non si 
 \end{itemize}
 Le conseguenze di queste scelte hanno portato ad una ripetizione dello stesso IV in $2^{24}$ cicli,corrispondenti a 8 ore se ogni frame è di 1500bytes e la rete di 7mbps.
 Questa soluzione si rivelò disastrosa e anche se IV veniva scelto in maniera casuale e anche se si sceglieva una chiave di dimensioni maggiori perché il problema era che la lunghezza di IV era troppo corta.
-\subsection{Attacchi pratici verso un IV di piccolo dimensioni}
-\subsubsection{Attacco Passivo}
+\chapter{Attacchi pratici verso un IV di piccolo dimensioni}
+\section{Attacco Passivo}
 Un attacco che si può effettuare in presenza di IV (initialization vectors) di piccolo dimensioni è quello di creare un \textbf{dizionario} formato da:
 \begin{center}
 	$IV\rightarrow RC4(IV,Key)$
@@ -194,7 +196,7 @@ Si utilizzano messaggi noti per recuperare il Keystream nel seguente modo:
 	\end{equation}
 \end{center}
 I messaggi noti possono essere raccolti anche tramite l'invio di email contenenti grandi allegati. Per proteggersi da questi attacchi si necessita di una \textbf{procedura di autentitcazione}
-\subsubsection{IV ripetuti}
+\section{IV ripetuti}
 Un'altra tecnica è quella di aspettare che un IV sia ripetuto ed in particolare:
 \begin{center}
 	\begin{equation}
@@ -202,10 +204,10 @@ Un'altra tecnica è quella di aspettare che un IV sia ripetuto ed in particolare
 	\end{equation}
 \end{center}
 Come già discusso in precedenza, l'aumento della grandezza della chiave non risolve il problema poiché l'IV mantiene la stessa lunghezza di 24 bits, insufficiente per mantenere un certo grado di sicurezza.
-\subsubsection{Attacco ad RC4}
+\section{Attacco ad RC4}
 RC4 è l'algoritmo utilizzato da WEP per generare il keystream utilizzato per cifrare i messaggi. Fluhrer, Mantir e Shamir riuscirono a rompere questo algoritmo notando che nel 5\% dei casi la chiave generata da RC4 faceva intuire il valore della chiave utilizzata come argomento di questafunzione. Quindi dimostrarono che, accumulando traffico, era possibile ottenere la chiave segreta simmetrica.
 Questo attacco era molto pratico poiché bastava utilizzare il traffico già noto (es. traffico su internet) per ottenere componenti della chiave segreta. Inoltre, si è dimostrato che questo attacco è lineare con la dimensione della chiave.
-\subsection{User Authentication}
+\chapter{User Authentication}
 Non bisogna confondere il concetto di \textbf{autenticazione} con il concetto di \textbf{identificazione}: nel primo, si vuole dimostrare la propria identità digitale (es. email,ID); nel secondo, si vuole mostrare che la propriaidentità digitale è controllata dal proprietario.
 Nel pratico il concetto di autentitcazione utente non è facilmente raggiungibile poiché non è possibile collegare l'ID all'identità nella vita reale. Quindi un organo internazionale chiamato NIST SP, fornisce una definizione di autenticazione utente.
 \begin{definition}[Autenticazione utente]
@@ -218,7 +220,7 @@ I mezzi che possono essere utilizzati per verificare l'autenticazione, possono e
 	\item Qualcosa per cui tu sei: dati biometrici come retina, impronta digitale;
 	\item Qualcosa che tu fai: come la scrittura e i movimenti del mouse sul computer;
 \end{itemize}
-\subsubsection{Autenticazione Wep}
+\section{Autenticazione Wep}
 L'idea dietro al Wep (\textbf{Wired Equivalent privacy}) non era quella di autenticare gli utenti, ma quella di redigere una lista di chi poteva utilizzare la rete. Tutti gli autorizzati nella rete avrebbero potuto comunicare senza ausilio crittografico, mentre per quelli al di fuori avrebbero osservato solamente i messaggi cifrati. Quindi, la conoscenza di un segreto comune rendeva un utente fidato.
 \textbf{L'idea di WEP}
 \begin{center}
@@ -239,7 +241,7 @@ Gli errori nel fare ciò sono i seguenti:
 	      A questo punto, il sistema è sensibile ad attacchi. Posto un MITM(\emph{man in the middle attack}, se esso ascolta IV di un messaggio e si ricava l'RC4 corrispondente, è in grado di entrare nella rete; se a quel punto chiede una challenge all'access point, può scegliere un IV precedentemente intercettato ed entrare nel sistema.\newline
 	      \textbf{La soluzione a questo problema poteva essere quella di comunicare oltre alla challenge anche l'IV}.
 \end{itemize}
-\subsubsection{Integrità WEP}
+\section{Integrità WEP}
 L'idea di WEP per l'integrità era quella di utilizzare CRC-32 come un valore di controllo di integrità così da evitare eventuali manomissioni dei messaggi in WEP.
 L'algoritmo \textbf{CRC-32} è un algoritmo di \textbf{error detection} che tiene conto dei bit di partenza tramite bit di parità posti alla fine del messaggio. Quindi, in pratica:
 \begin{center}
@@ -250,7 +252,7 @@ decisero di includere CRC-32 al pacchetti per poi criptarlo ed inviarlo in rete.
 	\item Modifica dei messaggi;
 	\item Iniezione di messaggi.
 \end{itemize}
-\subsubsection{Modifica del emssaggio}
+\section{Modifica del emssaggio}
 Supponiamo che un hacker volesse modificare qualche bit del plaintext in WEP.\newline
 Quando il messaggio viene mandato, vengono criptati tutti i bit:
 \begin{center}
@@ -268,28 +270,28 @@ Quindi siamo riusciti ad ottenere un messaggio modificato \emph{M'} con RC4 vali
 \begin{remark}
 	Risulta importante concatenare a $\delta$ anche il suo CRC per ragioni di coerenza con il controllo dei bit di parità.
 \end{remark}
-\subsubsection{Iniezione del messaggio}
+\section{Iniezione del messaggio}
 In questo tipo di attacco, l'attaccante necessita ci una coppia IV,RC4(IV,K). Quindi:
 \begin{itemize}
 	\item Calcola $c(M)$;
 	\item Invia $IV,RC4(IV,K)\bigoplus [M|c(M)]$
 \end{itemize}
-\subsection{Conclusioni}
+\chapter{Conclusioni}
 Il controllo di integrità deve essere non lineare per non consentire modifiche dei messaggi e deve includere esplicitamente una chiave diversa dato che un crittografica esterna non fornisce garanzie sull'integrità.
-\section{Message Authentication: Hash Function}
+\chapter{Message Authentication: Hash Function}
 Occorre evidenziare che \textbf{confidenzialità $\neq$ integrità}. Iinfatti:
 \begin{itemize}
 	\item \textbf{confidenzialità}: messaggi nascosti. Solo il leggittimo destinatario dovrebbe essere in grado di vedere il contenuto dei emssaggi;
 	\item \textbf{Integrità}: autenticità del messaggio. Nessuno dovrebbe essere in grado di modificare un messaggio finché è in trasmissione e la sorgente leggittima dovrebbe essere il solo a forgiare un messaggio.
 \end{itemize}
 Questi predicati sono corretti finché non si parla di algoritmi AEAD (\emph{authenticatted encryption associated data}.
-\subsection{Autenticazione del messaggio con chiave simmetrica}
+\section{Autenticazione del messaggio con chiave simmetrica}
 Il mittente e il destinatario conoscono una chiave \emph{k} dettao \textbf{integrity key}. Questa è una chiave diversa da quella per criptare il messaggio già visto.
 L'obiettivo è quello di aggiungere un qualcosa al messaggio che serva da check per l'integrità. Questo qualcosa è il \textbf{TAG}.Il mittente invia al destinatario il messaggio e il tag. Quest'ultimo è una sequenza di bit di lunghezza fissata, di solito più corto del messaggio stesso, generata da un funzione che prende come argomenti la chiave K e il messaggio. In seguito, quando il destinatario dovrà ricevere il messaggio e quindi verificarne l'autenticità, confronterà il tag associato al messaggio e quello che il destinarario del messaggio avrà generato sulla base della chiave K ed il messaggio. Se questo confronto ha buon fine, allora il messaggio è integro.
 \begin{center}
 	\includegraphics[scale=0.3]{MACSYM}
 \end{center}
-\subsection{Attacco MITM}
+\section{Attacco MITM}
 L'autenticazione di messaggio protegge dagli attacchi man in the middle. L'attaccante non può modificare il messaggio considerando le seguenti assunzioni:
 \begin{itemize}
 	\item $TAG=F(K,m)$ la funzione F è crittograficalmente forte;
@@ -298,31 +300,31 @@ L'autenticazione di messaggio protegge dagli attacchi man in the middle. L'attac
 	\item Non può cambiare il messaggio utilizzandone un altro che possiede lo stesso TAG.
 \end{itemize}
 Non è possibile prevenire un man in the middle attack, ma ci si può facilmente accorgere dell'attacco in quanto il tag non corrisponderà. L'attaccante ha solo $2^{-100}$ di probabilità di ricreare il tag giusto dopo aver modificato il messaggio di partenza affinché il destinatario non si accorga dello scambio.
-\subsection{Attacco message sppofing}
+\section{Attacco message sppofing}
 L'autenticazione di messaggio protegge dal message spoofing,cioè si è protetti dalla ricezioni di messaggi la cui identità non è quella effettiva. Si basa sull'assunzione che la funzione che genera il tag sia crittograficamente forte e non si può calcolare $F(K,X)$ senza conoscere la chiave segreta.
-\subsection{Replay attack}
+\section{Replay attack}
 L'autenticazione di messaggio non protegge dai replay attack: quando si inviano due messaggi uguali, si otterrà lo stesso tag. Questo tipo di attacco non porta problematiche se si è certi che non ci possano essere messaggi uguali.
 Per permettere l'invio di due messaggi uguali leggettimamente si utilizzano i \textbf{nonce}. Questi sono delle informazioni che non devono rimanere segrete e che permettono la differenziazione di tutti i messaggi.\newline Queste informazioni aggiuntive vengono inserite nel messaggio così da inglobarle nel TAG e possono essere di tre tipi: \textbf{sequence number},\textbf{random number},\textbf{time stamp}.
-\subsection{Nonce: Pro vs Cons}
+\section{Nonce: Pro vs Cons}
 \begin{itemize}
 	\item \textbf{Sequence Number}: la loro problematica riguarda il come gestire i reboot del sistema poiché in ogni avvia del sistema la sequenza ricomincia da capo, ma al contempo si è certi del messaggio che si sta ricevendo;
 	\item \textbf{Random Number}: con 128 bit avrei $\frac{1}{2^{64}}$ probabilità di collisione. Tuttavia, non posso tenere traccia dei numeri che sono stati generati. Per risolvere questo aspetto, si potrebbe avere un database in cui si controllano tutti i numeri casuali che sono stati generati, tuttavia le linee da controllare potrebbero essere elevate;
 	\item \textbf{Time step}: La problematica è capire come definire l'istante attuale e come prevenire modifica nel gestore dell'orario. Dato che l'orario è può essere impostato manualmente, da un Network Time Protocol (da cui è possibile effettuare attacchi di spoofing) o anche da sistemi di GPS.
 \end{itemize}
 
-\subsection{MAC \& Digital Signature}
+\section{MAC \& Digital Signature}
 \begin{itemize}
 	\item Nella DS, nessuno può modificare il messaggio ad eccezione del creatore.
 	\item Nessuno eccetto il destinatario e il mittente pososno modificare un messaggio autenticato;
 	\item MAC e DS hanno l'obiettivo di garantire integrità dei dati/messaggi;
 	\item Il MAC (message authentication code) è una forma più debole di una digital signature.
 \end{itemize}
-\subsection{Definizioni di sicurezza per MAC}
+\section{Definizioni di sicurezza per MAC}
 Per la crittografia si era parlato di modello INDCPA per definire la sicurezza. Ora per i messaggi occorre dare una definizione simile.
 La sicurezza è imperdonabile e quindi un attaccante non deve essere in grado di creare o modificare i messaggi e ciò implica che l'attaccante nopn dovrebbe essere in grado di estrarre la chiave dalla coppia $\{M,TAG(K,M)\}$.
 Formalmente, definiziona la sicurezza contro un modello di attaccante (\emph{Known Message Attack, Chosen Message Attack, Adaptively Chosen Message Attack} a cui gli vengono dati un numero di coppie passate formate da messaggio e tag e un messaggio m. Quindi, l'attaccante non dovrebbe essere in grado di generare un tag valido. La "bontà" della sicurezza viene data in basse alla probabilità di generare una coppia valida e deve essere pressocché nulla.
 L'idea di tag minimo per garantire sicurezza è di 96 bit.
-\subsection{MAC: Hash function}
+\section{MAC: Hash function}
 Una \textbf{funzione hash} è una funzxione che sintetizza qualsiasi messaggio di lunghezza X in un digest di lunghezza fissa Y. Queste funzioni non sono invertibili.
 Per avere un MAC sicuro si ha bisogno di una buona funzione hash (come \textbf{SHA-256}) e di includere il segreto nella hash. A meno che non si possegga una funzione has perfetta (\textbf{random oracle}), ha importanza la posizione in cui si mette il messaggio nella sequenza di bit di ingresso alla funzione hash.
 Definiamo il \textbf{random oracle} come un modello black box tale che, dato $X$ in puti, $H(X)$ è un valore veramente randomico.
@@ -334,13 +336,13 @@ Le proprietà di una funzione hash sono le seguenti:
 	\item Una funzione hash possiede la proprietà di resistenza alle collisioni debole: dato $X$, è difficile trovare un altro $X'$ con lo stesso digest;
 	\item Una funzione hash possiede la proprietà di resistenza alle collisioni forte: è difficile trovare due generici messaggi che hanno lo stesso digest.
 \end{itemize}
-\subsubsection{Paradosso del compleanno}
+\subsection{Paradosso del compleanno}
 Il paradosso del compleanno ci aiuta a capire la probabilità di collisione, cioè di ripetizione, di due numero:
 \begin{center}
 	\includegraphics[scale=0.5]{birthdaypdx}
 	\includegraphics[scale=0.5]{birthdaypdx2}
 \end{center}
-\subsubsection{Costruzione di una funzione Hash}
+\subsection{Costruzione di una funzione Hash}
 \begin{itemize}
 	\item \textbf{Segreto come suffisso} Si utilizza la costruzione di \textbf{Merkle-Damgard} per trasformare un set di $k$ bit in un set di dimensione fissata. Ne è un esempio \textbf{SHA-256} che prende $k$ bit arbitrari, li padda aggiungendo 10000 fino ad avere $N\cdot512bit$; negli utlimi 64 viene messo un numero che costituisce la lunghezza del messaggio.\newline
 	      In generale, si ha un messaggio ed usando il padding e last value si arriva ad avere un messaggio complessivo lungo un multiplo di 512 bit. Questi vengono tagliati in porzioni (chuncks) di 512bit. A questo punto viene preso un IV di 256 bit che è \textbf{DIVERSO} da quello utilizzato nella crittografia e lo si affianca con il primo chunck e , sommandoli, diventano da 768 bit; si applica F e si riottengono 256 bit. questi vengono riattaccata al secondo chunk e così via iterativamente fino alla fine. La \textbf{funzione di compressione} F è il cuore della costruzione della funzione di hash. Se F resiste, allora anche l'iterazione.
@@ -356,7 +358,7 @@ Il paradosso del compleanno ci aiuta a capire la probabilità di collisione, cio
 		      \includegraphics[scale=0.4]{secretPrefix.png}
 	      \end{center}
 \end{itemize}
-\subsubsection{HMAC (Hash Based Message Authentication Code)}
+\subsection{HMAC (Hash Based Message Authentication Code)}
 L'\textbf{HMAC} costituisce un modo sicuro di aggiungere il segreto nella funzione hash. In particolare, si vuole creare un MAC a partire da un messaggio e un segreto; si applica una funzione hash H sceltra tra quelle esistenti e si calcola:
 \begin{center}
 	$HMAC_K(M)=H(K^{+}\bigoplus opad||H(K^{+} \bigoplus ipad ||M))$
@@ -379,12 +381,12 @@ Infine, si ottiene un inner hash (vulnerabile) che sarà attaccato con $(outerke
 \begin{definition}[Messaggio Sicuro]
 	Un messaggio risolta sicuro se ha un'uscita pseudo randomica e non vi sono collisioni.
 \end{definition}
-\section{User Authentication: Password}
+\chapter{User Authentication: Password}
 Concettualmente, l'obiettivo dell'autenticazione è quello di dimostrare di sapere una password o un segreto. Tuttavia, si riscontra una differenza tra password e segreto:\begin{itemize}
 	\item \textbf{secret key}: è una stringa (true) random di $N$ bit. La probabilità di indovinare una chiave segreta(segreto) è pari a $\frac{1}{2^N}$ con $N$:= numero di bit;
 	\item \textbf{Passowrd} è una stringa di N bit in cui i caratteri scelti per comporla non si basano su tutti i caratteri possibili. La conseguenza è che la probabilità di indovinare una stringa è molto minore di quella che si avrebbe con una chiave segreta. Per questo motivo, le password sono stringe a \textbf{bassa entropia}, cioè "poco" casuali.
 \end{itemize}
-\subsection{Problematiche delle Password}
+\section{Problematiche delle Password}
 Le problematiche delle \textbf{passowrd} sono le seguenti:
 \begin{enumerate}
 	\item \textbf{Password Overload}: è il riutilizzo della stessa password su siti differenti.
@@ -450,7 +452,7 @@ Le problematiche delle \textbf{passowrd} sono le seguenti:
 		      \end{itemize}
 		      \emph{\textbf{Altri Esempi Si trovano sui fogli}}
 	      \end{remark}
-	      Riassumendo, il \textbf{valore informativo} di $x_i$ dipende da quanto l'evento $x_i$ è inatteso: minore è la proabilità $p_i$, maggiore è il valore informativo di quell'evento.
+	      Riassumendo, il \textbf{valore informativo} di \(x_i\) dipende da quanto l'evento \(x_i\) è inatteso: minore è la proabilità \(p_i\), maggiore è il valore informativo di quell'evento.
 	      \begin{definition}[Information Content]
 		      \begin{equation*}
 			      Information\ content = funzione\ di\ \frac{1}{p_i}
@@ -466,15 +468,15 @@ Le problematiche delle \textbf{passowrd} sono le seguenti:
 	      \end{center}
 	\item \textbf{Predictability and Dictionary Attacks}: la scelta delle password è sbagliata e in genere si usano password intuibili dall'umano. I \textbf{dictionary attacks} sono una serie di euristiche di \textbf{attacco brute force} in cui si utilizzano parole comuni, database pubblici di password (ottenuti da altri attacchi andati a buon termine)o dizionari specifici per l'utente che attacchiamo per indovinare la password di un utente. In particolare, per ogni utente si provano tutte le stringe ottenute dai dizionari. Questo è un tipo di attacco che può essere svolto online (facilmente difendibile imponendo un massimo numero di tentativi) o offline (assenza di difesa a patto che si scelga una password forte).
 \end{enumerate}
-\subsection{Password-Based Authentication vs Challenge-Handshake Authentication - PAP,CHAP}
-\subsubsection{PAP-Passowrd Authentication Protocol}
+\section{Password-Based Authentication vs Challenge-Handshake Authentication - PAP,CHAP}
+\subsection{PAP-Passowrd Authentication Protocol}
 Il \textbf{PAP} è il più semplice approccio di autenticazione possibile. Per dimostrare di conoscere il segreto (passworrd) lo si trasmette in chiaro. In particolare, si invia ID e PASSWORD all'authenticator che possiede un database con scritte tutte le associationi utente/password (ovviamente sono pre-condivise); quest'ultimo controlla la corrispondenza di quesi due valori e in caso affermativo garantisce l'accesso.\newline
 Tuttaia questi protocolli hanno delle limitazioni:\begin{enumerate}
 	\item Dato che la password e l'id sono trasmessi in chiaro, se qualcuno ascolta mette a repentaglio la sicurezza;
 	\item Non vi è protezione da Replay Attack dato che ad un attacker basta ascoltare il messaggio che viene inviato dall'utente all'authenticator per acquisire credenziali valide  per entrare nel sistema;
 	\item Non vi è protezione intrinseca sul numero dei tentativi per entrare e quindi si forniscono più tentativi ad un ipotetico attacker per tentare l'accesso.
 \end{enumerate}
-\subsubsection{CHAP-Challeng-Handshake Authentication Protocol}
+\subsection{CHAP-Challeng-Handshake Authentication Protocol}
 Nella autenticazione devo dimostrare di conoscere la password, ma non è necessario che debba dirla in maniera esplicita. Infatti nel \textbf{CHAP} non viene rilevata la password(P), ma la sua funzione di computazione (H(P)), ovvero un prodotto di byte ottenuto a partire dalla password. Assumiamo che:\begin{enumerate}
 	\item Questa funzione non sia invertibile: se così non fosse un attacker potrebbe intercettare il messaggio ed eseguire la funzione inversa;
 	\item H non deve essere una funzione della solo P, ma deve contenere delle \emph{freshness} (\textbf{nonce,challenge});
@@ -500,7 +502,7 @@ Il CHAP funzione nella seguente maniera:\begin{enumerate}
 		      \end{itemize}
 	\end{itemize}
 \end{remark}
-\subsubsection{One-Time Password}
+\subsection{One-Time Password}
 Il one-time password (OTP) è una tecnica che differisce da one time pad. Si bada sull'idea di migliorare il PAP per avere avere una password diversa ad ogni successfull attempt; questo garantirebbe al sistema una resistanza ai replay attacks. L'idea è quella di memorizzare più password associate ad uno stesso utente, il che però appesantirebbe tropo il DB.
 Per ovviare al probelma dellappesantimento del DB si utilizzano le \textbf{hash chain}: catene di shash applicate ad una password di partenza. Questa catena garantisce quindi che la password cambi ogni volta; ogni volta verrà utilizzata una password diversa per entrare generata a partire da quella precedente. Il probme a di questo metodo è che un attacker che ascolta una password poi è in grado di calcolarsi le successive. Una soluzione è usare un hash chain inversa, dove si parte dall'n-esima password generata e si torna indietro. Questa soluzione sembra funzionare, ma estendendola su scala mondiale, ogni singolo utente richiederebbe il calcolo di n hash ne momento di inserimento della password.\newline
 Mandare le password al contrare va bene, mabisgno risolvere questo problema computazionale.\newline
@@ -522,7 +524,7 @@ Questa soluzione prevede che ogni volta l'utente si calcoli offline sul posto fi
 	\item Vulnerabilità lato client che deve salvarsi il seed delle password o l'intero vettore;
 	\item Possibilità di desincronizzazione: se per qualche motivo fallisce una ccesso, si perde la catenta, in quanto l'utente la volta dopo proverà ad entrare con $P[N-1]$ in giù, mentre l'authenticator si aspetta ancora $P[N]$
 \end{itemize}
-\subsubsection{Autenticazione a due fattori}
+\subsection{Autenticazione a due fattori}
 Questo tipo di autenticazione si ispira a one time password. Si ipotizza che sia client che server siano sicuri. Ci sono divers requisiti in questo sistema, come un on time authorization token, generato su un device differente o ricevuto su un canale differente. Oltre ciò, il tutto deve essere human friendly cioè si utilizza un hash che trancono le key ad un massimo di 6/8 digit per essere memorizzata.\newline
 Ci sono due protocolli:HOTP e TOTP.\begin{itemize}
 	\item \textbf{HOTP-HMAC-Base OTP}: Questo protocollo si basa sull'idea di utilizzare un contatore $N$. Sul server e sul client viene memorizzata il segreto $k$ di un utente. Permettendo di fare:\begin{equation*}
@@ -537,7 +539,7 @@ Ci sono due protocolli:HOTP e TOTP.\begin{itemize}
 		      TOTP=HOTP(K,T)\quad T=(Current Unix Time-T0)/X
 	      \end{equation*}
 \end{itemize}
-\subsubsection{CHAP: Mutual Authentication}
+\subsection{CHAP: Mutual Authentication}
 L'idea di \textbf{CHAP} è quella di provare ad adattare CHAP ad una autenticazione utente server e viceversa. In generale, si ha che:
 \begin{center}
 	\includegraphics[scale=0.5]{mutual.png}
@@ -556,13 +558,13 @@ Questo può accadere perché le due autenticazioni sono unilaterali e non è spe
 \end{center}
 Per \textbf{prevenire il reflection attack}, si può procedere nella seguente maniera. Se l'authenticator invia una challenge all'utente, e quest'ultimo propone una challenge diversa che viene inclusa nella funziona hash insieme alla stessa challenge che ha ricevuto. A questo punto l'authenticator rimanda la funzionee hash delle challenge in ordine invero. Quindi, un hacker può sentire le diverse challenge, ma senza aver condiviso precedentemente il segreto e quindi non può calcolare la funzione hash.
 Il problema di CHAP, che è stato ideato per autenticazione single side, è che se viene usato in due direzioni, la loro indipendenza espone rischi al sistema. Quindi, occorre renderle indipendenti crittografando due challenge.
-\subsection{Chellenge-Response Authentication in Wireless Cellular Systems}
+\section{Chellenge-Response Authentication in Wireless Cellular Systems}
 La comunicazione in ambiente wireless di sistemi cellulare si basa sulla comunicazione di tre entità:\begin{itemize}
 	\item \textbf{UE}(User Equipment): cipè il mezzo che permette all'utente di connettersi alla rete. In questo caso è la SIM;
 	\item \textbf{Serving Network}(SN): è la rete diversa dal provider della SIM che interpella il provider(Home Network) per effettuare la connessione;
 	\item \textbf{Home Network}(HN): è la rete del gestore di rete alla quale un utente si autentica.
 \end{itemize}
-\subsubsection{Autenticazione in 2G(GSM)}
+\subsection{Autenticazione in 2G(GSM)}
 \begin{center}
 	\includegraphics[scale=0.4]{auth2g.png}
 \end{center}
@@ -577,7 +579,7 @@ Per instaurare la connessione si seguono i seguenti passi:\begin{enumerate}
 \begin{remark}
 	Il punto di forza è che $K_i$(Identity key- chiave dell'utente) resta nell'Home Network e non esce dal dominio verse il Service Network,grazie alla non invertibilità delle funzioni hash.
 \end{remark}
-\subsubsection{TRIPLETS}
+\subsection{TRIPLETS}
 \begin{center}
 	\includegraphics[scale=0.4]{triplets.png}
 \end{center}
@@ -586,7 +588,7 @@ Un concetto importante nei sistemi cellulare è l'utilizzo di vettori di dati. S
 	\item \textbf{AuC}: Home Operator;
 \end{itemize}
 Questa volta, VLR invia solo l'IMSI senza la RAND. AuC risponde con un insieme di vettori di tipo $[Challenge,SRES,K_c]$.\newline la risposta è quindi formata da $N$ triplette di questo tipo. Il vantaggio è che le performance aumentano dato che si mantengono delle triplete in più per le prossime connessioni; inoltre, è che questo mette tutta la sicurezza nelle mani dell'home operator poiché è quest'ultima che gestisce le \emph{nonce}. Quindi, si evita che qualunque hacker possa provare ad attaccare le \emph{nonce} cercando di creare o manipolarle.
-\subsubsection{2G:Problematiche}
+\subsection{2G:Problematiche}
 Dopo l'applicazione di A38(utilizzo A3 e A8 in contemporanea), viene dato $K_i$ e $RAND$ di 128 bit, da cui si ottengono SRES,da 32 bit, e $K_c$, da 64 bit. Il problema fu che in realtà erano 54 bit poiché alla fine non vi erano sempre 10 zeri. Quindi, si perdevano $2^{10}$ combinazioni di sicurezza.
 \begin{center}
 	\includegraphics[scale=0.4]{A38.png}
@@ -599,7 +601,7 @@ Ogni operatore doveva scegliere come creare la sua funzione di autenticazione: p
 		\item Una ulteriore problematica del 2G è l'assenza di mutual authentication. Quindi era possibile fingersi una BS (Base Station) fittizia.
 	\end{itemize}
 \end{remark}
-\subsubsection{3G(UMTS),4G(LTE),5G}
+\subsection{3G(UMTS),4G(LTE),5G}
 I protocolli di rete 3G,4G,5G utilizzano il mutual authentication protocol e gli algoritmi sono pubblici (al contrario de 2G).
 \begin{center}
 	\includegraphics[scale=0.4]{2g3g4g.png}
@@ -617,26 +619,26 @@ In qesti nuovi sistemi compaiono nuovamente \emph{MS,VLR,AUC} ed il procedimento
 	\item VLR rimanda quindi a MS: RAND, AUTN;
 	\item MS risponde con res per provare che è autentico una volta che riceve un AUTN.
 \end{enumerate}
-\paragraph{MS Authentication}
+\subsubsection{MS Authentication}
 \begin{center}
 	\includegraphics[scale=0.4]{msauth.png}
 \end{center}
 VLR manda il token che assicura l'autenticità della rete sulla base di una challenge che lui stesso ha generato. Secondo le regole visto fino ad ora non si può provare di essere autentici a meno che non sia l'opponente a creare la challenge.
-\subsubsection{Network Authentication - SEQ as Nonce}
+\subsection{Network Authentication - SEQ as Nonce}
 La nonce può essere una challenge, una sequenza o un time stamp. Si prende per questo esempio un time stamp ed ipotizziamo che MS e VLR siano in possesso di un GPS e che il tempo non sia attaccabile. Se MS conosce il tempo, in realtà non serve nel time stamp mandare la nonce poiché è già a conoscenza di che ore sono. Considerando che conosce già il riferimento temporare gli basta la risposta di VLR. VLR, quindi, provvede a rispondere diretto con $H(timestamp,secret)$. Usando quindi un secure time reference, è possibile effettuare mutual authentication con un solo messaggio.\newline
 Nel caso in cui volessimo fare la stessa cosa con una sequenza di numeri:\newline
 MS manda una nonce a VLR ed esso risponde con $AUTH(K,NONCE)$.  Vi è un contatore nella sim chiamato SQN-MS che aumenta ad ogni autenticazione; così quando il VLR manda la sua richiesta di identificazione ad MS, deve anche mettere quanto gli risulta che sia il contatore. In questo modo se MS riceve un contatore minore sa che non si deve fidare.SQN-MS è sincronizzato con SQN-HE quindi, un altor contatore nella home network. Alcuni attacchi si basano proprio sulla desincronizzazione di questi due. In particolare: la sim dell'utente conosce SQN MS; quando VLS manda il suo SQN che proviene da HN, l'utente deve controllare che $SQN=SQN-MS+1$. Se corrisponde, allora può fidarsi della rete.\newline Anche in questo caso con un solo messaggio ci si può assicure che la rete è sicura.
-\subsubsection{Formato AUTN}
+\subsection{Formato AUTN}
 \begin{center}
 	\includegraphics[scale=0.5]{AUTNFORMAT.png}
 \end{center}
 SQN è il sequence number formato da 48 bit. Attaccati ci sono 16 bit di AMF che rappresenzato quale algoritmo è stato utilizzato e quale finestra di sincronizzazione. Infine, ci sono gli utlimi 64 bit di MAC-A che sono costituiti nel seguente modo: si mettono insieme in una funzione di criptaggio f1 SQN,RAND,K,AMF(informzioni dell'algoritmo). Ed infine, tramite gli utlimi 64 bit, MS può testare l'autenticità della rete.
-\subsubsection{Sistema Sfruttato 3G e 4G}
+\subsection{Sistema Sfruttato 3G e 4G}
 La prima volta che un utente si connette alla VLS, al MS viene inviato un TMSI(temporary MS identifier) che viene allcoato dinamicamente alla prima connessione. Alla prossima autenticazione non verrà utilizzato l'IMSI, ma quel TMSI. Esso è importante perché cambia ogni volta e quindi non è tracciabile. Siccome, vedendo la SQN, un eavesdropper potrebbe discriminare e rintraccia l'utente si masschera con una chiave anonima, si esegue SQN xor AK.
 L'AK di 48bit viene generato tramite l'applicazione di una funzione f5 insieme ad un valore randomico ed una volta inviato il pacchetto, per ritrovare SQN viene rieseguito lo xor con AK. Altro passaggio importante è l'esecuzione della funzione f4(SQN,K,RAND,AMF)=MAC-A; verrà controllato con MAC-A inviato precedentemente.
-\subsubsection{Generazione chiavi da un segreto}
+\subsection{Generazione chiavi da un segreto}
 Per generare infinite chiavi da un solo segreto, si crea un global secret chiamato S, unico. Ogni volta che arriva un nuovo user crea H. In questo modo si ha la sicurezza che nessun utente nel sistema abbia una stessa password, e analogamente quando ne arriva uno nuovo gli viene affidata la sua $K_i$ senza eseguire contorlli su tutte quelle già fornite.
-\section{RADIUS}
+\chapter{RADIUS}
 \textbf{RADIUS} è un protocollo client-server di livello applicativo che utilizza UDP per gestire su larga scala di Access Point eterogenee. In particolare, deve gestire:\begin{itemize}
 	\item molteplici NAS (\emph{client});
 	\item molteplici servizi di accesso;
@@ -660,19 +662,19 @@ La solutione ottima è ottenuta gestendo un DB per ogni singolo utente. In parti
 		\item RADIUS server (AuC) e client (\textbf{NON} RADIUS Client)conosce il vero segreto;
 	\end{itemize}
 \end{remark}
-\subsection{RADIUS: AAA Protocol}
+\section{RADIUS: AAA Protocol}
 Il protocollo Radius è detto protocollo AAA poiché permette di centralizzare:\begin{itemize}
 	\item \textbf{Autenticazione}: verifica di chi dico di essere;
 	\item \textbf{Autorizzazione}: verifica se posseggo i privilegi per accedere ad un servizio anche se sono autenticato. Quindi è una proprietà totalmente scorrelata rispetto all'autenticazione:RADIUS fornisce entrambe le funzionalità;
 	\item \textbf{Accounting}: permette di monitorare le attività dell'utente in quel preciso momento. Per esempio il numero di Byte trasmessi o la fatturazione.
 \end{itemize}
-\subsection{RADIUS-Protocollo Client-Server}
+\section{RADIUS-Protocollo Client-Server}
 Il protocollo RADIUS è un protocollo client-server RADIUS: la parte client viene rappresentata dal NAS che inizia il servizio e a cui l'utente finale (dispositivo) chiede l'autenticazione/autorizzazione/accounting. Inoltre, è un protocollo che si basa su UDP/IP sulla porta server 1812 ed eventualmente il server può agire come proxy.
-\subsection{Proxy Operation}
+\section{Proxy Operation}
 \begin{center}
 	\includegraphics[scale=0.5]{proxyserver.png}
 \end{center}
-\subsection{Architettura RADIUS}
+\section{Architettura RADIUS}
 \begin{itemize}
 	\item Applicazione server RADIUS;
 	\item Database utente registrato per ogni voce nomeutente contiene almeno:\begin{itemize}
@@ -689,7 +691,7 @@ Il protocollo RADIUS è un protocollo client-server RADIUS: la parte client vien
 		      \item Utilizzato frequentemente per autenticazione;
 	      \end{itemize}
 \end{itemize}
-\subsection{Caratteristiche di sicurezza RADIUS}
+\section{Caratteristiche di sicurezza RADIUS}
 \begin{itemize}
 	\item \textbf{Risposta} autenticata per pacchetto:\begin{itemize}
 		      \item si utilizza un segreto condiviso;
@@ -701,7 +703,7 @@ Il protocollo RADIUS è un protocollo client-server RADIUS: la parte client vien
 	      \end{itemize}
 	\item Trasmissione crittografata della password utente. La chiave viene utilizzata per l'autenticazione.
 \end{itemize}
-\subsection{RADIUS authenticad reply}
+\section{RADIUS authenticad reply}
 Occorre definire un modello di attacco che verrà riportato di seguito. L'obiettivo è quello di usufruire di un servizio anche se non se ne ha la facoltà. Inanzitutto sappiamo che il vero segreto lo conoscono l'end-user e il server RADIUS; mentre il client NAS e il server RADIUS condividono lo stesso segreto $S$.
 \begin{center}
 	\includegraphics[scale=0.5]{AUTHREPLYRADIUS.png}
@@ -725,7 +727,7 @@ Il campo ID serve a riconosce tramite un numero univoco il pacchetto in question
 		\item La risposta include (e quindi convalida) il messaggio di risposta.
 	\end{itemize}
 \end{remark}
-\subsection{Formato del pacchetto RADIUS}
+\section{Formato del pacchetto RADIUS}
 Il pacchetto RADIUS è formato da:\begin{center}
 	\includegraphics[scale=0.4]{packetFormat.png}
 \end{center}\begin{itemize}
@@ -737,7 +739,7 @@ Il pacchetto RADIUS è formato da:\begin{center}
 	\item \textbf{Autenticatore}: utilizzato per autenticare le risposte dal server e usati anche come nonce per la cifratura della password;
 	\item \textbf{attributi}: campo informativo estensibile di circa 256 tipi. Il loro ordine non conta e si possono ripetere.
 \end{itemize}
-\subsection{Authentication Field}
+\section{Authentication Field}
 \begin{itemize}
 	\item \textbf{Access-Request(C$\rightarrow$ S)}: 16 byte generati casualmente. Quindi, imprevedibile e unico per evitare il replay attack;
 	\item \textbf{Pacchetto di risposta(S$\rightarrow$ C Accept/Reject/Challenge)}:\begin{itemize}
@@ -748,7 +750,7 @@ Il pacchetto RADIUS è formato da:\begin{center}
 	      \end{itemize}
 	\item $MD5(CODE|ID|Length|RequestAuth|Attributes|Secret)$
 \end{itemize}
-\subsection{Access-Request}
+\section{Access-Request}
 L'\textbf{access-request} tipicamente contiene:\begin{itemize}
 	\item L'username\textbf{obbligatorio}: è la chiave di ricerca per accedere al database dell'utente;
 	\item Password:\begin{itemize}
@@ -763,11 +765,11 @@ L'\textbf{access-request} tipicamente contiene:\begin{itemize}
 	      \end{itemize}
 	      Vi è la possibilità che l'utente non sia abilitato all'accesso su specifiche porte.
 \end{itemize}
-\subsection{Password Encryption}
+\section{Password Encryption}
 \begin{center}
 	\includegraphics[scale=0.4]{passwordEncry.png}
 \end{center}
-\subsection{Access-Accept}
+\section{Access-Accept}
 RADIUS come ulteriore tecnica di protezione utilizza il password encryption. In particolare, l'utente invia al NAS username e password e quest'ultimo lo invia al server. Dato che la rete fra il NAS e il server RADIUS non è sicura occorre criptare il messaggio.\newline
 A tale scopo, si prende la password e la si padda fino a 16 byte, si prende questo blocco, lo si affianca al NONCE e si applica la funzione di hash MD5. Al risultato di questa operazione si applica l'operazione di XOR con la password. Infin, il risultato dello XOR viene inserito nel campo attributi del pacchetto RADIUS ed inviato.\newline
 Nel caso in cui la password dell'utente sia pi+ lunga di 16 bytes, essa viene segmentata in blocchi di 16 bytes ciascuno (l'ultimo di questi blocchi, se minore di 16 byte, viene paddato fino al raggiungimento della dimensione richiesta). I singoli blocchi vengono quindi inseriti nella funzione hash M5D e si attua il procedimento canonico. La concatenzazione di questi risultati vengono inseriti nel campo attributo.
@@ -775,19 +777,19 @@ Nel caso in cui la password dell'utente sia pi+ lunga di 16 bytes, essa viene se
 	\item Risposta positiva del server: allora le credenziali di autenticazione dell'utente sono valide;
 	\item Contiene tutta la configurazione delle specifiche del servizio tra cui un attribut del tipo di servizio e ulteriori parametri.
 \end{itemize}
-\subsection{Access-Reject}
+\section{Access-Reject}
 L'accesso può essere rifiutato per due ragioni principali:\begin{itemize}
 	\item Autenticazione fallita;
 	\item 1 o più attributi nella richiesta di accesso non sono stati considirati accettabili.
 \end{itemize}
-\subsection{Access-Challenge}
+\section{Access-Challenge}
 La challenge per l'accesso viene utilizzato ogni qual volta che il server vuole un'ulteriore risposta dell'utente e può contenere:\begin{itemize}
 	\item 1 o più attributo di reply-message;
 	\item Testo mostrato all'utente;
 	\item Esplicita challenge di autenticazione.
 \end{itemize} Una Access-Challenge può essere il prompt di richiesta nome utente e password.\newline
 Inoltre, il client NAS collezione le risposte dall'utente e le invia in una una richiesta di accesso.
-\subsection{PPP CHAP supportato con RADIUS}
+\section{PPP CHAP supportato con RADIUS}
 \begin{center}
 	\includegraphics[scale=0.4]{PPPCHAPRADIUS.png}
 \end{center}
@@ -796,7 +798,7 @@ Il collegamento punto punto \textbf{PPP} con CHAP può essere supportato con RAD
 	Nella comunicazione utente-NAS si utilizza PPP-CHAP.\newline
 	Nella comunicazione NAS-RADIUS server si utilizza UDP/IP.
 \end{remark}
-\subsubsection{Attack on PPP CHAP RADIUS Standard}
+\subsection{Attack on PPP CHAP RADIUS Standard}
 Lo schema di comunicazione appena proposto è lo standard effettivamente utilizzato nel mondo reale. Tuttavia, può essere attaccato con l'obiettivo di usufruire "a gratis" del servizio anche se non si ha l'autorizzazione nel farlo.\newline
 L'attacker si posizione in due punti della cominicazione: User-NAS e NAS-RADIUS Server. Questo permette di modificare le credenziali non valide che andrebbero al RADIUS Server (che porterebbe ad una risposta di tipo Access-Reject) in credenziali.\newline
 In particolare, si compone di una prima fase in cui \textbf{l'attacker si pone fra User e NAS} si osservano le credenziali utente valide, salvandosi il seguente pacchetto:
@@ -809,7 +811,7 @@ In particolare, si compone di una prima fase in cui \textbf{l'attacker si pone f
 \end{center}
 Nella seconda fase, l'attacker si finge User,manda richiesta al NAS per essere autenticato. Il NAS invia la chap Challenge. A questo punto, l'attacker risponderà con credenziali arbitrarie e il NAS, una volta ricevuta la CHAP response, le invia al RADIUS Server. Tuttavia, \textbf{l'attacker si pone tra NAS e RADIUS Server}:lascia invariati i campi che vanno dal numero pacchetto al request (\emph{se vengono modificate, il RADIUS Server si accorgerebbe dell'attacco che sta avvenendo}), ma modifica il pacchetto RADIUS con le credenziali ottenute nella prima fase.Il server, quindi, verifica la validità delle credenziali, invia al NAS un RADIUS Access-Accept. Il NAS, una volta ricevuta risposta dal server notifica l'utente l'avvenuta autenticazione.\newline
 L'attacker entra nel servizio "a gratis".
-\subsubsection{Risuluzione}
+\subsection{Risuluzione}
 Un modo per proteggersi da questo attacco è quello di autenticare tutti i campi del pacchetto o legare ogni richiesta di autenticazione alla risposta.
 \begin{remark}
 	Come il prof. Bianchi insegna, si potrebbe risolvere utilizzando una copia della risposta nel RADIUS Client (NAS) ed inviare al RADIUS Server l'hash di $H(ID,AUTH,Replymsg,copia,S)$.
@@ -817,14 +819,14 @@ Un modo per proteggersi da questo attacco è quello di autenticare tutti i campi
 \begin{remark}
 	L'ideale è quello applicare una funzione di hash a tutto.
 \end{remark}
-\subsection{RADIUS debolezze di sicurezza}
+\section{RADIUS debolezze di sicurezza}
 RADIUS è sensibile a message sniffing, poiché non vi è confidezialità, a message modification, poiché non c'è autenticazione per le richieste di accesso: ognuno può modificarne e crearne uno nuovo.
-\subsubsection{Message-Authenticator}
+\subsection{Message-Authenticator}
 L'autenticazione per le richieste di accesso può essere ottenuta tramite:\begin{itemize}
 	\item \textbf{Message Authenticator}: per fornire la protezione dell'integrità per i messaggi di richiesta di accesso, viene aggiunto un tag a fine del messaggio di autenticazione detto \emph{authenticator} tra gli attributi del request packet. In aggiunta, quando si protegge il messaggio di richiesta di accesso con Message Authenticatori, si calcola un hash dell'intero pacchetto usando il segreto condiviso che condivide con il server RADIUS:$HMAC_MD5(Whole\ Packet)=HMAC-MD5(type|ID|len|RequestAuth|Attributes)$
 	\item \textbf{EAP(Extensible Authentication Protocol)} Si tratta di un approccio arbitrario di autenticazione, ovvero di tecniche aggiuntive messe per la sicurezza di sistemi a cura di chi li realizza.
 \end{itemize}
-\subsubsection{Attack Shared Secret}
+\subsection{Attack Shared Secret}
 Le password scelte dagli utenti sono spesso a bassa entropia e spesso se ne utilizza una per tutte le reti (es. Fonera modem basati su RADIUS).
 Per risolvere questo problema si prende un qualcosa di unico (che può essere un dato fisico di un device) e si fa in modo che il secret sia $HMAC(Secret,Dato\ Unico\ SEGRETO)$. Questa soluzione risulta scalabile e quindi ampiamente utilizzabile per le richieste di autenticazione.
 Un tipico attacco al secret viene offerto dai cosiddetti \textbf{dictionary attack}.\begin{center}
@@ -837,7 +839,7 @@ Per evitare questo scenario, server un autenticatore di richieste unico e per re
 	\item effettuare MD5 dei 4 byte pseudo-random;
 \end{itemize}
 Valutando il ciclo di valori pseudo-random prodotti, mi permette di non avere ripetizioni. Tuttavia, il primo metodo è la peggiore soluzionepoiché generare 4 sequenze per volta fa in modo che is ricrea una sequenza già vista quattro volte più velocimente: si diminuisci il ciclo di ripetizione; il secondo e terzo hanno la stessa probabilità di ripetizione poiché si tratta sempre di 4 bit casuali che sono soggetti al paradosso del compleanno, ma comunque sempre migliori del primo.
-\subsubsection{Replay Attack}
+\subsection{Replay Attack}
 Nei replay attack in RADIUS, l'attacker si pone l'obiettivo di farsi autenticare/autorizzare senza una password valida.
 \begin{center}
 	\includegraphics[scale=0.4]{replayRADIUS.png}
@@ -846,7 +848,7 @@ L'attacker può prendere la password di un utente tramite eavesdropping, cioè l
 \begin{remark}
 	Il replay attack è un metodo di sfruttare i pacchetti catturati o reinviati all'utente causando un comportamento imprevisto o non voluto dal server. Nel caso in cui il server non riconosce il riuso dei dati e accetta ripetutamente i pacchetti trasmessi, l'attacco ha successo.
 \end{remark}
-\subsubsection{Attack User Password}
+\subsection{Attack User Password}
 \begin{center}
 	\includegraphics[scale=0.4]{attackpswRADIUS.png}
 \end{center}
@@ -863,7 +865,7 @@ Un'altra alternativa è la seguente:
 	\includegraphics[scale=0.4]{attackpwdRADIUS.png}
 \end{center}
 In questo scenario, l'attacker invia attivamente delle password arbitario per formare un dizionario di password note e Access-Request. Quindi, se il server non impone un limite alle autenticazioni dell'utente, permette all'attacker di effettuare una ricerca esaustiva online per la password utente.
-\subsubsection{Conclusioni}
+\subsection{Conclusioni}
 Riassumendo, il protocollo RADIUS \textbf{non} è sicuro poiché:\begin{itemize}
 	\item Se un hacker può monitorare dei tentativi di accesso, può costruire un database di coppie AUTH Request NONCE-Access Accept Packet (e quindi tentare un replay attack). Sarà a quel punto in grado di entrare nella rete quando il NAS genererà un access request nonce già usato. L'attacker potrà, allora, rispondere al NAS fingendosi server usando la risposta che aveva collezionato nel database. L'attacker si autentica da solo in quando conosce già la risposta che deve dare.
 	\item Un altro modo è costruire una tabella dove ad ogni usare id si associano le informazioni password XOR MD5(secret,NONCE); alla ripetizione di una nonce, si effettua uno XOR per ottenere password1 XOR password2. A partire da queste due password legate da XOR è possibile, tramite un'opportuna analisi risalire alla password.
@@ -874,11 +876,11 @@ Considerando questi aspetti, RADIUS presenzt limitazioni funzionali dovuti a:\be
 	\item \textbf{Extendibility}:(type|len|value) per il tag non erano sufficienti per l'autenticazione. Questa idea adottata da RADIUS di utilizzare i suddetti byte negli attribuiti non fu abbastanz aper affrontare le nuove tecnologie. Questo portò ad una limitazione degli attributi utilizzabili;
 	\item \textbf{Interoperability:} L'utilizzo di tanti server che adottano soluzioni differenti,crea consistenti problemi per l'interoperabilità-
 \end{itemize}
-\section{DIAMETER}
+\chapter{DIAMETER}
 Il protocollo \textbf{DIAMETER} è un protocollo che nasce come evoluzione del protocollo RADIUS cercando di risolvere le sue problematiche. Questa tecnologia, insieme al RADext (estensione di RADIUS in assenza di sicurezza), è stata sviluppata da IETF (\emph{Internet Engineerign Task Force}). DIAMETER è tecnologicamente più avanzato ed è stato sviluppato in ottica Object Oriented Programming: il protocollo base è un protocollo di scambio di messaggi che poi si specializza nel settore in cui viene implementato.\begin{center}
 	\includegraphics[scale=0.4]{DIAMETERALL.png}
 \end{center}
-\subsection{Catatteristihe}
+\section{Catatteristihe}
 Le caratteristiche che lo differenziano dal protocollo RADIUS sono le seguenti:\begin{itemize}
 	\item DIAMETER non è un AAA protocol come il RADIUS, ma è un messaging protocol. In questo senso è detto protocollo Peer to Peer;
 	\item AAA transport profile comunica come deve funzionare il trasposto dei messaggi che che nel caso di DIAMETER, non potendo utilizzare TCP come protocollo di trasposto (dato che garantisce l'arrivo in ordine dei pacchetti), si utilizza SCTP: protocollo TCP in cui si mantiene una connessione persistente tra clien e server e i pacchetti sono in pipeline su una connessione;
@@ -887,19 +889,19 @@ Le caratteristiche che lo differenziano dal protocollo RADIUS sono le seguenti:\
 	\item Funzionalità di rilevamento di duplicati. (\emph{Fondamentale nelle funzioni di Accounting});
 	\item Presenza dei cosiddetti \emph{watchdog}: pacchetti periodici che consentono di capire quando DIAMETER sta fallendo.
 \end{itemize}
-\subsection{Problemi TCP}
+\section{Problemi TCP}
 I problemi di TCP in questa specifica applicazione sono che:\begin{itemize}
 	\item Strict Order Delivery e HOL;
 	\item Mancanza di Multi-Homing;
 \end{itemize}
 Quando richiesta, il NAS deve creare una connessione affidabile con l'AAA Server. Per garantirla, basta usare una connessione di tipo TCP. Una volta instaurata la connessione (Handshaking TCP), viene utilizzata per tutti i pacchetti successivi al primo. Ora, l'AAA server può usare più threads per gestire le richieste così che possano essere presi in carico diversi messaggi alla volta. Se un thread si ferma per un problema, TCP diventa svantaggioso in quanto grantisce l'ordine dei pacchetti: fa in modo che non si possa lavorare sui pacchetti successivi se non sono stati serviti i precedenti. Sarà quindi necessaria una nuova ricezione a partire dal messaggio perso.\newline Questa problematica viene detta \textbf{HOL(Head of the line blocking effect)},\newline
 Per quanto riguarda il secondo problema: preso un NAS, se la rete fallisce si può garantire un servizio di continuità grazie a delle connessioni di ricambio ulteriori. Il problema è che l'IP è differenze, e siccome TCP si basa sulle socket che richiedono di pre-specificare l'IP, bisognerebbe creare una nuova socket ogni volta. Quindi, è necessario il \textbf{multi-homing} cioè la possibilità di avere più connessioni insieme in modo tale che se una fallisce se ne utilizzi un'altra.
-\subsection{SCTP Stream Control Transport Protocol}
+\section{SCTP Stream Control Transport Protocol}
 Si tratta di un protocollo che permetterebbe di avere multihominh, ma on viene utilizzato per il cosiddetto \emph{Chicken and egg problem e Internet Ossification}.\newline
 Non molto tempo fa si utilizzava memorizzare i dati degli utenti su dispositivi, l'edge Network era quindi povero di dati. L'idea fu quella di portare i dati ai bordi della rete. Si utilizzarono i NAT per risolvere il problema degli indirizzi IP corti, al fine di connettere più device di quanti si poteva. Riguardo al DIAMETER non è possibile fare lo stesso discorso del NAT poiché, per renderlo reale, dovremmo porre due intermediari nella connessione fra due server. Se si utilizzasse un protocollo sconosciuto intermediario, esse bloccherebbero il traffico. Quindi, affinché sia possibile l'utilizzo di questo protocollo serve che i nodi di rete (intermediari fra due server) supportino SCTP,ma questo non accade.\begin{remark}
 	Nessuno può usare STCP poiché i nodi di rete lo bloccano e per far si che lo supportino si necessita che il protocollo venga utilizzato (\emph{Chicken and egg problem}). Questo problema ha portato all'\emph{internet ossification} ossia il blocco della crescita di Internet.
 \end{remark}
-\subsection{Miglioramenti DIAMETER rispetto a RADIUS}
+\section{Miglioramenti DIAMETER rispetto a RADIUS}
 \begin{itemize}
 	\item \textbf{trasporto affidabile}: affidabilità essenziali per questioni monetari;
 	\item \textbf{Standardized error and fail-over control}: al livello applicativo c'è il controllo degli errori e una serie di funzionalità di ritrasmissione gestita tramite l'invio di pacchetti che controllano se un device ha fallitO;
@@ -926,7 +928,7 @@ Non molto tempo fa si utilizzava memorizzare i dati degli utenti su dispositivi,
 		            \end{itemize}
 	      \end{itemize}
 \end{itemize}
-\subsection{Standardizzazioni DIAMETER}
+\section{Standardizzazioni DIAMETER}
 \begin{itemize}
 	\item Rely Agent;
 	\item Proxy Agent;
@@ -947,11 +949,11 @@ Infine il \textbf{redirect agent} non gestisce i dati, ma il controlla. Provvede
 \begin{center}
 	\part{Second Midterm}
 \end{center}
-\section{Transport Layer Security}
-\subsection{Introduzione}
+\chapter{Transport Layer Security}
+\chapter{Introduzione}
 TLS è un protocollo di livello di trasporto sicuro il cui progenitore è SSL v.3, Security Socket Layer. Da TLS v.1.0 ci furono nuove versione che inizialmente gradualemente: supportarono UDP (DTLS-\emph{Datagram TLS}), tolsero MD5/SHA-1 hash(TLS v1.2) e ammisero solamente AEAD\emph{(Authenticated Encryption with Associated Data)} (TLS v.1.3 -TLS completamente differente rispetto alle altre versioni).
 In TLS v.1.3, disaccoppiarono il protocollo dall'algoritmo crittografico, cosa che fino a prima non era implementato.
-\subsubsection{SSL/TLS: Visione stratificata}
+\section{SSL/TLS: Visione stratificata}
 \begin{center}
 	\includegraphics[scale=0.4]{SSL_TLS.png}
 \end{center}
@@ -966,26 +968,26 @@ Tramite l'utilizzo di TCP, possiamo scegliere di aprire una comunicazione critto
 \end{center}
 Questo perché se proteggessimo anche il pacchetto IP e il destination header, il router non saprebbe dove indirizzare il pacchetto. Quindi, con TLS vogliamo mantenere sia l'autenticazione e sia la cifratura dei dati.\newline
 TLS, lavora tra il livello applicativo e il livello di trasporto e non protegge il protocollo TCP dato che il TCP Header può essere ancora modificato: si è soggetti a TCP spoofing.
-\subsubsection{Application Support}
+\section{Application Support}
 In TLS incapsularono male il pacchetto. In generale, l'incapsulazione corretta sarebbe stata che ogni protocollo specifica il contenuto del prossimo campo. Tuttavia, in TLS si riservarono porte diverse per diverse applicazioni ma nel caso in cui ci sono stessi servizi si utilizzano diverse porte. IETF hanno reso obsoleto questo metodo di incapsulazione.
 IPsec, invece nell'IP packet vi è un campo protocollo che dice quello che sta dentro il prossimo campo, UDP.\newline
 Stratificare correttamente aggiunge sicurezza al protocollo perché, per sapere che applicazione stai usando, devo prima sapere rompere IPsec dato che cifra l'intero pacchetto IP. Questo è un nuovo requisito di privacy detto \textbf{traffic flow confidentiality}.
 \begin{center}
 	\includegraphics[scale=0.5]{TLSAPP.png}
 \end{center}
-\subsubsection{Obiettivi TLS}
+\section{Obiettivi TLS}
 Quando si progetta la sicurezza si deve pensare a due fasi:\begin{itemize}
 	\item \textbf{Set-up l'ambiente}: quando si deve stabilire una sessione sicura bisogna pensare a quale algoritmo utilizzare, a come condividere il segreto e, se necessario, effettuare l'autenticazione.
 	\item \textbf{Trasferire i dati dell'applicazione}: decidere come rendere la comunicazione privata (simmetric encryption) e mantenere l'integrità dei dati(HMAC).
 \end{itemize}
 In IPsec, questo processo è separato (IPsec IKE: Internet Key Exchange). In TLS, si effettuano queste cose in una: si ha una fase detta \textbf{handshake} in cui si negozia l'algoritmo da utilizzare, si crea il segreto condiviso e autenticare; la seconda fase è detta \textbf{record phase}.
-\subsubsection{TLS Protocol Stack}
+\section{TLS Protocol Stack}
 \begin{center}
 	\includegraphics[scale=0.55]{TLSProtocolStack.png}
 \end{center}
 \textbf{TLS Record Protocol} contiene tutte le regole per gestire i pacchetti di TLS su cui si eseguono le applicazioni (\emph{Application on TLS}) deciso preliminarmente in TCP, il protocollo Handshake per configurare la rete e Alert Protocol per ricevere feedback dalle azioni che si eseguono.
-\subsection{TLS Record Protocol}
-\subsubsection{Record Protocol Operation}
+\section{TLS Record Protocol}
+\subsection{Record Protocol Operation}
 \begin{center}
 	\includegraphics[scale=0.5]{RecordProtocolOperation.png}
 \end{center}
@@ -994,7 +996,7 @@ L'application data sono i dati ricevuti dal livello applicativo, si frammentano 
 La conseguenza di cifrare e poi comprimere è che il risultato prodotto dalla compressione non è più casuale ma è pseudo randomico e quindi è assolutamente da evitare. Un attacco detto CRIME si basa sulle azioni di compressione e poi cifratura per rompere TLS.\newline
 Le operazioni di aggiungere il HMAC e poi cifrare sono assolutamente scorrette.
 \newpage
-\section{Message Authentication Code}
+\chapter{Message Authentication Code}
 Per l'integrità di messaggio si utilizza HMAC \textbf{PRIMA DI TLS v.1.3}. Sappiamo che HMAC protegge da message spoofing e MITM. Per quanto riguarda il replay attack non siamo protetti. Alla fine delle 3 operazioni (compressione, aggiunta MAC e cifratura) si aggiunge un header detto Record Header formato nel seguente modo:
 \begin{center}
 	\includegraphics[scale=0.5]{TLS_Header.png}
@@ -1013,7 +1015,7 @@ Quindi, per aggiungere al messaggio integrità con HMAC e NONCE dobbiamo:
 	\item Affiancare il TLS record header;
 	\item Aggiungere il NONCE (Sequence Number), ma questo non viene trasmesso, ma utilizzato nel calcolo di HMAC;
 \end{itemize}
-\subsection{Problematiche Encryption+Authentication}
+\section{Problematiche Encryption+Authentication}
 Quello che vogliamo analizzare è il corretto modo di fare autenticazione e cifratura ed in particolare quali sono le problematiche a cui andiamo incontro.Ricordiamo che:\begin{itemize}
 	\item \textbf{Integrità} protegge da:
 	      \begin{itemize}
@@ -1022,7 +1024,7 @@ Quello che vogliamo analizzare è il corretto modo di fare autenticazione e cifr
 	      \end{itemize}
 	\item Encryption non garantisce integrità finché non si utilizza AEAD.
 \end{itemize}
-\subsubsection{Combinare ENC+MAC}
+\subsection{Combinare ENC+MAC}
 \begin{center}
 	\includegraphics[scale=0.5]{ENCMAC.png}
 \end{center}
@@ -1033,7 +1035,7 @@ Come abbiamo già visto possiamo avere la scelta di decidere quale operazione fr
 \end{itemize}
 La soluzione più scorretta è la soluzione \textbf{ENCRYPT and MAC} (SSH). Dato che l'applicazione di ENC è la sicurezza semantica e l'utilizzo di MAC è la unforgeability dei messaggi, l'unione in questo ordine rompe la sicurezza semantica: l'utilizzo del MAC non garanstisce condifenzialità e, applicato al messaggio al plaintext, si potrebbero rilevare informazioni.
 La soluzione di mezzo è quellaq di TLS: Mac and then Encrypt.
-\section{Block Ciphers}
+\chapter{Block Ciphers}
 \begin{center}
 	\includegraphics[scale=0.5]{blockCipher.png}
 \end{center}
@@ -1057,7 +1059,7 @@ L'obiettivo è quello di generalizzare i substitution ciphers.
 	\end{equation}
 	Tra queste permutazioni ne scegliamo una in maniera uniforme. Inoltre, la probabilità per cui in una permutazione non vi sono "fixed point", cioè che non ci sono due elementi che vanno in un solo output è di $\frac{1}{e}$
 \end{definition}
-\subsection{Problemi}
+\section{Problemi}
 \begin{itemize}
 	\item Cosa succede se il plaintext è più lungo della dimensione del blocco?
 	      \begin{center}
@@ -1104,10 +1106,10 @@ L'obiettivo è quello di generalizzare i substitution ciphers.
 		      Questa soluzione non è pratica dato che si duplica la dimensione di memoria occupata rispetto all'input. Questo schema garantisce sicurezza semantica se tutti gli IV sono random e PRP è pseudo random.
 	\end{itemize}
 \end{remark}
-\subsection{Modes of Operation}
+\section{Modes of Operation}
 I modes of operation sono tecniche per combinare i block cipher per messaggi più lunghi di un singolo block. Vengono indicate con le tre lettere che posticipano AES-XYZ.\newline
 I modi più utilizzati sono CBC \textbf{Cipher Block Chaining} e CTR \textbf{Counter Mode}; altri che sono stati standardizzati sono CGB \textbf{Cipher Feedback Mode} e OFB \textbf{Output Feedback Move}. Infine, i più avanzati GCM \textbf{Galois Counter Mode} e OCB \textbf{Offset Codebook Mode}.
-\subsubsection{CBC- Cipher Block Chaining}
+\subsection{CBC- Cipher Block Chaining}
 \begin{center}
 	\includegraphics[scale=0.5]{CBC.png}
 \end{center}
@@ -1147,7 +1149,7 @@ Per chiarire ulteriormente il problema dello short cycle occorre spiegare le seg
 \begin{remark}
 	Usare un block cipher per generare un keystream è una pessima idea per la presenza degli "short cycle". Infatti, in base dal punto di partenza abbiamo delle ripetizioni: qualche IV può essere debole.
 \end{remark}
-\subsubsection{Counter Mode - CTR}
+\subsection{Counter Mode - CTR}
 \begin{center}
 	\includegraphics[scale=0.6]{CounterMOde.png}
 \end{center}
@@ -1165,7 +1167,7 @@ Le principali caratteristiche sono le seguenti:\begin{itemize}
 	\item cifrare/decifrare un blocco a nostra scelta(\emph{Random Access});
 	\item assenza degli shot cycle perché per costruzione di PRP se l'ìnput è differente anche l'output è differente con in ciclo di $2^{n}$.
 \end{itemize}
-\subsection{BEAST Attack}
+\section{BEAST Attack}
 Il BEAST Attack sfrutta la predicibilità dell'IV nei CBC in TLS v.1.0/1.1. Durante l'invio di molteplici messaggi, con la stessa chiave, la condizione necessaria afifnché sia tutto sicuro è che l'IV deve essere diverso. Tuttavia questa condizione non è sufficiente perché l'IV deve essere anche non predicibile.
 Infatti, se nell'invio dei messaggi, utilizziamo come IV l'ultimo blocco del messaggio precedente ci esponiamo a dei rischi.
 \begin{center}
@@ -1189,17 +1191,17 @@ Questo attacco non è molto pratico perché:\begin{itemize}
 	\item Deve essere flessibile alle moderne tecnologie;
 	\item Se un attacker riesce a soddisfare i primi  3 punti deve effettuare comunque sia un brute force attack: AES blocchi da 128bit $\rightarrow 2^{123}$ guesses anche se si tratta di cookies di autenticazione la complessità è troppo elevata.
 \end{itemize}
-\subsubsection{Chosen Boundary Attack}
+\subsection{Chosen Boundary Attack}
 Sono attachi lineari rispetto la dimensione del messaggio. Si può iniettare qualcosa prima del messaggio e farlo cifrare e, sapendo a priori la posizione del messaggio, fanno corrispondere la prima lettera del messaggio all'ultimo blocco del bit. Ora, effettuanod un brute force attack posso indovinare la prima lettera della password e così via fino ad indovinare la password. La complessità è $256*N$.
 \begin{center}
 	\includegraphics[scale=0.5]{CBA.png}
 \end{center}
-\section{TLS Encryption}
+\chapter{TLS Encryption}
 TLS non supporta uno specifico cipher, ma è aperto a numerosi cipher.Ciò implica che si può integrare un buon cipher o pessimo; tuttavia gli attacchi sono presenti a prescindere dalla bontà del cipher. \newline
 Iniziamo ad analizzare i possibili attacchi a TLS con cipher CBC.
-\subsection{MAC-Then-Encrypt: CBC Padding Oracle Attack}
+\section{MAC-Then-Encrypt: CBC Padding Oracle Attack}
 L'attacco Padding Oracle a CBC è un attacco che appartiene alla categoria \textbf{chosen cipher text attack-CCA}: l'attacker ha l'abilità di produrre un cipher text modificato e consegnarlo ad un oracolo per decifrarlo. Questi attacchi sono più pratici perché non vi è necessità di fare injection nell'utente.
-\subsubsection{CBC Padding}
+\subsection{CBC Padding}
 \begin{center}
 	\includegraphics[scale=0.4]{CBCPADDING.png}
 \end{center}
@@ -1212,7 +1214,7 @@ Il modo in cui paddiamo il payload segue la standardizzazione di \textbf{ PKCS\#
 	Il Padding non è ristretto alla dimensione di un singolo blocco ma è possibile anche prendere più di un blocco.
 \end{remark}
 Il vantaggio di questa tecnica è che può essere un modo per rilevare gli errori dato che la lunghezza definisce il valore dei byte precedenti a lui.
-\subsection{CBC Decryption Steps}
+\section{CBC Decryption Steps}
 La decription in CBC segue i seguenti passi:\begin{itemize}
 	\item Decifra, finché il numero di byte non sono un multiplo della dimensione del blocco, ritorna un alert message decryption failed;
 	\item Rimuovi il padding:\begin{itemize}
@@ -1224,7 +1226,7 @@ La decription in CBC segue i seguenti passi:\begin{itemize}
 \end{itemize}
 Di norma, questi messaggi facilitano il troubleshooting, ma da un aspetto di sicurezza questo porta a delle problematica dato che si danno delle informazioni all'attaccante su cosa non sta funzionando: l'ideale sarebbe non dare spiegazione ai fallimenti.\newline
 In TLS queste informazioni permettono di rompere l'encryption.
-\subsubsection{Attaco a CBC}
+\subsection{Attaco a CBC}
 \begin{center}
 	\includegraphics[scale=0.4]{AttackDEC.png}
 \end{center}
@@ -1244,12 +1246,12 @@ Tutto il resto rimane invariato:\begin{center}
 	\includegraphics[scale=0.5]{STARTFROM.png}
 \end{center}
 ora, avviamo il decrypt ed effettuiamo lo XOR tra C[0] modificato e DEC(K,C[1]). Nel caso in cui si indovina, allora l'ultimo Byte viene cancellato dall'operazione di XOR e ne rimarrà solo il padding, indovinando così l'ultimo block. Altrimenti, mi uscirà un padding diverso e quindi non avrò indonvinato. A questo punto, posso provare ad indovinare i byte precedenti in maniera iterativa scoprendo tutta la password. La complessità è lineare con la dimensione del blocco.
-\paragraph{Esercizio d'esame}
+\subsubsection{Esercizio d'esame}
 TLS-Padding Oragle attack- Assume a CBC-based block encryption scheme which usese block sizes of 4 bytes each. Assume that the attacker sees the following ciphertext comprising 6 blocks(hex notation): \begin{center}
 	f1 aa 11 04 || 34 35 f1 20 || 07 07 07 07 || 73 73 73 73 || 65 61 fb 08 || 91 11 5f 10
 \end{center}
 Assume now that the server is vulnerable to a Padding Oracle attack, and assume that the fourth block contains a secret code which is either 01 01 01 01 or 02 02 02 02. Which Chosen ciphertext message should the attacker send to the server/oracle to as to determine the code?\newline
-\paragraph{Svolgimento}
+\subsubsection{Svolgimento}
 \begin{itemize}
 	\item Dividi il messaggio  e butta tutto i blocchi successivi a quell dell'attack.;
 	\item modifica il blocco precedente in molti modi:\begin{enumerate}
@@ -1278,17 +1280,17 @@ Metodi:\begin{enumerate}
 In conclusione, anche modificando gli alert message in BAD\_MAC non si risolve il problema dato che, per la presenza dei side channels e dato che le operazioni sono fatte in maniera sequenziale, il tempo di esecuzione dei passaggi per decifrare il messaggio danno informazioni su quale passaggio si sta fallendo. Analizzando questo tempo, si ritorna al caso precedente e quindi si rompe il sistema. Nella programmazione di questi algoritmi bisogna programmare in constant time.
 L'unica soluzione accettabile è quella di effettuare Encrypt-then-MAC introducendo così i cosiddetti AEAD\textbf{ Authenticated Encryption With Associated Data}.
 
-\section{CRIME ATttack:TLS Compression Leak}
+\chapter{CRIME ATttack:TLS Compression Leak}
 L'attacco CRIME serve ad evidenziare che la compressione seguita dalla cifratura in TLS non è sicura. Questo attacco si applica ogni qual volta che si applica la compressione seguita dalla cifratura.
-\paragraph{IDEA:}Supponiamo che sappiamo che una password è una alternativa fra due alternative. Cifriamo la password dopo la compressione: quando effettuiamo la compressione andiamo a modificare il messaggio che, in base alla cifratura, possiamo far trapelare delle informazioni. Da queste considerazioni possiamo decifrare la password.\newline In particolare, supponiamo che la password non sia nota, ma l'attacker può vedere la dimensione del dato compresso e poi cifrare e può iniettare ripetutamente un plaintext a sua scelta nel plaintext e vedere la dimensione del risultato.(\textbf{Plain Text Inject Attack}) Se nella compressione ho dei pattern posso vedere la dimensione del CT diversa da quella in ingresso, indovinando al massimo una lettera.\newline
-\subsubsection{Dettagli dell'attacco}
+\subsubsection{IDEA:}Supponiamo che sappiamo che una password è una alternativa fra due alternative. Cifriamo la password dopo la compressione: quando effettuiamo la compressione andiamo a modificare il messaggio che, in base alla cifratura, possiamo far trapelare delle informazioni. Da queste considerazioni possiamo decifrare la password.\newline In particolare, supponiamo che la password non sia nota, ma l'attacker può vedere la dimensione del dato compresso e poi cifrare e può iniettare ripetutamente un plaintext a sua scelta nel plaintext e vedere la dimensione del risultato.(\textbf{Plain Text Inject Attack}) Se nella compressione ho dei pattern posso vedere la dimensione del CT diversa da quella in ingresso, indovinando al massimo una lettera.\newline
+\subsection{Dettagli dell'attacco}
 DEFLATE utilizza due sotto algoritim: Huffman coding, LZ77. Il secondo rimpiazza 3 o più caratteri ripetuti con puntatori di offset e dimensione. Per esempio:\begin{center}
 	GIUSEPPE BIANCHI AND MARCO BIANCHINI   36B
 \end{center}
 In:\begin{center}
 	GIUSEPPE BIANCHI AND MARCO (-18,7)NI   31B
 \end{center}
-\subsubsection{Attacker Injects Chosen Text}
+\subsection{Attacker Injects Chosen Text}
 Supponiamo che vogliamo attaccare la password dell'utente formato da:\begin{itemize}
 	\item Header noto;\item segreto non noto
 \end{itemize}
@@ -1296,7 +1298,7 @@ Tutto cifrato. Tuttavia, posso utilizzare la parte nota come "gancio" per iniett
 	\item Att\_input+[header+secret]
 \end{itemize}
 Ogni volta che si ripete la cifratura, l'attacker vede la lunghezza del risulato. In particolare si inietta un commento contenente l'header noto e la lettera che vogliamo indovinare. Ripetiamo questo procedimento finché la dimenisone del CT non diminuisce e quando ciò accade abbiamo indovinato la lettera della password. Questo tipo di attacco è lineare con la dimensione della password.
-\section{Authenticated Encryption}
+\chapter{Authenticated Encryption}
 Encryption non garantisce confidenzialità ne integrità in qualche caso spceifico, ma protegge solo contro attacchi di eavesdropping. Abbiamo bisogno di authenticated encryption: cipher progettati per essere sicuri contro attachi attivi(tampering) (CCA-\textbf{Chosen Ciphertext Attack}) e garanire confidenzialità e integrità.
 Per mostrare che gli attacchi attivi (tapering) possono rompere la confidenzialità, mostriamo i seguenti esempi:
 \begin{itemize}
@@ -1338,13 +1340,13 @@ AE è sicuro se:
 	\item è semeanticamente sicuro sotto un CPA;
 	\item Garantisce integrità del CT \textbf{Ciphertext integrity};
 \end{itemize}
-\subsection{Ciphertext Integrity}
+\section{Ciphertext Integrity}
 Supponiamo di avere un challenger che possiede una chiave segreta e un avversario. Diamo la possibilità all'avversario di
 scegliere un messaggio e mandarlo al challenger n volte. Il Challenger lo cifra n volte tramite la chiave producendo il CT
 e invia all'avversario. A questo punto, l'avversario può prendere un messaggio differente da tutti quelli prodotti, lo invia
 al challenger. Ora, ascolto la risposta del challenger: se la risposta è reject, allora il gioco è vinto; altrimenti no.\newline
 Per provare la ciphertext integrity:\textbf{La probabilità di non essere reject deve essere trascurabile}\newline
-\subsection{AE with Associated Data}
+\section{AE with Associated Data}
 \begin{center}
 	\includegraphics*[scale=0.8]{2021-11-21-21-23-35.png}
 \end{center}
@@ -1352,7 +1354,7 @@ Nasce dall'esigenza di inviare pacchetti con porzioni cifrati o no. i.e. pacchet
 integrità.\newline
 Nel caso in cui non vi sono associated date $\rightarrow$ CCA-Suecure Encryption cioè tutto è cifrato. nel caso in cui non si
 voglia avere dati cifrati, si utilizza secure MAC.
-\subsection{Design AEAD}
+\section{Design AEAD}
 Quali sono le scelte di design di AEAD\dots
 \begin{itemize}
 	\item \textbf{Struttura}: \begin{itemize}
@@ -1367,11 +1369,11 @@ Quali sono le scelte di design di AEAD\dots
 	\item \textbf{Requisiti funzionali}: Dobe appliace la parte di associazione dei dati.
 	\item \textbf{Resistenza agli errori}: Quanto e come è robusto AEAD quando IV viene riusato.
 \end{itemize}
-\subsection{AES-GCM: Galois Counter Mode}
+\section{AES-GCM: Galois Counter Mode}
 AES-GCM è un algoritmo AEAD che utilizza una struttura Encrypt-then-MAC. Nella parte encrypt si utilizza AES-CTR(Counter Mode),
 nella fase di autentitcazione MAC: GHASH (Galoise Hash). GHASH non è una funzione di hash crittografica che si basa sulla moltiplicazione
 di polinomi nel GF(Galua Field)($2^{128})$.\newline
-\subsection{AES-GCM:GHASH}
+\section{AES-GCM:GHASH}
 GHASH non è una funzione di hash crittografica, ma appartiene alla famiglia \emph{universal hash function}. La sua costruzione si basa
 sulla moltiplicazione polinomiale carry-less nel Galua Fielsd.
 \subsubsection*{Costruzione}
@@ -1391,7 +1393,7 @@ Quindi, per proteggerci, scelgiamo di autenticare anche la lunghezza del messagg
 producendo così il messaggio. Il lavoro ancora non è finito poiché non si utilizza una hash function crittografica, ma occorre anche autenticare
 S con chiave K, ottenendo nu vettore pseudo randomico) e ne viene fatto lo XOR con il risultato della hash. Da questa operazione, si ottiene il TAG.
 \textbf{Auth TAG} è sicuro anche se GM non è una crypto algoritmo.
-\subsection{Wegman-Carter MAC}
+\section{Wegman-Carter MAC}
 Il \textbf{WegmanCarter MAC} è un teorema che supporta la costruzione di AES-GCM dicendo che grantisce la sicurezza di AES-GCM anche se GM non è crypto.
 Si utilizzano funzioni hash non crifttografiche perché le funzioni hash crittografiche sono generalmente lente.\newline
 Ovviamente queste hash non crittografiche devono soddisfare alcune proprietà. Per effettuare MAC con una funzione di hash non crypto, si necessitano di
@@ -1412,7 +1414,7 @@ due blocchei:
 	      \end{center}
 	\item \textbf{Pseudo Random Function};
 \end{itemize}
-\subsubsection{Costruzione di WegmanCarter}
+\subsection{Costruzione di WegmanCarter}
 Un MAC sicuro può essere costruito da un UHF (\emph{Univerasal Hash Function}) e un PRF(\emph{Pseudo Random Function}) dalla costruzione:
 \begin{center}
 	\(UHF_{k1}(msg)+PRF_{k2}(rand)\)
@@ -1420,13 +1422,13 @@ Un MAC sicuro può essere costruito da un UHF (\emph{Univerasal Hash Function}) 
 \begin{center}
 	\includegraphics*[scale=0.8]{2021-11-21-22-43-47.png}
 \end{center}
-\subsection{Conclusioni-Costruzione Finale}
+\section{Conclusioni-Costruzione Finale}
 Fino ad ora abbiamo visto la parte Authenticated Encryption e per quanto riguarda la parte Associated DATA, li insieriamo nella catena prima di
 effettuar ela parte di autenticazione.
 \begin{center}
 	\includegraphics*[scale=1]{2021-11-21-22-46-55.png}
 \end{center}
-\subsection{Criticità GCM}
+\section{Criticità GCM}
 Nel caso in cui si riutilizza il nonce (IV), si breakka il sistema.
 \begin{itemize}
 	\item AES-GCM TAG: tag=\( GHASH_H(CT)\bigoplus AES_K(IV,0)\)
@@ -1435,10 +1437,10 @@ Nel caso in cui si riutilizza il nonce (IV), si breakka il sistema.
 	\item \(tag1\bigoplus tag2\)=\( GHASH_H(CT1)\bigoplus GHASH_H(CT2)\)
 	\item GHAHS è lineare nello XOR: un attacker può recuperare un auth key H e forgiare quasiasi messaggio, ma la chiave K rimane comunque segreta.
 \end{itemize}
-\section{TLS Handshake Protocol}
+\chapter{TLS Handshake Protocol}
 TLS è un protocollo 2 in 1: in ogni sessione si ha una fase di \textbf{handshake} in cui si impostano tutti i parametri di comunicazione e \textbf{record protocolo} in
 si inviano i dati applicando encryption.
-\subsection{Handshake}
+\section{Handshake: fase 1  e 2}
 La fase di handshake è la fasa di negozaiazione inizilia e scambio di parametri. Questa fase si compone di:
 \begin{itemize}
 	\item Mutual Authentication;
@@ -1450,14 +1452,14 @@ La fase di ripresa della sessione: \emph{Re-Keying} cioè si aggiornano i segret
 \begin{center}
 	\includegraphics*[scale=0.8]{2021-11-22-14-35-06.png}
 \end{center}
-\subsection{Handshale:goals}
+\section{Handshale:goals}
 \begin{itemize}
 	\item Negoziazione sicura di un segreto condiviso tramite crittografia asimemetrica. Non viene mai trasmesso in chiaro e derivato
 	      da parametri crittografici che sono stati scambiati;
 	\item Autenticvazione opzionale per client e server
 	\item Negoziazione affidabile: l'attecker non può inferferire nella comunicazione e influenzare/alterare il ritorno della negoziazione senza essere rilevato dal client/server.
 \end{itemize}
-\subsubsection{Downgrade Attack}
+\subsection{Downgrade Attack}
 \begin{center}
 	\includegraphics*[scale=0.8]{2021-11-22-14-46-59.png}
 \end{center}
@@ -1467,7 +1469,7 @@ versione di SSL ad un a versione precedente. Quindi il server crede che si possa
 il Client: abbiamo modificato il protocollo da utilizzare con tutte le sue vulnerabilità e messo a rischio la comunicazione.
 \textbf{La negoziazione deve essere affidabile.}
 
-\subsection{Handshake Messages}
+\section{Handshake Messages}
 \begin{center}
 	\includegraphics[scale=0.6]{2021-11-22-14-56-02.png}
 \end{center}
@@ -1512,18 +1514,21 @@ il Client: abbiamo modificato il protocollo da utilizzare con tutte le sue vulne
 		\item Client Key Exchange \(\rightarrow \);
 	\end{enumerate}
 \end{remark}
+\begin{remark}
+	Il NONCE viene inviato nel \textbf{Server Hello}.
+\end{remark}
 \begin{tabular}{cc}
 	\includegraphics[scale=0.6]{2021-12-02-15-48-45.png} &
 	\includegraphics[scale=0.6]{2021-12-02-15-57-06.png}
 \end{tabular}
-\subsection{Crittografia Asimmetrica}
+\section{Crittografia Asimmetrica}
 \begin{center}
 	\includegraphics[scale=1]{2021-12-02-16-26-53.png}
 \end{center}
 La \textbf{Crittografia asimmetrica} è una oforma di crittografia dove la chiave usata per cripatre è deversa e indipendente rispetto a quella usata per decriptare.
 Similmente alore stream cipher e block scipher, per decriptare si utilizza la stessa trasformazione dell'encryption al contrario.\newline
 L'aspetto fondamentale è che deve essere impossibile capire la chiae di decryption a partire da quella dell'encryption.
-\subsubsection{Proprietà della chiave asimmetrica}
+\subsection{Proprietà della chiave asimmetrica}
 \begin{itemize}
 	\item Se si conosce \(K_{ENC}\) non si può risalire a \(K_{DEC}\);
 \end{itemize}
@@ -1531,13 +1536,13 @@ Se la chiave pubblica è quella utilizzata per l'encrypt, allora tutti possono c
 Quello che occorre fare è la seguente cosa. Ipotizziamo di voler inviare dei dati confidenziali al server attraverso una un canale protetto: il client invia una richiesta al server per trasmettergli i dati, il server risponde comunicando al client la sua
 chiave pubblica. Quindi il client prende la chiave e i dati e li cifra: l'attacker, potendo solamente cifrare i dati (dato che la chiave di cifratura è pubblica), non può risalire al messaggio che è stato inviato.
 Allo stesso tempo, il server può decifrare i messaggi poiché ha già salvato e messo in sicurezza la chiave privata precedentemente ricevuta.
-\subsubsection{Crittografia asimmetrica o simmetrica?}
+\subsection{Crittografia asimmetrica o simmetrica?}
 Entrambe le crittografie sono insicure/sicure e dipende dagli algoritmi utilizzati e dalla dimensione dele chiavi. Tuttavia, la crittografia asimmetrica è più flessibile dato che non necessità la precondivisione delle chiavi a costo di utilizzare protocolli più complessi gravando, di conseguenza,
 sulle prestazioni computazionali di circa 4/5 ordini di grandezza più lento.
 \begin{remark}
 	Si utilizza la crittografa asimmetrica per scambiare o impostare un segreto condiviso e poi trasferire molti dati usando la crittografia simmetrica.
 \end{remark}
-\subsubsection{Approcci alla gestione delle chiavi}
+\subsection{Approcci alla gestione delle chiavi}
 Questo è uno schema di tipo \textbf{Hybrid Encryption}
 \begin{enumerate}
 	\item \textbf{Trasporto chiave}:\begin{itemize}
@@ -1553,7 +1558,7 @@ Questo è uno schema di tipo \textbf{Hybrid Encryption}
 		      \item Il client e il server sono capaci di conoscere \(G^{XY}\)
 	      \end{itemize}
 \end{enumerate}
-\subsubsection{Modelli pratici: HTTP/TLS}
+\subsection{Modelli pratici: HTTP/TLS}
 \begin{center}
 	\includegraphics[scale=0.5]{2021-12-03-18-48-36.png}
 \end{center}
@@ -1562,7 +1567,7 @@ Questo è uno schema di tipo \textbf{Hybrid Encryption}
 	\item \textbf{Data transfer}: Nella fase di trasferimento dati si utilizza la crittografia a chiave simmetria e le chiavi di autenticazione dei messaggi dal segreto precedentemente condiviso.(\textbf{key derivation functions})
 	\item \textbf{rekeying + data transfer}: si aggiorna la chiave simmetrica e le chiavi di autenticazione dei messaggi dallo stesso segreto inizialmente condiviso.
 \end{enumerate}
-\subsubsection{Hybrid Encryption}
+\subsection{Hybrid Encryption}
 \begin{center}
 	\includegraphics[scale=0.5]{2021-12-03-18-59-15.png}
 \end{center}
@@ -1570,12 +1575,12 @@ Supponiamo di voler trasmettere un solo file e che questohe questo file sia di g
 \begin{remark}
 	ECIES: Elliptic curve integrated encryption scheme. Schema di cifratura per nascondere l'identità in 5G.
 \end{remark}
-\subsubsection{PubKey Cryptografy}
+\subsection{PubKey Cryptografy}
 La cifratura a chiave pubblica può essere vista in due modi, ma in generale DEC e ENC sono una l'operazione inversa dell'altra: DEC(ENC(M))=M.\newline Dato che queste due modalità sono concettualmente uguali si svilupparono questi due modi di utilizzo:\begin{itemize}
 	\item \textbf{Public Key Encryption}: Dato un messaggio M si cifra con una qualsiasi chiave pubblica e solamente un utente(che possiede la chiave privata) può decifrare i messaggi;
 	\item \textbf{Digital Signature}: Solo A possiede la chiave \(K_{DEC}\) e può quindi decifrare, ma tutti gli altri posseggono \(K_{ENC}\) da applicare ala firma digitale per verificare il messaggio.
 \end{itemize}
-\paragraph{Digital Signature}
+\subsubsection{Digital Signature}
 La \textbf{digital signature} funziona come segue. Supponiamo di avere un documento che vogliamo pubblicare nel web e vogliamo che solo io posso modificare il documento. Quindi, l'utente possiede una private key SK (decription) e una public key PK (Encription). La chiave privata rimane segreta e conosciuta solo da me. \begin{remark}
 	\textbf{La crittografia asimmetrica serve per messaggi di piccole dimensioni.}
 \end{remark}
@@ -1588,9 +1593,9 @@ Usiamo l'hash del messaggio per due motivi:\begin{enumerate}
 	\item Per rendere il messaggio piccolo;
 	\item Per questioni di sicurezza.
 \end{enumerate}
-\paragraph{Differenze digital signature e MAC}
+\subsubsection{Differenze digital signature e MAC}
 La differenza tra digital signature e MAC è che in MAC si genera un TAG attraverso la crittografia simmetrica e quindi la chiave K e condifisa tra sorgente e destinazione (Bisogna essere certi che la chiave sia uguale); mentre nella firma dicitare la chiave K è segreta e la destinazione deve conoscere la chiave pubblica della sorgente per verificare il messaggio.
-\subsubsection{Algoritmi per Asymmetric Criptography}
+\subsection{Algoritmi per Asymmetric Criptography}
 Nella crittografia asimmetrica il problema computazionale è facile in una direzione, ma difficile nella direzione opposta. Ne è una esempio il \emph{discrete logarith problem in prime fields} fornito da \textbf{Diffie-Hellman}: Dato un numer primo \(x\) è facile calcolare \(y=g^x mod p\), ma dato un numero \(y=g^x mod p\) è difficile calcolare \(x=D\log_{g}(y) mod p\). Questa facilità è data dalla natura monotona del logaritmo (i.e. Metodo di bisezione) nel primo caso, mentre per la difficoltà (secondo caso) del DLog è difficile perché non ci sono algoritmi efficienti per calcolare l'inversa di y. In particolare, data la natura modulare di y in ogni valore che proviamo a calcolare troviamo un numero differente quasi distribuito casualemnte: l'unica possibilità è provare tutti i possibili valori.\newline
 Vale lo stesso discorso in RSA in cui si deve\emph{factoring a production of towo large primes}:\begin{itemize}
 	\item dato \(p\) e \(q\) numeri primi grandi, è facile calcolare \(N=pq\)
@@ -1613,13 +1618,13 @@ Per risolvere il problema di \textbf{Diffie-Hellman} si procede con il \textbf{m
 	\includegraphics[scale=1]{2021-12-04-15-26-00.png}
 \end{center}
 Con questo metodo abbiamo fatto un numero di operazioni pari alla lunghezza in binario dell'esponenti sommati a quanti sono gli uni. La complessità è quindi \(O(nbit)+O(\frac{nbit}{2})\).
-\subsubsection{Diffie-Hellman Key Agreement}
+\subsection{Diffie-Hellman Key Agreement}
 Diffie Hellman key agreement è un protocollo per lo scambio di chiavi in maniera sicura scambiando solamente i valori pubblici.\newline In particolare, Alice genera un random \(x\) e Bob genera una quantità casuale \(y\). A questo punto, Alice calcola \(K=(g^y)^x mod p\) (\textbf{dove inviato come valore pubblico \(g^x modp\)}) e Bob, dopo aver inviato ad Alice \(g^y modp\) (\textbf{Valore pubblico di BOB}),\(K=(g^x)^y mod p\) contemporaneamente. Eseguendo queste operazioni entrambi possiedono la chiave. L'attacker pur vedendo lo scambio dei messaggi, non può fare nulla perché dovrebbe invertire la funzione e, come abbiamo visto il DLog inverso, questa operazione è difficile da effettuare poiché richiede troppo tempo.
 \begin{center}
 	\includegraphics[scale=0.6]{2021-12-04-15-43-15.png}
 \end{center}
 Questo algoritmo non implementa un sistema crittografico a chiave pubblica e quindi non si possono trasferire i dati cifrati con la chiave pubblica del ricevitore. Inoltre, non si pososno firmare i dati con la chiave privata.\newline A questo scopo, venne introdotto RSA.
-\paragraph{Varianti}\mbox{}\\
+\subsubsection{Varianti}\mbox{}\\
 \begin{itemize}
 	\item \textbf{Anonymous Diffie-Hellman}:\begin{enumerate}
 		      \item I valori X e Y sono generati a runtime e non autenticati;
@@ -1636,14 +1641,14 @@ Questo algoritmo non implementa un sistema crittografico a chiave pubblica e qui
 	      \end{enumerate}
 \end{itemize}
 La seconda versione di Diffie-Hellman è più robusta ma vogliamo che, nel caso in cui dovessimo cambiare chiave in ogni sessione, non dobbiamo contattare il CA per ottenre un nuovo certificato valido. La soluzione a questo problema è dato da \textbf{Ephimeral Diffie-Hellman}.
-\paragraph{Ephimeral Diffie-Hellman}\mbox{}\\
+\subsubsection{Ephimeral Diffie-Hellman}\mbox{}\\
 L'utente firma con il suo nome il suo valore pubblico \(g^x \mod{p}\). Ciò non significa che sta facendo un \emph{sel signed certificate} poiché sta usando il suo nome ed un valore del DH che non è il suo. Se l'utente manda sia questo certificato firmato da solo che un altro pacchetto firmato dal CA stiamo in sicurezza. \newline
 Con \(g^x \mod{p}\) firmato da CA siamo sicuri dal MITM, con quello firmato da alice possiamo generare dei fresh secret ogni volta, evitando problemi del fixed DH, ovvore: o mi scade il certificato e possono scoprire il segreto rileggendo le vecchie consersazioni o che trovano tramite brute force \(g^x\). Quindi:\begin{enumerate}
 	\item Prendo \(g^x \mod{p}\) e lo fimro usando il mio nome;
 	\item Prendo la mia chiave pubblica e la faccio firmare con il mio nome da un CA
 \end{enumerate}
 Questi processi vengono fatti localmente. Se anche avessi una rottura del sistema, gli scambi rimarrebbero sicuri. Viene utilizzato in TLS v.1.3.
-\subsubsection{Algoritmo RSA}
+\subsection{Algoritmo RSA}
 RSA è un algoritmo di crittografia asimmerica che si basa sul fattorizzazione dei numeri primi: dato N, numero prodotto dalla moltiplicazione di 2 numeri primi molto grandi per cui è difficile trovare la sua fattorizzazone.
 Per l'encryption e decryption si sfrutta il principio della \textbf{Modular exponentiation}:\begin{itemize}
 	\item ENC(message,\{N,PK\})\(\rightarrow\)Ciphertext=\((message)^{PK} mod N\);
@@ -1652,14 +1657,14 @@ Per l'encryption e decryption si sfrutta il principio della \textbf{Modular expo
 \begin{remark}
 	Il messaggio è più corto di N.
 \end{remark}
-\paragraph{RSA Principle}
+\subsubsection{RSA Principle}
 \begin{center}
 	\includegraphics[scale=0.6]{2021-12-04-16-42-43.png}
 \end{center}
 \begin{theorem}[Teorema di Eulero]
 	La regola esplicita per calcolare il massimo periodo di \(m^x mod N\). Il massimo periodo è pari a \(\Phi(N)\). \newline Se \(m\) è coprimo con \(N\) (i.e. GCD(m,N)=1), allora \(m^{\Phi(N)} mod N = 1\).
 \end{theorem}
-\paragraph{Calcolo della funzione di Eulero}
+\subsubsection{Calcolo della funzione di Eulero}
 \begin{itemize}
 	\item N primo \(\rightarrow\) \(\Phi(N)=N-1\rightarrow m^{\Phi(N)}mod N\)
 	      \begin{center}
@@ -1670,13 +1675,13 @@ Per l'encryption e decryption si sfrutta il principio della \textbf{Modular expo
 		      \(N=10,\Phi(10)=4\rightarrow 3^4 mod 10 = 81 mod 10 = 1\)
 	      \end{center}
 \end{itemize}
-\paragraph{Conseguenze Periodicità}\mbox{}\\ Sappiamo che \(m^x \mod N \) è una funzione periodica con periodo \(\Phi(N)\). La conseguenza di questa periodicità è che l'esponenste di m, non ha senso scriverlo come x e basta e quindi sarebbe meglio metterci il modulo della sua periodicità.\newline In particolare se devo fare \(2^x \mod 11\) è inutile scrivere \(2^{2143234123} mod 11\) poiché, siccome l'esponentte rappresenta tutti i numeri della sequenza della sua periodicità \[2,4,8,5,10,9,7,3,6,1\] composta da 10 numeri. Formalmelmente:\begin{equation}
+\subsubsection{Conseguenze Periodicità}\mbox{}\\ Sappiamo che \(m^x \mod N \) è una funzione periodica con periodo \(\Phi(N)\). La conseguenza di questa periodicità è che l'esponenste di m, non ha senso scriverlo come x e basta e quindi sarebbe meglio metterci il modulo della sua periodicità.\newline In particolare se devo fare \(2^x \mod 11\) è inutile scrivere \(2^{2143234123} mod 11\) poiché, siccome l'esponentte rappresenta tutti i numeri della sequenza della sua periodicità \[2,4,8,5,10,9,7,3,6,1\] composta da 10 numeri. Formalmelmente:\begin{equation}
 	m^x=m\ mod N\ se\ x=1 mod\Phi(N)
 \end{equation}
 \begin{center}
 	\includegraphics[scale=0.6]{2021-12-04-17-01-29.png}
 \end{center}
-\paragraph{RSA Construction}\mbox{}\\
+\subsubsection{RSA Construction}\mbox{}\\
 \begin{itemize}
 	\item Genera due numeri primi grandi \textbf{p,q(Segreti)};
 	\item Calcola RSA Module: \(N=pq\)\textbf{Può essere pubblico};
@@ -1704,7 +1709,7 @@ Le ipotesi di sicurezza è che dato N, deve essere difficile trovare i fattori p
 	\textbf{Funziona se e solo se il numero di cui vogliamo l'inversa è coprima rispetto a N (i.e.11) e non bisogna mai riutilizzare N}.
 \end{remark}
 RSA funziona perché vi è la funzione trapdoor \(\Phi(N)\). Noto \(\Phi(N)\) RSA viene rotto.
-\paragraph{Extended EuclideanAlgorithm}\mbox{}\\
+\subsubsection{Extended EuclideanAlgorithm}\mbox{}\\
 \begin{itemize}
 	\item Obiettivo:trovare \textbf{GCD[M,N]=1}
 	\item Trovare a,b tale che \(M*a+N*b=1\)
@@ -1739,7 +1744,7 @@ Iteriamo questo procedimento per la 2 e terza riga e così via.
 	\end{tabular}
 \end{center}
 L'algoritmo termina quando arriviamo a val pari ad 1. I valori di a,b cercati si trovano nelle rispettive caselle.
-\paragraph{Come calcolare RSA Inverso}
+\subsubsection{Come calcolare RSA Inverso}
 \begin{itemize}
 	\item \textbf{Chiave pubblica:}\(e\);
 	\item \textbf{RSA Modulus:}\(77=11\times 7\);
@@ -1755,11 +1760,11 @@ L'algoritmo termina quando arriviamo a val pari ad 1. I valori di a,b cercati si
 	\item Non deve essere mai negativo, quindi lo converto in numero positivo imponendo \(d+60=d'\);
 	\item Ottenendo così come chiave pubblica (N,e) e chiave privata (d).
 \end{itemize}
-\paragraph{Digital Certificates and Public Key Infrastructure}\mbox{}\\
+\subsubsection{Digital Certificates and Public Key Infrastructure}\mbox{}\\
 Il vero problema della cifratura a chiave pubblica è che è possibile attaccare la distribuzione delle chiave.
 \subparagraph{Problema}\mbox{}\\
 Un attacker può creare un messaggio formalmente valido, con una sua chiave e cripatare il messaggio da lui scambiato stostituendo l'H(M'). Chi vuole verificare se il messaggio l'ha scritto effettivamente la sorgente, o possedeva la vecchia chiave e non la richiede alla rete oppure non potrebbe accorgersi della presenza di un attacker. Quindi si necessitano dei certificati per capire l'identità delle persone ed evitare la presenza di attacker.
-\paragraph{RSA Key Transport}\mbox{}\\
+\subsubsection{RSA Key Transport}\mbox{}\\
 Supponiamo che Flavia voglia accedere alla sua banca con una comunicazione sicura. Flavia cheiede alla banda la chiave pubblica il quale risponde con la chiave richiesta. Flasvia ora, genera un numero casuale K (segreto) ed invio il segreto cifrandolo con RSA con la chiave pubblica fornita dalla banca.
 \begin{center}
 	\includegraphics[scale=0.5]{2021-12-05-18-56-31.png}
@@ -1774,10 +1779,10 @@ Il problema persiste anche se si utilizza il protocollo di scambio chiavi di Dif
 \end{center}
 Infatti se l'utente invia alla banca \(g^x \mod{p}\) e la banca manda ad alice \(g^y \mod{p}\). L'attacker prende entrambi i messaggi e mansda sia all'utente che alla banca un nuovo valore \(g^z mod p\). L'utente crederà che la chiave sia \(g^{xz}mod p\), la banca crederà \(g^{yz}mod p\). Il cattivo si comporterà come un proxy avendo sia la chiave sia dell'utente che della banca.\newline
 Per risolvere questa problematica necessitiamo di un meccanismo per \textbf{legare crittograficamente una chiave pubblica ad una identità}. A tale scopo si introdussero, i \textbf{certification autohority}.\
-\subsubsection{Certification Authority}
+\subsection{Certification Authority}
 Abbiamo bisogno di legare il nome e la public key. A tale scopo, ci viene in aiuto il \textbf{certificate Authority}. Concettualmente, è una terza parte che ci permette di avere la certezza della provenienza della chiave che riceviamo. In particolare, ciò viene effettuato nel seguente modo: si prende il nome e la chiave pubblica e si richiede al certificate authority di firmare digitalmente il mesasaggio che contiene queste informazioni. A questo punto il CA(\emph{certification authority}), fornisce un certificato che ne attesti la veridicità detto \textbf{digital certificate}.\newline
 \textbf{Non è possibile risolvere il problema senza "appoggiarsi" ai CA.}\newline
-\paragraph{Funzionamento}\mbox{}\\
+\subsubsection{Funzionamento}\mbox{}\\
 \begin{center}
 	\includegraphics[scale=0.4]{2021-12-06-10-26-26.png}
 \end{center}
@@ -1800,14 +1805,14 @@ Il processo è valido anche al contrario, dopo che la banca manda all'utente il 
 \begin{center}
 	\includegraphics[scale=0.6]{2021-12-06-10-47-59.png}
 \end{center}
-\paragraph{Approccio pratico TLS-RSA Key transport}\mbox{}\\
+\subsubsection{Approccio pratico TLS-RSA Key transport}\mbox{}\\
 \begin{enumerate}
 	\item La banca invia un \(certificate(BankName,BankPK)_{CA\_sign}\);
 	\item L'utente risponde con \(ENC(Key\ K)_{Bank\_PK}\);
 	\item Scambio di dati cifrati con la chiave simmetrica K.
 \end{enumerate}
 La banca può comunicare solo se è autentica. Un Rouge/MITM non può decifrare la chiave K.
-\paragraph{Certificate Chain}\mbox{}\\
+\subsubsection{Certificate Chain}\mbox{}\\
 In molti scenari, l'end user certificate non è rilasciato da un root certificate. Una o più certificazioni intermedie sono coinvoler nell'end user certification process. I root CA e i CA intermedi non sono necessariamente amministrati dalla stessa entità. Un certificate chain è una lista di certificati seguiti da uno o più CA certificate con le proprietà che:\begin{itemize}
 	\item Colui che rilascia il certificato è collegato al prossimo nella lista;
 	\item Ogni certificato apparte l'ultimo è firmato dalla chiave segreta corrispondente al prossimo certificato nella catena;
@@ -1815,7 +1820,7 @@ In molti scenari, l'end user certificate non è rilasciato da un root certificat
 	\item La certificate chain semplifica la gestione delle chiavi e il controllo dei certificati raggruppando i CA in una struttra ad albero dove si può verificare l'intera catena.
 \end{itemize}
 Ogni utente fidato possiede il basi constraints extension, dove si può leggere CA. Tutti gli utenti con CA false non hanno permesso di utilizzare la propria chiaave privata per firmare altri certificati. In questa maniera, un certificato illegittimo della catena può essere facilmente riconoscibile.
-\paragraph{PKI: Public Key Infrasrtructre}\mbox{}\\
+\subsubsection{PKI: Public Key Infrasrtructre}\mbox{}\\
 PKI è il tool set che serve a realizzare un public key certificate. Il formato tipico è X.509. Ha la struttura:\begin{center}
 	Version|CA Identity|User identity|User public key|CA Digital Signature
 \end{center}
@@ -1829,6 +1834,72 @@ Il problema di PKI è dovuto a chi rilascia i certifricati poiché molti di loro
 \begin{center}
 	\includegraphics[scale=0.6]{2021-12-07-14-30-09.png}
 \end{center}
-Per mitigare questo fenomeno, ipotizziamo che il certificate authoritiy non è più trsusted, si utilizza un DB generale con tutti i certificati che tutti possono consultare. Ciò implica che anche i veri proprietari del certificato possono controllare e vedere se qualcuino usa il proprio nome senza il consenso. Questo immenso DB viene detto \textbf{Certificate Transparencey DB} che ha le caratteristiche di essere \textbf{unico,scalabile e raggiungibile.} Nel caso in cui gli attacker\dots (DA CONTINUARE)
+Per mitigare questo fenomeno, ipotizziamo che il certificate authoritiy non è più trsusted, si utilizza un DB generale con tutti i certificati che tutti possono consultare. Ciò implica che anche i veri proprietari del certificato possono controllare e vedere se qualcuino usa il proprio nome senza il consenso. Questo immenso DB viene detto \textbf{Certificate Transparencey DB} che ha le caratteristiche di essere \textbf{unico,scalabile e raggiungibile.} Nel caso in cui gli attacker non mantengono il certificato nel DB generale, il browser dell'utente consulta il DB, non trova corrispondentza e capisce che è un certificato falso. Altrimenti, se il certificato viene messo nel DB, allora qualcuno rileverà il problema facendo capire all'utente che si trova di fronte ad un certificato falso. In entrambi i casi si \textbf{revocano i certificati.}
 
+\section{Handshake: Fase 3 e 4}
+\subsection{Handshale: Fase 3}
+\begin{center}
+	\includegraphics[scale=0.6]{2021-12-08-16-34-57.png}
+\end{center}
+\begin{itemize}
+	\item \textbf{Certificate:}Il Client mostra il certificato se richiesto;
+	\item \textbf{Client Key Exchange:} tramissione della chiave o informazioni per risalire ad essa(\emph{Coefficiente di DH}) tramite symmetric encryption;
+	\item \textbf{Certificate Verify}:\begin{enumerate}
+		\item Firma di qualcosa noto solo al client e al server;
+		\item Per provare che il Client conosca la chiave privata dietro al certificato. Dato che mi potrei autenticare copiando semplicemente la chiave pubblica.
+	\end{enumerate}
+\end{itemize}
+In particolare, sapendo che il NONCE viene inviato nei passi 1 e 2 dell'handshake (\emph{In particolare nel Server Hello}). Inizialmente possiamo inviare nel campo del Certificate la nostra chiave pubblica, scambiare le chiavi in Client Key Exchange e poi firmare il NONCE in Certificate Verify. \((NONCE)_{GB}\). Tuttavia, per i principi della mutua autenticazione possiamo anche firmare dei dati aggiuntivi come il NONCE del server e del Client. Fino a qui finisce la parte obbligatoria, ma nessuno ci vieta di aggiungere altri dati da firmare dato che la lunghezza del messaggio è sempre la stessa. \((ClientHello,ServerHello)_{GB}\) Ciò equivale a ripetere la negoziazione effettuata precedentemente, ma con la sicurezza di mezzo. Abbiamo aggiunto proprietà di \textbf{autenticazione e protezione da downgrade Attacks}. Questo discorso è estendibile a tutti i messaggi inviati e ricevuti creando un \textbf{LOG} che andrà firmato. \newline
+\textbf{Siamo riusciti a proteggere l'intera sessione.}\newline
+A questo punto, la parte del server può ricostruire il LOG, controllarlo con la firma che ha ricevuto. Se la firma coincide allora non vi è stato MITM. Altrimenti, l'utente o non può autenticarsi o vi è stato un MITM.
+\subsection{Handshake: Fase 4}
+\begin{center}
+	\includegraphics[scale=0.6]{2021-12-08-17-05-47.png}
+\end{center}
+La fase 4 ha due obiettivi fondamentali:\begin{enumerate}
+	\item Cambiare in un nuovo stato di connessione sicura:\begin{itemize}
+		\item Dato che l'autenticazione e l'encryption è basata su chiavi calcolate con lo scambio dei parametri di sicurezza;
+		\item Applicato immediatamente ai messaggi terminate: inizialmente controlla che tutto sia andato a buon fine. Se il Client non riesce a decifrare il messaggio finalem, allora qualcosa è andato storto.
+	\end{itemize}
+	\item Autenticare tutti i precedenti messaggi di handshake:\begin{itemize}
+		\item Finished= Firma digitale di tutti i precedenti nmessaggi di handshake;
+		\item Per evitare MITM\@;
+	\end{itemize}
+\end{enumerate}
+\begin{remark}
+	Nel caso in cui la negoziazione si basa solamente sull'encryption e non sull'autenticazione si rompe tutto il sistema. Infatti, se volessi negoziare i.e. AES-GCM, posso effettuare un downgrade nel cipher suite mettendo StreamCipher. Per rompere il protocollo,un MITM prende il log che il client manda al server e fa vedere dalla parte del server lLOG'. Questo è un caso di attacco attivo che modifica i ciphersuiter che possono essere usati a suo vatnaggio. Ora nel finished, il MITM vede \(H(LOG)\bigoplus Keystream\), ma sa che ha modificato il LOG in LOG' e può quindi calcolare l'hash di questo nuovo LOG ed effettua:\(H(LOG)\bigoplus Keystream \bigoplus H(LOG)\bigoplus H(LOG')\).\newline
+	In questo modo abbiamo cambiato coerentemenrte il messaggio rispetto a quello iniziale.
+\end{remark}
+\begin{remark}
+	Nel messaggio obbligatorio \emph{Finished} la sicurezza non risiede nel tipo di cipher utilizzato, ma che questo messaggio sia mandato con integrità.
+\end{remark}
+\chapter{TLS Key Computation}
+Il problema dello scambio di Diffie-Hellman è che la chiave finale è uniformemente distribuita in \(p^{-1}\) e che servono due chiavi differenti per fare le autenticazione e integrità.
+\begin{remark}
+	Nella vita reale i segreti non sono mai scambiati ed utilizzati così come sono.
+\end{remark}
+\begin{center}
+	\includegraphics[scale=0.6]{2021-12-08-18-14-51.png}
+\end{center}
+In tutti i protocolli abbiamo parlato di \textbf{Pre Master Secret}, ovvero la chiave generata da RSA o DH agreement. Il primo passo è trasformare la pre master secret utilizzando le nonce del client e del server. In questo modo garantiamo che finché una delle due cambia il master secret sarà fresh. Dal master secret si prenderanno tutti gli altri. L'altra cosa da fare è gestire la \emph{extract} operation del secret da oremaster a master(\textbf{deve essere uniform distributed e random}).\newline
+Un altro problema è come prendere da un singolo segreto numerose chiavi. Ad esempio, in TLS si usano 6 chiavi (encryption keys,authentication keys,initialization vectors). La procedura, detta \textbf{expand},che da un singolo secret deriva più chiavi.
+\begin{itemize}
+	\item \textbf{Extract}: aggiunge randomness nella generazione della chiave, generando con pre master e nonces una master key;
+	\item \textbf{expand}: espande un initial seed in ua sequenza di pseudo random materlia tramite una funzione specifica. Così l'unlimited output viene preso e tagliato in porzioni uguali al fine di costruire ogni volta una chiave diversa da sfruttare.
+\end{itemize}
+\begin{remark}
+	TLS Sbagliò inizialmente perché ricavava l'output illimitato in maniera sbagliata.
+\end{remark}
+\begin{center}
+	\includegraphics[scale=0.6]{2021-12-08-18-25-04.png}
+\end{center}
+\begin{remark}
+	\begin{itemize}
+		\item \textbf{TLS 1.2+}: usa PRF standardizzato basato su hash (negoziabile).
+	\end{itemize}
+\end{remark}
+\section{PRF}
+Un PRF è una \textbf{Pseudo Rando Function} che prende in ingresso un seed e crea un output illimitato utilizzando un secret. In SSL 3.0 non c'era un buon PRF, in TLS 1.0 e 1.1 c'era un buon PRF ma era hardcoed. In TLS 1.2 il PRF è negoziabile e di default impostato su SHA-256 e può essere cambiato.\newline
+Fino al 2010 non esistevano KDF\textbf{Key derivation function} la cui idea è: prendi il master key, prendi una funzione hash e costruisce l'HMAC con la master key con al suo intenro il \emph{Context Sring}(stringa con il nome di chi la usa insieme ad un ciontatore).\newline
+Quindi, si ottiene HMAC(context string|counter) che è una costruzione semplice con una stringa semplice e un contatore di una HMAC function. La master key è la sorgente di tutte le chiavi dei processi dell'applicazione. Ora il processo A che genera una sequenza di chiavi genera lo stesso risultato di un altro processo se il risultato dipendesse solo dal contatore. La stringa contestuale serve a garantire che le chiavi generate siano diverse per processi diversi.
 \end{document}
