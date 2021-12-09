@@ -1835,6 +1835,54 @@ Il problema di PKI è dovuto a chi rilascia i certifricati poiché molti di loro
 	\includegraphics[scale=0.6]{2021-12-07-14-30-09.png}
 \end{center}
 Per mitigare questo fenomeno, ipotizziamo che il certificate authoritiy non è più trsusted, si utilizza un DB generale con tutti i certificati che tutti possono consultare. Ciò implica che anche i veri proprietari del certificato possono controllare e vedere se qualcuino usa il proprio nome senza il consenso. Questo immenso DB viene detto \textbf{Certificate Transparencey DB} che ha le caratteristiche di essere \textbf{unico,scalabile e raggiungibile.} Nel caso in cui gli attacker non mantengono il certificato nel DB generale, il browser dell'utente consulta il DB, non trova corrispondentza e capisce che è un certificato falso. Altrimenti, se il certificato viene messo nel DB, allora qualcuno rileverà il problema facendo capire all'utente che si trova di fronte ad un certificato falso. In entrambi i casi si \textbf{revocano i certificati.}
+Per definire questo DB, si utilizzano i \textbf{Merkle Trees}.
+\subsubsection{Come Mettere in sicurezza un file}
+\begin{center}
+	\includegraphics[scale=0.6]{2021-12-09-15-36-54.png}
+\end{center}
+Supponiamo di voler mettere in sicurezza crittograficamente un file di grandi dimensioni. Possiamo agire nel seguen:\begin{itemize}
+	\item \textbf{Fase 1:} effettuare l'impronta del file tramite una funzione hash. Ciò mi permette di avere un'impronta molto piccola anche per file di grandi dimensioni;
+	\item \textbf{Fase 2:} Rendere sicura l'impronta copiandola in uno storage sicuro o firmando digitalmente l'hash dell'impronta.
+\end{itemize}
+Nel caso in cui il file è diviso in molte porzione e quest'ultime devono essere trasmesse a persone diverse (tipico delle applicazioni P2P), si potrebbe prendere il messaggio per poi firmarlo. Tuttavia, questa soluzione è poco pratica poiché si necessita necessariamente di tutte le porzioni di file per verificare l'integrità di una porzione. Implica anche che è facile effettuare un injection e rompere tutto il sistema. \newline
+In alternative, si potrebbe pensare di firmare ogni singola porzione di file, ma:\begin{itemize}
+	\item Aumento l'overhead computazionale;
+	\item Storage overhead;
+\end{itemize}
+Il difetto più importante è che finché non garantiamo che siamo riusciti a coordinare tutto, non abbiamo garantito l'integrità, ma solo per i singoli chunk (\emph{non per l'intero file}). Quindi a tale scopo si introducono i Merkle Tree.
+\subsubsection{Merkle Tree}
+\begin{center}
+	\includegraphics[scale=0.6]{2021-12-09-15-53-01.png}
+\end{center}
+L'idea è che non vi è differenza concettuale tra fare l'hashing del file o delle singole porzioni del file: l'hash risultante sarà differenze, ma rimane comunque un sommario del file.\newline
+In pratica si applica la funzione di hashing per formare un albero le cui foglie sono le porzioni del file mentre i nodi interni sono l'applicazione dell'hash dei rami inferiori. In questo caso, se volessimo verificare una sola porzione del file occorre fornire solo le porzione dell'albero a cui siamo interessati.
+\begin{center}
+	\includegraphics[scale=0.6]{2021-12-09-15-56-15.png}
+\end{center}
+In particolare, se vogliamo fare il check di integrità per la foglia C dobbiamo fornire i parenti a tale foglia: "fratello di mio padre,fratello di mio nonno,fratello del mio bisnonno". In questo esempio rappresentano tutte le informazioni necessarie all'utente per ricostruire l'albero fino all'hash dell'intero file (\emph{radice}). Se questo processo termina a buon fine sappiamo che il file è integro e nessuno può modificarlo. Formalmente necessitiamo di:\begin{itemize}
+	\item \(\log{N}\) informazioni per calcolare l'hash e confrontarlo con la radice;
+	\item Dimensione della grandezza dell'hash utilizzato. \emph{i.e. 256bit per SHA-256}
+\end{itemize}
+\begin{remark}
+	Questa costruzione è sicura dato che la funzione di hash non ha collisioni ed in altri termini la probabilità di trovare due hash uguali è trascurabile. Questa proprietà viene detta \textbf{unfeseable}.
+\end{remark}
+Un difetto di questa costruzione è che è statica ed in un ambiente più complesso, la costruzione è del tipo:
+\begin{center}
+	\includegraphics[scale=0.6]{2021-12-09-16-19-42.png}
+\end{center}
+Per rendere la costruzione più dinamica, ogni giorno si prendono un certo numero di certificati, si effettua la costruzione di Merkle per aggiungere ogni giorno Root al Root principale.
+\begin{remark}
+	I sibling vengono forniti all'utente e non calcolati a run-time.
+	\begin{center}
+		\includegraphics[scale=0.6]{2021-12-09-16-25-58.png}
+	\end{center}
+	Quando si rilascia un certificato, viene aggiunto al log srerver che ritorna un signed certificate timestamp SCT.
+\end{remark}
+\subsubsection{Merkle Tree and Blockchain}
+\begin{center}
+	\includegraphics[scale=0.6]{2021-12-09-16-28-26.png}
+\end{center}
+La costruzione vista fino ad ora è simile alla costruzione delle block chain con la differenza che si rimpiazzano le transazioni con i certificati. Si definisce un scala temporale di un giorno, in cui si collezionano tutti i certificaiti e si costruisce un blocco contenente la radice da concatenare con il blocco precedente. \textbf{Il blocco successivo ha l'hash del blocco precedente.}
 
 \section{Handshake: Fase 3 e 4}
 \subsection{Handshale: Fase 3}
@@ -1845,9 +1893,9 @@ Per mitigare questo fenomeno, ipotizziamo che il certificate authoritiy non è p
 	\item \textbf{Certificate:}Il Client mostra il certificato se richiesto;
 	\item \textbf{Client Key Exchange:} tramissione della chiave o informazioni per risalire ad essa(\emph{Coefficiente di DH}) tramite symmetric encryption;
 	\item \textbf{Certificate Verify}:\begin{enumerate}
-		\item Firma di qualcosa noto solo al client e al server;
-		\item Per provare che il Client conosca la chiave privata dietro al certificato. Dato che mi potrei autenticare copiando semplicemente la chiave pubblica.
-	\end{enumerate}
+		      \item Firma di qualcosa noto solo al client e al server;
+		      \item Per provare che il Client conosca la chiave privata dietro al certificato. Dato che mi potrei autenticare copiando semplicemente la chiave pubblica.
+	      \end{enumerate}
 \end{itemize}
 In particolare, sapendo che il NONCE viene inviato nei passi 1 e 2 dell'handshake (\emph{In particolare nel Server Hello}). Inizialmente possiamo inviare nel campo del Certificate la nostra chiave pubblica, scambiare le chiavi in Client Key Exchange e poi firmare il NONCE in Certificate Verify. \((NONCE)_{GB}\). Tuttavia, per i principi della mutua autenticazione possiamo anche firmare dei dati aggiuntivi come il NONCE del server e del Client. Fino a qui finisce la parte obbligatoria, ma nessuno ci vieta di aggiungere altri dati da firmare dato che la lunghezza del messaggio è sempre la stessa. \((ClientHello,ServerHello)_{GB}\) Ciò equivale a ripetere la negoziazione effettuata precedentemente, ma con la sicurezza di mezzo. Abbiamo aggiunto proprietà di \textbf{autenticazione e protezione da downgrade Attacks}. Questo discorso è estendibile a tutti i messaggi inviati e ricevuti creando un \textbf{LOG} che andrà firmato. \newline
 \textbf{Siamo riusciti a proteggere l'intera sessione.}\newline
@@ -1858,13 +1906,13 @@ A questo punto, la parte del server può ricostruire il LOG, controllarlo con la
 \end{center}
 La fase 4 ha due obiettivi fondamentali:\begin{enumerate}
 	\item Cambiare in un nuovo stato di connessione sicura:\begin{itemize}
-		\item Dato che l'autenticazione e l'encryption è basata su chiavi calcolate con lo scambio dei parametri di sicurezza;
-		\item Applicato immediatamente ai messaggi terminate: inizialmente controlla che tutto sia andato a buon fine. Se il Client non riesce a decifrare il messaggio finalem, allora qualcosa è andato storto.
-	\end{itemize}
+		      \item Dato che l'autenticazione e l'encryption è basata su chiavi calcolate con lo scambio dei parametri di sicurezza;
+		      \item Applicato immediatamente ai messaggi terminate: inizialmente controlla che tutto sia andato a buon fine. Se il Client non riesce a decifrare il messaggio finalem, allora qualcosa è andato storto.
+	      \end{itemize}
 	\item Autenticare tutti i precedenti messaggi di handshake:\begin{itemize}
-		\item Finished= Firma digitale di tutti i precedenti nmessaggi di handshake;
-		\item Per evitare MITM\@;
-	\end{itemize}
+		      \item Finished= Firma digitale di tutti i precedenti nmessaggi di handshake;
+		      \item Per evitare MITM\@;
+	      \end{itemize}
 \end{enumerate}
 \begin{remark}
 	Nel caso in cui la negoziazione si basa solamente sull'encryption e non sull'autenticazione si rompe tutto il sistema. Infatti, se volessi negoziare i.e. AES-GCM, posso effettuare un downgrade nel cipher suite mettendo StreamCipher. Per rompere il protocollo,un MITM prende il log che il client manda al server e fa vedere dalla parte del server lLOG'. Questo è un caso di attacco attivo che modifica i ciphersuiter che possono essere usati a suo vatnaggio. Ora nel finished, il MITM vede \(H(LOG)\bigoplus Keystream\), ma sa che ha modificato il LOG in LOG' e può quindi calcolare l'hash di questo nuovo LOG ed effettua:\(H(LOG)\bigoplus Keystream \bigoplus H(LOG)\bigoplus H(LOG')\).\newline
@@ -1902,4 +1950,19 @@ Un altro problema è come prendere da un singolo segreto numerose chiavi. Ad ese
 Un PRF è una \textbf{Pseudo Rando Function} che prende in ingresso un seed e crea un output illimitato utilizzando un secret. In SSL 3.0 non c'era un buon PRF, in TLS 1.0 e 1.1 c'era un buon PRF ma era hardcoed. In TLS 1.2 il PRF è negoziabile e di default impostato su SHA-256 e può essere cambiato.\newline
 Fino al 2010 non esistevano KDF\textbf{Key derivation function} la cui idea è: prendi il master key, prendi una funzione hash e costruisce l'HMAC con la master key con al suo intenro il \emph{Context Sring}(stringa con il nome di chi la usa insieme ad un ciontatore).\newline
 Quindi, si ottiene HMAC(context string|counter) che è una costruzione semplice con una stringa semplice e un contatore di una HMAC function. La master key è la sorgente di tutte le chiavi dei processi dell'applicazione. Ora il processo A che genera una sequenza di chiavi genera lo stesso risultato di un altro processo se il risultato dipendesse solo dal contatore. La stringa contestuale serve a garantire che le chiavi generate siano diverse per processi diversi.
+\section{Gestione connessione TLS e Supporto Applicazione}
+\subsection{Alert protocol}
+TLS definisce messaggi speciale fornire alert fra il client e il server. Questi messaggi sono incapsulati in TLS Record.
+\begin{center}
+	\includegraphics[scale=0.6]{2021-12-09-17-29-16.png}
+\end{center}
+\begin{itemize}
+	\item Alert level: Alert di tipo Warning and Faltal;
+	\item Alert Description: 23 possibili alert. Il più importante è il fatal message che termina la sessione e non permette di rissuumerla con gli stessi parametri.
+\end{itemize}
+Queste informazioni sono cifrati o meno in base al fatto che siano trasmessi nell'handshake o nel trasferimento dati.
+\begin{remark}
+	\textbf{TLS non protegge TCP}. TLS protegge il payload di TCP, questo implica che nell'invio di un pacchetto con header IP e TCP, la parte cifrata è solo il payload. Questo per ragioni tecniche poiché non si saprebbe dove inviare il pacchetto.\newline
+	Dato che la porzione del pacchetto di TCP non è cifrata è soggetta ad attacchi (i.e. Attacchi DoS)
+\end{remark}
 \end{document}

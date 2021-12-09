@@ -195,3 +195,7 @@ Secondo Anno/Teoria Dei Giochi/Appunti/Teoria dei Giochi/main.pdf
 .history
 *.synctex(busy)
 *.gz
+*.gz
+*.fls
+*.idx
+*.ind
