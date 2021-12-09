@@ -1963,6 +1963,12 @@ TLS definisce messaggi speciale fornire alert fra il client e il server. Questi 
 Queste informazioni sono cifrati o meno in base al fatto che siano trasmessi nell'handshake o nel trasferimento dati.
 \begin{remark}
 	\textbf{TLS non protegge TCP}. TLS protegge il payload di TCP, questo implica che nell'invio di un pacchetto con header IP e TCP, la parte cifrata è solo il payload. Questo per ragioni tecniche poiché non si saprebbe dove inviare il pacchetto.\newline
-	Dato che la porzione del pacchetto di TCP non è cifrata è soggetta ad attacchi (i.e. Attacchi DoS)
+	Dato che la porzione del pacchetto di TCP non è cifrata è soggetta ad attacchi (i.e. Attacchi DoS). Per proteggere anche il TCP Header si utilizza IPsec o si effettua il cosiddetto tunnel su TLS tra due end-point in cui inviare tutto.
 \end{remark}
+Tuttavia, non si deve effettuare il tunnel poiché le prestazioni diminuiscono notevolmente.
+\section{Truncation Attack}
+\begin{center}
+	\includegraphics[scale=0.6]{2021-12-09-18-01-49.png}
+\end{center}
+Sappiamo che TLS provvede encryption ed integrity (payload e session). Supponiamo che l'utente stia mandando un pacchetto TCP con payload cifrato con TLS. L'attacker può chiudere la connessione con un messaggio di reset ed inoltre può inviare un TCP FIN
 \end{document}
