@@ -950,7 +950,7 @@ Infine il \textbf{redirect agent} non gestisce i dati, ma il controlla. Provvede
 	\part{Second Midterm}
 \end{center}
 \chapter{Transport Layer Security}
-\chapter{Introduzione}
+\section{Introduzione}
 TLS è un protocollo di livello di trasporto sicuro il cui progenitore è SSL v.3, Security Socket Layer. Da TLS v.1.0 ci furono nuove versione che inizialmente gradualemente: supportarono UDP (DTLS-\emph{Datagram TLS}), tolsero MD5/SHA-1 hash(TLS v1.2) e ammisero solamente AEAD\emph{(Authenticated Encryption with Associated Data)} (TLS v.1.3 -TLS completamente differente rispetto alle altre versioni).
 In TLS v.1.3, disaccoppiarono il protocollo dall'algoritmo crittografico, cosa che fino a prima non era implementato.
 \section{SSL/TLS: Visione stratificata}
@@ -1778,7 +1778,8 @@ Il problema persiste anche se si utilizza il protocollo di scambio chiavi di Dif
 	\includegraphics[scale=0.6]{2021-12-05-19-03-04.png}
 \end{center}
 Infatti se l'utente invia alla banca \(g^x \mod{p}\) e la banca manda ad alice \(g^y \mod{p}\). L'attacker prende entrambi i messaggi e mansda sia all'utente che alla banca un nuovo valore \(g^z mod p\). L'utente crederà che la chiave sia \(g^{xz}mod p\), la banca crederà \(g^{yz}mod p\). Il cattivo si comporterà come un proxy avendo sia la chiave sia dell'utente che della banca.\newline
-Per risolvere questa problematica necessitiamo di un meccanismo per \textbf{legare crittograficamente una chiave pubblica ad una identità}. A tale scopo si introdussero, i \textbf{certification autohority}.\
+Per risolvere questa problematica necessitiamo di un meccanismo per \textbf{legare crittograficamente una chiave pubblica ad una identità}. A tale scopo si introdussero, i \textbf{certification autohority}.
+\subsubsection{RSA Key Transport: Details}
 \subsection{Certification Authority}
 Abbiamo bisogno di legare il nome e la public key. A tale scopo, ci viene in aiuto il \textbf{certificate Authority}. Concettualmente, è una terza parte che ci permette di avere la certezza della provenienza della chiave che riceviamo. In particolare, ciò viene effettuato nel seguente modo: si prende il nome e la chiave pubblica e si richiede al certificate authority di firmare digitalmente il mesasaggio che contiene queste informazioni. A questo punto il CA(\emph{certification authority}), fornisce un certificato che ne attesti la veridicità detto \textbf{digital certificate}.\newline
 \textbf{Non è possibile risolvere il problema senza "appoggiarsi" ai CA.}\newline
@@ -1970,5 +1971,28 @@ Tuttavia, non si deve effettuare il tunnel poiché le prestazioni diminuiscono n
 \begin{center}
 	\includegraphics[scale=0.6]{2021-12-09-18-01-49.png}
 \end{center}
-Sappiamo che TLS provvede encryption ed integrity (payload e session). Supponiamo che l'utente stia mandando un pacchetto TCP con payload cifrato con TLS. L'attacker può chiudere la connessione con un messaggio di reset ed inoltre può inviare un TCP FIN
+Sappiamo che TLS provvede encryption ed integrity (payload e session). Supponiamo che l'utente stia mandando un pacchetto TCP con payload cifrato con TLS. L'attacker può chiudere la connessione con un messaggio di reset ed inoltre può inviare un TCP FIN per dire al server che ha finito la comunicazione. In particolare, posso permettere l'invio di una porzione del messaggio per poi inviare un TCP FIN per terminare la connessione. In questo modo non si ha nessuno strumento per capire che vi è stato un attacco. Per fixare questo attacco occorre posso decidere la lunghezza totale del pacchetto che sto per inviare nel momento in cui stabilisco la connessione, ma non è una soluzione pratica.\newline
+La soluzione migliore è detta \textbf{Close Notify}: il client invia i dati su TLS come al solito, ma quando devo terminare nell'ultimo pacchetto dico che sto terminando. In pratica, viene effettuato tramite un alert message detto \emph{close notify}.
+\begin{remark}
+	Il problema di DOS rimane.
+\end{remark}
+\section{Renaegotiation Attack(Aborted in TLS v.1.3)}
+TLS utilizzato nella modalità standard vi è una negoziazione del protocollo da utilizzare per cifrare i dati. Nella versione standard, scelsero di permettere di aprire molteplici sessioni TLS durante la stessa connessione TCP al fine di rinegoziare i parametri di sicurezza precedentemente scelti.
+\begin{center}
+	\includegraphics[scale=0.6]{2021-12-10-14-12-07.png}
+\end{center}
+I due handshake possono essere degli handshake completi come quello iniziale e quindi non vi è differenza tra uno e l'altro. Il server/client ricxonoscono che sono differenti poiché il primo è in chiaro mentre il secondo è cifrato poiché basato su connessione TLS. Questa costruizione è attaccabile.
+Il \textbf{Renegotiation Attack} è un tipo di attacco che inietta nella connessione del plaintext.
+\begin{center}
+	\includegraphics[scale=0.6]{2021-12-10-14-17-12.png}
+\end{center}
+Io sono l'attaccante e so che l'utente deve aprire una connessione con un certo sito. Quindi, apro una sessione TLS inviando qualche dato e nel frattempo rintraccio l'indirizzo IP dell'utente e quando l'utente vorrà connettersi a quel determinato sito dovrà effettuare l'handshake TLS per entrare nel server. L'attacker il Client Hello dell'utente (\emph{handshake message}) e lo utilizza nella propria TLS session. Quindi il server vede che il secondo handshake che invia l'attacker è un tentativo di rinegoziare l'handshake. A questo punto l'utente crede di aver inviato i propri dati al server, ma il server vede che l'utente ha inviato i propri dati più altri dati cifrati inviati dall'attacker.
+\begin{remark}
+	Questo tipo di attacco viene detto \textbf{Plaintext Injection Attack}: i propri dati non possono essere cambiati, ma l'attaccante può iniettare altri dati come preamble.
+\end{remark}
+In pratica non si potrebbe effettuare questo attacco poiché dovrei essere in grado di anticipare  l'utente e sapere quando si connetterà; tuttavia questa problematica è facilmente risolvibile poiché l'attacker può intercettare persistentemente il traffico dell'utente ed appena instaura una TLS session ed avvia l'attacco. Le conseguenze di questo attacco è che,mettendo nel preambolo come ultime carattere il carattere di commento, si può far ignorare tutto quello che l'utente ha inviato e leggere solo quello che l'attacker ha iniettato. \newline
+Per prevenire l'attacco ci sono due alternative:\begin{itemize}
+	\item Non effettuare la renegotiation;
+	\item Standardizzazione patch che prevede la renegotiation extention: prevede un primo messaggio senza estensione ed un secondo messaggio che conteneva il precedente handshake verify per rilevare l'attacco.
+\end{itemize}
 \end{document}
