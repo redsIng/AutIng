@@ -1780,6 +1780,114 @@ Il problema persiste anche se si utilizza il protocollo di scambio chiavi di Dif
 Infatti se l'utente invia alla banca \(g^x \mod{p}\) e la banca manda ad alice \(g^y \mod{p}\). L'attacker prende entrambi i messaggi e mansda sia all'utente che alla banca un nuovo valore \(g^z mod p\). L'utente crederà che la chiave sia \(g^{xz}mod p\), la banca crederà \(g^{yz}mod p\). Il cattivo si comporterà come un proxy avendo sia la chiave sia dell'utente che della banca.\newline
 Per risolvere questa problematica necessitiamo di un meccanismo per \textbf{legare crittograficamente una chiave pubblica ad una identità}. A tale scopo si introdussero, i \textbf{certification autohority}.
 \subsubsection{RSA Key Transport: Details}
+Nell'RSA key Transport:\begin{itemize}
+	\item Il Server manda al client un RSA Public Key;
+	\item Il Client genera il Pre-Master Secret e lo cifra con RSA e, usando RSA tramite la public key del server, lo trasmette al server.
+\end{itemize}
+Questo schema non è del tutto sicuro dato che non garantisce integrity. Infatti, non è robusto contro i \textbf{Chosen Ciphertext Attacks}:\begin{itemize}
+	\item L'attacker vede un ciphertext \(C=M^e\);
+	\item Obiettivo: trovare \(M=C^d\)
+	\item Abilità attaccante: l'attacker può accedere ad un oracolo per la decryption, ma non può fornire il dato originale.
+	\item Attacco: Per decifrare C, prendo un valore casuale e ne costruisco un nuovo ciphertext \(X=(r^eC)\). Ora chiediamo all'oracolo di decifrare X che ritornerà \(X^d=(r^eC)^d=r^{ed}C^d=rC^d\) e l'attacker cancella r moltiplicando per \(r^{-1}\mod{N}\),trovando M:\(X^dr^{-1}=rC^dr^{-1}=C^d=M\)
+\end{itemize}
+\paragraph{Problemi}
+RSA è \emph{malleable} poiché non garantisce che, dato un ciphertext c di qualche messaggio m, l'attacker non dovrebbe riuscire a creare un differente ciphertext c' che decifra il messaggoio in m' che è in qualche modo collegato a m.\newline
+Inoltre, RSA non è \textbf{CPA-Secure} perché se si prende un messaggio \(C=(M)^e \mod{N}\) e poi cifriamo nuovamente il messaggio \(C=(M)^e \mod{N}\) allora l'outpt sarà uguale.
+Per mitigare queste problematiche si utilizza il \textbf{padding}.
+\paragraph{RSA Padding: PKCS \# v.1.5}
+PKCS è uno standard per la public key. Il padding è necessario per:\begin{itemize}
+	\item Malleability;
+	\item Protezioni CPA;
+	\item Messaggi di tipo M=0 M=1;
+\end{itemize}
+Questo standard prevede di aggiungere nel plaintext:\begin{itemize}
+	\item Una sequenza iniziale di 2 bytes di tipo 00000000|000000010(00|02) che rappresenza il preambolo di ogni meccanismo di encryption di RSA;
+	\item 8 bytes casuali diversi da zero per far si che, se si cifra il messaggio m due volte, i ciphertext siano sempre diversi. Tramite questo meccanismo ci si protegge da Chosen PlainText Attack. In particolare, questi 8 bytes vengono detti \textbf{padding string}\textbf{NON DEVONO CONTENERE IL BYTE 0};
+	\item Un byte 0000(0) che delimita la fine dei byte casuali;
+	\item Il resto sono dati.
+\end{itemize}\begin{center}
+	\includegraphics[scale=0.6]{2021-12-10-18-50-55.png}
+\end{center}
+Questo meccanismo permette di risolvere le problematiche sopra descritte.
+\paragraph{RSA Key Transport With Padding}
+\begin{enumerate}
+	\item Il Server manda RSA Public Key;
+	\item Il Client manda un RSA Encryption detto \textbf{client key exchange message} usando l'attuale standard e nel messaggio viene messo il Pre-Master Secret. \newline \emph{Quando il server riceve un client key exchange messagem estrae il ciphertext c, e tenta di decrittografarlo- Se la decodifica PKCS1 restituisce reject(decription fails), il server invia un messaggi di interruzione (abort message) al client. IN caso contrario continua normalmente con il setup della sessione.}
+\end{enumerate}
+\begin{remark}
+	Sembra che abbiamo un possibile padding oracle: ogni volta che provo a decriptare qualcosa ricevo una risposta YES/NO, quindi 1 bit di informazione, quindi possiamo eseguire un attacco CPA adattando un ciphertext mandato basandoci su cosa abbiamo visto nella risposta precedente.
+\end{remark}
+\subsubsection{Bleichenbacher's Oracle}
+Bleichenbacher's Oracle è un \textbf{Adaptive Chose Ciphertext Atacck} contro lo standard RSA PKCS\#1.\begin{itemize}
+	\item \textbf{Idea}: Effettuare Chosen Ciphertext Attack;
+	\item \textbf{Obiettivo}:Decifrare il ciphertext C:\begin{enumerate}
+		\item \(C=M^e\mod{N}\);
+		\item Pericoloso poiché quando si fa RSA key Transport, il ciphertext C contiene la premaster secret che se viene decifrato si rompe l'intera sessione di TLS.
+	\end{enumerate}
+	\item L'attacker sceglie il valore r e costruisce un nuovo ciphertext, criptando r con la public key:\begin{enumerate}
+		\item \(C')Cr^e\mod{N}\);
+		\item A casua della malleability di RSA, facendo \(r^eC\) si modifica in maniera significativa il messagio nascosto dall'encryption. Infatti, effettuando \(r^eC\mod{N}\) è come se si prendesse il messaggio orgiinale in plainttext e lo moltiplico per M. Lavorando sul ciphertext sto applicando l'operazione M+r sul plaintext.
+		\item L'attacker sta modificando il messaggio interno M*r che verrà sottoposto all'oracolo per saper se inizia con 0002 o meno.
+	\end{enumerate}
+	\item L'attacker invia al server SSL v.3.0 il ciphertext(Oracolo) che mi dirà se il mio messaggio è ben formato:\begin{enumerate}
+		\item Se la decryption fallisce allora vuol dire che la mia modifica porta a un messaggio M' che non inizia con 0002;
+		\item Questo trapela informazioni su M utile a decriptare l'intero plaintext.
+	\end{enumerate}
+	\item \textbf{Risultato:} Con un numero sufficiente di tentativi si decifra il plaintext M.
+\end{itemize}
+\begin{remark}
+	Viene detto attacco \emph{adattivo} poiché si sceglie r in base ai risultati precedenti.
+\end{remark}
+\paragraph{Toy Bleichenbacher example}
+Supponiamo che il padding invece di avere 0002(16bit) sia solo 1 bit (0 o 1). Allora l'oracolo mi dice se è 0 o 1, riconducendoci ad una scelta binaria.\newline
+\begin{center}
+	\(Msg=\log_{2}{N}\) bits\newline
+	Con l'ordine di \(\log_{2}{N}\) tentativi è possibile decifrare l'intero messaggio.
+\end{center}
+\paragraph{Esempi}
+\begin{itemize}
+	\item Parametri RSA:\begin{enumerate}
+		\item p=13,q=19,n=p*q=247 (8 bit);
+		\item Prendiamo la chiave pubblica \(e=29\)(coprimo con \(\Phi(q)\ e\ \Phi(n) \)) e calcoliamo \(d=e^{-1}\mod{\Phi(N)}=d=e^{-1}\mod{216}=149\)
+		\item L'attacker conosce \emph{e} e \emph{n};
+		\item Vede il valore del ciphertext \(C=90=M^e\);
+		\item \(M=90^d \mod{247}\) , ma con d che non possiede.
+	\end{enumerate}
+	Quindi l'attacke rpuò testera se il plaintext di un messaggio che scelgio io inizia con 0 o 1 , usando un ciphertext:\begin{center}
+		\(C'=Cw^e=90w2^{29}=M^e2^e=(M2)^2\rightarrow r=2\) quindi seleziono un numero non puiù randome scelto da me.
+	\end{center}
+	Quindi mando al server C' per capire se inizia con 0 o 1. In particolare:\begin{center}
+		\(C2^e\rightarrow\) test su 2M;\newline
+		\((C2^2)^e\rightarrow\) test su 4M;\newline
+		\((C2^3)^e\rightarrow\) test su 8 M;
+		\((^4)^e\rightarrow\)	testu su 16M
+	\end{center}
+	(Ovviamente questi valori sono in modulo).\newline
+	Se mando questi valori uno alla volta, il server ritorna \{0,1,1,1,0,1,1,1\}
+\end{itemize}
+\subsubsection{Corollario: Attaccando la parità}
+Ho un negiozio e si mandano qualche richiesta per un numero di items, e lo shop mi dice ok se ho richiesto un numero pari di item e se è pari il negiozio mi dirà di no.\newline
+Ho un parity side channel se conosce se l'internal message è pari o dispari, allora posso rompre RSA effettuando un chosen ciphertext attack. Questo equivale alla situazione di prima poiché finché si rivela 1 solo bit, tutto il plaintext è in gioco.
+\subsubsection{Bleichenbacher 's Oracle in the wild}
+\begin{enumerate}
+	\item \textbf{DROWN Attack}: Ci sono due casi:\begin{itemize}
+		\item \textbf{Caso 1}: Il server supporta SSL v2 DOWNGRADE\begin{itemize}
+			\item Questo attico è un immediate attack, poiché non si può fixare il downgrade attack se torni indietro a SSL v2.
+			\item Hanno unito lo studio dell'oracolo con un'esplorazione su larga scala del server del mondo reale;
+			\item La public key e la private key del lato SSL v2 sono le stesse dell'operational server.
+			\item Si prende un nuovo server, si aggiorna TLS, ma si riusa la stessa chiave su un altro server parallelo che può essere downgraded. Allora, riusano lo stesso ceretificato, quindi si può attaccare il server debole per rompere quello forte. Si fa leva sul fatto che quando si installa un nuovo server non si cambia la chiave privata.
+			\item La conseguenza di questo attacco è che un terzo dei siti globali che erano vulnerabile e quindi si potevano utilizzare sessioni e decifrarle interamente.
+		\end{itemize}
+		\item \textbf{ROBOT Attack}:Protocol Fuzzing. Si mandano messaggi mal formati per stimulare le exception ed effettuare dei bleichenbacheri oracle.
+	\end{itemize}
+\end{enumerate}
+\subsubsection{Contromisure}
+\begin{enumerate}
+	\item Cambiare totalmente il padding RSA-PKCS\# v.1.5 in uno più sicuro come RSA OAEP;
+	\item Attenta implementazione: se il padding è malformato eseguire il follow-up come se fosse stata fomrata correttamente;
+	\item Sbarazzarsi del key transport RSA (come in TLS v.1.3).
+\end{enumerate}
+L'implementazione delle contromisure è molto molto complessa.
 \subsection{Certification Authority}
 Abbiamo bisogno di legare il nome e la public key. A tale scopo, ci viene in aiuto il \textbf{certificate Authority}. Concettualmente, è una terza parte che ci permette di avere la certezza della provenienza della chiave che riceviamo. In particolare, ciò viene effettuato nel seguente modo: si prende il nome e la chiave pubblica e si richiede al certificate authority di firmare digitalmente il mesasaggio che contiene queste informazioni. A questo punto il CA(\emph{certification authority}), fornisce un certificato che ne attesti la veridicità detto \textbf{digital certificate}.\newline
 \textbf{Non è possibile risolvere il problema senza "appoggiarsi" ai CA.}\newline
@@ -1994,5 +2102,36 @@ In pratica non si potrebbe effettuare questo attacco poiché dovrei essere in gr
 Per prevenire l'attacco ci sono due alternative:\begin{itemize}
 	\item Non effettuare la renegotiation;
 	\item Standardizzazione patch che prevede la renegotiation extention: prevede un primo messaggio senza estensione ed un secondo messaggio che conteneva il precedente handshake verify per rilevare l'attacco.
+\end{itemize}
+\section{TLS v.1.3}
+In TLS v.1.3 hanno rimosso tutti i vecchi algoritmi simmetrici diventati obsoleti.Gli unici a rimanere furono AES128,AES256 e gli altri AEAD. Inoltre, si cambia il modo in cui viene effettuato l'handshake con l'ottenimento del cosiddetto \textbf{perfet forward secrecy}: supponiamo di avere un server e qualcuno accede alla secret key; il sistema si dice caratterizzato da forward secrecy se garantisce che tutto quello che si è fatto prima e dopo di aver subito l'attacco, la chiave privata rimane al sicuro.\newline
+L'RSA non garantiva la perfect forward secrecy perché il server trasferiva la chiave al clinet; il client rimandava al server il pre-master secret criptato con la public key del server. Se qualcuno ottiene la private key, egli sarà in grado di creciptare tutti i log di dati fino a quel punto.
+\subsection{Perfect Forward Secrecy (PFS)}
+Il Perfect Forward Secrecy garantisce sicurezza sia priama e dopo che che la chiave viene compromessa e ciò implica che se una chiave privata a lungo termine viene compromessa in un qualsiasi istante, questo non dovrebbe influenzare i dati consegnati prima e dopo tale istante.\newline
+Inoltre, potegge contro agli attacker capaci di:\begin{itemize}
+	\item effettuare logs di grandi dati;
+	\item Capaci di rompere occasionalmente la coppia chiave pubblica/privata;
+\end{itemize}
+L'unico dei protocolli visto fino ad ora che garantisce PFS è Ephimeral DH, poiché anche se un MITM prende la chiave privato, non è in grado di decifrare i messaggi visto che non può andare indietro nel tempo poiché i valori cambiano sempre.
+\subsection{TLS v.1.3 Handshake:}
+TLV v.1.3 effettua l'handshake con Ephimeral Diffie-Hellman permettendo un setup più rapido e consentendo perfect forward secrecy. L'handshake viene velocizzato poiché come primo messaggio da parte del client è utilizzato per mandare il valore \(g^x\) insieme al Client Hello, il server risponde con \(g^y\) e può direttamente cifrare il messaggio.
+\begin{center}
+	\includegraphics[scale=0.6]{2021-12-11-18-04-13.png}\newline
+	\includegraphics[scale=0.6]{2021-12-11-18-07-14.png}
+\end{center}
+L'handhsake viene riutilizzato anche per aggiornare le chiavi precedentemente condivise. In particolare, assumiamo di avere un sistema in cui voglio autenticare con una chiave pre condivisa mantenendo PFS. Questo è possibile, in particolare l'handhsake TLS v.1.3 può prevedere un vettore di preshared keys con un puntatore che selezione quale vogliamo usare. Si ha a disposizione una preshared key, ed insieme ad essa si manda un DHEpublic coefficient \(g^x\) generato dall'utente e un nonce. Quindi, ora il server può calcolare \(HKDF_{psk}(N_c,N_s,g^{xy})\). PSK rimarrà statica, ma grazie al valore \(g^{xy}\). Nella prossima sessione si invia \(g^x\) e \(g^y\) e si calcola \(k=HKDF_{psk}(N_c,N_s,g^{xy})\). Il vantaggio è che \(g^{xy}\) non garantisce l'authentication e non è salvata nel log così che se qualcuno lo ruba non trova la chiave. La chiave viene trovata tramite HKDF.\newline
+Con questo meccanismo abbiasmo	 ottenuto PFS con static pre-shared secret senza utilizzo di certificati.
+\begin{center}
+	\includegraphics[scale=0.6]{2021-12-11-18-37-34.png}
+\end{center}
+\subsection{TLS v.1.3 Handshake: Opzioni aggiuntive}
+\subsubsection{0-RTT Data}
+Quando PSK viene negoziato nell'handhshake precedente, invio i dati applicativi direttamente nel primo messaggio con la chiave HKDF(Client-Hello-Content). Con questa tecnica si guadagna in velocità, ma si perde in sicurezza data la nonce singola. \textbf{0 RTT  può essere usata solo con PSK. Dopo aver visitato un sito, la seconda volta si riusa la psk di prima grazie alla cache.} Tuttavia questa opzione soffre di replay attack(dato che non si usa la nonce nel server side) che può essere mitigato controllango la finestra di tempo includendo un lifetime per la prima sessione e si controlla che la nonce non si ripeta. Tuttavia il problema rimane.
+\section{Conclusioni}
+\begin{itemize}
+	\item Assenza di rinegoziazione;
+	\item HKDF incluso ufficialmente;
+	\item RImozione della compressione;
+	\item Chiavi esportate.
 \end{itemize}
 \end{document}
