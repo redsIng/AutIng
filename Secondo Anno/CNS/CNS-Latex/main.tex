@@ -1264,7 +1264,7 @@ Assume now that the server is vulnerable to a Padding Oracle attack, and assume 
 \begin{center}
 	f1 aa 11 04 || 34 35 f1 20 || 07 07 07 07 || 73 73 73 73
 \end{center}
-Metodi:\begin{enumerate}
+Metodi:\begin{enumerate} 
 	\item \begin{center}
 		      07 XOR 01 XOR 00 = 0111 XOR 0001 XOR 0000=00110=06
 	      \end{center}
@@ -1284,7 +1284,10 @@ L'unica soluzione accettabile è quella di effettuare Encrypt-then-MAC introduce
 L'attacco CRIME serve ad evidenziare che la compressione seguita dalla cifratura in TLS non è sicura. Questo attacco si applica ogni qual volta che si applica la compressione seguita dalla cifratura.
 \subsubsection{IDEA:}Supponiamo che sappiamo che una password è una alternativa fra due alternative. Cifriamo la password dopo la compressione: quando effettuiamo la compressione andiamo a modificare il messaggio che, in base alla cifratura, possiamo far trapelare delle informazioni. Da queste considerazioni possiamo decifrare la password.\newline In particolare, supponiamo che la password non sia nota, ma l'attacker può vedere la dimensione del dato compresso e poi cifrare e può iniettare ripetutamente un plaintext a sua scelta nel plaintext e vedere la dimensione del risultato.(\textbf{Plain Text Inject Attack}) Se nella compressione ho dei pattern posso vedere la dimensione del CT diversa da quella in ingresso, indovinando al massimo una lettera.\newline
 \subsection{Dettagli dell'attacco}
-DEFLATE utilizza due sotto algoritim: Huffman coding, LZ77. Il secondo rimpiazza 3 o più caratteri ripetuti con puntatori di offset e dimensione. Per esempio:\begin{center}
+La compressione è un meccanismo per trasmettere o salvare una quantità di dati in pochi bit. Il metodo usato in TLS per comprimere i dati è \textbf{DEFLATE}. Esso consiste di due algoritmi: Lempel-Ziv coding \emph{LZ77} e Huffman coding. Il primo è usato per eliminare le ridondanze delle sequenze che si ripetono; il secondo elimina le ridondanze dei simboli che si ripetono. In particolare, si scansiona l'input per cercare stringhe ripetute e le rimpiazza con le referenze all'indietro fino all'ultima occorrenza (offset,lunghezza) e le formatta in una nuova stringa.
+\begin{remark}
+	Un parametro importante è la dimensione della finestra: più è alta, maggiore è il rapporto di compressione.
+\end{remark} Per esempio:\begin{center}
 	GIUSEPPE BIANCHI AND MARCO BIANCHINI   36B
 \end{center}
 In:\begin{center}
@@ -2134,4 +2137,49 @@ Quando PSK viene negoziato nell'handhshake precedente, invio i dati applicativi 
 	\item RImozione della compressione;
 	\item Chiavi esportate.
 \end{itemize}
+\chapter{IPsec}
+\section{Introduzione}
+IPsec è un protocollo che permette di costruire una VPN,\textbf{Virtual Protocol Network}. Si tratta di costruire una rete private virtuale nin internet per evitare i costi troppo alti di una rete P2P diretta.
+I VPN permette di far connettere diverse entità nella stessa compagnia anche in aree geocrafiche differenti, ma dobbiamo assicurarci di gestire gli interizzi privati lungo i siti e proteggere i dati in traffico A tale scopo si utilizza il cosiddetto \textbf{tunneling}: si prende il contenuto di un pacchetto IP, lo metti nel payload di un altro pacchetto IP. Questo risolve il problema di creare VPN in quanto risolvono il problema di routing. I pacchetti sono nascoti poiché incapsulati.\newline
+\textbf{VPN}= Virtual Network(tunnel)+Private Network(authentication and encryption).
+\section{IPsec}
+\emph{IPsec} è uno strato di sicurezza previsto da diversi protocolli, che è inserito tra il layer di trasporto e l'IP layer. In particolare protegge l'intero host e non solo il livello di trasporto come tLS.
+\section{Implementazione}
+Per implementare \emph{IPsec} possiamo:\begin{itemize}
+	\item Estendere l'IP layer per supportare le operazioni, ma diventa difficoltoso svilupparlo dato che si dovrebbe cabmiare l'indirizzo IP;
+	\item Bump in the stack (\textbf{BITS}), tra indirizzo IP e il device driver;
+	\item Bump in the wire (\textbf{BITW})
+\end{itemize}
+\section{Security Association}
+Il concetto fondamentale in IPsec è \textbf{Security Association}: una associazione logica tra due entità ipsec enabled che vogliono proteggere il traffico. La security association è unidirezionale (protegge in una sola direzione). Quindi per proteggere entrambe le entità necessitiamo di due associati.\newline
+Quest'ultime si basano su parametri salvati tra cui l'algoritmo di encryption, la chiace di autenticazione etc. \dots
+Per recuperare una security association da un SAD (\textbf{security association database}), si utilizza il security parameter index SPI, gli address dell'endpoint della SA e il protocollo di sicurezza (AH/ESP). Inoltre, la SA può essere instaurata manualmenten(Pper una VPN di piccole dimensioni) insieme alle relatiche chiavi di criptografia, oppure da protocolli automatici come \textbf{IKE v.2}.
+\begin{center}
+	\includegraphics[scale=0.6]{2021-12-12-17-03-03.png}
+\end{center}
+\section{AH \& ESP Security Protocol}
+In IPsec vi sono due protocolli di sicurezza:\begin{itemize}
+	\item \textbf{Authentication Header AH}:fornisce solamente integrità per l'intero pacchetto. Inoltre protegge dai replay attack;
+	\begin{center}
+		\includegraphics[scale=0.6]{2021-12-12-17-11-08.png}
+	\end{center}
+	Si può effettuare authentication header sia in transport mode che tunnel mode.
+	\begin{center}
+		\includegraphics[scale=0.6]{2021-12-12-17-13-15.png}
+	\end{center}
+	\item \textbf{Encapsulated Security Payload ESP}: autentica solamente il payload.
+	\begin{center}
+		\includegraphics[scale=0.6]{2021-12-12-17-15-04.png}\newline
+		\includegraphics[scale=0.6]{2021-12-12-17-15-37.png}
+	\end{center}
+\end{itemize}
+\section{IPsec Protection and Access Control}
+L'architettura di IPsec gestisce anche le policy di sicurezza: specifica sulla protezione o meno del pacchetto. Le policies sono una serie di regole conservare in un security policy database per regolare la sicurezza nel traffico. \newline
+In particolare, security policy è un match-action-rule che specifica cosa fare con i pacchetti non protetti. Potrebbe indiciare di passare, scartare o proteggere un pacchetto \emph{atction phase}. La \emph{match phase} è una combinazione arbitraria di IPsource,IPaddres, protcollo.
+\section{Operazioni IPsec}
+\begin{itemize}
+	\item Output packet; appena arriva un pacchetto, si controlla la security policy database per vedere se vi è una policy che matcha il pacchetto. Una volta ritirata la security association, si protegge l'intero pacchetto;
+	\item Input Packet: appena arriva un pacchetto si confronta il SPI,IPscr. Se il confronto è andato a buon fine allora il pacchetto è decriptato e autenticato.
+\end{itemize}
+
 \end{document}
