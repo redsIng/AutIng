@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1638834770 "c:/Users/loryb/Desktop/AutIng/Secondo Anno/Teoria Dei Giochi/Appunti/Teoria dei Giochi/main.tex" "main.pdf" "main" 1638834779
+["pdflatex"] 1638834770 "c:/Users/loryb/Desktop/AutIng/Secondo Anno/Teoria Dei Giochi/Appunti/Teoria dei Giochi/main.tex" "main.pdf" "main" 1639501321
   "C:/Program Files/MiKTeX/fonts/tfm/jknappen/ec/tcrm1000.tfm" 993058908 1436 c7f957a372ef2fbe93c0982f96625e12 ""
   "C:/Program Files/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
   "C:/Program Files/MiKTeX/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1233951854 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -106,6 +106,6 @@
   "main.aux" 1638834779 113 5f759fe2b52173f728e233c9fb59669b "pdflatex"
   "main.tex" 1638834760 42610 18550634fd2e17968b8ebbbb3854c409 ""
   (generated)
-  "main.log"
-  "main.aux"
   "main.pdf"
+  "main.aux"
+  "main.log"

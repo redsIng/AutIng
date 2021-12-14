@@ -1690,6 +1690,7 @@ Per l'encryption e decryption si sfrutta il principio della \textbf{Modular expo
 	\item Calcola RSA Module: \(N=pq\)\textbf{Può essere pubblico};
 	\item Calcola \(\Phi(N)=(p-1)(q-1)\)\textbf{Segreto};
 	\item Genera chiave arbitrartia \(e\) coprimo con \(\Phi(N)\) e prendi come \textbf{chiave pubblica} \(1<e<\Phi(N)\)
+	\item Genera \textbf{chiave privata} \(d\) tale che \(e\times d=1\mod{\Phi(N)}\)
 \end{itemize}
 Le ipotesi di sicurezza è che dato N, deve essere difficile trovare i fattori p,q poiché:\begin{enumerate}
 	\item è difficile trovare \(\Phi(N)\);
@@ -2022,7 +2023,7 @@ La fase 4 ha due obiettivi fondamentali:\begin{enumerate}
 		      \item Applicato immediatamente ai messaggi terminate: inizialmente controlla che tutto sia andato a buon fine. Se il Client non riesce a decifrare il messaggio finalem, allora qualcosa è andato storto.
 	      \end{itemize}
 	\item Autenticare tutti i precedenti messaggi di handshake:\begin{itemize}
-		      \item Finished= Firma digitale di tutti i precedenti nmessaggi di handshake;
+		      \item Finished= Hash di tutti i precedenti nmessaggi di handshake;
 		      \item Per evitare MITM\@;
 	      \end{itemize}
 \end{enumerate}
@@ -2060,7 +2061,7 @@ Un altro problema è come prendere da un singolo segreto numerose chiavi. Ad ese
 \end{remark}
 \section{PRF}
 Un PRF è una \textbf{Pseudo Rando Function} che prende in ingresso un seed e crea un output illimitato utilizzando un secret. In SSL 3.0 non c'era un buon PRF, in TLS 1.0 e 1.1 c'era un buon PRF ma era hardcoed. In TLS 1.2 il PRF è negoziabile e di default impostato su SHA-256 e può essere cambiato.\newline
-Fino al 2010 non esistevano KDF\textbf{Key derivation function} la cui idea è: prendi il master key, prendi una funzione hash e costruisce l'HMAC con la master key con al suo intenro il \emph{Context Sring}(stringa con il nome di chi la usa insieme ad un ciontatore).\newline
+Fino al 2010,cioè in TLS v.1.3, non esistevano KDF\textbf{Key derivation function} la cui idea è: prendi il master key, prendi una funzione hash e costruisce l'HMAC con la master key con al suo intenro il \emph{Context Sring}(stringa con il nome di chi la usa insieme ad un ciontatore).\newline
 Quindi, si ottiene HMAC(context string|counter) che è una costruzione semplice con una stringa semplice e un contatore di una HMAC function. La master key è la sorgente di tutte le chiavi dei processi dell'applicazione. Ora il processo A che genera una sequenza di chiavi genera lo stesso risultato di un altro processo se il risultato dipendesse solo dal contatore. La stringa contestuale serve a garantire che le chiavi generate siano diverse per processi diversi.
 \section{Gestione connessione TLS e Supporto Applicazione}
 \subsection{Alert protocol}
