@@ -1996,7 +1996,13 @@ Per rendere la costruzione più dinamica, ogni giorno si prendono un certo numer
 	\includegraphics[scale=0.6]{2021-12-09-16-28-26.png}
 \end{center}
 La costruzione vista fino ad ora è simile alla costruzione delle block chain con la differenza che si rimpiazzano le transazioni con i certificati. Si definisce un scala temporale di un giorno, in cui si collezionano tutti i certificaiti e si costruisce un blocco contenente la radice da concatenare con il blocco precedente. \textbf{Il blocco successivo ha l'hash del blocco precedente.}
-
+\begin{remark}
+	\begin{itemize}
+		\item Ora con l'aggiunta del Certificate Transparency DB, si crea il certificato, lo registro nel DB e ottengo i siblings e ciò non permette ad un attacker di forgiare un certificato falso a causa dei siblings. Quindi, quando si rilascia un certificato, viene aggiunto al log server che ritorna un signed certificate timestamp SCT ed un utente per fidarsi del certificato deve controllare la validità del certificato ed inoltre verificare che il certificato sia nella lista pubblica.;
+		\item Se si usa il blockchain DB, se un certificato è salvato nel database allora non è fake ossia non c'è un controllo effettivo dei certificati;
+		\item Se si usa il Certificate Transparency DB, il punto di forza è che il DB è visibile a tutti quindi se un certificato non è salvato nel DB allora è fake ma se è salvato non è detto che sia reale ma c'è un controllo da parte degli utenti (per esempio google) che se trovano un certificato con il loro nome che non appartiene a loro, revocano quel certificato e lo mettono nella Certificate Revocation List (CRL).
+	\end{itemize}
+\end{remark}
 \section{Handshake: Fase 3 e 4}
 \subsection{Handshale: Fase 3}
 \begin{center}
