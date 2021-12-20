@@ -1,7 +1,12 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
-
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem*{importante}{\textbf{Importante}\newline}
 \title{Computer and Network Security}
 \author{Lorenzo Rossi}
 \begin{document}
@@ -150,14 +155,87 @@ Al livello implementativo, per gestire questo immenso database si utilizzano i c
 I Merkle Trees funzionano proprio in questo modo: le foglio di questo albero rappresentano i certificati;\@mentre i nodi interni rappresentano l'applicaizone della funzione di hashing fino ad arrivare alla fine\@. Inoltre, al momento di verificare la validità di un certificato basta fornire i pezzi di albero corrispondenti alla funzione di hash che porta fino al rootCA e così facendo siamo riusciti a mantenere il DB di piccole dimensioni con la firma data dal rootCA\@. I Merkle Trees sono unfeseable cioè la probavilità di torvare due hash uguali è trascurabile\@.\newline
 Tuttavia, il difetto di questa costruzione è che è molto statica e quindi occorre renderla dinamica nel seguente modo: ogni giorno si raccolgono un tot.di certificati che vengono hashati e poi aggiunti al Merkle Trees\@. Bisogna inoltre ricordare che quando si aggiunge un certificato al merkle trees si rilascia un sct che rappresenta il time stamp di valdità del certificato che verrà poi controllato dall'end-user quando necessita di verificare il certificato inviato dal server\@. Durante la TLS hanshake, oltre a verificare la validità del certificato, si verifica anche la presenza nella lista pubblica\@.
 \section{TLS Handshake}
+L'Handshake protocol di TLS consente di stabilire una comunicazione TLS tra gli end-point\@. In questo protocollo l'obiettivo si prevede la possibilità di avvire una nuova sessione TLS o di riavviarne uno e il suo scopo è quello di avere una negoziazione sicura e affidabile e si deve anche consentire di autenticare opzionalmente il client/server in maniera sicura\@. Tutti i messaggi scambiati in questa fase sono composti da un header e un payload che cambia in base al tipo di messaggio che si sta inviando ed, inoltre, queste informazioni vengono incapsulate in un TLS record.\newline
+L'handshake si compone di 4 fas:\begin{itemize}
+    \item La fase 1 dell'handshake ha l'obiettivo di negoziare quale versione di TLS utilizzare, assegnare un ID alla sessione, scambiare dei nonce (timestamp e valor casuale), accordarsi su quale cipher utilizzare e quale algoritmo di compressione\@. In particolare i messaggi che vengono scambiati sono i seguenti:\begin{enumerate}
+        \item Client Hello: è un messaggio inviato dal client al server e contiene il tipo di Handshake, la lunghezza, la versione del protocollo TLS da utilizzare, il nonce, la lunghezza del campo del cipher da utilizzare, una lista dei cipher disponibili che si vogliono utilizzare (cipher suite), una lista degli algoritmi da utilizzare per effettuare la compressione;
+        \item Server Hello: è un messaggio inviato dal server al client che contiente l'header di handshake, la versione del protocollo TLS, l'ID della sessione, il nonce del server, il cipher da utilizzare nella lista proposta dal client, l'algoritmo di compressione da utilizzare\@.
+    \end{enumerate}
+    \begin{importante}
+        Un Cipher Suite ha il seguente formato:\begin{center}
+            TLS\_ASYMCRIPT\_WITH\_SIMCRIP\_HASHALGO\@.
+        \end{center}
+    \end{importante}
+    \item La fase 2 ha lo scopo di autenticare opzionalmente il server e di inviare la chiave pubblica del server che verrà utilizzata per generare un pre-master secret e generare il mastersecter\@. Si compone di:\begin{enumerate}
+        \item Certificate (OPZIONALE): inviato dal server al client che contiene il certificato per autenticare il server;
+        \item Server Key Exchange (OPZIONALE): inviato dal server al client per scambiare la chiave pubblica del server\@. Si usa Anonymous Diffie-Hellman oppure Ephemeral Diffie-Hellman;
+        \item Certificate Request (OPZIONALE): viene inviato dal server al client per chiedere autenticare tramite un certificato il client;
+        \item Server Hello Done: messaggio vuoto inviato dal server al client per far capire al client di aver finito la sua fase di Hello;
+    \end{enumerate}
+    \item La fase 3 ha lo scopo di autenticare opzionalmente il client, di inviare la chiave pubblica del client per permettere al server di calcolare il master client tramite l'invio di un pre-master secret (dopo esser generato dal client)\@. Si compone di \begin{enumerate}
+        \item Certificate (OPZIONALE): inviato dal client al server e contiene il certificato o la catena dei certificati del client;
+        \item Client Key Exchange (OPZIONALE): inviato dal client al server in cui si scambia il pre-master secret tramite crittografia asimmetrica;
+        \item Certificate Verify (OPZIONALE): inviato dal client al server per farsi autenticare verificando di conoscere la chiave privata collegata al certificato precedentemente inviato\@. Così facendo si evitano attacchi di tipo tampering (alterazione e modifica dei messaggio).
+    \end{enumerate}
+    \item La fase 4 ha lo scopo di cambiare lo stato della connessione TLS in uno stato sicuro contentente l'autenticazione del client/server ed inoltre si autenticano tutti i messaggi precedente effettuando l'hashing del log del client/server\@. Si compone di:\begin{enumerate}
+        \item Change Cipher Spec: inviato dal client al server per indicare l'avvio della cifratura a chiave simmetrica;
+        \item Finished: Inviato dal client al sever che contiente l'hash di tutti messaggi precedentemente scambiati;
+        \item Change Cipher Spec: inviato dal server al client contentente tutti i messaggi precedentemente scambiati serve a verificare, con la chiave simmetrica che vi è corrispondenza nei messaggi.
+        \item Finished: inviato dal server al client contentente l'hash di tutti messaggi precedentemente scambiati.
+    \end{enumerate}
+\end{itemize}
+Vi è un modo per riavviare una sessione TLS senza chiuderla e riaprirla che prevede la generazione solamente di nuove chiavi per continuare la connessione\@. In particolare, si mantiente la fase 1 dell'handshake e la fase 4\@.
 
 \section{TLS Computation}
+Il problema di RSA Key Transport è che la chiave viene generata dall'end-user mentre in Diffie-Hellman la problematica è che la chiave non è uniformemente distribuita\@. Il succo è che non si deve mai generare un segreto e applicarlo direttamente nel protocollo, ma occorre seguire queste due fasi\@.\newline
+Nella prima fase si trasforma la pre-master secret (il segreto condiviso in Diffie-Hellman o il valore generato dall'end user in RSA) utilizzando il nonce del client e del server:\@così facendo abbiamo sempre un pre-master secret differente a patto che almeno uno dei due nonce cambiano ed in questo modo abbiamo reso le chiavi uniformemente distribuite\@.\newline La seconda fase è detta Conntection State key in cui si generano le chiavi per i diversi servizi (infatti TLS possiede 6 chiavi:\@2 di encryption,2 di autenticazione e 2 IV) che consta di 2 fasi:\@la fase si extract serve a aggiungere randomness nella generezione delle chiavi utilizzando sia il pre-master secret sia i nonces e una master key, nella fase di expand si espande la master-key con un PRF per generare un output illimita, si taglia questo output e ve se ne prendono le chiavi necessarie\@.\newline
+A partire da SSL usava un PRF errato, TLS v.1.0/1 si utilizzava un PRF hardcoder, TLS v.1.2 si utilizzava un PRF negoziabile con SHA-256 impostato di default ed, infine, in TLS v.1.3 si utilizza HKDF una funzione HMAC-Based Key derivation Function i cui si prende un HMAC, un input (context sstring) affiancato ad un contatori e una hash con segreto K per generare le chiavi\@. Cambiando il contatore l'output cambia\@.
 \section{TLS Alert Protocol}
+TLS decise di utilizzare un protocollo di messagistica per ritornare un feedback sulla comunicazione\@. Questo protocollo viene detto TLS Alert protocol è consiste di due campi principali detti Alert Lever che indica il livello del messaggio di alert che può essere warning o fatal in cui la connessione cessa di esistera e anche un alert description che possiede 23 diversi tipi di attributi collegati ad una diversa descrizione dell'alert\@.
 \section{Truncation Attack}
+Il Truncation Attack è un attacco legato all'integrità del pacchetto TCP che non può essere risolto tramite l'utilizzo di HMAC\@. In particolare, sappiamo che TLS protegge solamente il payload di Tdel pacchetto TCP, quindi un attacker può chiudere la connessione inviando un TCP FIN dopo aver concesso l'invio anche di una sola porzione del payload TLS\@.\newline
+Per proteggerci da questo tipo di attacco si potrebbe in prima battuta inculudere nel pacchetto anche la lunghezza del messaggio, ma è una soluzione poco pratica\@. In seconda, si potrebbe effettuare l'hash del messaggio che si vuole inviare, tuttavia aumenterebe l'overhead comuptazionale e quindi è una soluzione sconsigliata\@. La via maestra è quella di utilizzare un alert message detto Close-Notify che consente di far presente al server di aver terminato la trasmissione e quindi si può procedere con l'invio del TCP FIN e la fine della connessione\@. Quindi, se si riceve un TCP FIN prima che si sia ricevuto un Close-Notify, allora abbiamo rilevato un Truncation Attack\@. In questo scenario è ancora possibile effettuare un DoS attack, ma viene prontamente rilevato\@.
 \section{Renegotiation Attack}
-
-
+Il Renegotiation Attack è un tipo di plaintext injection attack\@. In TLS è stata abilitata la possibilità di effettuare una rinegoziazione dell'hanshake appena effettuato\@. Dal punto di vista tecnico non vi è alcuna differenza tra il primo e il secondo handshake, ma l'unica differenza è che il secondo handshake viene effettuato con TLS\@.\newline
+L'attacco viene effettuato nel seguente modo:\@inizialmente si invia dei dati con TLS al server (dopo aver precedentemente ottenuto l'indirizzo IP della vittima), quando la vittima vuole connettersi al sito effettuerà l'handshake che verrà rinegoziato dall'attacker\@. Il server vede il secondo handshake come una rinegoziazione e non come un attacco da parte di un hacker, l'utente ha inviato i propri i dati che possono essere facilmente ignorati iniettando nei successivi messaggi dei commenti facendo così vedere al server solamente i messaggi che vuole inviare\@.\newline
+Per prevenire questo attacco bisogna abolire la rinegoziazione oppure occorre standardizzarla con l'impiego di messaggi che consentono di rilevare questo tipo di attacco\@.
 \section{TLS v.1.3}
+In TLS v.1.3 fecere un grande passo avanti rispetto alle precedenti versioni\@. Infatti, si elimina la possibilità di rinegoziare l'algoritmo, si ottiene il perfect forward secrecy utilizzando gli algoritmi AEAD (EDH) e si risolve la problematica del bleichenbacher attack\@.\newline
+Che cosa intendiamo con PFS (Perfect Forward Secrecy)? Questo è un concetto molto forte poiché si da all'attacker la possibilità di conoscere le chiavi utilizzate e non deve essere in grado di calcolare le future o passate chiavi\@.
+Proprio per questo motivo si utilizza Ephimeral Diffie-Hellman:\@se un attacker conoscesse la chiave non potrebbe risalire a quelle precedenti poiché non è in grado di calcolare il coefficiente di Diffie-Hellman;\@similmente non potrebbe calcolare le future chiavi poiché esse dipendono da nonces e quindi sono sempre differenti\@.\newline
+Un'altra feature che hanno introdotto è quella di ridurre l'handshake del protocollo:\@si effettua un Anonymous Diffie-Hellman con lo scambio dei valori pubblici nel client e server hello con la particolarità che nel secondo il server può già mandare del testo cifrato\@. Così facendo, si ottiene il cosiddetto identity protection dato che i certificati non sono mai mandati in chiaro\@.\newline
+Dopo aver inviato questi due messaggi, vi è la fase in cui il server invia il certificate, si scambiano le chiavi (Server Key Exchange) e si termina con il messaggio finished in cui il server invia al client tutti i messaggi fino ad ora scambiati firmati\@. In aggiunta, con questo messaggio ci si protegge dai downgrade attack\@.
+Nell'ultima fase si ha che il client invia il certificato e tutti i messaggi precedentemente inviati firmati\@. Le rispettive firme corrispondono, allora l'handshake è andato a buon fine e la comunicazione può finalmente avvenire\@.
+\section{PFS con Pre-Shared Key}
+TLV v.1.3 consente di utilizzare una prekey statica nel suo protocollo garantendo comunque perfect forward secrecy\@. In particolare, si la PSK (pre-shared key) viene installata offline o ottenuta da una precedente connessione TLS\@.
+Il server e il client si scambiano nonce e i loro valori pubblici di diffie-hellman e per ottenere la chiave utilizzano la funzione HKDF (Nclient,Nserver,chiave Diffie-Hellman)\@.\newline
+Così facendo, si ha che se un attacker prender PSK non può risalire alle chiavi precedenti e quindi decifrarne i messaggi dato che non può calcolare il valore di Diffie-Hellman che cambia in ogni rekeying\@.
+\section{TLS v.1.3 RTT-0}
+TLS v.1.3 consente una modalità detta 0-RTT in cui si abilita l'invio di dati cifrat sin dal primo messaggio se e solo se vi è una PSK precedentemente salvata\@. In particolare nella prima fase si invia il messaggio solamente in base ai valori in possesso al client, che una volta ricevuti dal server saranno utilizzati per avviare la effettiva comunbicazione includendo i suoi valori pubblici\@. Questa soluzione sebbene ci espone a replay attack ci fa guadagnare molto in velocità e per mitigare questa problematica si possono inserire intervalli di tempo per la validità di PSK (i.e.tempo di vita PSK in cache) oppure controllando che non vi siano ripetizioni dell'IV\@.
+\section{VPN}
+Una VPN è una rete privata all'interno di una rete pubblica che ha l'obiettivo di criptare i dati e di connettere in maniera sicura diverse sottoreti come può essere una aziendale\@. Si può realizzare in due modi:\@il primo è quello di utilizzare una tecnica detto tunnelling in cui si incapsulano/trasportanto interi pacchetti IP;\@la seconda è composta dall'encryption in cui si cifra solamenteil payload del pacchetto IP\@.
 \section{IPsec}
+Il protocollo IPsec è un protocollo di sicurezza di livello di rete che a differenza del protocollo IP protegge l'intero payload del pacchetto IP e coopera con il livell applicativo e non protegge direttamente il livello applicativo\@. Nella partica, può essere implementato in 3 modi differenti:\@inserendo nel codice nativo del protocollo IP, BITS cioè implementandolo tra il livello di rete e di collegamento cioè tra i device e BITW implementandolo nella NIC a livello hardware\@.\newline
+Inoltre, si compone di 3 componenti:\@la security association SA che definisce e coordina la comunicazione tra gli end-user, il security protocol SP che definisce i protocolli di sicurezza utilizzati quali AH e ESP e Key Management che definisce le regole da utilizzare per calcolare le chiavi (sono 7 chiavi di cui alcune calcolate tramite Diffie-Hellman)\@.
+\section{Security Association}
+Il Security Assocuatui raooresenta una connessione unidirezionale tra mittente e destinatario (quindi in una connessione si necessita di due SA) e definisce le regole per il cui i pacchetti devono esser protetti con confidenzialità e integrità\@. Una SA può essere impostata manualmente (soluzione non molto pratica e adatta a piccole VPN) o automaticamente tramite l'utilizzo del protocollo IKEv2 per generare nuove SA e gestire i parametri di sicurezza\@. Inoltre ogni SA è composta da SAD e SPD che rispettivamente significano: Security Association Database e Security Policy Database\@.\newline
+Il Security Association Database contiene tutte le SA attive e per ogni SA si mantiene il SPI (Security Parameter Index) che identifica la specifica SA, l'indirizzo sorgente/destinazione, il sequence number che identifica il numero di sequenza del pacchetto IP, anti-replay window che rappresenza la finestra massima con cui contrastare i replay attacks etc\dots \@.\newline
+Il Security Policy Database contiente tutte le security policy SP utili a gestire i pacchetti in ingresso e in uscita dall'end-host\@. In particolare contiene funzionalità del tipo ignorato (pacchetto IP non processato), protetto (pacchetto IP processato) o scartato (pacchetto IP da scartare)\@. Occorre, inoltre, considerare i pacchetti IP protetti in cui si definiscono regola che riguardano quale protocollo di sicurezza IPsec utilizzare e regole di granularità utilizzate per gestire i pacchetti in un singolo tunnel o diversi tunnel per ogni connessione TCP/IP\@.
+\section{Security Protocol}
+Il Security Protocol di IPsec prevede due differenti protocolli di sicurezza:AH (Authentication Header) e ESP (Encapsulated Security Payload)\@. Il primo fornisce integrità sul payload del pacchetto e sull'header, il secondo fornisce integrità dell'intero pacchetto IP e confidenzialità\@.\newline
+Entrambi forniscono protezione dai replay attacks ed entrambi possono essere utilizzati sia in modalità transport (i pacchetti vengono solamente protetti da IPsec) che tunnel (i pacchetti IPsec vengono incapsulati nuovamente in un altor pacchetto IP)\@. Per scegliere la modalità di sicurezza si utilizza il transport mode tra host o host-gateway o gateway-end o end-gateway, la modalità tunnel tra gateway\@.
+\section{Anti-Replay}
+IPsec utilizza il numero di sequenza dei pacchetti IP\@. Questa informazione viene utilizzata per impostare (da parte del ricevitore) la dimensione della finestra scorrevole il cui margine destro è definito dal pioù alto numero di sequenza ricevuto e si procede come segue: alla ricezione di un pacchetto IP esso viene scartato se si trova a sinistra della finestra di ricezione, mentre viene elaborato se si trova all'interno della finestra altrimenti, se si trova a destra o viene scartato se non è possibile mandare avanti la finestra (nel caso in cui non si siano già ricevuti tutti i pacchetti) o si sposta la finestra\@.
+\section{Traffic Flow Confidentiality}
+Il traffic flow confidentiality è un servizio di sicurezza che ha come obiettivo l'offuscamento della firma del traffico\@. Prevede due differenti meccanismi per contrastare l'analisi del traffico:\@abilità di alterare la dimensione dei pacchetti aggiungendo del padding o generando pacchetti dummy\@.
+\section{Ike v2}
+Il protocollo IKEv2 permette di creare molteplici SA in maniera sicura tra due hosts\@. Nella fase uno si ha un handshake a 4 viene nel quale si crea un IKE SA composta da: IKE SA INIT in chiaro per negoziare i parametri IKE e l'invio di nonce secondo Diffie-Hellman e IKE AUTH (messaggi criptati simmetricamente e autentitcati per confermare la negoziazione), la fase 2 è opzionale e vengono creati i child SA e si inviano gli IKE di controllo\@.\newline
+Il i messaggi del protocollo IKE sono trasporati tramite il protocollo UDP reso affidabile da IKE stesso ed inviati tramite il protocollo IP\@. \newline
+Inoltre, le chiavi della fase uno seguono la costruzione Extract-then-Expand tramite le PRF negoziate.
+\section{Downgrade Attacks}
+Il protocollo IKE viene protetto dai downgrade attack includendo un version flag V su tutti i messaggi scambiati\@. Questo flag indica se la versione del protocollo negoziata non è quella massima disponibile ovvero è impostata a 0 se il mittente sta negoziando la propria versione massima;\@altrimenti ad 1 se il mittente sta negoziando una versione inferiore alla massima disponibile\@.\newline
+Un MITM può modificare la versione e il flag all'interno di IKE SA Init, tuttavia non può criptare i messaggi IKE SA AUTH che comprendono il flag dichiato poiché protetti da criptazione e autenticazione\@. Così facnedo si rileva l'attacco verificando che entrambi i flag sono impostati ad 1 (entrambi non stanno utilizzando la propria versione massima)\@.\newline
+La versione ottima è quella data dalla minima tra le due versioni massime disponibili\@.
+
 \section{Deloitte}
 \end{document}
