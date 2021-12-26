@@ -4,5 +4,14 @@
         "libsvm"
     ],
     "jupyter.jupyterServerType": "local",
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.wordWrap": "bounded",
+    "editor.cursorBlinking": "smooth",
+    "editor.formatOnSave": true,
+    "diffEditor.codeLens": true,
+    "editor.quickSuggestionsDelay": 5,
+    "editor.suggest.preview": true,
+    "editor.wordBasedSuggestionsMode": "allDocuments",
+    "files.autoGuessEncoding": true
 }
