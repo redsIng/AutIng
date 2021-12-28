@@ -15,6 +15,8 @@
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem*{Importante}{\textbf{Importante}}
 \newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{esempio}{\emph{Esempio}}
 \usepackage{amsmath}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows}
@@ -30,7 +32,6 @@
 \theoremstyle{definition}
 \maketitle
 \tableofcontents
-\newpage
 \part{Third Midterm}
 \chapter{Secret Sharing}
 \section{Trivial Secret Sharing}\mbox{}\\
@@ -77,7 +78,7 @@ Il problema è quello di modellare uno schema per cui, conoscendo 2 degli n shar
     \includegraphics[scale=0.5]{2021-12-26-18-33-00.png}% chktex 8
 \end{figure*}
 Infatti conoscendo un solo punto (shares) ho infinite rette passanti per quel punto e quindi è impossibile ricondurci al segreto;\@tuttavia, conoscendo 2 punti (shares), tra essi passa solamente una sola retta e conseguentemente posso conoscere il segreto\@. Abbiamo comunque mantenuto la proprietà di poter avere un numero maggiore di 2 per ottenere il segreto, ma al minimo sono 2\@.
-\subsubsection{Procedura: Generalizzazione schema\((2,n)\)}
+\subsubsection{Procedura: Schema\((2,n)\)}
 \begin{itemize}
     \item \textbf{Dealer:} costruisce la linea:
           \begin{enumerate}
@@ -100,9 +101,116 @@ Infatti conoscendo un solo punto (shares) ho infinite rette passanti per quel pu
 \begin{Importante}
     La y viene calcolata in base alla funzione della retta;\@tuttavia, i punti degli shareholder sono mantenuti con (x,y) e il valore delle \(x_{i}\) possono essere noti a priori a patto che la y sia nascosta\@.
 \end{Importante}
-\subsubsection{Procedura: Ricostruzione}
+\subsubsection{Procedura: Ricostruzione (2,n)}
 \begin{itemize}
     \item Ricezione di due shares:\(P_{i}=(x_{i},y_{i})\quad P_{j}=(x_{j},y_{j})\);
+    \item Interpola i punti per ricostruire l'equazione della retta:
+          \begin{equation*}
+              \centering
+              \frac{y-y_{i}}{y_{i}-y_{j}}=\frac{x-x_{i}}{x_{i}-x_{j}}
+          \end{equation*}
+          Ottenendo:
+          \begin{equation*}
+              \centering
+              y=y_{i}+\frac{x-x_{i}}{x_{i}-x_{j}}(y_{i}-y_{j})
+          \end{equation*}
+    \item Bisogna sostituire \(x=0\) per ottenere il segreto \(y=S\);
 \end{itemize}
-SONO ARRIVATO A CNS 24: 0:44:11
+\subsubsection{Estensione al caso \((t,n)\)}
+Estendendo il discorso precedentemente introdotto, ci si riconduce al caso di polinomi di grado \(t-1\) unicamente definiti da \(t\) punti:
+\begin{itemize}
+    \item Linea:\@2 punti;
+    \item Parabola (quadratic):\@3 punti;
+    \item Cubiche:\@4 punti;
+    \item \dots
+\end{itemize}
+\subsubsection{Generalizzazione: Schema \((t,n)\)}
+\begin{itemize}
+    \item \textbf{Dealer}:\
+          \begin{enumerate}
+              \item Genera un polinomio casuale \(p(x)\) di grado \(t-1\);
+              \item Imposta il segreto \(s\) come il termine noto del polinomio:
+                    \begin{equation*}
+                        p(x)=s+a_{1}x+a_{2}x^{2}+ \cdots +a_{t-2}x^{t-2}+a_{t-1}x^t-1
+                    \end{equation*}
+                    con s il segreto e i coefficienti delle x generati truly random;
+              \item Distribuisci uno share ad ogni shareholders:
+                    \begin{equation*}
+                        \centering
+                        (x_{i},y_{i})\rightarrow y_{i}=p(x_{i})
+                    \end{equation*}
+          \end{enumerate}
+    \item \textbf{Ricostruzione}: Colleziona \(t\) shares su \(n\) disponibili e calcola il segreto utilizzando \emph{l'Interporlazione di Lagrange} con \(x=0\):
+          \begin{equation*}
+              \centering
+              s=\sum_{shares\ x_i}{y_{i}\Lambda_{x_{i}}}\quad with\quad\Lambda_{x_{i}}=\Lambda_{x_{i}}(0)=\prod_{shares\ x_{k}\neq x_{j}}{\frac{-x_{k}}{x_{i}-x_{k}}}
+          \end{equation*}
+          L'interpolazione di Lagrange si basa sul concetto che qualsiasi polinomio di grando t-1 con t punti noti, può essere decomposto come:
+          \begin{equation*}
+              \centering
+              y=\sum_{i=1}^{t}{y_{i}\Lambda_{i}(x)}
+          \end{equation*}
+          In cui \(\Lambda_{i}(x)\) è la base del polinomio calcolata come:
+          \begin{equation*}
+              \centering
+              \Lambda_{i}(x)=\prod_{m=1,m\neq1}^{l}{\frac{x-x_{m}}{x_{i}-x_{m}}}\quad \Lambda_{i}(x_{i})=1;\quad \Lambda_{i}(x_{m})=0\quad for\ m\neq i
+          \end{equation*}
+\end{itemize}
+\subsubsection{Segretezza}
+Per discutere di quanto sia sicuro questo schema dobbiamo ricordare che in questo ambito la segretezza è così definita:
+\begin{center}
+    \emph{Finché si conoscono (t-1) shares non si dovrebbe avere nessuna informazione sul segreto che stiamo condividendo.}
+\end{center}
+Lo schema di Shamir in questo senso non è sicuro poiché se conoscessi a priori il range in cui è compreso il segreto, potrei ciclare su uno share mancante per ottenere un segreto nel range voluto\@.
+\begin{esempio}
+    Effttuiamo uno schema (3,4) in cui per conoscere il segreto dobbiamo conoscore almeno 3 share su 4\@. Dato che utilizziamo l'interpolazione di Lagrange il polinomio sarà di grado \(t-1\) e il termine noto sarà \(s\):
+    \begin{equation*}
+        y=3 x^2+52 x+32;
+    \end{equation*}
+    Abbiamo 4 shareholders, quindi dobbiamo generare 4 punti,generando un valore casuale x e sostituendolo nell'equazione precedente. Avendo posto rispettivamte i valori \(1,2,3,4\), si ottengono i seguenit punti:
+    \begin{equation*}
+        (1,87),(2,148),(3,215),(4,288)
+    \end{equation*}
+    Ora, occorre calcolare i valori di lambda, supponendo di aver collezionato \(x_{1},x_{2},x_{3}\), come
+    \begin{equation*}
+        \centering
+        \Lambda_{i}(x)=\prod_{m=1,m\neq1}^{l}{\frac{x-x_{m}}{x_{i}-x_{m}}}\quad \Lambda_{i}(x_{i})=1;\quad \Lambda_{i}(x_{m})=0\quad for\ m\neq i
+    \end{equation*}
+    Ottenendo:
+    \begin{equation*}
+        \Lambda_{1}(x)=\frac{(x-\text{x2}) (x-\text{x3}) }{(\text{x1}-\text{x2}) (\text{x1}-\text{x3}) }
+    \end{equation*}
+    \begin{equation*}
+        \Lambda_{2}(x)=\frac{(x-\text{x1}) (x-\text{x3}) }{(\text{x2}-\text{x1}) (\text{x2}-\text{x3}) }
+    \end{equation*}
+    \begin{equation*}
+        \Lambda_{3}(x)= \frac{(x-\text{x1}) (x-\text{x2}) }{(\text{x3}-\text{x1}) (\text{x3}-\text{x2}) }
+    \end{equation*}
+    Ora, per ricostruire il segreto occorre applicare
+    \begin{equation*}
+        \centering
+        y=\sum_{i=1}^{t}{y_{i}\Lambda_{i}(x)}
+    \end{equation*}
+    Quindi:
+    \begin{equation*}
+        s=y_{1}\Lambda_{x_{1}}(0)+y_{2}\Lambda_{x_{2}}(0)+y_{3}\Lambda_{x_{3}}(0)=87(30)+148(-3)+215(1)=32
+    \end{equation*}
+    Ora supponiamo di non sapere uno share \emph(\(d\)) e vogliamo verificare se questo schema garantisce secrecy o meno\@. Sostituendo imponiamo:
+    \begin{equation*}
+        s=y_{1}\Lambda_{x_{1}}(0)+d\Lambda_{x_{2}}(0)+y_{3}\Lambda_{x_{3}}(0)= 476-3d
+    \end{equation*}
+    Ipotizziamo che il range in cui vive s è noto e compreso tra 0 e 100\@. Possiamo indovinare il segreto? Si, basta ciclare sulle d:\begin{itemize}
+        \item Con \(d=125\rightarrow s=101\);
+        \item Con \(d=126\rightarrow s=98\);
+        \item Con \(d=127\rightarrow s=95\);
+        \item Da varie prove si capisce che d è nel range \(126\leq d\leq 158\);
+    \end{itemize}
+    Quindi, conoscere 2 su 3 in uno schema 3 su 4 ci permette di escludere tutti i valori d non ammissibili\@.
+\end{esempio}
+\subsubsection{Real Shamir Secret Sharing}
+Lo schema reale utilizza l'aritmetica modulare (con \(p\) numero primo) invece di quella reale e  le operazioni effettuate sia con il segreto sia con il polinomio devono essere scelti nel campo dei numeri primi\@.\newline
+L'interpolazione rimane uguale\@.
+\begin{Importante}
+    La regola per scegliere il numero primo p deve essere più grande del dominio del segreto per avere un segreto uniformemente distribuito e non è necessario che sia grande\@.
+\end{Importante}
 \end{document}
