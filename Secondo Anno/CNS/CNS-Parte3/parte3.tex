@@ -272,5 +272,78 @@ L'interpolazione rimane uguale\@.
 \begin{center}
     \includegraphics[width=0.48\textwidth]{2021-12-29-10-57-00.png}% chktex 8
 \end{center}
-36minuti
+\section{Secret Sharing: Details}\begin{itemize}
+    \item Gli shares non possono essere più piccoli del segreto, ma al più larghi quanto il segreto\@. A tale scopo, intuitivamente la conoscenza di uno share deve aggiungere informazioni al segreto, riducendone l'entropia\@. Quindi, dati t-1 shares, non si può determinare nulla riguardo al segreto ed, inoltre, lo share finale deve contenere quanta più informazione quanta ne ha il segreto stesso\@.
+    \item Shamir Scheme Ideal quando lo share ha la stessa dimensione del segreto\@. Vi sono esempio di schemi con chiavi maggiore del segreto come lo schema di \emph{Blackley}\@.
+\end{itemize}
+\section{Secret Sharing for secure multiparty computation}
+\subsection{Homomorphic Property}
+\setlength\intextsep{0pt}
+\begin{wrapfigure}[12]{R}[0pt]{0pt}
+    \centering
+    \includegraphics[scale=0.5]{2021-12-29-21-48-24.png}% chktex 8
+\end{wrapfigure}
+Assumiamo uno schema (3,4) scheme e supponiamo di avere un Dealer che genera un segreto \(S_{F}\) e un polinomio \(f(x)\).
+Il dealer condividere a 4 shareholders (parties) gli shares.
+In parallelo, un altro Dealer genera un altro segreto \(S_{G}\) con un altro polinomio \(g(x)\) e anche lui genera e condivide gli shares\@.\newline
+Il nostro obiettivo è calcolare \(S_{F}+S_{G}\):\@ approccio sarebbe quello di ricostruire inizialmente entrambi i segreti per peoi effettuarne la somma;\@tuttavia grazie allo schema di Shamir \textbf{la somma degli shares è uguale alla somma dei segreti} (ovviamente applicando la formula di ricostruzione) \@.
+Quindi, la propietà homomorphic risiede nel fatto che è possibile calcolare \(S_{F}+S_{G}\) senza sapere i due segreti: effettuare calcoli sui segreti senza rivelare niente dei segreti\@.
+\subsection{SMC:\@Secure Multiparty Computation}
+SMC (\textbf{Secure Multiparty Computation}) l'obiettivo è quello di calcolare il risultato di una funzione senza rivelare i dati in input\@. Funziona nel seguente modo:
+\begin{itemize}
+    \item Date \(N\) parti \(P_{1},P_{2},\dots,P_{n}\) ognuna delle quali con valore \(z_{i}\);
+    \item Calcola la funzione \(f(z_{1},z_{2},\dots,z_{n})\) \@. Il suo risultato è pubblico, ma non si deve dare alcuna informazione riguardo agli input;
+    \item \emph{se l'operazione è una funzione lineare al più pesata da dei coefficienti, allora diventa banale e identico al Secret Sharing Scheme classico};
+\end{itemize}
+Schematicamente, senza l'utilizzo di SMC:\@
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{2021-12-29-23-00-13.png}% chktex 8
+\end{figure}
+La terza parte deve essere trusted e conosce tutto il segreto\@.\newpage
+Al contrario, con SMC si ha l'assenza di trusted third parties poiché il segreto è noto solo dall'unione dei privacy peers (\emph{applicando la proprietà homomorphic}):
+\begin{figure}[h]
+    \begin{center}
+        \includegraphics[scale=0.4]{2021-12-29-23-03-44.png}% chktex 8
+    \end{center}
+\end{figure}
+\begin{Importante}
+    \begin{itemize}
+        \item Si necessitano almeno di 3 peers poiché se ce ne fossero 2 ad una parte basterebbe calcolare il segreto tramite complementarieta;
+        \item Ci spossono essere molteplici end users;
+        \item Ci devono essere almeno 2 privacy peers, ma più ce ne sono maggiore è la sicurezza e robusto alle collisione;
+        \item Soglia sul numero di peers pari a \(2\leq t\leq k\) se è uno schema (t,k).
+    \end{itemize}
+\end{Importante}
+\subsection{Costruzione}
+\begin{itemize}
+    \item Input peer i:\begin{enumerate}
+              \item Input data \(z_{i}\);
+              \item Genera un polinomio \(p_{i}(x)\) di grado \(t-1\) con \(z_{i}\) termine noto;
+              \item Invia privatamente gli shares \(p_{i}(1),\dots,p_{i}(k)\) ai privacy peer \(1,\dots,k\);
+          \end{enumerate}
+    \item Privace peer \(m\):\begin{enumerate}
+              \item Collezione gli input shares \(p_{1}(m),\dots,p_{n}(m)\);
+              \item Calcola \(RES=p_{1}(m)+\dots,p_{n}(m)\);
+              \item Pubblica lo share aggregato \(RES(m)\);
+          \end{enumerate}
+    \item Public:\begin{enumerate}
+              \item Ricostruisci RES da un numero sufficiente di \(RES(m)\) con l'interpolazione di Lagrange.
+          \end{enumerate}
+\end{itemize}
+\begin{esempio}
+    Versione distribuita dello schema precedente:\newline
+    \begin{tabular}{c c}
+        (1)\includegraphics[scale=0.5]{2021-12-29-23-40-26.png}% chktex 8
+         &
+        (2)\includegraphics[scale=0.5]{2021-12-29-23-43-20.png}% chktex 8
+        \\
+        (3)\includegraphics[scale=0.5]{2021-12-29-23-45-01.png}% chktex 8
+         &
+        (4)\includegraphics[scale=0.5]{2021-12-29-23-47-08.png}% chktex 8
+        \\
+    \end{tabular}
+\end{esempio}
+\chapter{Verifiable Secret Sharing}
+CNS-28
 \end{document}
