@@ -9,6 +9,12 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{amsthm}
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{imakeidx}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
 \newtheorem{definition}{Definition}[section]
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newtheorem{theorem}{Theorem}[section]
@@ -17,13 +23,8 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \theoremstyle{definition}
 \newtheorem{esempio}{\emph{Esempio}}
-\usepackage{amsmath}
-\usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows}
-\usepackage{geometry}
 \geometry{a4paper, top=2cm, bottom=2cm, left=1.5cm, right=1.5cm}
-\usepackage{imakeidx}
-\usepackage[T1]{fontenc}
 \makeindex[columns=3, title=Alphabetical Index, intoc]
 \title{Computer and Network Security}
 \author{Lorenzo Rossi}
@@ -68,17 +69,17 @@ Un altro possibile schema è quello di utilizzare le somme modulari:\begin{enume
 \end{Importante}
 Questo metodo è più facile da implementare per essere condiviso con N shareholders\@. In particolare, genero 3 quantità truly random ed effettua la differenza tra il segreto e queste 3 quantità modulo N\@.
 Nel caso un attacker, riuscisse ad ottenere un numero sufficiente di share non può comunque ottenere la password, ma al più la differenza tra il segreto e le shares non prese\@.\newline Da qui è possibile definire il concetto di \textbf{perfect secrecy}: un avversario, conoscendo n-1 shares deve ancora possedere la probabilità di indovinare il segreto pari a quella di indovinare il segreto da zero\@.
-\subsection{Shamir Secret Sharing}
+\section{Shamir Secret Sharing}
 Fino ad ora abbiamo costruito uno schema detto (n,n) secret sharing scheme in cui il primo parametro è il numero delle persone necessarie a rilevare il segreto e il secondo parametor è il numero di parti:\@il segreto viene rilevato solo se tutte le n parti forniscono il segreto\@.\newline
 Un altro schema è \textbf(t,n) secret sharing scheme:\@il segreto è rilevato quando qualsiasi t delle n parti fornisce il segreto\@. Questo secondo problema è molto più complicato del trivial secret sharing\@.
-\subsubsection{Idea:\@Schema (2,n)}
+\subsection{Idea:\@Schema (2,n)}
 Il problema è quello di modellare uno schema per cui, conoscendo 2 degli n shareholders, posso ricostruire il segreto\@. Questo problema è riconducibile a quello di conoscere quanti punti sono necessari per definire una linea:\@ovviamente 2\@.
 \begin{figure*}[h]
     \centering
     \includegraphics[scale=0.5]{2021-12-26-18-33-00.png}% chktex 8
 \end{figure*}
 Infatti conoscendo un solo punto (shares) ho infinite rette passanti per quel punto e quindi è impossibile ricondurci al segreto;\@tuttavia, conoscendo 2 punti (shares), tra essi passa solamente una sola retta e conseguentemente posso conoscere il segreto\@. Abbiamo comunque mantenuto la proprietà di poter avere un numero maggiore di 2 per ottenere il segreto, ma al minimo sono 2\@.
-\subsubsection{Procedura: Schema\((2,n)\)}
+\subsection{Procedura: Schema\((2,n)\)}
 \begin{itemize}
     \item \textbf{Dealer:} costruisce la linea:
           \begin{enumerate}
@@ -101,7 +102,7 @@ Infatti conoscendo un solo punto (shares) ho infinite rette passanti per quel pu
 \begin{Importante}
     La y viene calcolata in base alla funzione della retta;\@tuttavia, i punti degli shareholder sono mantenuti con (x,y) e il valore delle \(x_{i}\) possono essere noti a priori a patto che la y sia nascosta\@.
 \end{Importante}
-\subsubsection{Procedura: Ricostruzione (2,n)}
+\subsection{Procedura: Ricostruzione (2,n)}
 \begin{itemize}
     \item Ricezione di due shares:\(P_{i}=(x_{i},y_{i})\quad P_{j}=(x_{j},y_{j})\);
     \item Interpola i punti per ricostruire l'equazione della retta:
@@ -116,7 +117,7 @@ Infatti conoscendo un solo punto (shares) ho infinite rette passanti per quel pu
           \end{equation*}
     \item Bisogna sostituire \(x=0\) per ottenere il segreto \(y=S\);
 \end{itemize}
-\subsubsection{Estensione al caso \((t,n)\)}
+\subsection{Estensione al caso \((t,n)\)}
 Estendendo il discorso precedentemente introdotto, ci si riconduce al caso di polinomi di grado \(t-1\) unicamente definiti da \(t\) punti:
 \begin{itemize}
     \item Linea:\@2 punti;
@@ -124,7 +125,7 @@ Estendendo il discorso precedentemente introdotto, ci si riconduce al caso di po
     \item Cubiche:\@4 punti;
     \item \dots
 \end{itemize}
-\subsubsection{Generalizzazione: Schema \((t,n)\)}
+\subsection{Generalizzazione: Schema \((t,n)\)}
 \begin{itemize}
     \item \textbf{Dealer}:\
           \begin{enumerate}
@@ -156,7 +157,7 @@ Estendendo il discorso precedentemente introdotto, ci si riconduce al caso di po
               \Lambda_{i}(x)=\prod_{m=1,m\neq1}^{l}{\frac{x-x_{m}}{x_{i}-x_{m}}}\quad \Lambda_{i}(x_{i})=1;\quad \Lambda_{i}(x_{m})=0\quad for\ m\neq i
           \end{equation*}
 \end{itemize}
-\subsubsection{Segretezza}
+\subsection{Segretezza}
 Per discutere di quanto sia sicuro questo schema dobbiamo ricordare che in questo ambito la segretezza è così definita:
 \begin{center}
     \emph{Finché si conoscono (t-1) shares non si dovrebbe avere nessuna informazione sul segreto che stiamo condividendo.}
@@ -207,10 +208,69 @@ Lo schema di Shamir in questo senso non è sicuro poiché se conoscessi a priori
     \end{itemize}
     Quindi, conoscere 2 su 3 in uno schema 3 su 4 ci permette di escludere tutti i valori d non ammissibili\@.
 \end{esempio}
-\subsubsection{Real Shamir Secret Sharing}
+\subsection{Real Shamir Secret Sharing}
 Lo schema reale utilizza l'aritmetica modulare (con \(p\) numero primo) invece di quella reale e  le operazioni effettuate sia con il segreto sia con il polinomio devono essere scelti nel campo dei numeri primi\@.\newline
 L'interpolazione rimane uguale\@.
 \begin{Importante}
     La regola per scegliere il numero primo p deve essere più grande del dominio del segreto per avere un segreto uniformemente distribuito e non è necessario che sia grande\@.
 \end{Importante}
+\begin{esempio}
+    La nuova costruzione corretta che utilizza il modulo è la seguente\@.\newline
+    Supponiamo di avere un segreto \(s\in[0,100]\) in uno schema \((3,4) \) \@.
+    \begin{enumerate}
+        \item Scegliamo il primo numero primo maggiore dell'intervallo in cui è compreso s\@.
+              \begin{equation*}
+                  p=101
+              \end{equation*}
+        \item Il segreto che vogliamo inviare è:\@ \(s=32\).
+        \item Il polinomio sarà di grado \(t-1\) e con termine noto \(s\):\begin{equation*}
+                  y=Mod[32+52x+3x^{2},101]=(32+52x+3x^{2})\mod{101}
+              \end{equation*}
+        \item Generiamo i valori pergli shareholders:
+              \begin{equation*}
+                  \begin{matrix}
+                      x_{1}=1\rightarrow y_{1}=y/.{x\rightarrow x_{1}}=87 \\
+                      x_{2}=2\rightarrow y_{2}=y/.{x\rightarrow x_{2}}=47 \\
+                      x_{3}=3\rightarrow y_{3}=y/.{x\rightarrow x_{3}}=13 \\
+                      x_{4}=6\rightarrow y_{4}=y/.{x\rightarrow x_{4}}=48 \\
+                  \end{matrix}
+              \end{equation*}
+        \item Calcoliamo i valori \(\Lambda_{i}(0) \) presupponendo di conoscere le share di \(1,2,4\), sostituendo \(x=0\) e ovviamente considerando il modulo:
+              \begin{equation*}
+                  \begin{matrix}
+                      \Lambda_{1}(x)= Mod[(0-x{2})*(0-x_{4})*PowerMod[(x_{1}-x{2})*(x_{1}-x{4}),-1,101],101]=63 \\
+                      \Lambda_{2}(x)= Mod[(0-x{1})*(0-x_{4})*PowerMod[(x_{2}-x{1})*(x_{2}-x{4}),-1,101],101]=49 \\
+                      \Lambda_{4}(x)= Mod[(0-x{1})*(0-x_{2})*PowerMod[(x_{4}-x{1})*(x_{4}-x{2}),-1,101],101]=91
+                  \end{matrix}
+              \end{equation*}
+              \begin{Importante}
+                  \begin{equation*}
+                      \centering
+                      \Lambda_{i}(x)=\prod_{m=1,m\neq1}^{l}{\frac{x-x_{m}}{x_{i}-x_{m}}}\quad \Lambda_{i}(x_{i})=1;\quad \Lambda_{i}(x_{m})=0\quad for\ m\neq i
+                  \end{equation*}
+                  Questa formula imporrebbe di scrivere il denominatore sotto il segno di frazione, ma questo non è possibile se si effettua il modulo\@. Quindi, quello che occorre fare è effettuare l'inversa del modulo: in mathematica si utilizza PowerMod. Per esempio per \(\Lambda_{1}(0)\):
+                  \begin{equation*}
+                      \Lambda_{1}(x)= Mod[(0-x{2})*(0-x_{4})*PowerMod[(x_{1}-x{2})*(x_{1}-x{4}),-1,101],101]=(\frac{(0-x{2})*(0-x_{4})}{(x_{1}-x{2})*(x_{1}-x{4})})\mod{p}
+                  \end{equation*}
+                  In cui:
+                  \begin{equation*}
+                      \frac{1}{(x_{1}-x_{2})*(x_{1}-x_{4})}\mod{101}=
+                      {((x_{1}-x_{2})(x_{1}-x{4}))}^{-1}\mod{101}
+                  \end{equation*}
+              \end{Importante}
+        \item La forma per ricostruire il segreto è la seguente:
+              \begin{equation*}
+                  Mod[y_{1}\Lambda_{1}(x)+y_{2}\Lambda_{2}(x)+y_{3}\Lambda_{3},101]=(y_{1}\Lambda_{1}(x)+y_{2}\Lambda_{2}(x)+y_{3}\Lambda_{3})\mod{101}=32
+              \end{equation*}
+        \item Verifichiamo ora che sia unconditially secure:\@finché ho anche uno share mancante, allora il segreto potrebbe essere qualsiasi\@. In particolare, supponiamo che non sia noto \(d=y_{1}\) e cicliamo su d da 0 a 100, sapendo che il segreto è compreso in questo intervallo:
+              \begin{equation*}
+                  Mod[d*\Lambda_{1}(x)+y_{2}*\Lambda_{2}(x)+y_{3}*\Lambda_{3}(x)/.{d\rightarrow Range[0,100]}]
+              \end{equation*}
+              Come osserviamo i possibili valori sono molteplici e uniformamente distribuiti tra 0 e 100:
+    \end{enumerate}
+\end{esempio}
+\begin{center}
+    \includegraphics[width=0.48\textwidth]{2021-12-29-10-57-00.png}% chktex 8
+\end{center}
+36minuti
 \end{document}
