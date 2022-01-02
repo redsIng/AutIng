@@ -1,8 +1,10 @@
 \documentclass{book}
 \usepackage[utf8]{inputenc}
 \usepackage{amssymb}
+\usepackage{xcolor}
 \usepackage{blindtext}
 \usepackage[english]{babel}
+\usepackage{tabularx}
 \usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage[english]{babel}
@@ -15,13 +17,12 @@
 \usepackage{imakeidx}
 \usepackage[T1]{fontenc}
 \usepackage{geometry}
-\newtheorem{definition}{Definition}[section]
+\newtheorem{Definizione}{\textbf{Definizione}}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem*{Importante}{\textbf{Importante}}
 \newtheorem{lemma}[theorem]{Lemma}
-\theoremstyle{definition}
 \newtheorem{esempio}{\emph{Esempio}}
 \usetikzlibrary{shapes.geometric, arrows}
 \geometry{a4paper, top=2cm, bottom=2cm, left=1.5cm, right=1.5cm}
@@ -30,7 +31,6 @@
 \author{Lorenzo Rossi}
 \graphicspath{{Images/}}
 \begin{document}
-\theoremstyle{definition}
 \maketitle
 \tableofcontents
 \part{Third Midterm}
@@ -345,5 +345,213 @@ Al contrario, con SMC si ha l'assenza di trusted third parties poiché il segret
     \end{tabular}
 \end{esempio}
 \chapter{Verifiable Secret Sharing}
-CNS-28
+Quando si immette uno share non è possibile capire se è un valore corretto o meno (\emph{cheating})\@. Il nostro obiettivo è capire se vi sono delle tecniche per verificare le operazioni crittografiche\@.\newline
+L'\textbf{honest-but-curious model} è un modello in cui un attacker segue le regole per ottenere il segreto (quello classico è quello in cui l'attacker cheatta e questo viene detto malicious) \@. Quindi, il nostro obiettivo è quello di avere dei modi per rilevare e bloccare i cheaters che possono essere sia i dealer che i players\@.\newline
+Si ha bisogno di verifiable secret sharing quando un party può verificare qualora il dealer share è consistente (\emph{rilevare malicious dealer}) oppure le parti possono verificare qualora il segreto rivelato è consistente (\emph{detect cheating parties}) \@.
+\section{VSS:\@Feldman VSS Scheme}
+\subsection{Feldman Scheme:\@dealer}
+\begin{itemize}
+    \item Inizia con un ordinary Shamir scheme:\begin{enumerate}
+              \item Genera un polinomio casuale \(p(x)\) con grado \((t-1)\), con \(P(0)=s\):
+                    \begin{equation*}
+                        p(x)=s+a_{1}x+a_{2}x^{2}+\cdots+a_{t-2}x^{t-2}+a_{t-1}x^{t-1}
+                    \end{equation*}
+              \item Distribuisci uno share ad ognuna delle n parti:\begin{equation*}
+                        (x_{i},y_{i})\quad y_{i}=p(x_{i})
+                    \end{equation*}
+          \end{enumerate}
+    \item Per ogni coefficiente del polinomio pubblichiamo in chiaro i seguenti termni detti \textbf{commitments}:\begin{equation*}
+              c_{0}=g^{s};c_{1}=g^{a_{1}};\ldots;c_{t-1}=g^{a_{t-1}}\mod{p}
+          \end{equation*}
+          \begin{Importante}
+              Se utilizziamo \(p\), grande numero primo, e i coefficienti del polinomio in \emph{Large Fields} allora i coefficienti \(c_{i}\) non rivelano nulla del segreto poiché si basano sul problema del discrete log (sono difficili da calcolare).
+          \end{Importante}
+\end{itemize}
+\subsubsection{Commitments}
+Un commitment è una costruzione crittografica che deve possedere due proprietà:\begin{itemize}
+    \item \emph{Hiding}: un reicever, ottenuto il commitment, non dovrebbe conoscere nulla riguardo il segreto; \textbf{COMMIT PHASE}
+    \item \emph{Binding}: il commitment può essere aperto solo con il valore del segreto\@. Quindi, il mittente non può barare e cambiarlo. \textbf{REVEAL PHASE}
+\end{itemize}
+Anche \(C=H(x)\) è una sorta di commitment poiché possiede entrambe le proprietà, ma in aggiunta fornisce cumputationally hiding e computationally binding (\emph{con abbastanza tempo posso trovare una collisione})\@.\newline
+Il Feldman Commitment \(c=g^{x}\) è un commitment:\begin{itemize}
+    \item Hiding computazionale:\begin{enumerate}
+              \item Dato \(c=g^{x}\mod{p}\), computazionalmente legato al ricevitore senza conoscere \(x\) (\emph{x deve essere preso in intervallo grande});
+          \end{enumerate}
+    \item Perfectly Binding:\begin{enumerate}
+              \item Il mittente non può trovare alcun \(x'\) tale che \(g^{x'}=c\);
+              \item
+          \end{enumerate}
+
+\end{itemize}
+\begin{Importante}
+    Feldman VSS è solo computazionalmente sicuro\@. Ciò implica che se s è piccolo, \(c_{0}=g^{s}\) rivela informazioni sul segreto.
+\end{Importante}
+\subsection{Feldman Scheme:\@verifier}
+\begin{itemize}
+    \item La parte \(i\) riceve lo share \((x_{i},y_{i})\):\begin{enumerate}
+              \item Le altre parti possono verificare se la parte \(i\) è onesta senza sapere il segreto \(s\);
+              \item Le altre parti, dato che il dealer in questo caso è onesto, possono caloclare:\begin{align*}
+                        c_{0}\cdot c_{1}^{x_i}\cdot c_{2}^{x_{i}^{2}}\cdot c_{t-1}^{x_{i}^{t-1}} & =                                                                                                           \\                                                       & =(g^{s})\cdot {(g^{a_{1}})}^{x_{i}}\cdot {(g^{a_{2}})}^{x_{i}^2}\cdot\cdots\cdot {(g^{a_{t-1}})}^{x_{i}^{t-1}}= \\
+                                                                                                 & = g^{s}\cdot g^{a_{1}\cdot x_{i}}\cdot g^{a_{2}\cdot x_{i}^2}\cdot\cdots\cdot g^{a_{t-1}\cdot x_{i}^{t-1}}= \\
+                                                                                                 & = g^{s+a_{1}x{i}+a_{2}x_{i}^2+\cdots +a_{t-1}x_{i}^{t-1}}=g^p(x_{i})
+                    \end{align*}
+              \item così facendo le altre parti effettuano una homomorphic computation di \(p(x_{i})\) all'esponente ottenendo \(g^{p(x_{i})}\);
+              \item Ora per verificare le parti hannno \(y_{x_{i}}\), calcolando \(g^{y_{x_{i}}}\) e se è uguale a quello calcolato al passo precedente, allora lo share è verificato\@.
+          \end{enumerate}
+\end{itemize}
+\section{Pedersen Commitment}
+Non è possibile avere uno schema perfectly hiding:\@uno schema in cui un commitment sia contemporaneamente perfectly hiding e perfectly binding\@.\newline Tuttavia, esistono commitment che sono perfectly hiding, ma computationally binding\@. L'approccio di Feldman funzionava poiché si ha un commitment che è anche homomorphic\@.\newline
+Quindi, vogliamo uno scheme perfectly hiding, ma che sia anche homomorphic: \textbf{Pedersen Commitment}\@.
+\begin{Definizione}[Pedersen Commitment] Dati \(g\) e \(h\) pubblici\@:
+    \begin{equation*}
+        \centering
+        Commit(a,r)=g^{a}\cdot h^{r}\mod{p}
+    \end{equation*}
+    In cui \(a\) è il segreto, \(r\) numero scelto truly random.
+\end{Definizione}
+Abbiamo ottenuto la proprietà homomorphic poiché:
+\begin{align*}
+    Commit(a+b,r_{a}+r_{b}) & =                                      \\
+                            & =g^{a}h^{r_{a}}\cdot g^{b}h^{r_{b}}=   \\
+                            & = Commit(a,r_{a})\cdot Commit(b,r_{b})
+\end{align*}
+Abbiamo ottenuto anche il perfectly hiding\@. Infatti, dato il commitment \(c=g^{a}h^{r}\) questo permette di nasconodere qualsiasi valore di \(a\):\@ per qualsiasi \(a'\neq a\), possiamo trovare un unico \(r'\) tale che:\begin{equation*}
+    Commit(a',r')=g^{a'}h^{r'}=g^{a}h^{r}=Commit(a,r)
+\end{equation*}
+Questo commitment è solamente computationally binding:\@il mittente non dovrebbe essere in grado di trovare un \(a'\), ma si può arrivare ad un trapdoor commitment scheme\@.
+\begin{itemize}
+    \item Sia \(h=g^{w}\) i.e.\(w=\log_{g}{h}\);
+    \item Sappiamo \(a,r\), ci viene dato \(a'\) e cerchiamo un \(r'\) tale che:
+          \begin{align*}
+              g^{a}h^{r}=g^{a'}h^{r'} & \Longrightarrow g^{a}g^{wr}=g^{a'}g^{wr'}\Longrightarrow \\
+                                      & \Longrightarrow g^{a+wr}=g^{a'+wr'}\Longrightarrow       \\
+                                      & \Longrightarrow a+wr=a'+wr' \mod{q}\Longrightarrow       \\
+                                      & \Longrightarrow r'=w^{-1}(a-a'+wr)=r'=(a-a')w^{-1}+r
+          \end{align*}
+\end{itemize}
+\section{Pdersen VSS:\@dealer}
+\begin{itemize}
+    \item Genera due polinomi casuali:\begin{align*}
+              f(x)  & =s+a_{1}x+a_{2}x^2+\cdots +a_{t-1}x^{t-1} \\
+              f'(x) & =r+b_{1}x+b_{2}x^2+\cdots +b_{t-1}x^{t-1}
+          \end{align*}
+    \item Dai ad ogni parte lo share \(x_{i},y_{i},z_{i}\)
+          \begin{align*}
+              y_{i} & =f(x_{i})=s+a_{1}x_{i}+\cdots +a_{t-1}x^{t-1}  \\
+              z_{i} & =f'(x_{i})=r+b_{1}x_{i}+\cdots +b_{t-1}x^{t-1}
+          \end{align*}
+    \item Pubblica i commitment di Pedersen:\begin{align*}
+              c_{0}   & =g^{s}h^r               \\
+              c_{1}   & =g^{a_{1}}h^{b_{1}}     \\
+              \vdots                            \\
+              c_{t-1} & =g^{a_{t-1}}h^{b_{t-1}}
+          \end{align*}
+\end{itemize}
+\section{Pedersen VSS:\@verifier}
+\begin{itemize}
+    \item La parte i-esima riceve lo share \(x_{i},y_{i},z_{i}\);
+    \item Verifica in \(\mod{p}\) che:\begin{align*}
+              c_{0}\cdot c_{1}\cdot x_{i}\cdot \cdots \cdot c_{t-1}^{x_{i}^{t-1}} & ={(g^{s}h^{r})}\cdot {(g^{a_{1}}h^{b_{1}})}^{x_{i}}\cdot\cdots\cdot {(g^{a_{t-1}}h^{b_{t-1}})}^{x_{i}^{t-1}}=                                                  \\
+                                                                                  & =g^{s}\cdot g^{a_{1}x_{i}}\cdot g^{a_{2}x_{i}^2}\cdot\cdots\cdot g^{a_{t-1}x_{i}^{t-1}}\cdot h^{r}\cdot h^{b_{1}x_{i}}\cdot\cdots\cdot h^{b_{t-1}x_{i}^{t-1}}= \\
+                                                                                  & =g^{s+a_{1}x_{i}+a_{2}x_{i}^2+\cdots+ a_{t-1}x_{i}^{t-1}}\cdot h^{r+b_{1}x_{i}+b_{2}x_{i}^2+\cdots+b_{t-1}x_{i^{t-1}}}=                                        \\
+                                                                                  & =g^{y_{i}}h^{z_{i}}
+          \end{align*}
+    \item Se l'equazione è soddisfatta allora siamo riusciti a verificare;
+\end{itemize}
+\newpage
+\section{Distribuited Key Generation}
+Nei sistemi crittografici basati su DLog, si ha: \(x\) chiave privata e \(g^{x}\) chiave pubblica\@. Vogliamo generare una coppia \((Pub_{K},Priv_{K})\) tale che tutti conoscono \(Pubb_{K}\), ma nessuno conosce \(Priv_{K}\).\\ Ciò ci è utile in tutti i casi in cui non vogliamo rilevare la chiave privata o deve essere ricostruita in seguito\@.\newline
+Lo schema che realizza questa idea è chiamato \textbf{DKG} \emph{Distribuited Key Generation}\@.\newline
+\begin{tabularx}{0.99\textwidth}{X X}
+    (1)\includegraphics[scale=0.4]{2022-01-02-15-56-05.png}% chktex 8
+     &
+    (2)\includegraphics[scale=0.4]{2022-01-02-15-59-26.png}% chktex 8
+    \\
+    (3)\includegraphics[scale=0.4]{2022-01-02-15-59-59.png}% chktex 8
+     &
+    (4)\includegraphics[scale=0.4]{2022-01-02-16-00-20.png}% chktex 8
+    \\
+    (5)\includegraphics[scale=0.4]{2022-01-02-16-04-23.png}% chktex 8
+     &
+    (6)\includegraphics[scale=0.4]{2022-01-02-16-01-46.png}% chktex 8
+    \\
+    (7)\includegraphics[scale=0.4]{2022-01-02-16-05-51.png}% chktex 8
+     &
+    (8)\includegraphics[scale=0.4]{2022-01-02-16-06-25.png}% chktex 8
+    \\
+    (9)\includegraphics[scale=0.4]{2022-01-02-16-07-44.png}% chktex 8
+     &
+    (10)\includegraphics[scale=0.4]{2022-01-02-16-27-48.png}% chktex 8
+\end{tabularx}
+\chapter{Multiplicative Group\(\mod{p}\)}
+\section{Gruppo}
+Un \textbf{gruppo} \((G,\circ )\) è una struttura algebrica in cui \(G\) definisce l'insieme degli elementi (\emph{membri del gruppo}) e \(\circ \) è l'operazione del gruppo\@. Questa operazione deve soddisfare:\begin{itemize}
+    \item \textbf{Chiusura}:\@presi due elemnti \(g_{1},g_{2}\) del gruppo, allora \(g_{x}=g_{1}\circ g_{2}\) deve appartenere al gruppo;
+    \item \textbf{Identità}:\@deve esiste un membro del gruppo tale che \(g\circ I = I\circ g=g\);
+    \item \textbf{Inversa}:\@per ogni \(g\) esiste \(g^{-1}\) tale che \(g\circ g^{-1}=I\);
+    \item \textbf{Associtativa}:\@per qualsiasi \(g_{1},g_{2},g_{3}\) deve valere \((g_{1}\circ g_{2})\circ g_{3}=g_{1}\circ (\circ g_{3})\)
+\end{itemize}
+Inoltre, se l'operazione è anche commutativa, si ha un \textbf{Gruppo Abeliano}\@.
+\subsection{Gruppo \(Z_{p}^{*}\)}
+\(Z_{p}^{*}\) è la sintassi utilizzata per indicare il gruppo moltiplicativo modulo p:\@gli elementi di questo gruppo \textbf{finito} sono \(p-1\) composti da \( \{ 1,2,\ldots,p-1\} \) e l'unica operazione è la moltiplicazione (\emph{se l'avessimo considerata avremmo avuto un campo \(F_{p}\)})\@.\newline
+Infatti, questo insieme di elementi con questa operazione, è un gruppo poiché è chiuso, è associativo, indentità e commutatività (Gruppo Abeliano) e presenta l'inversa\@.
+\begin{esempio}[\(Z_{11}^{*}\)]
+    \begin{itemize}
+        \item \(p-1=10\) elementi:\( \{1,2,3,4,5,6,7,8,9,10 \} \);
+        \item Inverse in modulo p:\begin{align*}
+                   & \Rightarrow 1\rightarrow 1                        \\
+                   & \Rightarrow 2\rightarrow 6\quad & 6 \rightarrow 2 \\
+                   & \Rightarrow 3\rightarrow 4\quad & 4 \rightarrow 3 \\
+                   & \Rightarrow 5\rightarrow 9\quad & 9 \rightarrow 5 \\
+                   & \Rightarrow 7\rightarrow 8\quad & 2 \rightarrow 7 \\
+                   & \Rightarrow 10\rightarrow 10
+              \end{align*}
+        \item Per grandi gruppi si utilizza l'algoritmo di Euclide esteso.
+    \end{itemize}
+\end{esempio}
+\subsection{Gruppi moltiplicativi:\@exponentiation}
+L'esponenziazion è una operazione che appartiene al gruppo \(Z_{p}^{*}\) poiché è l'applicazione della stessa operazione moltiplicativa più volte:\(x^{k}=x\circ x\circ x\circ x\circ \ldots \circ x\)(k volte).
+\begin{Definizione}[Generatore di un Gruppo]
+    Il generatore del gruppo è un valore \(g\) tale che \( \{g^{0},g^{1},\ldots ,g^{m-1} \} \) siano tutti gli elementi del gruppo
+\end{Definizione}
+\begin{Importante}
+    Se \(m\) è primo, allora quasiasi membro del gruppo è un generatore ad eccezione dell'identità\@.\\
+    \(Z_{p}^{*}\) non è un \textbf{Prime-Order Group} infatti se \(p\) è primo, non lo è \(p-1\).
+\end{Importante}
+\newpage
+\begin{esempio}[\(Z_{11}^{*}\)]
+    \begin{itemize}
+        \item \(p-1=10\) elementi:\( \{1,2,3,4,5,6,7,8,9,10 \} \);
+        \item Quali sono i generatori? \( \{g^{1},g^{2},g^{3},\ldots ,g^{10}\} \)?
+        \item \begin{align*}
+                  g=2\rightarrow \{2,4,8,5,10,9,7,3,6,1\}\quad & \text{OK,è un generatore}                                \\
+                  g=3\rightarrow \{3,9,5,4,1,3,,9,5,4,1\}\quad & \text{\textcolor{red}{NO, è un sottogruppo di ordine 5}} \\
+                  etc\ldots
+              \end{align*}
+        \item La cardinalità di sottogruppi deve essere uno dei fattori del numero degli elementi del gruppo: se \((p-1)=kq\) è il numero di elementi, allora potremmo incontrare sottogruppi di cardinalità \(k\) o \(q\).
+    \end{itemize}
+\end{esempio}
+\section{Strong Primes}
+In crittografia siamo interessati a prendere \emph{strong primes}.
+\begin{Definizione}
+    Un numero primo \(p\) è detto \textbf{strong prime} se \(p=2q+1\) con \(q\) numero primo.
+\end{Definizione}
+Quindi, qualsiasi sia \(x\) ad eccezione di 1 e p-1:\begin{itemize}
+    \item Genera l'intero gruppo;
+    \item Genera un sottogruppo di ordina primo q.
+\end{itemize}
+\section{Quadratic Residue Subgroup}
+\begin{Definizione}
+    Sia \(x\in Z_{p}^{*}\) è un \textbf{quadratic residue} se ammette la radice quadrata in \(Z_{p}^{*}\).
+\end{Definizione}
+Per esempio esiste \(a\) tale che \(a^{2}\mod{p}=x\).\newline
+Se soddisfo la definizione allora sono il generatore di un sottogruppo;\@altrimenti sono il generatore dell'intero gruppo.
+\begin{itemize}
+    \item QR forma un sottogruppo di ordine \(\frac{p-1}{2}\);
+    \item QR Test: \textbf{Legendre Symbol}:\(a\in QR\) se \(a^{\frac{p-1}{2}}\mod{p}=1\) (se pari a \(-1\) allora sono un generatore)
+\end{itemize}
+\begin{Importante}
+    Vedere applicazioni nel file matematica 41-vss-example-1-qr e -correct.
+\end{Importante}
+\chapter{Threshold and policy-based cryptography}
 \end{document}
