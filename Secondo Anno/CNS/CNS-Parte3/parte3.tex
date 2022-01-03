@@ -554,4 +554,41 @@ Se soddisfo la definizione allora sono il generatore di un sottogruppo;\@altrime
     Vedere applicazioni nel file matematica 41-vss-example-1-qr e -correct.
 \end{Importante}
 \chapter{Threshold and policy-based cryptography}
+La \textbf{threshold cryptography}è un tipo di crittografia in cui l'encryption o una singnature può essere decryptata solo quando vi sono un certo numero di partecipanti. Si può anche definire come group crpyto composta da VSS con tecniche standard di criptografia\@.
+\section{Threshold Encryption}
+\subsection{Public Key Encryption with DLOG}
+Vogliamo applicare il DLOG con la public encryption: schema El Gamal (DH adattato)\@. Si è fatta questa scelta poiché viene facilmente implementato nelle curve ellittiche\@.
+\subsection{El-Gamal:\@background}
+Lo schema di El-Gamal modifica il protocollo di accordo delle chiavi in un cipher asimmetrico\@.
+\subsection{El-Gamal:\@Sketch}
+\begin{itemize}
+    \item Operazioni in \(\mod{p}\) con \(p\) numero primo elevato;
+    \item \(g\) generatore di gruppo;
+    \item \(s\) chive privata;
+    \item \(h=g^{s}\) chiave pubblica;
+    \item \(r\) valore casuale;
+\end{itemize}
+\begin{Importante}
+    \begin{itemize}
+        \item \(g^{s},g^{r}\) noti a tutti:\@il primo pubblico, il secondo nel ciphertext;
+        \item \(s\) noto solo dal receiver;
+        \item \(r\) noto solo dal transmitter;
+        \item \(g^{sr}\) nessun altro può calcolarlo
+    \end{itemize}
+\end{Importante}
+Quindi per \textbf{cifrare}:\begin{equation*}
+    (R,c)=(g^{r},m\cdot h^{r})
+\end{equation*}
+Per \textbf{decifrare}:\begin{equation*}
+    m=c\cdot R^{-s}=\frac{c}{{(g^{r})}^{s}}=\frac{m\cdot h^{r}}{g^{rs}}=\frac{m\cdot g^{sr}}{g^{rs}}
+\end{equation*}
+\newpage
+\subsection{Asymmetrc Criptography}
+Schema su come si applica El-Gamal:
+\begin{figure*}[ht]
+    \centering
+    \includegraphics[scale=0.5]{2022-01-03-15-37-08.png}% chktex 8
+\end{figure*}
+\subsection{ECIES=Hybrid Encryption 5g}
+\textbf{ECIES} sta per \emph{Elliptic Curver Integrated Encryption Scheme} e venne per la prima volta standardizzato nell'IMSI
 \end{document}
