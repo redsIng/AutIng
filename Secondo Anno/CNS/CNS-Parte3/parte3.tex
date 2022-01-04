@@ -590,5 +590,51 @@ Schema su come si applica El-Gamal:
     \includegraphics[scale=0.5]{2022-01-03-15-37-08.png}% chktex 8
 \end{figure*}
 \subsection{ECIES=Hybrid Encryption 5g}
-\textbf{ECIES} sta per \emph{Elliptic Curver Integrated Encryption Scheme} e venne per la prima volta standardizzato nell'IMSI
+\textbf{ECIES} sta per \emph{Elliptic Curver Integrated Encryption Scheme} e venne per la prima volta standardizzato nell'IMSI del 5G\@. Assumiamo che nella nostra SIM ho installato la chiave pubblica del provider della SIM (Trusted) \(g^{HN}\) (Home Network)\@. Nel momento dell'autenticazione \textbf{Encrypt-then-MAC}:\begin{itemize}
+    \item generiamo \(x\) casuale, il coefficente ephemeral \(g^{x}\);
+    \item calcoliamo \(K=HKDF(g^{HNx})\) ed inviamo \(AES_{k}(SUP)\) (SUP è l'IMSI);
+    \item aggiungiamo \(HMAC\) (integrità);
+    \item Il messaggio sarà quindi \(({g}^{x},HMAC(AES_{k}(MSG)))\)
+\end{itemize}
+In ricezione:\begin{itemize}
+    \item Riceviamo \(({g}^{x},HMAC(AES_{k}(MSG)))\):\begin{enumerate}
+              \item Con \({g}^{x}\) e la chiave privata dell'Home Network ricostruiamo la chiave \({(g^{x})}^{HN}\);
+              \item Deriviamo la chiave \(K=HKDF(g^{HNx})\);
+          \end{enumerate}
+    \item Decrypto il dato in ingresso
+\end{itemize}
+\section{Threshold El-Gamal}
+L'idea di El-Gamal è quella di distribuire gli shares della chiave privata \(s\) e ricostruirla quando si necessità di decriptare solo quando vi sono un certo numero (threshold) di riceiver che cooperano e questo messaggio può essere letto solamente da queste parti\@. Ovviamente, nessuno possiede la chiave privata\@.\newline
+Quindi, il mittente invia il messaggio, i receiver ricevono il messaggio e ricostruiscono il segreto per decryptarlo\@. Questo apporoccio non è molto conveniente poiché può essere usato solamente una volta, nel momento in cui si ripete siamo esposti a rischi\@.\newline
+Ricordiamo che la \textbf{encryption} è:\begin{equation*}
+    (g^{r_{1}},m_{1}\cdot h^{r_{1}})
+\end{equation*}
+La \textbf{decryption} è:\begin{equation*}
+    m_{1}=\frac{c}{{(g^{r_{1}})}^{s}}
+\end{equation*}
+Ma se volessi decryptare anche un altro messaggio, il mittente dovrebbe generare altri due coefficienti da condividere cosicché il receiver possa decryptare:\begin{equation*}
+    m_{2}=\frac{c_{2}}{{(g^{r_{2}})}^{s}}
+\end{equation*}
+Se non facessì così ed utilizzerei sempre lo stesso segreto \textbf{perdo} la sicurezza semantica\@. Tuttavia, notiamo che per decriptare i messaggi il denominatore viene sempre elevato per il segreto \(s\) \@. Esiste un modo per mantenere il segreto e quindi calcolare il denominatore del decrypt senza rivelare il segreto?\@Una soluzione potrebbe essere quella di interpolare gli shares all'esponente sfruttando la proprietà degli esponenziali:\begin{equation*}
+    A^{x}=A^{x_{1}}\cdot A^{x_{2}}=A^{x_{1}+x_{2}}
+\end{equation*}
+\newpage
+In particolare:\begin{itemize}
+    \item Manentiamo:\begin{enumerate}
+              \item Il polinomio (Pedersen Scheme): \(p(x)=s+a_{1}x+a_{2}x+\cdots+a_{t-2}x^{t-2}+a_{t-1}x^{t-1}\);
+              \item Gli shares:\((x_{i},y_{i})\quad y_{i}=p(x_{i})\);
+              \item La formula per ricostruire il segreto:\begin{equation*}
+                        \centering
+                        y=\sum_{shares\ x_{i}}^{t}{y_{i}\Lambda_{x_{i}}}
+                    \end{equation*}
+                    In cui \(\Lambda_{x_{i}}\) è la base del polinomio calcolata come:
+                    \begin{equation*}
+                        \centering
+                        \Lambda_{x_{i}}=\Lambda_{x_{i}}(0)=\prod_{x_{k}\neq x_{i}}^{l}{\frac{-x_{k}}{x_{i}-x_{k}}}
+                    \end{equation*}
+          \end{enumerate}
+    \item Effettuato all'esponente:\begin{equation*}
+              \prod{ A^{y_{i}\Lambda_{x_{i}}}}=A^{\sum{y_{i}\Lambda_{x_{i}}}=A^{s}}
+          \end{equation*}
+\end{itemize}
 \end{document}
