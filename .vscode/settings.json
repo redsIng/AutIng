@@ -1,17 +1,19 @@
 {
     "python.pythonPath": "C:\\Users\\loryb\\anaconda3\\python.exe",
     "cSpell.words": [
-        "libsvm"
+        "L'esponenziazione",
+        "libsvm",
+        "Pubb"
     ],
     "jupyter.jupyterServerType": "local",
     "cmake.configureOnOpen": false,
     "editor.bracketPairColorization.enabled": true,
     "editor.wordWrap": "bounded",
     "editor.cursorBlinking": "smooth",
-    "editor.formatOnSave": true,
     "diffEditor.codeLens": true,
     "editor.quickSuggestionsDelay": 5,
     "editor.suggest.preview": true,
     "editor.wordBasedSuggestionsMode": "allDocuments",
-    "files.autoGuessEncoding": true
+    "files.autoGuessEncoding": true,
+    "editor.formatOnSave": true
 }

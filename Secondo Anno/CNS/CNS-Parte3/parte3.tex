@@ -65,12 +65,12 @@ Un altro possibile schema è quello di utilizzare le somme modulari:\begin{enume
     \item Esegui \(S-RAND\mod{N}\) i.e. \(S-RAND\mod{256}\rightarrow  121\);
 \end{enumerate}
 \begin{Importante}
-    Questo schema è equivalente ad One Time Pad poiché abbiamo sommato un numero pseudocasuale con un numero casuare (in modulo)\@. In altre parole, la probabilità di indovinare S conoscendo il valore casuale o il valore della somma è uguale alla probabilità di indovinare senza sapere nulla\@.
+    Questo schema è equivalente ad One Time Pad poiché abbiamo sommato un numero pseudocasuale con un numero casuale (in modulo)\@. In altre parole, la probabilità di indovinare S conoscendo il valore casuale o il valore della somma è uguale alla probabilità di indovinare senza sapere nulla\@.
 \end{Importante}
 Questo metodo è più facile da implementare per essere condiviso con N shareholders\@. In particolare, genero 3 quantità truly random ed effettua la differenza tra il segreto e queste 3 quantità modulo N\@.
 Nel caso un attacker, riuscisse ad ottenere un numero sufficiente di share non può comunque ottenere la password, ma al più la differenza tra il segreto e le shares non prese\@.\newline Da qui è possibile definire il concetto di \textbf{perfect secrecy}: un avversario, conoscendo n-1 shares deve ancora possedere la probabilità di indovinare il segreto pari a quella di indovinare il segreto da zero\@.
 \section{Shamir Secret Sharing}
-Fino ad ora abbiamo costruito uno schema detto (n,n) secret sharing scheme in cui il primo parametro è il numero delle persone necessarie a rilevare il segreto e il secondo parametor è il numero di parti:\@il segreto viene rilevato solo se tutte le n parti forniscono il segreto\@.\newline
+Fino ad ora abbiamo costruito uno schema detto (n,n) secret sharing scheme in cui il primo parametro è il numero delle persone necessarie a rilevare il segreto e il secondo parametro è il numero di parti:\@il segreto viene rilevato solo se tutte le n parti forniscono il segreto\@.\newline
 Un altro schema è \textbf(t,n) secret sharing scheme:\@il segreto è rilevato quando qualsiasi t delle n parti fornisce il segreto\@. Questo secondo problema è molto più complicato del trivial secret sharing\@.
 \subsection{Idea:\@Schema (2,n)}
 Il problema è quello di modellare uno schema per cui, conoscendo 2 degli n shareholders, posso ricostruire il segreto\@. Questo problema è riconducibile a quello di conoscere quanti punti sono necessari per definire una linea:\@ovviamente 2\@.
@@ -83,7 +83,7 @@ Infatti conoscendo un solo punto (shares) ho infinite rette passanti per quel pu
 \begin{itemize}
     \item \textbf{Dealer:} costruisce la linea:
           \begin{enumerate}
-              \item Coefficiente a:\@scelto casualemnte;
+              \item Coefficiente a:\@scelto casualmente;
               \item Segreto S:\@noto;
                     \begin{equation*}
                         \centering
@@ -141,12 +141,12 @@ Estendendo il discorso precedentemente introdotto, ci si riconduce al caso di po
                         (x_{i},y_{i})\rightarrow y_{i}=p(x_{i})
                     \end{equation*}
           \end{enumerate}
-    \item \textbf{Ricostruzione}: Colleziona \(t\) shares su \(n\) disponibili e calcola il segreto utilizzando \emph{l'Interporlazione di Lagrange} con \(x=0\):
+    \item \textbf{Ricostruzione}: Colleziona \(t\) shares su \(n\) disponibili e calcola il segreto utilizzando \emph{l'interpolazione di Lagrange} con \(x=0\):
           \begin{equation*}
               \centering
               s=\sum_{shares\ x_i}{y_{i}\Lambda_{x_{i}}}\quad with\quad\Lambda_{x_{i}}=\Lambda_{x_{i}}(0)=\prod_{shares\ x_{k}\neq x_{j}}{\frac{-x_{k}}{x_{i}-x_{k}}}
           \end{equation*}
-          L'interpolazione di Lagrange si basa sul concetto che qualsiasi polinomio di grando t-1 con t punti noti, può essere decomposto come:
+          L'interpolazione di Lagrange si basa sul concetto che qualsiasi polinomio di grande t-1 con t punti noti, può essere decomposto come:
           \begin{equation*}
               \centering
               y=\sum_{i=1}^{t}{y_{i}\Lambda_{i}(x)}
@@ -164,11 +164,11 @@ Per discutere di quanto sia sicuro questo schema dobbiamo ricordare che in quest
 \end{center}
 Lo schema di Shamir in questo senso non è sicuro poiché se conoscessi a priori il range in cui è compreso il segreto, potrei ciclare su uno share mancante per ottenere un segreto nel range voluto\@.
 \begin{esempio}
-    Effttuiamo uno schema (3,4) in cui per conoscere il segreto dobbiamo conoscore almeno 3 share su 4\@. Dato che utilizziamo l'interpolazione di Lagrange il polinomio sarà di grado \(t-1\) e il termine noto sarà \(s\):
+    Effettuiamo uno schema (3,4) in cui per conoscere il segreto dobbiamo conoscere almeno 3 share su 4\@. Dato che utilizziamo l'interpolazione di Lagrange il polinomio sarà di grado \(t-1\) e il termine noto sarà \(s\):
     \begin{equation*}
         y=3 x^2+52 x+32;
     \end{equation*}
-    Abbiamo 4 shareholders, quindi dobbiamo generare 4 punti,generando un valore casuale x e sostituendolo nell'equazione precedente. Avendo posto rispettivamte i valori \(1,2,3,4\), si ottengono i seguenit punti:
+    Abbiamo 4 shareholders, quindi dobbiamo generare 4 punti,generando un valore casuale x e sostituendolo nell'equazione precedente. Avendo posto rispettivamente i valori \(1,2,3,4\), si ottengono i seguenti punti:
     \begin{equation*}
         (1,87),(2,148),(3,215),(4,288)
     \end{equation*}
@@ -226,7 +226,7 @@ L'interpolazione rimane uguale\@.
         \item Il polinomio sarà di grado \(t-1\) e con termine noto \(s\):\begin{equation*}
                   y=Mod[32+52x+3x^{2},101]=(32+52x+3x^{2})\mod{101}
               \end{equation*}
-        \item Generiamo i valori pergli shareholders:
+        \item Generiamo i valori per gli shareholders:
               \begin{equation*}
                   \begin{matrix}
                       x_{1}=1\rightarrow y_{1}=y/.{x\rightarrow x_{1}}=87 \\
@@ -262,11 +262,11 @@ L'interpolazione rimane uguale\@.
               \begin{equation*}
                   Mod[y_{1}\Lambda_{1}(x)+y_{2}\Lambda_{2}(x)+y_{3}\Lambda_{3},101]=(y_{1}\Lambda_{1}(x)+y_{2}\Lambda_{2}(x)+y_{3}\Lambda_{3})\mod{101}=32
               \end{equation*}
-        \item Verifichiamo ora che sia unconditially secure:\@finché ho anche uno share mancante, allora il segreto potrebbe essere qualsiasi\@. In particolare, supponiamo che non sia noto \(d=y_{1}\) e cicliamo su d da 0 a 100, sapendo che il segreto è compreso in questo intervallo:
+        \item Verifichiamo ora che sia unconditionally secure:\@finché ho anche uno share mancante, allora il segreto potrebbe essere qualsiasi\@. In particolare, supponiamo che non sia noto \(d=y_{1}\) e cicliamo su d da 0 a 100, sapendo che il segreto è compreso in questo intervallo:
               \begin{equation*}
                   Mod[d*\Lambda_{1}(x)+y_{2}*\Lambda_{2}(x)+y_{3}*\Lambda_{3}(x)/.{d\rightarrow Range[0,100]}]
               \end{equation*}
-              Come osserviamo i possibili valori sono molteplici e uniformamente distribuiti tra 0 e 100:
+              Come osserviamo i possibili valori sono molteplici e uniformemente distribuiti tra 0 e 100:
     \end{enumerate}
 \end{esempio}
 \begin{center}
@@ -286,8 +286,8 @@ L'interpolazione rimane uguale\@.
 Assumiamo uno schema (3,4) scheme e supponiamo di avere un Dealer che genera un segreto \(S_{F}\) e un polinomio \(f(x)\).
 Il dealer condividere a 4 shareholders (parties) gli shares.
 In parallelo, un altro Dealer genera un altro segreto \(S_{G}\) con un altro polinomio \(g(x)\) e anche lui genera e condivide gli shares\@.\newline
-Il nostro obiettivo è calcolare \(S_{F}+S_{G}\):\@ approccio sarebbe quello di ricostruire inizialmente entrambi i segreti per peoi effettuarne la somma;\@tuttavia grazie allo schema di Shamir \textbf{la somma degli shares è uguale alla somma dei segreti} (ovviamente applicando la formula di ricostruzione) \@.
-Quindi, la propietà homomorphic risiede nel fatto che è possibile calcolare \(S_{F}+S_{G}\) senza sapere i due segreti: effettuare calcoli sui segreti senza rivelare niente dei segreti\@.
+Il nostro obiettivo è calcolare \(S_{F}+S_{G}\):\@ approccio sarebbe quello di ricostruire inizialmente entrambi i segreti per poi effettuarne la somma;\@tuttavia grazie allo schema di Shamir \textbf{la somma degli shares è uguale alla somma dei segreti} (ovviamente applicando la formula di ricostruzione) \@.
+Quindi, la proprietà homomorphic risiede nel fatto che è possibile calcolare \(S_{F}+S_{G}\) senza sapere i due segreti: effettuare calcoli sui segreti senza rivelare niente dei segreti\@.
 \subsection{SMC:\@Secure Multiparty Computation}
 SMC (\textbf{Secure Multiparty Computation}) l'obiettivo è quello di calcolare il risultato di una funzione senza rivelare i dati in input\@. Funziona nel seguente modo:
 \begin{itemize}
@@ -309,8 +309,8 @@ Al contrario, con SMC si ha l'assenza di trusted third parties poiché il segret
 \end{figure}
 \begin{Importante}
     \begin{itemize}
-        \item Si necessitano almeno di 3 peers poiché se ce ne fossero 2 ad una parte basterebbe calcolare il segreto tramite complementarieta;
-        \item Ci spossono essere molteplici end users;
+        \item Si necessitano almeno di 3 peers poiché se ce ne fossero 2 ad una parte basterebbe calcolare il segreto tramite complementarietà;
+        \item Ci possono essere molteplici end users;
         \item Ci devono essere almeno 2 privacy peers, ma più ce ne sono maggiore è la sicurezza e robusto alle collisione;
         \item Soglia sul numero di peers pari a \(2\leq t\leq k\) se è uno schema (t,k).
     \end{itemize}
@@ -322,7 +322,7 @@ Al contrario, con SMC si ha l'assenza di trusted third parties poiché il segret
               \item Genera un polinomio \(p_{i}(x)\) di grado \(t-1\) con \(z_{i}\) termine noto;
               \item Invia privatamente gli shares \(p_{i}(1),\dots,p_{i}(k)\) ai privacy peer \(1,\dots,k\);
           \end{enumerate}
-    \item Privace peer \(m\):\begin{enumerate}
+    \item Privacy peer \(m\):\begin{enumerate}
               \item Collezione gli input shares \(p_{1}(m),\dots,p_{n}(m)\);
               \item Calcola \(RES=p_{1}(m)+\dots,p_{n}(m)\);
               \item Pubblica lo share aggregato \(RES(m)\);
@@ -360,7 +360,7 @@ Si ha bisogno di verifiable secret sharing quando un party può verificare qualo
                         (x_{i},y_{i})\quad y_{i}=p(x_{i})
                     \end{equation*}
           \end{enumerate}
-    \item Per ogni coefficiente del polinomio pubblichiamo in chiaro i seguenti termni detti \textbf{commitments}:\begin{equation*}
+    \item Per ogni coefficiente del polinomio pubblichiamo in chiaro i seguenti termini detti \textbf{commitments}:\begin{equation*}
               c_{0}=g^{s};c_{1}=g^{a_{1}};\ldots;c_{t-1}=g^{a_{t-1}}\mod{p}
           \end{equation*}
           \begin{Importante}
@@ -369,10 +369,10 @@ Si ha bisogno di verifiable secret sharing quando un party può verificare qualo
 \end{itemize}
 \subsubsection{Commitments}
 Un commitment è una costruzione crittografica che deve possedere due proprietà:\begin{itemize}
-    \item \emph{Hiding}: un reicever, ottenuto il commitment, non dovrebbe conoscere nulla riguardo il segreto; \textbf{COMMIT PHASE}
+    \item \emph{Hiding}: un receiver, ottenuto il commitment, non dovrebbe conoscere nulla riguardo il segreto; \textbf{COMMIT PHASE}
     \item \emph{Binding}: il commitment può essere aperto solo con il valore del segreto\@. Quindi, il mittente non può barare e cambiarlo. \textbf{REVEAL PHASE}
 \end{itemize}
-Anche \(C=H(x)\) è una sorta di commitment poiché possiede entrambe le proprietà, ma in aggiunta fornisce cumputationally hiding e computationally binding (\emph{con abbastanza tempo posso trovare una collisione})\@.\newline
+Anche \(C=H(x)\) è una sorta di commitment poiché possiede entrambe le proprietà, ma in aggiunta fornisce computationally hiding e computationally binding (\emph{con abbastanza tempo posso trovare una collisione})\@.\newline
 Il Feldman Commitment \(c=g^{x}\) è un commitment:\begin{itemize}
     \item Hiding computazionale:\begin{enumerate}
               \item Dato \(c=g^{x}\mod{p}\), computazionalmente legato al ricevitore senza conoscere \(x\) (\emph{x deve essere preso in intervallo grande});
@@ -386,17 +386,17 @@ Il Feldman Commitment \(c=g^{x}\) è un commitment:\begin{itemize}
 \begin{Importante}
     Feldman VSS è solo computazionalmente sicuro\@. Ciò implica che se s è piccolo, \(c_{0}=g^{s}\) rivela informazioni sul segreto.
 \end{Importante}
-\subsection{Feldman Scheme:\@verifier}
+\subsection{Feldman Scheme:verifier}
 \begin{itemize}
     \item La parte \(i\) riceve lo share \((x_{i},y_{i})\):\begin{enumerate}
               \item Le altre parti possono verificare se la parte \(i\) è onesta senza sapere il segreto \(s\);
-              \item Le altre parti, dato che il dealer in questo caso è onesto, possono caloclare:\begin{align*}
+              \item Le altre parti, dato che il dealer in questo caso è onesto, possono calcolare:\begin{align*}
                         c_{0}\cdot c_{1}^{x_i}\cdot c_{2}^{x_{i}^{2}}\cdot c_{t-1}^{x_{i}^{t-1}} & =                                                                                                           \\                                                       & =(g^{s})\cdot {(g^{a_{1}})}^{x_{i}}\cdot {(g^{a_{2}})}^{x_{i}^2}\cdot\cdots\cdot {(g^{a_{t-1}})}^{x_{i}^{t-1}}= \\
                                                                                                  & = g^{s}\cdot g^{a_{1}\cdot x_{i}}\cdot g^{a_{2}\cdot x_{i}^2}\cdot\cdots\cdot g^{a_{t-1}\cdot x_{i}^{t-1}}= \\
                                                                                                  & = g^{s+a_{1}x{i}+a_{2}x_{i}^2+\cdots +a_{t-1}x_{i}^{t-1}}=g^p(x_{i})
                     \end{align*}
               \item così facendo le altre parti effettuano una homomorphic computation di \(p(x_{i})\) all'esponente ottenendo \(g^{p(x_{i})}\);
-              \item Ora per verificare le parti hannno \(y_{x_{i}}\), calcolando \(g^{y_{x_{i}}}\) e se è uguale a quello calcolato al passo precedente, allora lo share è verificato\@.
+              \item Ora per verificare le parti hanno \(y_{x_{i}}\), calcolando \(g^{y_{x_{i}}}\) e se è uguale a quello calcolato al passo precedente, allora lo share è verificato\@.
           \end{enumerate}
 \end{itemize}
 \section{Pedersen Commitment}
@@ -415,7 +415,7 @@ Abbiamo ottenuto la proprietà homomorphic poiché:
                             & =g^{a}h^{r_{a}}\cdot g^{b}h^{r_{b}}=   \\
                             & = Commit(a,r_{a})\cdot Commit(b,r_{b})
 \end{align*}
-Abbiamo ottenuto anche il perfectly hiding\@. Infatti, dato il commitment \(c=g^{a}h^{r}\) questo permette di nasconodere qualsiasi valore di \(a\):\@ per qualsiasi \(a'\neq a\), possiamo trovare un unico \(r'\) tale che:\begin{equation*}
+Abbiamo ottenuto anche il perfectly hiding\@. Infatti, dato il commitment \(c=g^{a}h^{r}\) questo permette di nascondere qualsiasi valore di \(a\):\@ per qualsiasi \(a'\neq a\), possiamo trovare un unico \(r'\) tale che:\begin{equation*}
     Commit(a',r')=g^{a'}h^{r'}=g^{a}h^{r}=Commit(a,r)
 \end{equation*}
 Questo commitment è solamente computationally binding:\@il mittente non dovrebbe essere in grado di trovare un \(a'\), ma si può arrivare ad un trapdoor commitment scheme\@.
@@ -429,7 +429,7 @@ Questo commitment è solamente computationally binding:\@il mittente non dovrebb
                                       & \Longrightarrow r'=w^{-1}(a-a'+wr)=r'=(a-a')w^{-1}+r
           \end{align*}
 \end{itemize}
-\section{Pdersen VSS:\@dealer}
+\section{Pedersen VSS:dealer}
 \begin{itemize}
     \item Genera due polinomi casuali:\begin{align*}
               f(x)  & =s+a_{1}x+a_{2}x^2+\cdots +a_{t-1}x^{t-1} \\
@@ -459,9 +459,9 @@ Questo commitment è solamente computationally binding:\@il mittente non dovrebb
     \item Se l'equazione è soddisfatta allora siamo riusciti a verificare;
 \end{itemize}
 \newpage
-\section{Distribuited Key Generation}
+\section{Distributed Key Generation}
 Nei sistemi crittografici basati su DLog, si ha: \(x\) chiave privata e \(g^{x}\) chiave pubblica\@. Vogliamo generare una coppia \((Pub_{K},Priv_{K})\) tale che tutti conoscono \(Pubb_{K}\), ma nessuno conosce \(Priv_{K}\).\\ Ciò ci è utile in tutti i casi in cui non vogliamo rilevare la chiave privata o deve essere ricostruita in seguito\@.\newline
-Lo schema che realizza questa idea è chiamato \textbf{DKG} \emph{Distribuited Key Generation}\@.\newline
+Lo schema che realizza questa idea è chiamato \textbf{DKG} \emph{Distributed Key Generation}\@.\newline
 \begin{tabularx}{0.99\textwidth}{X X}
     (1)\includegraphics[scale=0.4]{2022-01-02-15-56-05.png}% chktex 8
      &
@@ -486,15 +486,15 @@ Lo schema che realizza questa idea è chiamato \textbf{DKG} \emph{Distribuited K
 \chapter{Multiplicative Group\(\mod{p}\)}
 \section{Gruppo}
 Un \textbf{gruppo} \((G,\circ )\) è una struttura algebrica in cui \(G\) definisce l'insieme degli elementi (\emph{membri del gruppo}) e \(\circ \) è l'operazione del gruppo\@. Questa operazione deve soddisfare:\begin{itemize}
-    \item \textbf{Chiusura}:\@presi due elemnti \(g_{1},g_{2}\) del gruppo, allora \(g_{x}=g_{1}\circ g_{2}\) deve appartenere al gruppo;
+    \item \textbf{Chiusura}:\@presi due elementi \(g_{1},g_{2}\) del gruppo, allora \(g_{x}=g_{1}\circ g_{2}\) deve appartenere al gruppo;
     \item \textbf{Identità}:\@deve esiste un membro del gruppo tale che \(g\circ I = I\circ g=g\);
     \item \textbf{Inversa}:\@per ogni \(g\) esiste \(g^{-1}\) tale che \(g\circ g^{-1}=I\);
-    \item \textbf{Associtativa}:\@per qualsiasi \(g_{1},g_{2},g_{3}\) deve valere \((g_{1}\circ g_{2})\circ g_{3}=g_{1}\circ (\circ g_{3})\)
+    \item \textbf{Associativa}:\@per qualsiasi \(g_{1},g_{2},g_{3}\) deve valere \((g_{1}\circ g_{2})\circ g_{3}=g_{1}\circ (\circ g_{3})\)
 \end{itemize}
 Inoltre, se l'operazione è anche commutativa, si ha un \textbf{Gruppo Abeliano}\@.
 \subsection{Gruppo \(Z_{p}^{*}\)}
 \(Z_{p}^{*}\) è la sintassi utilizzata per indicare il gruppo moltiplicativo modulo p:\@gli elementi di questo gruppo \textbf{finito} sono \(p-1\) composti da \( \{ 1,2,\ldots,p-1\} \) e l'unica operazione è la moltiplicazione (\emph{se l'avessimo considerata avremmo avuto un campo \(F_{p}\)})\@.\newline
-Infatti, questo insieme di elementi con questa operazione, è un gruppo poiché è chiuso, è associativo, indentità e commutatività (Gruppo Abeliano) e presenta l'inversa\@.
+Infatti, questo insieme di elementi con questa operazione, è un gruppo poiché è chiuso, è associativo, identità e commutatività (Gruppo Abeliano) e presenta l'inversa\@.
 \begin{esempio}[\(Z_{11}^{*}\)]
     \begin{itemize}
         \item \(p-1=10\) elementi:\( \{1,2,3,4,5,6,7,8,9,10 \} \);
@@ -509,13 +509,13 @@ Infatti, questo insieme di elementi con questa operazione, è un gruppo poiché 
         \item Per grandi gruppi si utilizza l'algoritmo di Euclide esteso.
     \end{itemize}
 \end{esempio}
-\subsection{Gruppi moltiplicativi:\@exponentiation}
-L'esponenziazion è una operazione che appartiene al gruppo \(Z_{p}^{*}\) poiché è l'applicazione della stessa operazione moltiplicativa più volte:\(x^{k}=x\circ x\circ x\circ x\circ \ldots \circ x\)(k volte).
+\subsection{Gruppi moltiplicativi:exponentiation}
+L'esponenziazione è una operazione che appartiene al gruppo \(Z_{p}^{*}\) poiché è l'applicazione della stessa operazione moltiplicativa più volte:\(x^{k}=x\circ x\circ x\circ x\circ \ldots \circ x\)(k volte).
 \begin{Definizione}[Generatore di un Gruppo]
     Il generatore del gruppo è un valore \(g\) tale che \( \{g^{0},g^{1},\ldots ,g^{m-1} \} \) siano tutti gli elementi del gruppo
 \end{Definizione}
 \begin{Importante}
-    Se \(m\) è primo, allora quasiasi membro del gruppo è un generatore ad eccezione dell'identità\@.\\
+    Se \(m\) è primo, allora qualsiasi membro del gruppo è un generatore ad eccezione dell'identità\@.\\
     \(Z_{p}^{*}\) non è un \textbf{Prime-Order Group} infatti se \(p\) è primo, non lo è \(p-1\).
 \end{Importante}
 \newpage
@@ -554,13 +554,13 @@ Se soddisfo la definizione allora sono il generatore di un sottogruppo;\@altrime
     Vedere applicazioni nel file matematica 41-vss-example-1-qr e -correct.
 \end{Importante}
 \chapter{Threshold and policy-based cryptography}
-La \textbf{threshold cryptography}è un tipo di crittografia in cui l'encryption o una singnature può essere decryptata solo quando vi sono un certo numero di partecipanti. Si può anche definire come group crpyto composta da VSS con tecniche standard di criptografia\@.
+La \textbf{threshold cryptography}è un tipo di crittografia in cui l'encryption o una signature può essere decryptata solo quando vi sono un certo numero di partecipanti. Si può anche definire come group crypto composta da VSS con tecniche standard di criptografia\@.
 \section{Threshold Encryption}
 \subsection{Public Key Encryption with DLOG}
 Vogliamo applicare il DLOG con la public encryption: schema El Gamal (DH adattato)\@. Si è fatta questa scelta poiché viene facilmente implementato nelle curve ellittiche\@.
-\subsection{El-Gamal:\@background}
+\subsection{El-Gamal:background}
 Lo schema di El-Gamal modifica il protocollo di accordo delle chiavi in un cipher asimmetrico\@.
-\subsection{El-Gamal:\@Sketch}
+\subsection{El-Gamal:Sketch}
 \begin{itemize}
     \item Operazioni in \(\mod{p}\) con \(p\) numero primo elevato;
     \item \(g\) generatore di gruppo;
@@ -583,15 +583,15 @@ Per \textbf{decifrare}:\begin{equation*}
     m=c\cdot R^{-s}=\frac{c}{{(g^{r})}^{s}}=\frac{m\cdot h^{r}}{g^{rs}}=\frac{m\cdot g^{sr}}{g^{rs}}
 \end{equation*}
 \newpage
-\subsection{Asymmetrc Criptography}
+\subsection{Asymmetric Cryptography}
 Schema su come si applica El-Gamal:
 \begin{figure*}[ht]
     \centering
     \includegraphics[scale=0.5]{2022-01-03-15-37-08.png}% chktex 8
 \end{figure*}
 \subsection{ECIES=Hybrid Encryption 5g}
-\textbf{ECIES} sta per \emph{Elliptic Curver Integrated Encryption Scheme} e venne per la prima volta standardizzato nell'IMSI del 5G\@. Assumiamo che nella nostra SIM ho installato la chiave pubblica del provider della SIM (Trusted) \(g^{HN}\) (Home Network)\@. Nel momento dell'autenticazione \textbf{Encrypt-then-MAC}:\begin{itemize}
-    \item generiamo \(x\) casuale, il coefficente ephemeral \(g^{x}\);
+\textbf{ECIES} sta per \emph{Elliptic Curve Integrated Encryption Scheme} e venne per la prima volta standardizzato nell'IMSI del 5G\@. Assumiamo che nella nostra SIM ho installato la chiave pubblica del provider della SIM (Trusted) \(g^{HN}\) (Home Network)\@. Nel momento dell'autenticazione \textbf{Encrypt-then-MAC}:\begin{itemize}
+    \item generiamo \(x\) casuale, il coefficiente ephemeral \(g^{x}\);
     \item calcoliamo \(K=HKDF(g^{HNx})\) ed inviamo \(AES_{k}(SUP)\) (SUP è l'IMSI);
     \item aggiungiamo \(HMAC\) (integrità);
     \item Il messaggio sarà quindi \(({g}^{x},HMAC(AES_{k}(MSG)))\)
@@ -601,11 +601,11 @@ In ricezione:\begin{itemize}
               \item Con \({g}^{x}\) e la chiave privata dell'Home Network ricostruiamo la chiave \({(g^{x})}^{HN}\);
               \item Deriviamo la chiave \(K=HKDF(g^{HNx})\);
           \end{enumerate}
-    \item Decrypto il dato in ingresso
+    \item Decrypt il dato in ingresso
 \end{itemize}
 \section{Threshold El-Gamal}
-L'idea di El-Gamal è quella di distribuire gli shares della chiave privata \(s\) e ricostruirla quando si necessità di decriptare solo quando vi sono un certo numero (threshold) di riceiver che cooperano e questo messaggio può essere letto solamente da queste parti\@. Ovviamente, nessuno possiede la chiave privata\@.\newline
-Quindi, il mittente invia il messaggio, i receiver ricevono il messaggio e ricostruiscono il segreto per decryptarlo\@. Questo apporoccio non è molto conveniente poiché può essere usato solamente una volta, nel momento in cui si ripete siamo esposti a rischi\@.\newline
+L'idea di El-Gamal è quella di distribuire gli shares della chiave privata \(s\) e ricostruirla quando si necessità di decriptare solo quando vi sono un certo numero (threshold) di receiver che cooperano e questo messaggio può essere letto solamente da queste parti\@. Ovviamente, nessuno possiede la chiave privata\@.\newline
+Quindi, il mittente invia il messaggio, i receiver ricevono il messaggio e ricostruiscono il segreto per decryptarlo\@. Questo approccio non è molto conveniente poiché può essere usato solamente una volta, nel momento in cui si ripete siamo esposti a rischi\@.\newline
 Ricordiamo che la \textbf{encryption} è:\begin{equation*}
     (g^{r_{1}},m_{1}\cdot h^{r_{1}})
 \end{equation*}
@@ -615,15 +615,16 @@ La \textbf{decryption} è:\begin{equation*}
 Ma se volessi decryptare anche un altro messaggio, il mittente dovrebbe generare altri due coefficienti da condividere cosicché il receiver possa decryptare:\begin{equation*}
     m_{2}=\frac{c_{2}}{{(g^{r_{2}})}^{s}}
 \end{equation*}
-Se non facessì così ed utilizzerei sempre lo stesso segreto \textbf{perdo} la sicurezza semantica\@. Tuttavia, notiamo che per decriptare i messaggi il denominatore viene sempre elevato per il segreto \(s\) \@. Esiste un modo per mantenere il segreto e quindi calcolare il denominatore del decrypt senza rivelare il segreto?\@Una soluzione potrebbe essere quella di interpolare gli shares all'esponente sfruttando la proprietà degli esponenziali:\begin{equation*}
+Se non facessi così ed utilizzerei sempre lo stesso segreto \textbf{perdo} la sicurezza semantica\@. Tuttavia, notiamo che per decriptare i messaggi il denominatore viene sempre elevato per il segreto \(s\) \@. Esiste un modo per mantenere il segreto e quindi calcolare il denominatore del decrypt senza rivelare il segreto?\@Una soluzione potrebbe essere quella di interpolare gli shares all'esponente sfruttando la proprietà degli esponenziali:\begin{equation*}
     A^{x}=A^{x_{1}}\cdot A^{x_{2}}=A^{x_{1}+x_{2}}
 \end{equation*}
 \newpage
 In particolare:\begin{itemize}
-    \item Manentiamo:\begin{enumerate}
+    \item Manteniamo:\begin{enumerate}
               \item Il polinomio (Pedersen Scheme): \(p(x)=s+a_{1}x+a_{2}x+\cdots+a_{t-2}x^{t-2}+a_{t-1}x^{t-1}\);
               \item Gli shares:\((x_{i},y_{i})\quad y_{i}=p(x_{i})\);
-              \item La formula per ricostruire il segreto:\begin{equation*}
+              \item La formula per ricostruire il segreto:
+                    \begin{equation*}
                         \centering
                         y=\sum_{shares\ x_{i}}^{t}{y_{i}\Lambda_{x_{i}}}
                     \end{equation*}
@@ -637,4 +638,49 @@ In particolare:\begin{itemize}
               \prod{ A^{y_{i}\Lambda_{x_{i}}}}=A^{\sum{y_{i}\Lambda_{x_{i}}}=A^{s}}
           \end{equation*}
 \end{itemize}
+\subsection{Soluzione}
+\begin{itemize}
+    \item Ogni parte possiede uno share \( (x_{i},y_{i})\quad y_{i}=p(x_{i})\);
+    \item Le parti prendono \(g^{r}\) dal ciphertext \(g^{r},m\cdot h^{r}\);
+    \item Calcolano il coefficiente di Lagrange:\begin{equation*}
+              \centering
+              \Lambda_{x_{i}}=\Lambda_{x_{i}}(0)=\prod_{x_{k}\neq x_{i}}^{l}{\frac{-x_{k}}{x_{i}-x_{k}}}
+          \end{equation*}
+    \item Calcola exponent share \({(g^{r})}^{y_{i}\Lambda_{x_{i}}}\)
+    \item Un numero sufficiente di shares permette di ricostruire il termine di decryption:\begin{equation*}
+              \prod{(g^{r})}^{y_{i}\Lambda_{x_{i}}}={(g^{r})}^{\sum{y_{i}\Lambda_{x_{i}}}}={(g^{r})}^{s}=g^{rs}
+          \end{equation*}
+\end{itemize}
+\section{Threshold Signature}
+Si utilizza la threshold signature ogni qual vola in cui vogliamo che \(t\) su \(n\) membri di un gruppo possono firmare un messaggio garantendo, di conseguenza, che la validità di un messaggio viene garantita da più parti, che un membro del gruppo è certificato dagli altri e la fiducia viene riposta in più certification authority\@.
+Inoltre, se si hanno meno di \(t\) membri è impossibile forgiare una signature.
+\subsection{RSA Signature}
+Ricordiamo il funzionamento di RSA:\begin{itemize}
+    \item Genera due numeri primi grandi \textbf{p,q (Segreti)};\@
+    \item Calcola RSA Module:\(N=pq\) \textbf{Può essere pubblico};\@
+    \item Calcola \(\Phi(N)=(p-1)(q-1)\) \textbf{Segreto};\@
+    \item Genera chiave arbitraria \(e\) coprimi con \(\Phi(N)\) e prendi come \textbf{chiave pubblica} \(1<e<\Phi(N)\)
+    \item Genera \textbf{chiave privata} \(d\) tale che \(e\times d=1\mod{\Phi(N)}\);
+    \item Firma il messaggio \([m,{H(m)}^{d}]\)
+\end{itemize}
+Adattandolo in una threshold function:\begin{itemize}
+    \item \textbf{Dealer}:\begin{equation*}
+              f(x)=d+a_{1}x+a_{2}x^{2}+\cdots +a_{t-2}x^{t-2}+a_{t-1}x^{t-1}
+          \end{equation*}
+    \item Shares della parte \(P_{i}\):\begin{equation*}
+              (x_{i},y_{i}=f(x_{i}))\mod{\Phi(N)}
+          \end{equation*};
+    \item Firma il messaggio \(m,H(m)\);
+    \item Ora tutte le part hanno uno share del tipo:\begin{equation*}
+              {H(m)}^{y_{i}\Lambda_{x_{i}}}\mod{N}
+          \end{equation*};
+    \item Ricostruzione della firma:\begin{equation*}
+              \prod {H(m)}^{y_{i}\Lambda_{x_{i}}}={H(m)}^{\sum{y_{i}\Lambda_{x_{i}}}}={H(m)}^{d}
+          \end{equation*}
+\end{itemize}
+\begin{Importante}
+    Vedi file mathematica 43-thresholdRSA.nb per vedere che questa costruzione è sbagliata;
+\end{Importante}
+La costruzione è sbagliata perché stiamo operando in modulo e quindi l'operazione di divisione all'interno del coefficiente di Lagrange è sbagliata dato che occorre utilizzare l'inversa del modulo e questa non è sempre possibile (a meno che il modulo e il numero da invertire siano coprimi) \@. Oltre a questo non possiamo calcolare il modulo poiché non conosciamo \(\Phi(N)\).
+
 \end{document}
