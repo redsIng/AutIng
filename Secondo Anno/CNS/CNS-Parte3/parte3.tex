@@ -21,7 +21,7 @@
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
-\newtheorem*{Importante}{\textbf{Importante}}
+\newtheorem*{Importante}{\textbf{\textcolor{red}{Importante}}}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{esempio}{\emph{Esempio}}
 \usetikzlibrary{shapes.geometric, arrows}
@@ -682,5 +682,139 @@ Adattandolo in una threshold function:\begin{itemize}
     Vedi file mathematica 43-thresholdRSA.nb per vedere che questa costruzione è sbagliata;
 \end{Importante}
 La costruzione è sbagliata perché stiamo operando in modulo e quindi l'operazione di divisione all'interno del coefficiente di Lagrange è sbagliata dato che occorre utilizzare l'inversa del modulo e questa non è sempre possibile (a meno che il modulo e il numero da invertire siano coprimi) \@. Oltre a questo non possiamo calcolare il modulo poiché non conosciamo \(\Phi(N)\).
-
+In particolare:\begin{equation*}
+    \centering
+    \Lambda_{x_{i}}=\Lambda_{x_{i}}(0)=\prod_{x_{k}\neq x_{i}}^{l}{\frac{-x_{k}}{x_{i}-x_{k}}}=\frac{\alpha_{x_{i}}}{\beta_{x_{i}}}
+\end{equation*}
+Quindi occorre calcolare:\begin{equation*}
+    {H(m)}^{y_{i}\Lambda_{x_{i}}}={H(m)}^{y_{i}\Lambda_{x_{i}}\beta_{x_{i}}^{-1}}\mod{N}
+\end{equation*}
+In cui:\begin{equation*}
+    \beta_{x_{i}}\cdot\beta_{x_{i}}=1\mod{\Phi(N)}
+\end{equation*}
+ma noi non siamo a conoscenza di \(\Phi(N)\) e non sempre l'inversa è calcolabile\@.
+\subsubsection{RSA:signature Shoup scheme}
+Tuttavia, è possibile evitare di effettuare l'inversa tramite lo schema di Shoup:\begin{itemize}
+    \item Assumi \(x_{i}=i\) e \(L\) giocatori;
+    \item Osservando il denominatore del polinomio di Lagrange, nel caso peggiore abbiamo:\begin{equation*}
+        \Lambda_{i}(x)=\prod_{shares\ k\neq i}{\frac{x-k}{i-k}}=\frac{something(x)}{(i-1)(i-2)\cdots (u-(-1))(i-(i+1))\ codots (i-L)}
+    \end{equation*}
+    \item Il denominatore può essere suddiviso in \(i!(L-i)! \) che moltiplicato per \(L\) ritorna \textbf{sicuramente} un intero:\begin{equation*}
+        L! \cdot \Lambda_{i}(x):=\overline{\Lambda_{i}}(x)
+    \end{equation*}
+    \item Modificando la costruzione del capitolo precedente, calcoliamo gli shares computabili INTERI:\begin{equation*}
+        {H(m)}^{y_{i}\overline{\Lambda_{x_{i}}}}
+    \end{equation*}
+    \item Ricostruiamo la firma con un \(L! \) aggiuntivo come:\begin{equation*}
+        \prod{H(m)}^{y_{i}\overline{\Lambda_{x_{i}}}}={H(m)}^{L! \sum{y_{i}\Lambda_{x_{i}}}}={H(m)}^{d\cdot L! }\mod{N}
+    \end{equation*}
+\end{itemize}
+\begin{Importante}
+    L'\textbf{RSA Modulus Attack} si basa sull'errore di un client nell'aver utilizzato per cifrare lo stesso messaggio m con differenti chiavi pubbliche\@. Questo perché si utilizza due volte lo stesso modulo \(N\): il messaggio m può essere decifrato calcolando due coefficienti \(r,s\) ottenuti applicando l'algoritmo di Euclide esteso\@. \newline
+    Infatti, eseguendo \(e_{a}\cdot r+e_{b}\cdot s=\gcd{e_{a},e_{b}} \) si trova \(r,s\) che per decifrare il messaggio vanno utilizzati nei rispettivi ciphertext come esponente e moltiplicarli tra di loro.
+    \begin{equation*}
+        \centering
+        {(m^{e_{a}})}^{r}\cdot {(m^{e_{b}})}^{s}=m^{e_{a}+r+e_{b}s}=m
+    \end{equation*}
+\end{Importante}
+L'unica cosa che rimane da levare è \(L! \) e a tale scopo utilizziamo l'idea del \textbf{RSA Modulus Attack}:\begin{itemize}
+    \item Sia \(L! =\Delta \);
+    \item Abbiamo \({H(m)}^{d\cdot L!}={H(m)}^{d\cdot \Delta}\);
+    \item Vogliamo \({H(m)}^{d}=y\), ma abbiamo \({H(m)}^{d\cdot \Delta }=y\);
+    \item Inoltre \(H(m)={H(m)}^{de}=y^{e}\);
+    \item Se \(e\ \text{e}\ \Delta \) sono coprimi, possiamo applicare l'attacco e ricostruire il messaggio.
+\end{itemize}
+\section{Mobile Devices Resilient to Capture}
+è un dispositivo che non può essere usato da nessuno ad eccezione del proprietario legittimo\@. Assumiamo che il nucleo del dispositivo è una chiave segreta e i possibili approcci di sicurezza possono essere i seguenti:\begin{itemize}
+    \item Lock/Unlock la chiave con password:\@soluzione debole poiché si può effettuare un dictionary attack;
+    \item Salvare il segreto in un sistema hardware sicuro:\@soluzione costosa e bisogna che sia sicuro anche su aspetti di attacchi di tipo side channels;
+    \item Scaricare dinamicamente la chiave dalla repository di rete:\@soluzione non adatta poiché occorre fidarsi della repository;
+\end{itemize}
+La soluzione a questo problema venne fornita da \textbf{MacKenzie+Reiter}
+\section{MacKenzie+Reiter}
+L'assunzione è che il dispositivo deve essere connesso quando viene utilizzato\@.La soluzione da loro proposta si basa su 3 giocatori: me stesso (utilizzo la password), computer (salva il segreto) e un server remoto (untrusted server)\@. Inoltre, come altro fondamento, si utilizza il concetto di \textbf{capture-protection server}:il server, sebbene sia non trusted, conferma che il dispositivo rimane al proprietario prima di consentire l'utilizzo della chiave\@. Si compone di due livelli.
+\subsection{Scenario}
+\begin{figure*}[h]
+    \centering
+    \includegraphics[scale=0.5]{2022-01-06-16-43-18.png}% chktex 8
+\end{figure*}
+\subsection{Basic Solution}
+La soluzione base risolve tutte le combinazioni di attacchi precedenti tranne una in cui bisogna applicare tecniche più avanzate.
+\subsubsection{Tickets}
+\begin{itemize}
+    \item Assunzioni: il dispositivo deve essere connesso in rete;
+    \item Protection: cifra la chiave del dispositivo cosicché possa essere decifrata solamente con la cooperazione del server;
+    \item Idea: \begin{enumerate}
+        \item Invia il ticket cifrato al server (contiene dati per autenticare l'utente e non si ha bisogno che siano salvati);
+        \item Usa il contenuto del ticket per autenticare l'utente:
+        \item Usa il contenuto del ticket per decifrare parzialmente la chiave del dispositivo.
+    \end{enumerate}
+\end{itemize}
+    \subsubsection{Protocol Inizialization}
+    \begin{figure*}[h]
+        \centering
+        \includegraphics[scale=0.5]{2022-01-06-16-51-03.png}% chktex 8
+    \end{figure*}
+    Il tempo in cui registriamo il dispositivo inseriamo la vera \textcolor{red}{password P} e salvata temporaneamente nel dispositivo\@.Sappiamo la chiave \textcolor{red}{pubblica del serve \(PK_{server}\)} e quella \textcolor{red}{pubblica \(PK_{device}\) e privata \(SK_{device}\) del dispositivo}\@.
+    \begin{itemize}
+        \item generiamo due chiavi casuali \(v,a\);
+        \item \textcolor{red}{Eseguiamo l'hash della password \(b=H(P)\)};
+        \item \textcolor{red}{Cifriamo la chiave segreta \(c=SK_{device}\bigoplus PRF(v,P)\)};
+        \item Crea il ticket \(tkt=E_{PK_{server}[a,b,c]}\);
+    \end{itemize}
+    \begin{Importante}
+        Tutto ciò che è in rosso viene cancellato appena letto.
+    \end{Importante}
+    \newpage
+    \subsubsection{Key Retrival}
+    \begin{figure*}[h]
+        \centering
+        \includegraphics[scale=0.4]{2022-01-06-17-06-20.png}% chktex 8
+    \end{figure*}
+Accedo al dispositivo inserendo la password \(P\) calcolo localmente \(\beta =H(P)\) e genero il valore casuale \(\rho \) \@. Ora invio al server un messaggio che contiene:\begin{itemize}
+    \item \(tkt=E_{PK_{server}[a,b,c]}\);
+    \item \(E_{PK_{server}}[\beta ,\rho ]\);
+\end{itemize}
+Autentico questo messaggio tramite HMAC con chiave a.\newline
+Ora chiedo assistenza al server:\begin{itemize}
+    \item Apro il ticket e prelevo il valore \(a\);
+    \item Verifico che il messaggio è stato inviato effettivamente da quel dispositivo controllando il MAC\@;
+    \item Decrypt l'hash della password \(\beta ,\rho \);
+    \item Controllo che la password originale sia uguale a quella ricevuta \(\beta = b\);
+    \item \textcolor{red}{Ora so che l'utente e il device sono reali};
+    \item Il server ritorna \(p\bigoplus s\);
+\end{itemize}
+Il dispositivo decifra la chiave \((\rho \bigoplus c)\bigoplus \rho \bigoplus PRF(v,P)=SK_{device}\) avendo così il dispositivo autorizzato.
+\subsubsection{Attacchi}
+Con lo schema appena proposto ci siamo protetti da qualsiasi tipo di attacco eccetto uno (\emph{device stolen and password known}).\begin{itemize}
+    \item \textbf{Server cracked e password nota}:\begin{enumerate}
+        \item Se la chiave \(v\) nel dispositivo è ancora segreta allora non asi può ottenere SK poiché cifrata con PRF (v,P)
+    \end{enumerate}
+    \item \textbf{Device cracked/stolen}:\begin{enumerate}
+        \item L'attacker deve inviare un hash di una password valida;
+        \item L'attacker può effettuare un dictionary attack online, ma è facilmente rilevabile e il MAC è verificato;
+    \end{enumerate}
+    \item \textbf{Device and Server Cracked}:\begin{enumerate}
+        \item Manca solamente la password;
+        \item L'attacker può effettuare un dictionary attack online.
+    \end{enumerate}
+\end{itemize}
+Per risolvere tutti i problemi fino ad ora proposti si utilizza il secret sharing nella seguente maniera.
+\newpage
+\subsection{Advanced Solution}
+\subsubsection{Secret Sharing (2,2) for RSA}
+\begin{figure*}[h]
+    \includegraphics[scale=0.5]{2022-01-06-17-30-36.png}% chktex 8
+\end{figure*}
+\begin{tabular}{ccc}
+    \textbf{Protocol Initialization}&\includegraphics[scale=0.4]{2022-01-06-17-31-58.png}% chktex 8
+&\\
+\textbf{Key Retrieval}
+&\includegraphics[scale=0.5]{2022-01-06-17-33-30.png}% chktex 8
+&
+\\\textbf{Key Disabling}&
+\includegraphics[scale=0.5]{2022-01-06-17-34-40.png}% chktex 8
+&
+\end{tabular}
+\chapter{Linear Secret Sharing \& Access Control Matrix}
 \end{document}

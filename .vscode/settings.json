@@ -14,6 +14,5 @@
     "editor.quickSuggestionsDelay": 5,
     "editor.suggest.preview": true,
     "editor.wordBasedSuggestionsMode": "allDocuments",
-    "files.autoGuessEncoding": true,
-    "editor.formatOnSave": true
+    "files.autoGuessEncoding": true
 }
