@@ -1,5 +1,6 @@
 \documentclass{book}
 \usepackage[utf8]{inputenc}
+\usepackage{caption}
 \usepackage{amssymb}
 \usepackage{xcolor}
 \usepackage{blindtext}
@@ -17,19 +18,21 @@
 \usepackage{imakeidx}
 \usepackage[T1]{fontenc}
 \usepackage{geometry}
+\definecolor{Grey1}{RGB}{84, 110, 122}
 \newtheorem{Definizione}{\textbf{Definizione}}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem*{Importante}{\textbf{\textcolor{red}{Importante}}}
 \newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{esempio}{\emph{Esempio}}
+\newtheorem{esempio}{\textcolor{Grey1}{Esempio}}
 \usetikzlibrary{shapes.geometric, arrows}
 \geometry{a4paper, top=2cm, bottom=2cm, left=1.5cm, right=1.5cm}
 \makeindex[columns=3, title=Alphabetical Index, intoc]
 \title{Computer and Network Security}
 \author{Lorenzo Rossi}
 \graphicspath{{Images/}}
+
 \begin{document}
 \maketitle
 \tableofcontents
@@ -585,7 +588,7 @@ Per \textbf{decifrare}:\begin{equation*}
 \newpage
 \subsection{Asymmetric Cryptography}
 Schema su come si applica El-Gamal:
-\begin{figure*}[ht]
+\begin{figure*}[h]
 	\centering
 	\includegraphics[scale=0.5]{2022-01-03-15-37-08.png}% chktex 8
 \end{figure*}
@@ -978,5 +981,197 @@ Nel \textbf{Linear Secret Sharing Scheme (LSSS)} è una generalizzazione dello s
     \begin{equation*}
         c_{1}=c_{2}=c_{3}=1
     \end{equation*}
+    Ricostruzione del segreto:\begin{equation*}
+        c_{1}(s-r_{1}-r_{2})+c_{2}r_{1}+c_{3}r_{2}=(s-r_{1}-r_{2})+r_{1}+r_{2}=s
+    \end{equation*}
 \end{esempio}
+\begin{theorem}[LSSS-homomorphic]
+    Qualsiasi LSSS (Linear Secret Sharing Scheme) è \textbf{homomorphic}.
+    \begin{proof}
+        Supponiamo di avere:\begin{equation*}
+            x_{a}=(s_{a},r_{1a},r_{2a},\ldots)\quad y_{a}=(share_{1a},share_{2a},\ldots)
+        \end{equation*}
+        \begin{equation*}
+            x_{b}=(s_{b},r_{1b},r_{2b},\ldots)\quad y_{b}=(share_{1b},share_{2b},\ldots)
+        \end{equation*}
+        \begin{equation*}
+            Ax_{a}=y{a}\quad Ax_{b}=y_{b}
+        \end{equation*}
+        \begin{equation*}
+            y_{a}+y_{b}=Ax_{a}+Ax_{b}=A(x_{a}+x_{b})=A(s_{a}+s_{b},rand,rand,\ldots)
+        \end{equation*}
+    \end{proof}
+\end{theorem}
+\subsection{Monotone Span Programs}
+Le operazioni fatte fino ad ora, le operazioni sono legate al campo vettoriale in cui si opera\@.Proviamo ad eseguire uno Span Program in GF2 (si può avere o 0 o 1): il segreto è un bit e la sua probabilità di essere indovinato è del 50. Facciamo un esempio in GF2.
+\begin{esempio}
+\begin{itemize}
+    \item 5 parties;
+    \item Vettori 4-dimensionali;
+    \item La seconda parte ha 2 vettori;
+\end{itemize}
+\begin{figure*}[h]
+    \centering
+    \includegraphics[scale=0.5]{2022-01-08-15-15-29.png}% chktex 8
+\end{figure*}
+Vogliamo capire se una qualche combinazione lineare di questi vettori ci porta al valore \(\begin{bmatrix}
+    1&0&0&0
+\end{bmatrix}\) e quindi capace di farmi ricostruire il segreto\@. Quindi, il programma accetta un insieme \(B\) se e solo se lo span delle righe assegnate a \(B\) consentono di arrivare al vettore \(\begin{bmatrix}
+    1&0&0&0
+\end{bmatrix}\) \@.
+Supponiamo che \( \{P_{2},P_{4}\} \) si mettono insieme
+\setlength\intextsep{0pt}
+\begin{figure*}[h]
+	\centering
+	\includegraphics[scale=0.4]{2022-01-08-15-24-44.png}% chktex 8
+\end{figure*}
+\end{esempio}
+e sommo i 3 vettori, ottengo il vettore che cercavamo quindi posso ricostruire il segreto\@.\newline
+Supponiamo ora che si uniscano \(P_{1},P_{2}\), non è possibile ricostruire il segreto poiché lo span di questi vettori non ritorna il vettore \(\begin{bmatrix}
+    1&0&0
+\end{bmatrix}\)
+\begin{figure*}[h]
+    \centering
+    \includegraphics[scale=0.4]{2022-01-08-16-38-44.png}% chktex 8
+\end{figure*}
+\newpage
+\begin{esempio}
+    Span Programs\(\rightarrow \)Secret Sharing
+    \begin{figure*}[h]
+        \centering
+        \includegraphics[scale=0.4]{2022-01-08-17-18-40.png}% chktex 8
+    \end{figure*}
+    \begin{Importante}
+        Abbiamo effettuato la moltiplicazione fra le due matrici per ottenere il termine di destra.
+    \end{Importante}
+\end{esempio}
+\subsection{LSSS and Access Structure}
+Ogni struttura di accesso monotona può essere implementata con questo schema:\begin{itemize}
+    \item Partecipanti \(P= \{P_{1},P_{2},P_{3},P_{4}\} \);
+    \item Struttura monotona di accesso: \(A\subseteq 2^{P}\);
+\end{itemize}
+\begin{Definizione}[Struttura di accesso monotona]
+    Una \textbf{struttura di accesso monotona} è una struttura in cui non sono presenti negazioni:\@si ottiene la condizione verificata solo se non vi sono presenti negazioni nella policy implementata.
+\end{Definizione}
+\begin{esempio}
+    \begin{equation*}
+        A=\{ \{P_{1},P_{2} \} , \{P_{1},P_{3},P_{4} \} \}
+    \end{equation*}
+    Con questa notazione, si accede al segreto solo se si coordinano \( \{P_{1},P_{2} \} \) o \( \{P_{1},P_{3},P_{4} \} \) \emph{(Come si può vedere non vi sono negazioni)}
+\end{esempio}
+Ogni predicato booleano (AND o OR) si può implementare un LSSS che supporta quel determinato predicato\@. Tuttavia, non vi è una regola precisa di implementare un predicato:\@in base a come viene scritta la logica si ha uno schema ideale o meno\@.
+\subsubsection{LSSS matrix frmo AC Predicate}
+\setlength\intextsep{0pt}
+\begin{wrapfigure}[6]{R}[0pt]{0pt}
+	\centering
+    \includegraphics[scale=0.4]{2022-01-08-17-38-41.png}% chktex 8
+\end{wrapfigure}
+Vogliamo ottenere il segreto se la condizione \(P_{1}\wedge P_{2}\vee (P_{3}\wedge P_{4})\) è verificata e lo vogliamo implementare secondo uno schema di Secret Sharing\@. Scriviamo la policy come un albero:
+\begin{enumerate}
+    \item Radice;
+    \item Da sinistra a destra esegui:\begin{itemize}
+        \item Ogni parte \(P_{i}\) rappresenta la foglia dell'albero;
+        \item Gli operatori sono i nodi interni dell'albero;
+        \item Ogni operatore OR o AND collega la foglia all'albero;
+    \end{itemize}
+\end{enumerate}
+Qual è la matrice che implementa questa policy? A tale scopo, procediamo preliminarmente ad analizzare le singole operazioni\@.
+\paragraph{AND Gate}
+\setlength\intextsep{0pt}
+\begin{wrapfigure}[3]{R}[0pt]{0pt}
+	\centering
+    \includegraphics[scale=0.4]{2022-01-08-17-49-09.png}% chktex 8
+\end{wrapfigure}
+Supponiamo che \(X\) sia il segreto che vogliamo dividere in 3 parti in modo tale che il segreto venga ricostruito solo se tutti e tre condividono il proprio share: (3,3) Trivial Secret Scheme.
+\bigskip \bigskip
+\begin{Importante}
+    La matrice \(\begin{bmatrix}
+        X&1&1\\0&1&0\\0&0&-1
+    \end{bmatrix}\) viene ottenuta tenendo conto che le righe sono le parties e che lo span (combinazione lineare) delle righe debba ritornare \(\begin{bmatrix}
+        1&0&0
+    \end{bmatrix}\) (X,0,0)\@. Quindi era valida anche la seguente matrice:\begin{equation*}
+        \begin{bmatrix}
+            X&-1&1\\0&1&0\\0&0&1
+        \end{bmatrix}\quad \text{\textbf{Relativi Pesi:}}\quad c_{1}=1,c_{2}=1,c_{3}=-1
+    \end{equation*}
+    Infatti:\begin{equation*}
+        c_{1}P_{1}+c_{2}P_{2}+c_{3}P_{3}=1\begin{bmatrix}
+            X&-1&1
+        \end{bmatrix}+1\begin{bmatrix}
+            0&1&0
+        \end{bmatrix}-1\begin{bmatrix}
+            0&0&1
+        \end{bmatrix}=\begin{bmatrix}
+            X&0&0
+        \end{bmatrix}
+    \end{equation*}
+\end{Importante}
+\medskip
+\paragraph{OR Gate}
+\setlength\intextsep{0pt}
+\begin{wrapfigure}[3]{R}[0pt]{0pt}
+	\centering
+    \includegraphics[scale=0.4]{2022-01-08-18-06-14.png}% chktex 8
+\end{wrapfigure}
+Sia \(X\) il segreto che stiamo condividendo a due parties\@.La condizione OR ci dice che per ricostruire il segreto, deve essere presente una delle due parti\@.\newline
+Quindi possiamo modellare la matrice come \(\begin{bmatrix}
+    X\\X
+\end{bmatrix}\).
+\medskip
+\paragraph{Ricostruzione della matrice}
+La condizione era \(P_{1}\wedge P_{2}\vee (P_{3}\wedge P_{4})\) \@.\newline \bigskip
+\begin{figure*}[th]
+    \begin{tabular}{cc}
+        \begin{minipage}{0.45\textwidth}
+            \includegraphics[scale=0.4]{first.png}
+            \captionof{figure}{Fase 1:\@assumiamo il segreto di una dimensione e quest'ultimo deve essere diviso in due per essere ricostruito.}
+        \end{minipage}
+            &\begin{minipage}{0.45\textwidth}
+                \includegraphics[scale=0.4]{second.png}
+                \captionof{figure}{Fase 2: Calcolo gli shares necessari e li spartisco nei rami \(P_{1}\rightarrow (1,1)\) e \(\wedge \rightarrow (0,-1)\)}
+            \end{minipage}\\
+            \begin{minipage}{0.45\textwidth}
+                \includegraphics[scale=0.4]{third.png}
+                \captionof{figure}{Fase 3: dato che non so se ci sono delle parti o meno prendo lo share e lo copio in entrambi i rami \textbf{poiché uno dei due deve conoscere il segreto per risalire l'albero}.}
+            \end{minipage}
+            &
+            \begin{minipage}{0.45\textwidth}
+                \includegraphics[scale=0.4]{fourth.png}
+                \captionof{figure}{Fase 4: Mi trovo di fronte ad un AND e quindi il segreto deve essere conosciuto da entrambi. Aumentiamo la dimensione del vettore e generiamo due valori consoni per ottenere il valore del padre cioè \((0,-1)\), come nella fase 1 si è scelto 1 e -1}
+            \end{minipage}
+    \end{tabular}
+\end{figure*}
+Quello che manca ora è di riassumere tutti i vettori che sono stati assegnati durante la ricostruzione della matrice:\begin{equation*}
+    \begin{matrix}
+        P_{1}:\begin{bmatrix}
+            1&1&0
+        \end{bmatrix}\\
+        P_{2}:\begin{bmatrix}
+            0&-1&0
+        \end{bmatrix}\\
+        P_{3}:\begin{bmatrix}
+            0&-1&1
+        \end{bmatrix}\\
+        P_{4}:\begin{bmatrix}
+            0&0&-1
+        \end{bmatrix}\\
+    \end{matrix}
+\end{equation*}
+Per effettuare le verifiche si pone ad uno la/le parties che dovrebbero contribuire a ricostruire il segreto, si effettuano le somme e non si deve ottenere il vettore \(\begin{bmatrix}
+    1&0&0
+\end{bmatrix}\).
+\newpage
+\begin{esempio}[Esercizio]
+    Verifica che la policy proposta rispetta la condizione data:
+    \begin{figure*}[h]
+        \centering
+        \includegraphics[scale=0.4]{2022-01-08-19-34-43.png}% chktex 8
+    \end{figure*}
+\end{esempio}
+\section{Conclusione}
+\begin{figure*}[th]
+    \centering
+    \includegraphics[scale=1]{2022-01-08-19-39-12.png}% chktex 8
+\end{figure*}
+\chapter{Elliptic Curves}
 \end{document}
