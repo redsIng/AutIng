@@ -1,8 +1,8 @@
 \documentclass{book}
 \usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{caption}
 \usepackage{subcaption}
-\usepackage{amssymb}
 \usepackage{picins}
 \usepackage{mathtools}
 \usepackage[calc]{adjustbox}
@@ -17,9 +17,7 @@
 \usepackage[english]{babel}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
-\usepackage{amsthm}
 \usepackage{wrapfig}
-\usepackage{amsmath}
 \usepackage{tikz}
 \usepackage{imakeidx}
 \usepackage[T1]{fontenc}
@@ -1336,7 +1334,7 @@ Restringiamo l'uso delle curve ellittiche non a numeri reali, ma fra interi in m
 		\item \(y^{2}\mod{p}=x^{3}+ax+b \mod{p}\).
 	\end{itemize}
 \end{Definizione}
-Dato che questo campo è finito, allora il numero di punti della curva è finito\@.\newline
+Dato che questo campo è finito, allora il numero di punti della curva è finito\@.\newpage
 \begin{adjustbox}{valign=C,raise=\strutheight,minipage={1.0\linewidth}}
 	\begin{wrapfigure}{r}{0.5\linewidth}
 		\centering
@@ -1354,7 +1352,67 @@ Dato che questo campo è finito, allora il numero di punti della curva è finito
 	Quindi:\begin{equation*}
 		E(Z_{5})=\{O,(0,1),(0,4),(2,1),(2,4),(3,1),(3,4),(4,2),(4,3)\}
 	\end{equation*}
+	Supponiamo di prendere un punto come punto iniziale:\begin{flalign*}
+		&P=(0,1)&\\
+		&P+P=(0,1)+(0,1)&\\
+		&\text{Passo 1: calcolare \(\lambda \)}&\\
+		&\lambda =\frac{3x_{1}^{2}+a}{2y_{1}}=1\cdot 2^{-1}=1\cdot 3=3\mod{5}&\\
+		& \text{\(2^{-1}\mod{5}=2x=1\mod{5}=3\) }&\\
+		&\text{Passo 2: calcolare \(x_{3}\)}&\\
+		&x_{3}=\lambda^{2}-x_{1}-x_{1}=3^{2}=4\mod{5}&\\
+		&\text{Passo 3:calcolare \(y_{3}\)}&\\
+		&y_{3}=\lambda (x_{1}-x_{3})-y_{1}=3(0-4)-1=2\mod{5}&\\
+		&\text{Risultato:\((4,2)\)}&
+	\end{flalign*}
+	Iterando:\begin{align*}
+		P&=(0,1)\\
+		2P&=(0,1)+(0,1)=(4,2)\\
+		3P&=(4,2)+(0,1)=(2,1)\\
+		4P&=(2,1)+(0,1)=(3,4)\\
+		5P&=(3,4)+(0,1)=(3,1)\\
+		6P&=(3,1)+(0,1)=(2,4)\\
+		7P&=(2,4)+(0,1)=(4,3)\\
+		8P&=(4,3)+(0,1)=(0,4)\\
+		9P&=(0,4)+(0,1)=O
+	\end{align*}
+	Notiamo che partendo da P, il gruppo è ciclico.
 \end{esempio}
 \end{adjustbox}
-\section{A caso}
+\subsection{Elliptic Curves Group}
+In conclusione, \((E(Z_{p}),+)\) è un gruppo per cui:\begin{enumerate}
+	\item L'addizione è chiusa su un insieme \(E\) definita dalla curva ellittica;
+	\item L'addizione è commutativa;
+	\item O è l'identità;
+	\item Ogni punto \(P\in E\) possiede l'inversa \(-P\);
+	\item Vale la proprietà associativa;
+	\item è un gruppo abeliano;
+\end{enumerate}
+\subsubsection{Proprietà Elliptic curver group in crypto}
+Sia \(P\) un punto della curva ellittica appartenente al gruppo \(Z_{p}\) e \(k\) intero mod group order:
+\begin{itemize}
+	\item Dato \(P\) e \(k\) è facile calcolare \(k\cdot P\);
+	\item Dato \(P\) e \(kP\) è difficile calcolare \(k\);
+	\item Questo problema è equivalente al problema del DLog in\(Z_{p}\):se abbiamo la notazione moltiplicativa \(k\rightarrow P^{k}\).
+	\item In criptografia si ha una forte dipendenza dalla curva scelta: si estendono questi discorsi oltre che in \(Z_{p}\), ma anche nel campo di Galua.
+\end{itemize}
+\begin{figure*}[h]
+	\centering
+	\includegraphics[scale=1]{2022-01-12-11-39-51.png}% chktex 8
+\end{figure*}
+\chapter{ECDH/ECDSA}
+In qualsiasi problema crittografico, si calcola \(g^{x}\mod{p}\) che nelle curve ellittiche corrisponde a moltiplicare \(x\) volte \(g\) punto appartenente al gruppo della curva.
+\section{ECDH:Elliptic Curves Diffie-Hellman}
+Lo scambio chiavi di Diffie-Hellman con le curve ellittiche funziona esattamente come Diffie-Hellman generale, ma con la differenza che si utilizzare il gruppo delle curve ellittiche.
+\vspace*{0.5cm}
+\begin{figure*}[ht]
+	\centering
+	\includegraphics[scale=0.7]{ECDH.png}
+\end{figure*}
+\begin{enumerate}
+	\item C genera x casuale e calcola \([x]G\) in cui G è una curva ellittica;
+	\item Invia \(G,[x]G\);
+	\item S genera y casuale e calcola \([y]G\), per la proprietà di gruppo (additiva) può calcolare il segreto \([yx]G\) tramite la conoscenza di \(y\);
+	\item Invia \([y]G\);
+	\item C calcola il segreto \([xy]G\);
+\end{enumerate}
 \end{document}
