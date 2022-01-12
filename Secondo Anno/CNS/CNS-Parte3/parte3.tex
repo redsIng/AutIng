@@ -706,9 +706,9 @@ ma noi non siamo a conoscenza di \(\Phi(N)\) e non sempre l'inversa è calcolabi
 Tuttavia, è possibile evitare di effettuare l'inversa tramite lo schema di Shoup:\begin{itemize}
 	\item Assumi \(x_{i}=i\) e \(L\) giocatori;
 	\item Osservando il denominatore del polinomio di Lagrange, nel caso peggiore abbiamo:\begin{equation*}
-		      \Lambda_{i}(x)=\prod_{shares\ k\neq i}{\frac{x-k}{i-k}}=\frac{something(x)}{(i-1)(i-2)\cdots (u-(-1))(i-(i+1))\ codots (i-L)}
+		      \Lambda_{i}(x)=\prod_{shares\ k\neq i}{\frac{x-k}{i-k}}=\frac{something(x)}{(i-1)(i-2)\cdots (u-(-1))(i-(i+1))\cdots (i-L)}
 	      \end{equation*}
-	\item Il denominatore può essere suddiviso in \(i!(L-i)! \) che moltiplicato per \(L\) ritorna \textbf{sicuramente} un intero:\begin{equation*}
+	\item Il denominatore può essere suddiviso in \(i!(L-i)! \) che moltiplicato per \(L! \) ritorna \textbf{sicuramente} un intero:\begin{equation*}
 		      L! \cdot \Lambda_{i}(x):=\overline{\Lambda_{i}}(x)
 	      \end{equation*}
 	\item Modificando la costruzione del capitolo precedente, calcoliamo gli shares computabili INTERI:\begin{equation*}
@@ -729,7 +729,7 @@ Tuttavia, è possibile evitare di effettuare l'inversa tramite lo schema di Shou
 L'unica cosa che rimane da levare è \(L! \) e a tale scopo utilizziamo l'idea del \textbf{RSA Modulus Attack}:\begin{itemize}
 	\item Sia \(L! =\Delta \);
 	\item Abbiamo \({H(m)}^{d\cdot L!}={H(m)}^{d\cdot \Delta}\);
-	\item Vogliamo \({H(m)}^{d}=y\), ma abbiamo \({H(m)}^{d\cdot \Delta }=y\);
+	\item Vogliamo \({H(m)}^{d}=y\), ma abbiamo \({H(m)}^{d\cdot \Delta }=y^{\Delta }\);
 	\item Inoltre \(H(m)={H(m)}^{de}=y^{e}\);
 	\item Se \(e\ \text{e}\ \Delta \) sono coprimi, possiamo applicare l'attacco e ricostruire il messaggio.
 \end{itemize}
@@ -1402,7 +1402,7 @@ Sia \(P\) un punto della curva ellittica appartenente al gruppo \(Z_{p}\) e \(k\
 \chapter{ECDH/ECDSA}
 In qualsiasi problema crittografico, si calcola \(g^{x}\mod{p}\) che nelle curve ellittiche corrisponde a moltiplicare \(x\) volte \(g\) punto appartenente al gruppo della curva.
 \section{ECDH:Elliptic Curves Diffie-Hellman}
-Lo scambio chiavi di Diffie-Hellman con le curve ellittiche funziona esattamente come Diffie-Hellman generale, ma con la differenza che si utilizzare il gruppo delle curve ellittiche.
+Lo scambio chiavi di Diffie-Hellman con le curve ellittiche funziona esattamente come Diffie-Hellman generale, ma con la differenza che si utilizzare il gruppo delle curve ellittiche. Quindi ECDH è un protocollo di accordo delle chiavi.
 \vspace*{0.5cm}
 \begin{figure*}[ht]
 	\centering
@@ -1415,4 +1415,7 @@ Lo scambio chiavi di Diffie-Hellman con le curve ellittiche funziona esattamente
 	\item Invia \([y]G\);
 	\item C calcola il segreto \([xy]G\);
 \end{enumerate}
+\section{ECDSA}
+ECDSA è un protocollo per la firma digitale a modulo di un numero primo da 256 e 384 bit.
+MINUTO 34
 \end{document}
