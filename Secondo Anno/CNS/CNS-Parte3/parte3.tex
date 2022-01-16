@@ -1,7 +1,10 @@
 \documentclass{book}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{float}% http://ctan.org/pkg/float
 \usepackage{caption}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 \usepackage{subcaption}
 \usepackage{picins}
 \usepackage{mathtools}
@@ -10,6 +13,7 @@
 \usepackage{mdwlist}
 \usepackage{xcolor}
 \usepackage{blindtext}
+\usepackage{svg}
 \usepackage[english]{babel}
 \usepackage{tabularx}
 \usepackage{graphicx}
@@ -36,6 +40,7 @@
 \title{Computer and Network Security}
 \author{Lorenzo Rossi}
 \graphicspath{{Images/}}
+\svgpath{{Images/}}
 \newlength{\strutheight}
 \settoheight{\strutheight}{\strut}
 
@@ -1416,6 +1421,210 @@ Lo scambio chiavi di Diffie-Hellman con le curve ellittiche funziona esattamente
 	\item C calcola il segreto \([xy]G\);
 \end{enumerate}
 \section{ECDSA}
-ECDSA è un protocollo per la firma digitale a modulo di un numero primo da 256 e 384 bit.
-MINUTO 34
+ECDSA è un protocollo per la firma digitale a modulo di un numero primo da 256 e 384 bit basato sul DLog.
+\subsection{DSA}
+Nella versione standard di \textbf{DSA} si utilizzano le operazioni modulari in \(Z*(p),p>2\) numero primo e \(q\) strong prime cioè: se p è primo \(p=2q+1\). Inoltre, lo span di \(g^{x}\mod{p}\) comprende tutti gli elementi del gruppo.
+\begin{Importante}
+	Chiave privata \(d\), chiave pubblica \(y=g^{d}\mod{p}\)
+\end{Importante}
+Quando si firma, dobbiamo effettuare le seguenti operazioni:\begin{itemize}
+	\item Generare un valore casuale \(k\in (1,q)\);
+	\item Calcolare \(r=(g^{k}\mod{p})\mod{q}\);
+	\item Calcolare \(s=k^{-1}(H((m)+dr))\mod{q}\);
+	\item la firma:\((r,s)\);
+\end{itemize}
+Per verificare la firma, occorre:\begin{itemize}
+	\item Calcolare \(u_{1}=s^{-1}H(m)\mod{q}\);
+	\item Calcolare \(u_{2}=s^{-1}r\mod{q}\);
+	\item Verificare \(((g^{u_{1}}y^{u_{2}})\mod{p})\mod{q}= r\)
+	\item \(g^{u_{1}}y^{u_{2}}=g^{u_{1}}g^{d\cdot u_{2}}=g^{k}=M\)
+	\item \(u_{1}+d\cdot u_{2}=\frac{H(m)k}{H(m)+rd}+\frac{d\cdot r\cdot k}{H(m)+rd}=k\)
+\end{itemize}
+\subsubsection{Problematiche}
+Nel caso in cui k viene predetto la costruzione porta a dei rischi.Infatti, un attacco che è possibile fare è dovuto all'errore di ottimizzazione nel ricalcolo della curva ellittica in ogni firma:k viene predetto o riutilizzato.
+Quindi, k non deve essere predicibile poiché, altrimenti, si può firmare un qualsiasi messaggio casuale, si può rubare la chiave privata e quindi perdere la propria identità digitale\@.In particolare:
+\begin{algorithm}[H]
+	\caption{K predicted}
+	\begin{algorithmic}
+		\Ensure{\((r,s),\ k\)}
+		\State{\(s=k^{-1}[H(m)+rd]\mod{n}\)}
+		\State{\(sk=H(m)+rd\mod{n}\)}
+		\State{\([sk-H(m)]r^{-1}=d\mod{n}\)}
+		\State{\(d\) viene calcolato}
+	\end{algorithmic}
+\end{algorithm}
+\vspace{0.2cm}
+Invece, nel caso in cui si ripete k:
+\begin{figure*}[h]
+	\centering
+	\includegraphics[scale=0.5]{2022-01-14-10-15-00.png}% chktex 8
+	\caption{K riutilizzato}
+\end{figure*}
+\subsection{ECDSA:setup}
+In ECDSA, dati:\begin{itemize}
+	\item \(E(Z_{p})\) curva ellittica con p numero primo;
+	\item \(n\) differente da p e numero grande;
+	\item \(P\) generatore del gruppo;
+	\item \(Q=[d]P\):\begin{enumerate}
+		\item \(d\) è un intero casuale tra \([1,n-1]\) \textbf{chiave privata};
+		\item \(Q=dP\) punto sulla curva \(chiave pubblica\).
+		\end{enumerate}
+\end{itemize}\newpage
+\subsection{ECDSA:signature generation}
+\begin{algorithm}[H]
+	\caption{Signature generation}
+	\begin{algorithmic}
+		\State{Seleziona casualmente un intero \(k\in [1,n-1]\):\begin{itemize}
+			\item unico per ogni firma;
+			\item non predicibile;
+		\end{itemize}}
+		\State{Calcola il puntto sulla curva ellittica \(kP=(x_{1,y_{1}})\)}:\begin{itemize}
+			\item \(x_{1}\) è un intero \(\mod{P}\)
+		\end{itemize}
+		\State{Calcola \(r=x_{1}\mod{n}\) è un numero e non un punto della curva ellittica}
+		\State{Calcola \(k^{-1}\mod{n}\)}
+		\State{Effettua l'hash del messaggio i.e. SHA}
+		\State{Firma:\((r,s)\quad s=k^{-1}(H(m)+dr)\)}
+	\end{algorithmic}
+\end{algorithm}
+\subsection{ECDSA:verification}
+\begin{algorithm}
+	\caption{Signature verification}
+	\begin{algorithmic}
+		\Ensure{Ricevo \(m\ (r,s)\) con \(s=k^{-1}(H(m)+dr)\)}
+		\State{Prendo il messaggio \(m\) e calcolo \(H(m)\)}
+		\State{Prendo \(s=\frac{H(m)+rd}{k}\) e calcolo \(w=s^{-1}\mod{n}=\frac{k}{H(m)+rd}\)}
+		\State{Calcola:\begin{itemize}
+			\item \(u_{1}=H(m)w\mod{n}\)
+			\item \(u_{2}=rw\)
+		\end{itemize}}
+		\State{Calcola il punto della curva ellttica:\begin{itemize}
+			\item \(u_{1}P+u_{2}Q=(x_{0},y_{0})\)
+			\item è possibile grazie alla proprietà homomorphic:\begin{equation*}
+				u_{1}P+u_{2}Q=u_{1}P+u_{2}dP=(u_{1}+u_{2}d)P=\frac{H(m)k}{H(m)+rd}+\frac{rkd}{H(m)+rd}=\frac{k(H(m)+rd)}{H(m)+rd}=kP
+			\end{equation*}
+		\end{itemize}}
+		\State{Calcola \(v=x_{0}\mod{n}\)}
+		\State{verifica che \(v=r\)}
+	\end{algorithmic}
+\end{algorithm}
+\subsection{Considerazioni}
+L'operazione più costosa rispetto a quella modulare è quella fatta fra le curve ellittiche poiché dipende da quante operazioni si devono effettuare sulla curva ellittica. Infatti:
+\begin{itemize}
+	\item una per generare la chiave pubblica Q\@;
+	\item calcolare kP\@;
+\end{itemize}
+Quindi per questo si è tentati di riutilizzare la stessa k perché, così facendo, si abbassa il costo computazionale dovuto all'utilizzo delle curve ellittiche.
+\chapter{Bilinear Maps}
+Il \textbf{bilinear maps} viene utilizzato nelle tecniche di crittografia dette \textbf{pairing-based crypto}: si hanno molti gruppi i cui punti vengono trasformati in altri gruppi.
+\section{Definizioni}
+\begin{Definizione}[Bilinear Map]
+	Siano \(G_{1},G_{2},G_{t}\) gruppi ciclici dello stesso gruppo. Una \textbf{mappa bilineare} da \(G_{1}\times G_{2}\rightarrow G_{t}\) è una funzione \(e:G_{1}\times G_{2}\rightarrow G_{t}\) tale che per tutti \(u\in G_{1},\ v\in G_{2},\ a,b\in \mathbb{Z}\) valga:\begin{equation*}
+		e(u^{a},v^{b})={e(u,v)}^{ab}
+	\end{equation*}
+\end{Definizione}
+\begin{Importante}
+	Vengono dette \textbf{pairings} perché associano coppie di elementi di \(G_{1},G_{2}\) con gli elementi di \(G_{t}\).
+\end{Importante}
+\begin{Definizione}[Admissible Bilinear Map]
+	Sia \(e:G_{1}\times G_{2}\rightarrow G_{t}\) e \(g_{1},g_{2}\) generatori di \(G_{1},G_{2}\) rispettivamente. La mappa \(e\) è una \textbf{mappa bilineare ammissibile} se \(e(g_{1},g_{2})\) genera \(G_{t}\) e \(e\) è efficientemente calcolabile.
+\end{Definizione}
+\section{Relazione tra \(G_{1},G_{2},G_{t}\)}
+\begin{itemize}
+	\item \(G_{1},G_{2},G_{t}\) sono tutti gruppi isomorphic di un altro gruppo dato che hanno in comune lo stesso gruppo ciclico;
+	\item Sono differenti poiché i loro elementi vengono calcolati in maniera differenti;
+	\item Di solito, \(G_{1}=G_{2}\);
+	\item etc\dots;
+\end{itemize}
+\section{Decisional Diffie-Hellman}
+\begin{Definizione}[Decisional Diffie-Hellman]
+	Dati \(g,g^{a},g^{b}\) e \(\alpha = \{g^{ab},g^{random}\} \). Sapendo che è possibile conoscere il valore \(\alpha \) con un coin flip (una tra le due alternative), è possibile distinguere quale sia il valore? (il vero valore di DH o quello casuale)\newline
+	Un gruppo soddisfa il Decisional Diffie-Hellman DDH se non è possibile distinguere tra il numero casuale e il vero coefficiente di Diffie-Hellman.
+\end{Definizione}
+Se siamo in grado di calcolare Diffie-Hellman, allora non si soddisfa DDH e DH ma non vale il contrario.\newline
+Questo problema è differente da quello computazionale di DH.A tale scopo, supponiamo che stiamo affrontando questo problema con ECDDH:\begin{itemize}
+	\item Dati \(G,G^{a},G^{b}\) con bilinear pairing:\begin{equation*}
+		e(g^{a},g^{b})={e(g,g)}^{ab}
+	\end{equation*} (in modulo);
+	\item Obiettivo: rompere DDH
+\end{itemize}
+Il pairing non ci consente, di norma, di calcolare il termine \(g^{ab}\) poiché è una operazione della curva ellittica, ma trasforma i punti in altri. Quindi, non si rompe Diffie-Hellman\@.\newline
+Supponiamo di avere \(g,g^{a},g^{b}\) (\emph{Punti della curva ellittica}) e chiamiamo il generatore del gruppo \(g_{t}={e(g,g)}\) (\emph{Punti in \(Z_{p}\)}). Ora, se prendo due punti \(g^{a},b^{b}\) e applico pairing ottengo \(e(g^{a},g^{b})=g_{t}^{ab}\) ma non ho rotto DH dato che non è un punto sulla curva ellittica. Tuttavia, posso prende il termine \(\alpha \) e considerare questo scenario:\begin{equation*}
+	e(g,\alpha )=\begin{cases}
+		e(g^{1},g^{ab})=g_{t}^{1\cdot ab}\\
+		e(g,g^{Z})=g_{t}^{z}\neq g^{ab}
+	\end{cases}
+\end{equation*}
+Assunto che precedentemente il valore \(g_{t}^{ab}\), se il valore \(\alpha \) da noi scelto ci porta allo stesso risultato allora era il coefficiente di Diffie-Hellman.
+\section{Discrete Log}
+\begin{theorem}
+	Se esiste una mappa bilineare \(e:G\times G\rightarrow G_{t}\), allora il problema DLOG in \(G\) non è più difficile del DLOG in \(G_{t}\)
+\end{theorem}
+\section{Group Diffie-Hellman}
+Vogliamo provare applicare Diffie-Hellman per key agreement con più parties. Di base ciò non è possibile a meno che non si apportino delle modifiche ed occorre scambiare più di un messaggio fra le parties.
+\subsection{Joux Scheme}
+Si applica il pairing per effettuare uno schema Diffie-Hellman con più di due parties\@.\newline
+Dati \(X,Y,Z\) parti con relativi valori \(x,y,z\) e concessa la possibilità di utilizzare pairings \(e(g,g)=g_{t}\) vogliamo effettuare un key agreement.\newline
+\begin{figure*}[ht]
+	\begin{subfigure}[tl]{0.35\textwidth}
+		\centering
+		\includegraphics[scale=0.3]{joux1.png}
+		\caption{Fase 1: si \(X,Y,Z\) generano e pubblicano i valori\(g^{x},g^{y},g^{z}\)}.
+	\end{subfigure}
+	\begin{subfigure}[l]{0.50\textwidth}
+		\centering
+		\includegraphics[scale=0.3]{joux2.png}
+		\caption{Fase 2: per esempio Z riceve \(g^{x},g^{y}\), potendo così calcolare \(g^{xz},g^{yz}\)} ma non può ancora calcolare \(g^{xzy}\) (Diffie-Hellman), ma è come se stessimo affrontando un problema di Secret Sharing: posso applicare il pairing. Ottenendo:\(e(g^{xz,g^{y}})={e(g,g)}^{xyz}\). Questo rappresenta il segreto condiviso.
+	\end{subfigure}
+\end{figure*}
+\begin{Importante}
+	Questo procedimento funziona solamente a 3. Se lo dovessimo fare anche per uno schema a 4 parties non funziona per lo stesso problema che si aveva nello schema a 2.
+\end{Importante}
+\section{Identity-based Encryption}
+Nell'\textbf{identity-based encryption} vogliamo uno schema crittografico a chiave pubblica in cui la chiave pubblica \textbf{PK} è una stringa leggibile (per esempio nome utente).
+\subsection{Schema Boneh e Franklin: Identity Based Encryption}
+\begin{itemize}
+	\item Sia \(G\) un gruppo di ordine \(q\) primo, \(e:G\times G\rightarrow G_{t}\) una mappa bilineare, e \(g\) un generatore di \(G\);
+	\item Sia \(\hat{g}=e(g,g)\in G_{t}\);
+	\item Siano \(h_{1}:{0,1}*\rightarrow G\) e \(h_{2}:G_{t}\rightarrow {0,1}*\) hash functions: la prima è una hash function che prende una stringa di bit e ne effettua l'hash su un punto di una curva ellittica;la seconda funzione hash prende un punto su una curva ellittica e ne effettua l'hash in una stringa di bit.
+\end{itemize}
+\begin{Importante}
+	Questi parametri sono tutti pubblici.
+\end{Importante}\newpage
+\subsection{Scheme}
+\setlength\intextsep{0pt}
+\begin{wrapfigure}[7]{R}[0pt]{0pt}
+	\centering
+	\includegraphics[scale=0.25]{ibes.png}
+\end{wrapfigure}
+Supponiamo che Alice voglia mandare dei dati cifrati a BOB, BOB riceve il messaggio e la sua public key è il suo nome \(PK_{BOB}=BOB\) e un PKG (public key generator) \(s\) chiave privata e \(g^{s}\) chiave pubblica.
+\subsubsection{Scheme:Encryption}
+Se alice vuole Inviare un messaggio \(m\) a BOB, genera un numero casuale \(r\leftarrow{\text{R}}Z_{q}\) e calcola:
+\begin{align*}
+	ENC(g,g^{s},BOB,m)&=
+	(g^{r},m\bigoplus h_{2}({e(h_{1}(BOB),g^{s})}^{r}))\\
+	&=(g^{r},m\bigoplus h_{2}({e(h_{1}(BOB),g)}^{rs}))
+\end{align*}
+PKG, genera la chiave privata di BOB come:\begin{equation*}
+	MakeKey(s,BOB)=h_{1}(BOB)
+\end{equation*}
+\subsubsection{Scheme:Decryption}
+Dato un messaggio cifrato \((u,v)=(g^{r},m\bigoplus {h_{2}(e(h_{1}(BOB),g))}^{rs})\) e la chiave privata \(w=h_{1}(BOB)\), BOB decifra come segue:
+\begin{align*}
+	DEC(u,v,w)&=v\bigoplus h_{2}(e(w,u))\\
+	&=m\bigoplus h_{2}{(e(h_{1}(BOB),g))}^{rs}\bigoplus h_{s}(e({h_{1}(BOB)}^{s},g^{r}))\\
+	&=m\bigoplus h_{2}({e(h_{1}(BOB),g)}^{*rs})\bigoplus h_{2}({e(h_{1}(BOB),g)}^{rs})\\
+	&=m
+\end{align*}
+\subsubsection{Summary}
+\begin{figure*}[ht]
+	\centering
+	\includegraphics[scale=0.36]{ibes1.png}% chktex 8
+\end{figure*}
+\subsection{Considerazioni}
+Con questa schema ci siamo tolte tutte le problematiche dovute alla presenza dei Certification Authority, ma con l'impiego dei PKG stiamo dando molto potere a una terza parte che ha il compito di generare (e non più solamente di verificare) la chiave privata del destinatario. PKG potrebbe prendere l'identità di BOB\@.\newline
+TUttavia per ovviare a questo problema si utilizzano più PKG che condividono lo stesso segreto s:\@distributed PKGs. Questo sistema è più semplice da gestire e da setuppare e quindi è più conveniente.
+\begin{esempio}[Esercizio]
+	Spiegare come si può implementare un Distributed PKG
+\end{esempio}
 \end{document}
