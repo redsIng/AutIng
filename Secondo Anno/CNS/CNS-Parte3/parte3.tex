@@ -122,12 +122,12 @@ Infatti conoscendo un solo punto (shares) ho infinite rette passanti per quel pu
 	\item Interpola i punti per ricostruire l'equazione della retta:
 	      \begin{equation*}
 		      \centering
-		      \frac{y-y_{i}}{y_{i}-y_{j}}=\frac{x-x_{i}}{x_{i}-x_{j}}
+		      \frac{y-y_{i}}{y_{j}-y_{i}}=\frac{x-x_{i}}{x_{j}-x_{i}}
 	      \end{equation*}
 	      Ottenendo:
 	      \begin{equation*}
 		      \centering
-		      y=y_{i}+\frac{x-x_{i}}{x_{i}-x_{j}}(y_{i}-y_{j})
+		      y=y_{i}+\frac{x-x_{i}}{x_{j}-x_{i}}(y_{j}-y_{i})
 	      \end{equation*}
 	\item Bisogna sostituire \(x=0\) per ottenere il segreto \(y=S\);
 \end{itemize}
@@ -189,7 +189,7 @@ Lo schema di Shamir in questo senso non è sicuro poiché se conoscessi a priori
 	Ora, occorre calcolare i valori di lambda, supponendo di aver collezionato \(x_{1},x_{2},x_{3}\), come
 	\begin{equation*}
 		\centering
-		\Lambda_{i}(x)=\prod_{m=1,m\neq1}^{l}{\frac{x-x_{m}}{x_{i}-x_{m}}}\quad \Lambda_{i}(x_{i})=1;\quad \Lambda_{i}(x_{m})=0\quad for\ m\neq i
+		\Lambda_{i}(x)=\prod_{m=1,m\neq i}^{l}{\frac{x-x_{m}}{x_{i}-x_{m}}}\quad \Lambda_{i}(x_{i})=1;\quad \Lambda_{i}(x_{m})=0\quad for\ m\neq i
 	\end{equation*}
 	Ottenendo:
 	\begin{equation*}
@@ -1527,7 +1527,7 @@ Il \textbf{bilinear maps} viene utilizzato nelle tecniche di crittografia dette 
 	Vengono dette \textbf{pairings} perché associano coppie di elementi di \(G_{1},G_{2}\) con gli elementi di \(G_{t}\).
 \end{Importante}
 \begin{Definizione}[Admissible Bilinear Map]
-	Sia \(e:G_{1}\times G_{2}\rightarrow G_{t}\) e \(g_{1},g_{2}\) generatori di \(G_{1},G_{2}\) rispettivamente. La mappa \(e\) è una \textbf{mappa bilineare ammissibile} se \(e(g_{1},g_{2})\) genera \(G_{t}\) e \(e\) è efficientemente calcolabile.
+	Sia \(e:G_{1}\times G_{2}\rightarrow G_{t}\) e \(g_{1},g_{2}\) generatori di \(G_{1},G_{2}\) rispettivamente. La mappa \(e\) è una \textbf{mappa bilineare ammissibile} se \(e(g_{1},g_{2})\) genera \(G_{t}\) ed \(e\) è efficientemente calcolabile.
 \end{Definizione}
 \section{Relazione tra \(G_{1},G_{2},G_{t}\)}
 \begin{itemize}
@@ -1586,7 +1586,7 @@ Nell'\textbf{identity-based encryption} vogliamo uno schema crittografico a chia
 \begin{itemize}
 	\item Sia \(G\) un gruppo di ordine \(q\) primo, \(e:G\times G\rightarrow G_{t}\) una mappa bilineare, e \(g\) un generatore di \(G\);
 	\item Sia \(\hat{g}=e(g,g)\in G_{t}\);
-	\item Siano \(h_{1}:{0,1}*\rightarrow G\) e \(h_{2}:G_{t}\rightarrow {0,1}*\) hash functions: la prima è una hash function che prende una stringa di bit e ne effettua l'hash su un punto di una curva ellittica;la seconda funzione hash prende un punto su una curva ellittica e ne effettua l'hash in una stringa di bit.
+	\item Siano \(h_{1}:\{0,1\}\rightarrow G\) e \(h_{2}:G_{t}\rightarrow \{0,1\} \) hash functions: la prima è una hash function che prende una stringa di bit e ne effettua l'hash su un punto di una curva ellittica;la seconda funzione hash prende un punto su una curva ellittica e ne effettua l'hash in una stringa di bit.
 \end{itemize}
 \begin{Importante}
 	Questi parametri sono tutti pubblici.
@@ -1612,7 +1612,7 @@ PKG, genera la chiave privata di BOB come:\begin{equation*}
 Dato un messaggio cifrato \((u,v)=(g^{r},m\bigoplus {h_{2}(e(h_{1}(BOB),g))}^{rs})\) e la chiave privata \(w=h_{1}(BOB)\), BOB decifra come segue:
 \begin{align*}
 	DEC(u,v,w)&=v\bigoplus h_{2}(e(w,u))\\
-	&=m\bigoplus h_{2}{(e(h_{1}(BOB),g))}^{rs}\bigoplus h_{s}(e({h_{1}(BOB)}^{s},g^{r}))\\
+	&=m\bigoplus h_{2}{(e(h_{1}(BOB),g))}^{rs}\bigoplus h_{2}(e({h_{1}(BOB)}^{s},g^{r}))\\
 	&=m\bigoplus h_{2}({e(h_{1}(BOB),g)}^{*rs})\bigoplus h_{2}({e(h_{1}(BOB),g)}^{rs})\\
 	&=m
 \end{align*}
