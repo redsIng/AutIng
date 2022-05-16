@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, top=2cm, bottom=2cm, left=1.5cm, right=1.5cm}
+\graphicspath{{Images/}}
+
+
+\begin{document}
+\tableofcontents
+\part{Topologia Magnetica}
+\section{Tokamak}
+\subsection{Struttura}
+Il Tokamak si basa su tre gruppi elettromagnetici:\begin{itemize}
+    \item campo toroidale: funge da manicotto e confina il plasma;
+    \item magneti centrale che appartendono al trasformatore e incuono corrente nel plasma che fluisce torodialmente;
+    \item magneti del campo verticale: agiscono in modo da stabilizzare il plasma e vincolarlo al centro del toro.
+\end{itemize}
+\subsection{Confinamento}
+Per far avvenire la scarica di plasma, il tokamak deve raggiungere la cosiddetta configurazione di confinamento in cui la risultante del campo magnetico toroidale e poloidale è un campo magnetizo elicoidale: le particelle di plasma si avvitano toroidalmente in superfici isobare di flusso.
+\subsection{Scarica}
+Durante l'avviamento di un esperimento nel tokamak si inizia crea il vuoto all'interno del vessel e si inietta una miscela di deuterio e trizio all'interno nella camera da vuoto. A questo punto, si innalza il campo toroidale, si ha un ramp up del flusso nel trasformatore per ottenere un alto campo elettrico per poi essere interrotto. Così facendo si crea una differenza di potenziale che avvia un breakdown del plasma: gli elettroni, accelerati dal campo elettrico, guadagnano energia. Questi quando urtano gli atomi di deuterio e trizio lo possono ionizzare e generare un nuovo elettrone. Questo fenomeno si ripete esponenzialmente (avalanche) così da giungere al breakdown del plasma.\newline
+Una volta che è trascorso il breakdown viene aviato il controllo in feedback del plasma.
+\section{Ruolo delle misure magnetiche}
+Le misure magnetiche si possono dividere in due macrocategorie:
+\begin{itemize}
+    \item \textbf{Operazioni real time}:\begin{enumerate}
+        \item \textbf{Posizione del plasma e controllo di forma};
+        \item \textbf{Sistema di protezione};
+        \item \textbf{Misurazioni};
+    \end{enumerate}
+    \item \textbf{Analisi offline}:
+    \begin{enumerate}
+        \item Ricostruzioni magnetiche: superfici di flusso e il bordo del plasma. Sono molto impoortanti per correggere e interpretare le informazioni contenuta in una scarica;
+        \item Analisi MHD
+    \end{enumerate}
+\end{itemize}
+\section{Sensori Induttivi}
+Il tokamak possiede delle diagnostiche basate su sensori induttivi: sono dei sensori che risentono delle variazioni del campo magnetico in forma integrale o derivativa.\\
+I sensori induttivi si basano sulla legge di Faraday: la forza elettromotiva indozza è proporzionale alla derivata del flusso di campo magnetico.\begin{equation}
+    fem=-\frac{d \Phi\langle B\rangle }{dt}
+\end{equation}
+Tuttavia in pratica quello che lo strumento ritorna sono valori di tensione che tramite la relazione:
+\begin{equation}
+    V=-NA\langle \dot{B}\rangle 
+\end{equation}
+Integrando nel tempo si può avere una misuare del flusso del campo magnetico:\begin{equation}
+    \Phi=NA\langle B\rangle =-\int Vdt+const
+\end{equation}
+Di seguito si illustreranno i sensori induttivi installati in un tokamak.
+\subsubsection{Rogowski Coil}
+Le bobine Rogowski sono delle bobine solenoidali che si avvolgono lungo la sezione poloidale del toro. Queste forniscono una misura diretta della corrente che fluisce nel suo centro.\newline L'equazione che la caratterizza è:\begin{equation}
+    \Phi = nA \oint B dl \mu_{0}nAI_p=-\int V dt+const
+\end{equation}
+Bisogna ricordare che:
+\begin{itemize}
+    \item Le misure di corrente non dipendono sulla forma del rogowski ne dalla distribuzione di corrente nel plasma;
+    \item Il cammino degli avvolgimenti del solenoide devono ritornare sullo stesso asse in cui sono iniziate;
+    \item Le bobine Rogowski possono essere sostituite da un set di bobine tangenti alla camera.
+\end{itemize}
+\subsection{Voltage Loop / Flux Loop}
+Il Voltage Loop è una singolo cavo che avvolge la camera toroidalmente ed ha il compito di misurare la tensione indotta dal trasformatore centrale. La tensione ai capi della bobina vengono inviato ad un DAS che ne calcola il valore.
+\subsection{Pick-Up Coils}
+Le Pick-up Coils sono bobine poste al bordo del vessel utilizzare per ricostruisce l'equilibrio, per controllare il plasma e rilevare le instabilità MHD.% chktex 13
+\subsection{Saddle Coils}
+Le bobine Saddle sono bobine estese montate sulla camera da vuora che permettono di misuare il flusso magnetico perpendicolare a loro stessi. Inoltre, sono utilizzate per la ricostruzione dell'equilibrio e possono fornire in totale misure del flusso poloidale. In quest'ultimo caso, si ottengono misure integrali del flusso poloidale che devono essere derivare con un flusso di riferimento per ottenere una informazione.
+\subsection{Loop Diamagnetico}
+Sappiamo che il plasma, dall'equazione dell'equilibrio \(j\times B=\nabla p\) le particelle del plasma si dispongono lungo superficie isobare e che l'equilibrio sviluppa delle correnti poloidali che riducono il campo magnetico. Questo specifico comportamento viene detto \textbf{diamagnetismo}.\\
+Al fine di misurare l'energia del plasma dal flusso toroidale si utilizza il Loop Diamagnetico. Questa misura risulta non semplice dato che l'effetto diamagnetico è molto piccolo.\newline
+Infine, risulta una diagnostica che soffre dell'allineamento.
+\subsection{}
+\end{document}
