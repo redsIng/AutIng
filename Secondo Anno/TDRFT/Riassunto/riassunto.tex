@@ -47,7 +47,7 @@ Integrando nel tempo si può avere una misuare del flusso del campo magnetico:\b
     \Phi=NA\langle B\rangle =-\int Vdt+const
 \end{equation}
 Di seguito si illustreranno i sensori induttivi installati in un tokamak.
-\subsubsection{Rogowski Coil}
+\subsection{Rogowski Coil}
 Le bobine Rogowski sono delle bobine solenoidali che si avvolgono lungo la sezione poloidale del toro. Queste forniscono una misura diretta della corrente che fluisce nel suo centro.\newline L'equazione che la caratterizza è:\begin{equation}
     \Phi = nA \oint B dl \mu_{0}nAI_p=-\int V dt+const
 \end{equation}
@@ -67,5 +67,45 @@ Le bobine Saddle sono bobine estese montate sulla camera da vuora che permettono
 Sappiamo che il plasma, dall'equazione dell'equilibrio \(j\times B=\nabla p\) le particelle del plasma si dispongono lungo superficie isobare e che l'equilibrio sviluppa delle correnti poloidali che riducono il campo magnetico. Questo specifico comportamento viene detto \textbf{diamagnetismo}.\\
 Al fine di misurare l'energia del plasma dal flusso toroidale si utilizza il Loop Diamagnetico. Questa misura risulta non semplice dato che l'effetto diamagnetico è molto piccolo.\newline
 Infine, risulta una diagnostica che soffre dell'allineamento.
-\subsection{}
+\subsection{Sensori di Hall}
+Una delle problematiche delle diagnostiche a bobine magnetiche è che le misurazioni del campo magnetico rispondono a cambiamenti della derivata del campo magnetico. Ciò implica che in un campo magnetico stazionario queste bobine risultano inutili finché non vengono mosse all'interno del campo.\newline
+Per questi tipi di campi si è deciso di introdurre delle diagnostiche che si basasserò sull'effetto Hall.\newline
+L'effetto Hall è un fenomeno fisico proprio del plasma in cui si considera il plasma come un semiconduttore solido. In particolare, una lastra di semiconduttore è immersa in un campo magnetico. Una corrente attraversa la lastra e viene affetta dalla forza di Lorentz, deviando perpendicolarmente al prodotto vettoriare tra j e B.\newline
+La carica risultante sulle facce della lastra genera un campo elettrico addizionale che cancella la forza magnetica. Quest'ultimo campo elettrico viene misurato dai sensori.
+\section{Sistemi di riscaldamento addizionali}
+Il principale meccanismo utilizzato nel tokamak per accellerare le particelle è il riscaldamento ohmico. Tuttavia, non è necessario ad accellerare le particelle quanto dovuto dato che questo tipo di risaldamento risulta inefficace ad alte temperature. Questo difetto è dovuto alla resistitività del plasma che diminuisce con l'aumentare della temperatura.\newline
+Si necessitano di riscaldamenti addizionali per raggiungere le temperature necessarie. Esse sono basate su riscaldamento da particelle \(\alpha\), su onde elettromagnetiche e su iniezione di particelle neutre.
+\subsection{Diagnostiche su atomi neutri}
+Le diagnostiche basate su atomi neutri nel plasma sono importanti per plasmi confinati elettromagneticamente poiché essi, essendo neutri, attraversano le linee di campo. Possono essere quindi sfruttati per ottenere delle informazioni sul centro del plasma.\newline
+Per creare un fascio neutro si utilizza una miscela da cui si producono gli ioni di deuterio o idrogeno (per maggiore efficienza si sono scelti ioni negativi), a questo punto vengono accellarati da un campo magnetico orizzontale, vengono neutralizzati e poi iniettati all'interno del plasma. Le linee guida per l'iniezione di un fascio neutro sono i seguenti:\begin{itemize}
+    \item Le particelle neutre viaggiano inalterate attraverso i campi magnetici;
+    \item Il beam trasferisce energia al plasma attraverso le collisioni;
+    \item L'assorbimento del fascio deve avvenire al centro del plasma. Se abbiamo fomato un fascio debole allora verrà assorbito nel bordo del plasma; se troppo forte o mal direzionato può bucare la camera da vuoto;
+    \item L'assorbimento del fascio dipende dalla sezione d'urto tra il fascio e il plasma;
+\end{itemize}
+Schematicamente:
+\begin{figure}
+    \includegraphics[scale=0.4]{2022-05-17-22-03-45.png}% chktex 8
+\end{figure}
+\subsection{Electron Cyclotron Resonant Heating}
+Le cosiddette ECRH sono riscaldamenti addizionali basati su onde radio per trasferire energia da una sorgente esterna al plasma. Quando una onda elettromagnetica si propaga attraverso il plasma, il campo elettrico dell'onda accellera le particella cariche e quindi aumenta il numero di collisioni di queste nel plasma.\newline
+In particolare, si ha assorbimento dell'onda quando si è in risonanza, tuttavia essendo il plasma non uniforme si possono avere anche fenomeni di riflessioni. Ne risulta quindi che la polarizzazione dell'onda gioca un ruolo molto importante sulla forza dell'onda e sulla regione di assorbimento. Vi sono principalmente due distinzioni di polarizzazioni che sono dipendenti dal campo magnetico nel plasma:\begin{itemize}
+    \item O-Mode: parallelo al campo magnetico e inconrano solamente una frequenza di risonanza e un di cut-off ;
+    \item X-Mode: perpendicolare al campo magnetico
+\end{itemize}
+Un altro fenomeno che potrebbe risentire il fascio è quello della rifrazione quando si trannano plasmi di alta densità.
+\section{Thomson Scattering}
+Per misurare la temperature e la densità del plasma si sfrutta il fenomeno del Thomson Scattering. In particolare si inietta nel plasma un fascio laser e se ne misura sia la luce diffusa che la larghezza spettrale.\newline
+Le misure di larghezza fornisco delle informazioni sulla temperatura e l'intensità della luce diffusa sulla densità degli elettroni. Le ragioni principali per cui si è introdotta questa diagnostica sono due:\begin{itemize}
+    \item è un metodo che non perturba l'equilibrio del plasma poiché si richiede solo l'accesso alle radiazioni del plasma;
+    \item permette di avere delle informazioni dettagliate sulla funzione di distribuzione degli elettroni.
+\end{itemize}
+Si ha una onda elettromagnetica incidente su una particella che viene accelerata dai campi elettromagnetici dell'onda. Durante l'urto si ha una emissione di una radiazione detta scattered wave. Questa radiazione viene misurata dagli spettrometri a filtri policromatrici.
+Dato che occorre che il posizionamento delle ottiche sia ottimale, la calibrazione diventa fondamentale per ottenere misurazioni della densità di elettroni. Essa viene effettuata utilizzando altri gas.
+\section{Polarimetro}
+Il polarimetro è necessario per ottenere informazioni sulla densità e corrente di plasma.
+\section{Interferometro}
+\section{MSE}
+\section{Neutronica}
+\section{Disruzioni}
 \end{document}

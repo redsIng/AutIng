@@ -2,12 +2,21 @@
 \contentsline {section}{\numberline {1}Tokamak}{1}{}%
 \contentsline {subsection}{\numberline {1.1}Struttura}{1}{}%
 \contentsline {subsection}{\numberline {1.2}Confinamento}{1}{}%
-\contentsline {subsection}{\numberline {1.3}Scarica}{1}{}%
-\contentsline {section}{\numberline {2}Ruolo delle misure magnetiche}{1}{}%
+\contentsline {subsection}{\numberline {1.3}Scarica}{2}{}%
+\contentsline {section}{\numberline {2}Ruolo delle misure magnetiche}{2}{}%
 \contentsline {section}{\numberline {3}Sensori Induttivi}{2}{}%
-\contentsline {subsubsection}{\numberline {3.0.1}Rogowski Coil}{2}{}%
-\contentsline {subsection}{\numberline {3.1}Voltage Loop / Flux Loop}{2}{}%
-\contentsline {subsection}{\numberline {3.2}Pick-Up Coils}{2}{}%
-\contentsline {subsection}{\numberline {3.3}Saddle Coils}{2}{}%
-\contentsline {subsection}{\numberline {3.4}Loop Diamagnetico}{2}{}%
-\contentsline {subsection}{\numberline {3.5}}{3}{}%
+\contentsline {subsection}{\numberline {3.1}Rogowski Coil}{2}{}%
+\contentsline {subsection}{\numberline {3.2}Voltage Loop / Flux Loop}{3}{}%
+\contentsline {subsection}{\numberline {3.3}Pick-Up Coils}{3}{}%
+\contentsline {subsection}{\numberline {3.4}Saddle Coils}{3}{}%
+\contentsline {subsection}{\numberline {3.5}Loop Diamagnetico}{3}{}%
+\contentsline {subsection}{\numberline {3.6}Sensori di Hall}{3}{}%
+\contentsline {section}{\numberline {4}Sistemi di riscaldamento addizionali}{3}{}%
+\contentsline {subsection}{\numberline {4.1}Diagnostiche su atomi neutri}{3}{}%
+\contentsline {subsection}{\numberline {4.2}Electron Cyclotron Resonant Heating}{4}{}%
+\contentsline {section}{\numberline {5}Thomson Scattering}{4}{}%
+\contentsline {section}{\numberline {6}Polarimetro}{4}{}%
+\contentsline {section}{\numberline {7}Interferometro}{4}{}%
+\contentsline {section}{\numberline {8}MSE}{4}{}%
+\contentsline {section}{\numberline {9}Neutronica}{4}{}%
+\contentsline {section}{\numberline {10}Disruzioni}{4}{}%
