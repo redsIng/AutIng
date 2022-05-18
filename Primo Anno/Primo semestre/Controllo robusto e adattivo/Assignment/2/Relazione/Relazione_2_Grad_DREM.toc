@@ -1,0 +1,13 @@
+\beamer@sectionintoc {1}{Introduzione}{3}{0}{1}
+\beamer@sectionintoc {2}{Modello teorico}{4}{0}{2}
+\beamer@sectionintoc {3}{Implementazione Simulink}{5}{0}{3}
+\beamer@subsectionintoc {3}{1}{Parametrizzazione}{5}{0}{3}
+\beamer@subsectionintoc {3}{2}{Gradiente}{6}{0}{3}
+\beamer@subsectionintoc {3}{3}{DREM}{7}{0}{3}
+\beamer@subsubsectionintoc {3}{3}{1}{Filtro e Stimatore DREM}{8}{0}{3}
+\beamer@subsectionintoc {3}{4}{Sistema complessivo}{9}{0}{3}
+\beamer@sectionintoc {4}{Analisi}{10}{0}{4}
+\beamer@subsectionintoc {4}{1}{Ingresso gradino}{10}{0}{4}
+\beamer@subsectionintoc {4}{2}{Ingresso Sinusoidale}{11}{0}{4}
+\beamer@subsectionintoc {4}{3}{Gradiente e DREM a confronto}{12}{0}{4}
+\beamer@sectionintoc {5}{Conclusioni}{13}{0}{5}

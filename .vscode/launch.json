@@ -5,6 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch HelloWorld",
+            "request": "launch",
+            "mainClass": "HelloWorld",
+            "projectName": "AutIng_e2b0c56b"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
             "type": "OctaveDebugger",
             "request": "launch",
             "name": "Launch Program",
@@ -20,8 +33,5 @@
             "exec": "octave-cli",
             "program": "${command:AskForProgramName}"
         }
-        
-    
-    
     ],
 }

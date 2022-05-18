@@ -1,6 +1,6 @@
-<TeXmacs|1.99.13>
+<TeXmacs|2.1.1>
 
-<style|<tuple|generic|italian|maxima>>
+<style|<tuple|generic|italian|maxima|old-lengths>>
 
 <\body>
   <\eqnarray*>
@@ -1432,7 +1432,7 @@
     <\input>
       <with|color|red|(<with|math-font-family|rm|%i>115) >
     <|input>
-      \;
+      gradef(q[1])
     </input>
   </session>
 

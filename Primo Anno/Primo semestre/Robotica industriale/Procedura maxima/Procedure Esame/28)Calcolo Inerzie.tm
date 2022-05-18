@@ -1,4 +1,4 @@
-<TeXmacs|1.99.17>
+<TeXmacs|2.1.1>
 
 <style|<tuple|generic|italian|maxima>>
 
@@ -825,8 +825,113 @@
       >><matrix|<tformat|<table|<row|<cell|<frac|2*M*R<rsup|4>+2*R<rsub|1>*M*R<rsup|3>+2*R<rsub|1><rsup|2>*M*R<rsup|2>+2*R<rsub|1><rsup|3>*M*R+2*R<rsub|1><rsup|4>*M|5*R<rsup|2>+5*R<rsub|1>*R+5*R<rsub|1><rsup|2>>>|<cell|0>|<cell|0>>|<row|<cell|0>|<cell|<frac|2*M*R<rsup|4>+2*R<rsub|1>*M*R<rsup|3>+2*R<rsub|1><rsup|2>*M*R<rsup|2>+2*R<rsub|1><rsup|3>*M*R+2*R<rsub|1><rsup|4>*M|5*R<rsup|2>+5*R<rsub|1>*R+5*R<rsub|1><rsup|2>>>|<cell|0>>|<row|<cell|0>|<cell|0>|<cell|<frac|2*M*R<rsup|4>+2*R<rsub|1>*M*R<rsup|3>+2*R<rsub|1><rsup|2>*M*R<rsup|2>+2*R<rsub|1><rsup|3>*M*R+2*R<rsub|1><rsup|4>*M|5*R<rsup|2>+5*R<rsub|1>*R+5*R<rsub|1><rsup|2>>>>>>>>>
     </unfolded-io>
 
+    <\unfolded-io>
+      <with|color|red|(<with|math-font-family|rm|%i>5) >
+    <|unfolded-io>
+      expand(trigreduce(integrate(cos(theta)^2,theta)))
+    <|unfolded-io>
+      \;
+
+      \ <math|<with|math-display|true|<text|<with|font-family|tt|color|red|(<with|math-font-family|rm|%o5>)
+      >><frac|sin <around*|(|2*\<vartheta\>|)>|4>+<frac|\<vartheta\>|2>>>
+    </unfolded-io>
+
+    <\unfolded-io>
+      <with|color|red|(<with|math-font-family|rm|%i>11) >
+    <|unfolded-io>
+      integrate(cos(theta),theta)
+    <|unfolded-io>
+      <math|<with|math-display|true|<text|<with|font-family|tt|color|red|(<with|math-font-family|rm|%o11>)
+      >>sin <around*|(|\<vartheta\>|)>>>
+    </unfolded-io>
+
+    <\unfolded-io>
+      <with|color|red|(<with|math-font-family|rm|%i>13) >
+    <|unfolded-io>
+      integrate(cos(theta)*sin(theta),theta)
+    <|unfolded-io>
+      <math|<with|math-display|true|<text|<with|font-family|tt|color|red|(<with|math-font-family|rm|%o13>)
+      >>-<frac|cos <around*|(|\<vartheta\>|)><rsup|2>|2>>>
+    </unfolded-io>
+
+    <\unfolded-io>
+      <with|color|red|(<with|math-font-family|rm|%i>20) >
+    <|unfolded-io>
+      transpose(matrix([1],[0])).transpose(rot2(theta)).rot2(%pi/2).rot2(theta).matrix([1],[0])
+    <|unfolded-io>
+      \;
+
+      \ <math|<with|math-display|true|<text|<with|font-family|tt|color|red|(<with|math-font-family|rm|%o20>)
+      >>0>>
+    </unfolded-io>
+
+    <\unfolded-io>
+      <with|color|red|(<with|math-font-family|rm|%i>1) >
+    <|unfolded-io>
+      ex:matrix([1],[0])
+    <|unfolded-io>
+      <math|<with|math-display|true|<text|<with|font-family|tt|color|red|(<with|math-font-family|rm|%o1>)
+      >><matrix|<tformat|<table|<row|<cell|1>>|<row|<cell|0>>>>>>>
+    </unfolded-io>
+
+    <\unfolded-io>
+      <with|color|red|(<with|math-font-family|rm|%i>2) >
+    <|unfolded-io>
+      ey:matrix([0],[1])
+    <|unfolded-io>
+      \;
+
+      \ <math|<with|math-display|true|<text|<with|font-family|tt|color|red|(<with|math-font-family|rm|%o2>)
+      >><matrix|<tformat|<table|<row|<cell|0>>|<row|<cell|1>>>>>>>
+    </unfolded-io>
+
     <\input>
-      <with|color|red|(<with|math-font-family|rm|%i>63) >
+      <with|color|red|(<with|math-font-family|rm|%i>3) >
+    <|input>
+      \;
+    </input>
+
+    <\unfolded-io>
+      <with|color|red|(<with|math-font-family|rm|%i>11) >
+    <|unfolded-io>
+      point:v[1]*s[1]*rot2(%pi/2).rot2(q[1]).ex+v[1]*s[2]*rot2(%pi/2).rot2(q[1]).ey+v[2]*rot2(q[1]).ex+q[2]*v[1]*rot2(%pi/2).rot2(q[1]).ex+v[1]*L*rot2(%pi/2).rot2(q[1]).ex
+    <|unfolded-io>
+      <math|<with|math-display|true|<text|<with|font-family|tt|color|red|(<with|math-font-family|rm|%o11>)
+      >><matrix|<tformat|<table|<row|<cell|-v<rsub|1>*sin
+      <around*|(|q<rsub|1>|)>*L-v<rsub|1>*q<rsub|2>*sin
+      <around*|(|q<rsub|1>|)>-s<rsub|1>*v<rsub|1>*sin
+      <around*|(|q<rsub|1>|)>+v<rsub|2>*cos
+      <around*|(|q<rsub|1>|)>-v<rsub|1>*s<rsub|2>*cos
+      <around*|(|q<rsub|1>|)>>>|<row|<cell|v<rsub|1>*cos
+      <around*|(|q<rsub|1>|)>*L+v<rsub|2>*sin
+      <around*|(|q<rsub|1>|)>-v<rsub|1>*s<rsub|2>*sin
+      <around*|(|q<rsub|1>|)>+v<rsub|1>*q<rsub|2>*cos
+      <around*|(|q<rsub|1>|)>+s<rsub|1>*v<rsub|1>*cos
+      <around*|(|q<rsub|1>|)>>>>>>>>
+    </unfolded-io>
+
+    <\unfolded-io>
+      <with|color|red|(<with|math-font-family|rm|%i>33) >
+    <|unfolded-io>
+      fullratsimp(trigsimp(expand(trigreduce(expand(transpose(point).point)))))
+    <|unfolded-io>
+      \;
+
+      \ <math|<with|math-display|true|<text|<with|font-family|tt|color|red|(<with|math-font-family|rm|%o33>)
+      >>v<rsub|1><rsup|2>*L<rsup|2>+<around*|(|2*v<rsub|1><rsup|2>*q<rsub|2>+2*s<rsub|1>*v<rsub|1><rsup|2>|)>*L+v<rsub|2><rsup|2>-2*v<rsub|1>*s<rsub|2>*v<rsub|2>+v<rsub|1><rsup|2>*s<rsub|2><rsup|2>+v<rsub|1><rsup|2>*q<rsub|2><rsup|2>+2*s<rsub|1>*v<rsub|1><rsup|2>*q<rsub|2>+s<rsub|1><rsup|2>*v<rsub|1><rsup|2>>>
+    </unfolded-io>
+
+    <\unfolded-io>
+      <with|color|red|(<with|math-font-family|rm|%i>15) >
+    <|unfolded-io>
+      trigsimp(transpose(rot2(theta)).rot2(%pi/2).rot2(theta)
+    <|unfolded-io>
+      <math|<with|math-display|true|<text|<with|font-family|tt|color|red|(<with|math-font-family|rm|%o15>)
+      >><matrix|<tformat|<table|<row|<cell|0>|<cell|-1>>|<row|<cell|1>|<cell|0>>>>>>>
+    </unfolded-io>
+
+    <\input>
+      <with|color|red|(<with|math-font-family|rm|%i>16) >
     <|input>
       \;
     </input>

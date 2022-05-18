@@ -1,0 +1,17 @@
+\beamer@sectionintoc {1}{Introduzione}{3}{0}{1}
+\beamer@sectionintoc {2}{Modello Teorico}{4}{0}{2}
+\beamer@sectionintoc {3}{Implementazione Simulink}{5}{0}{3}
+\beamer@subsectionintoc {3}{1}{Modello Parallelo}{5}{0}{3}
+\beamer@subsectionintoc {3}{2}{Stimatore Parallelo}{6}{0}{3}
+\beamer@subsectionintoc {3}{3}{Modello Serie-Parallelo}{7}{0}{3}
+\beamer@subsectionintoc {3}{4}{Stimatore Serie-Parallelo}{8}{0}{3}
+\beamer@subsectionintoc {3}{5}{Sistema Complessivo}{9}{0}{3}
+\beamer@sectionintoc {4}{Analisi}{10}{0}{4}
+\beamer@subsectionintoc {4}{1}{Ingresso Sinusoidale}{11}{0}{4}
+\beamer@subsectionintoc {4}{2}{Ingresso Esponenziale}{12}{0}{4}
+\beamer@subsectionintoc {4}{3}{Ingresso a gradino}{13}{0}{4}
+\beamer@subsectionintoc {4}{4}{Ingresso impulsivo}{14}{0}{4}
+\beamer@subsectionintoc {4}{5}{Ingresso sinusoidale con rumore in ingresso}{15}{0}{4}
+\beamer@subsectionintoc {4}{6}{Ingresso sinusoidale con rumore sullo stato}{16}{0}{4}
+\beamer@subsectionintoc {4}{7}{Variazione del parametro a}{17}{0}{4}
+\beamer@sectionintoc {5}{Conclusioni}{18}{0}{5}
