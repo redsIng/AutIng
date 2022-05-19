@@ -1,0 +1,19 @@
+\beamer@sectionintoc {1}{Introduzione}{3}{0}{1}
+\beamer@sectionintoc {2}{Modello teorico}{4}{0}{2}
+\beamer@sectionintoc {3}{Implementazione Simulink}{5}{0}{3}
+\beamer@subsectionintoc {3}{1}{Reference Model}{5}{0}{3}
+\beamer@subsectionintoc {3}{2}{Controllo Adattativo I\&I}{6}{0}{3}
+\beamer@subsubsectionintoc {3}{2}{1}{\(\beta \) quadratic}{6}{0}{3}
+\beamer@subsubsectionintoc {3}{2}{2}{\(\beta \) logarithmic}{7}{0}{3}
+\beamer@subsectionintoc {3}{3}{Controllore MRAC}{8}{0}{3}
+\beamer@subsectionintoc {3}{4}{Sistema complessivo}{9}{0}{3}
+\beamer@sectionintoc {4}{Analisi}{10}{0}{4}
+\beamer@subsectionintoc {4}{1}{MRAC Parametri stazionari}{10}{0}{4}
+\beamer@subsectionintoc {4}{2}{MRAC Parametri stazionari + rumore}{11}{0}{4}
+\beamer@subsectionintoc {4}{3}{MRAC parametri non stazionari}{12}{0}{4}
+\beamer@subsectionintoc {4}{4}{MRAC parametri non stazionari + rumore}{13}{0}{4}
+\beamer@subsectionintoc {4}{5}{I\&I parametri stazionari}{14}{0}{4}
+\beamer@subsectionintoc {4}{6}{I\&I parametri stazionari + rumore}{15}{0}{4}
+\beamer@subsectionintoc {4}{7}{I\&I parametri non stazionari}{16}{0}{4}
+\beamer@subsectionintoc {4}{8}{I\&I parametri non stazionari + rumore}{17}{0}{4}
+\beamer@sectionintoc {5}{Conclusioni}{18}{0}{5}

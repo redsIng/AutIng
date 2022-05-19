@@ -16,7 +16,8 @@
 \contentsline {subsection}{\numberline {4.2}Electron Cyclotron Resonant Heating}{4}{}%
 \contentsline {section}{\numberline {5}Thomson Scattering}{4}{}%
 \contentsline {section}{\numberline {6}Polarimetro}{4}{}%
-\contentsline {section}{\numberline {7}Interferometro}{4}{}%
-\contentsline {section}{\numberline {8}MSE}{4}{}%
-\contentsline {section}{\numberline {9}Neutronica}{4}{}%
-\contentsline {section}{\numberline {10}Disruzioni}{4}{}%
+\contentsline {subsubsection}{\numberline {6.0.1}Assorbimento Selettivo}{5}{}%
+\contentsline {section}{\numberline {7}Interferometro}{5}{}%
+\contentsline {section}{\numberline {8}MSE}{5}{}%
+\contentsline {section}{\numberline {9}Neutronica}{5}{}%
+\contentsline {section}{\numberline {10}Disruzioni}{5}{}%

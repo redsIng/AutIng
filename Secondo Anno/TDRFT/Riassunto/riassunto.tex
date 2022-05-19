@@ -3,9 +3,12 @@
 \usepackage{geometry}
 \geometry{a4paper, top=2cm, bottom=2cm, left=1.5cm, right=1.5cm}
 \graphicspath{{Images/}}
+\usepackage{amsthm}
 
 
 \begin{document}
+\newtheorem{definizione}{Definizione}
+
 \tableofcontents
 \part{Topologia Magnetica}
 \section{Tokamak}
@@ -103,7 +106,31 @@ Le misure di larghezza fornisco delle informazioni sulla temperatura e l'intensi
 Si ha una onda elettromagnetica incidente su una particella che viene accelerata dai campi elettromagnetici dell'onda. Durante l'urto si ha una emissione di una radiazione detta scattered wave. Questa radiazione viene misurata dagli spettrometri a filtri policromatrici.
 Dato che occorre che il posizionamento delle ottiche sia ottimale, la calibrazione diventa fondamentale per ottenere misurazioni della densità di elettroni. Essa viene effettuata utilizzando altri gas.
 \section{Polarimetro}
-Il polarimetro è necessario per ottenere informazioni sulla densità e corrente di plasma.
+Il polarimetro è necessario per ottenere informazioni sulla densità e corrente di plasma. Si basa principalmente su due fenomeni:\begin{itemize}
+    \item Effetto Faraday: nel plasma in presenza del campo magnetico, il piano di polarizzazione del fascio laser propagato nel campo magnetico ruota. Da informazioni su \textbf{Campo magnetico Poloidale};
+    \item Effetto Cotton-Mouton: se il fascio laser si propaga perpendicolarmente al campo magnetico vi è un campo dell'ellitticità della polarizzazione.Da informazioni su \textbf{Campo magnetico toroidale}.
+\end{itemize}
+Il plasma nel campo magnetico si comporta come un mezzo dielettrico con indici di rifrazione diverse in base alle componenti del campo magnetico. In particolare, il pasma è birifrangente e questa proprietà dipende da:\begin{itemize}
+    \item Densità elettronica;
+    \item Il campo magnetico;
+    \item Temperatura elettronica.
+\end{itemize}
+\begin{definizione}
+    Un'onda è detta polarizzata linearmente se la risultante del campo elettrico vibra nella stessa direzione in un particolare punto.
+\end{definizione}
+La polarizzazione può essere ottenuta da:\begin{itemize}
+    \item assorbimento selettivo;
+    \item Riflessione;
+    \item Scattering;
+\end{itemize}
+\subsection{Assorbimento Selettivo}
+Nell'assorbimento selettivo, un fascio non polarizzato attraversa una lente di polarizzazione che fa passare solo le componenti del campo magnetico su un asse. Poi queste componenti incidono su un analizzatore: il raggio incidente con quello rifratto formerà un angolo che viene misurato.
+La particolarità del polarizzatore è che assorbe i vettori di campo elettrico nelle direzioni perpendicolari e trasmette quelle nella direzione parallela.
+\subsection{Polarizzazione da doppia rifrazione}
+Esistono materiali che possiedono due inidici di rifrazioe differenti. Questi materiali vengono detto birifrangenti.\\
+Ne è un esempio la calcite che, quando la luce non polarizzata attraversa il materiale viene divisa in due: raggio straordinario E (varia in base alla direzione di propagazione) e raggio ordinario O ( è la stessa lungo tutte le direzioni). inoltre, vi è una direzione detta \textbf{asse ottico}, su quale i raggi ordinari e straordinari hanno la stessa velocità.
+\subsection{Funzionamento}
+Supponiamo di avere una onda luminosa che si propaga lungo la direzione z. Sappiamo che questa è una onda elettromagnetica con le componenti del campo magnetico e elettrico perpendicolari l'una dall'altra. Tramite delle funzioni trigonometriche e passaggi algebriche si arriva allìequazione di una ellisse. Quando questo raggio luminoso attraversa il plasma si nota che l'ellisse viene ruotata di un certo angolo
 \section{Interferometro}
 \section{MSE}
 \section{Neutronica}
