@@ -109,29 +109,77 @@
 	\frametitle{Simulink - 5}% chktex 8
 	\subsection{Sistema complessivo}
 \begin{figure}[t]
-	\includegraphics[scale=0.28]{2022-05-19-18-44-46.png}% chktex 8
+	\includegraphics[scale=0.35]{2022-05-20-11-05-07.png}% chktex 8
 \end{figure}
 \end{frame}
 \begin{frame}
 	\frametitle{MRAC Parametri stazionari}
 	\section{Analisi}
 	\subsection{MRAC Parametri stazionari}
-
+	\begin{minipage}[t]{0.45\textwidth}
+		\textbf{\(\gamma\) = 1}
+		\begin{figure}
+			\includegraphics[scale=0.25]{2022-05-20-10-29-19.png} % chktex 8
+		\end{figure}
+	\end{minipage}
+	\begin{minipage}[t]{0.45\textwidth}
+		\textbf{\(\gamma\) = 5}
+		\begin{figure}
+			\includegraphics[scale=0.25]{2022-05-20-10-33-35.png} % chktex 8
+		\end{figure}
+	\end{minipage}
+	\vspace{0.1cm}
+	\\Al variare del parametro \(\gamma\) del controllore adattativo MRAC si nota che il tempo di convergenza per stimare lo stato rimane invariato a circa 5s. Per valore di \(\gamma\) maggiori, si nota che l'errore presenta una sottoelongazione e la stima di \(k\) una leggera sovraelongazione.
 \end{frame}
 \begin{frame}
 	\frametitle{MRAC Parametri stazionari con rumore}
 	\subsection{MRAC Parametri stazionari + rumore}
-
+	\begin{minipage}[t]{0.45\textwidth}
+		\textbf{\(\gamma\) = 1}
+		\begin{figure}
+			\includegraphics[scale=0.25]{2022-05-20-11-03-08.png} % chktex 8
+		\end{figure}
+	\end{minipage}
+	\begin{minipage}[t]{0.45\textwidth}
+		\textbf{\(\gamma\) = 5}
+		\begin{figure}
+			\includegraphics[scale=0.25]{2022-05-20-11-04-01.png} % chktex 8
+		\end{figure}
+	\end{minipage}
+	\vspace{0.1cm}
+	L'errore in entrambi i casi rimane limitato, tuttavia a causa del disturbo sinusoidale l'andamento degli stati variano.
 \end{frame}
 \begin{frame}
 	\frametitle{MRAC parametri non stazionari}
 	\subsection{MRAC parametri non stazionari}
-
+	\begin{minipage}[t]{0.45\textwidth}
+		\textbf{\(\gamma=1\quad a=1+\frac{1}{10}\sin{(10t)}\)}
+		\begin{figure}
+			\includegraphics[scale=0.25]{2022-05-20-12-52-05.png} % chktex 8
+		\end{figure}
+	\end{minipage}
+	\begin{minipage}[t]{0.45\textwidth}
+		\textbf{\(\gamma=1\quad a=1+10\sin{(\frac{t}{10})}\)}
+		\begin{figure}
+			\includegraphics[scale=0.25]{2022-05-20-12-55-10.png} % chktex 8
+		\end{figure}
+	\end{minipage}
 \end{frame}
 \begin{frame}
 	\frametitle{MRAC parametri non stazionari con rumore}
 	\subsection{MRAC parametri non stazionari + rumore}
-
+	\begin{minipage}[t]{0.45\textwidth}
+		\textbf{\(\gamma=1\quad a=1+\frac{1}{10}\sin{(10t)}\)}
+		\begin{figure}
+			\includegraphics[scale=0.25]{2022-05-20-12-57-45.png} % chktex 8
+		\end{figure}
+	\end{minipage}
+	\begin{minipage}[t]{0.45\textwidth}
+		\textbf{\(\gamma=1\quad a=1+10\sin{(\frac{t}{10})}\)}
+		\begin{figure}
+			\includegraphics[scale=0.25]{2022-05-20-12-59-29.png} % chktex 8
+		\end{figure}
+	\end{minipage}
 \end{frame}
 \begin{frame}
 	\frametitle{I\&I parametri stazionari}
