@@ -10,7 +10,6 @@
 \newtheorem{definizione}{Definizione}
 
 \tableofcontents
-\part{Topologia Magnetica}
 \section{Tokamak}
 \subsection{Struttura}
 Il Tokamak si basa su tre gruppi elettromagnetici:\begin{itemize}
@@ -93,7 +92,7 @@ Schematicamente:
 \subsection{Electron Cyclotron Resonant Heating}
 Le cosiddette ECRH sono riscaldamenti addizionali basati su onde radio per trasferire energia da una sorgente esterna al plasma. Quando una onda elettromagnetica si propaga attraverso il plasma, il campo elettrico dell'onda accellera le particella cariche e quindi aumenta il numero di collisioni di queste nel plasma.\newline
 In particolare, si ha assorbimento dell'onda quando si è in risonanza, tuttavia essendo il plasma non uniforme si possono avere anche fenomeni di riflessioni. Ne risulta quindi che la polarizzazione dell'onda gioca un ruolo molto importante sulla forza dell'onda e sulla regione di assorbimento. Vi sono principalmente due distinzioni di polarizzazioni che sono dipendenti dal campo magnetico nel plasma:\begin{itemize}
-    \item O-Mode: parallelo al campo magnetico e inconrano solamente una frequenza di risonanza e un di cut-off ;
+    \item O-Mode: parallelo al campo magnetico e inconrano solamente una frequenza di risonanza e un di cut-off;
     \item X-Mode: perpendicolare al campo magnetico
 \end{itemize}
 Un altro fenomeno che potrebbe risentire il fascio è quello della rifrazione quando si trannano plasmi di alta densità.
@@ -128,11 +127,65 @@ Nell'assorbimento selettivo, un fascio non polarizzato attraversa una lente di p
 La particolarità del polarizzatore è che assorbe i vettori di campo elettrico nelle direzioni perpendicolari e trasmette quelle nella direzione parallela.
 \subsection{Polarizzazione da doppia rifrazione}
 Esistono materiali che possiedono due inidici di rifrazioe differenti. Questi materiali vengono detto birifrangenti.\\
-Ne è un esempio la calcite che, quando la luce non polarizzata attraversa il materiale viene divisa in due: raggio straordinario E (varia in base alla direzione di propagazione) e raggio ordinario O ( è la stessa lungo tutte le direzioni). inoltre, vi è una direzione detta \textbf{asse ottico}, su quale i raggi ordinari e straordinari hanno la stessa velocità.
+Ne è un esempio la calcite che, quando la luce non polarizzata attraversa il materiale viene divisa in due: raggio straordinario E (varia in base alla direzione di propagazione) e raggio ordinario O (è la stessa lungo tutte le direzioni). Inoltre, vi è una direzione detta \textbf{asse ottico}, su quale i raggi ordinari e straordinari hanno la stessa velocità.
 \subsection{Funzionamento}
 Supponiamo di avere una onda luminosa che si propaga lungo la direzione z. Sappiamo che questa è una onda elettromagnetica con le componenti del campo magnetico e elettrico perpendicolari l'una dall'altra. Tramite delle funzioni trigonometriche e passaggi algebriche si arriva allìequazione di una ellisse. Quando questo raggio luminoso attraversa il plasma si nota che l'ellisse viene ruotata di un certo angolo
 \section{Interferometro}
 \section{MSE}
 \section{Neutronica}
 \section{Disruzioni}
+Le disruzioni nei Tokamak sono inevitabili. Esse sono una perdita globale di confinamento e controllo del plasma dovuto da impurezze e radiazioni.\newline
+Si compongono di due fasi:
+\begin{itemize}
+    \item Termal quence: perdita di tutta l'energia cinetica e termica;
+    \item Current quence: decadimento di corrente
+\end{itemize}
+In particolare, si ha una fase lontana dalla disruzione non si ha un indizio della disruzione. Dopo di che, si ha un segnale di precorso nelle bobine magnetiche che indica l'inizio di una anomalia. Passata questa fase, si hanno delle anomalie sul profilo di temperatura e corrente così da innescare il termal quence e quindi l'inizio di una disruzione, perdendo di conseguenza il controllo.\newline
+Il problema principale di questo fenomeno è che avvenuta la disruzione si danneggiano i dispositivi e si introducono impurezze nel vessel che diminuiscono il tempo operativo del Tokamak. I danni principali sono:
+\begin{itemize}
+    \item Carichi termici;
+    \item Estinzione della corrente rapida porta a carichi magnetici molto elevati dovuto alle correnti indotte (Eddy current);
+    \item Elettroni di runaway nella fase di current quenche: in questa fase il plasma perde la densità, così vengono accellarati notevolmente divenendo un fascio di elettroni incontrollato in assenza di collisioni per limitarne la velocità.
+\end{itemize}
+\subsection{Classificazione diagnostiche disruzione}
+L'obiettivo delle diagnostiche per le disruzioni è quello di predizioni, spiegazione e controllo. Si dividono in:
+\begin{itemize}
+    \item monitorazione delle conseguenze;
+    \item misura della disruzione;
+    \item investigazione della fisica della disruzione;
+    \item predizione delle disruzione
+\end{itemize}
+Queste diagnostiche fanno parte del sistema di controllo e quindi è necessario che l'hardware siano affidabili, disponibili, forniscano un risoluzione spaziale e temporale per prevenire il fenomeno e devono coprire tutti i punti della camera da vuoto. Inoltre, al livello di processamento deve essere in real-time ed avere capacità predittive.
+Una scarica disruttiva presenta la seguente nomenclatura:
+\begin{itemize}
+    \item Avoidance: la fase lontana di disruzione;
+    \item Prevenzione: azione correttiva per evitare l'instabilità;
+    \item Mitigazione: nel caso in cui la prevenzione non è abbastanza d avviene la disruzione si riducono i carichi abbassando lentamente la corrente e l'energia termica. In questo fase possono avvenire i run-away. Si immettono pellet di gas per ridurre il carico termico o degli shattered pellet.
+\end{itemize}
+\subsection{Requisiti Hardware}
+\subsubsection{Carichi termici}
+Il problema principale sono i carichi termici che dipendono dalla potenza deposita, dalla superfice e dal tempo. Le misure che si utilizzano sono:\begin{itemize}
+    \item Camere termiche;
+    \item Spettrometria;
+    \item Bolometria
+\end{itemize}
+La problematica di queste misure è che il carico termico non sono toroidalmente simmetrici.
+\subsubsection{Carichi Meccanici}
+Le misure che si utilizza sono:\begin{itemize}
+    \item bobine in posizioni differenti per eseguire una ricostruzione dell'equilibrio;
+    \item Misure delle correnti toroidali del vessel (Halo currents);
+    \item Accelerometria per misurare gli spostamenti della camera da vuoto
+\end{itemize}
+\subsection{Locked mode detection AUG}
+Siamo nella fase di mitigazioni per cui dobbiamo predirre con un margine di predizioni basso, ma molto accurato.\newline
+In questa fase, vi sono delle instabilità MHD macroscopiche con misure magnetiche grande. La crescita delle istabilità vengono misurate con la componente radiale del campo magnetico tramite le Saddle Coils. In un tokamak ve ne sono 4 e tramite la differenza di queste bobine opposte e tramite un indicatore si misura l'effetto di rallentamento delle instabilità. Esse crescono nella fase preliminare della disruzioni, poi rallentano fino a zero e poi disrompe. Viene detto bloccato poiché il campo magnetico da loro generato si blocca con gli errori del Tokamak divenendo stazionari nel sistema di riferimento del laboratorio.\newline
+Analizzando lo spettro a bassa frequenza si nota che le instabilità MHD non sono le uniche fautrici delle disruzioni, ma anche dovute dai cosiddetti ELMS.% chktex 13
+\subsection{Imaging for disruptions}
+Si utilizzano delle telecamere nel visibile per avere una idea di quello che accade nella camera da vuoto. Risulta quindi molto importante cercare di ricoprire il maggiorspazio dellla camera da vuoto e del vessel. Tramite queste telecamere è possibile rivelare i MARFE.\newline
+I MARFE sono instabilità termiche che si manifestano come un anello di radiazioni visibili per effetto delle impurezze. In queste zone la temperatura risulta più bassa rispetto al plasma.
+\subsection{Indicatori di Profilo}
+Per la predizione delle disruzione e il controllo in feedback sono necessari gli indicatori di profilo.\\ GLi indicatori di profilo per la predizione devono essere robusti e calcolabili in real time, ma allo stesso tempo devono fornire  un quantitativo sufficiente di informazioni. Uno degli indicatori sul profilo di temperatura è la hollowness cioè quanto il profilo di temperatura è cavo. Questa è una misura particolarmente difficile da quantificare dato che in molti casi si deve effettuare il mirroring dei dati sull'asse magnetico per un problema di coverage e che è resiliente sulle fluttuazioni della temperatura.\newline
+Per questa misura si utilizza un fitting basato su due Gaussiane quando il profilo è cavo: differenze tra i due massimi e normalizzata per la deviazione standard delle  gaussiane. Con questo approccio, più due massimi sono distanti più il profilo sarà cavo.
+\subsection{Problema inverso nella fusione}
+Per quanto riguardo le misure effettuate dall'esterno del plasma, esse vengono utilizzate nella risoluzione di un problema inverso per ottenere delle informazioni dell'interno. Il principale strumento che viene utilizzato è la tomografia.
 \end{document}
