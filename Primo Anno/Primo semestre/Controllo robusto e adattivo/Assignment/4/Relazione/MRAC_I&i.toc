@@ -11,9 +11,8 @@
 \beamer@subsectionintoc {4}{1}{MRAC Parametri stazionari}{10}{0}{4}
 \beamer@subsectionintoc {4}{2}{MRAC Parametri stazionari + rumore}{11}{0}{4}
 \beamer@subsectionintoc {4}{3}{MRAC parametri non stazionari}{12}{0}{4}
-\beamer@subsectionintoc {4}{4}{MRAC parametri non stazionari + rumore}{13}{0}{4}
-\beamer@subsectionintoc {4}{5}{I\&I parametri stazionari}{14}{0}{4}
-\beamer@subsectionintoc {4}{6}{I\&I parametri stazionari + rumore}{15}{0}{4}
+\beamer@subsectionintoc {4}{4}{I\&I parametri stazionari}{13}{0}{4}
+\beamer@subsectionintoc {4}{5}{I\&I parametri stazionari + rumore}{14}{0}{4}
+\beamer@subsectionintoc {4}{6}{I\&I parametri non stazionari}{15}{0}{4}
 \beamer@subsectionintoc {4}{7}{I\&I parametri non stazionari}{16}{0}{4}
-\beamer@subsectionintoc {4}{8}{I\&I parametri non stazionari + rumore}{17}{0}{4}
-\beamer@sectionintoc {5}{Conclusioni}{18}{0}{5}
+\beamer@sectionintoc {5}{Conclusioni}{17}{0}{5}

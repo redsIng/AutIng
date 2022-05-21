@@ -51,32 +51,28 @@
 \headcommand {\slideentry {4}{3}{0}{12/12}{}{0}}
 \headcommand {\beamer@framepages {12}{12}}
 \headcommand {\beamer@subsectionpages {1}{12}}
-\headcommand {\beamer@subsectionentry {0}{4}{4}{13}{MRAC parametri non stazionari + rumore}}
+\headcommand {\beamer@subsectionentry {0}{4}{4}{13}{I\&I parametri stazionari}}
 \headcommand {\slideentry {4}{4}{0}{13/13}{}{0}}
 \headcommand {\beamer@framepages {13}{13}}
 \headcommand {\beamer@subsectionpages {1}{13}}
-\headcommand {\beamer@subsectionentry {0}{4}{5}{14}{I\&I parametri stazionari}}
+\headcommand {\beamer@subsectionentry {0}{4}{5}{14}{I\&I parametri stazionari + rumore}}
 \headcommand {\slideentry {4}{5}{0}{14/14}{}{0}}
 \headcommand {\beamer@framepages {14}{14}}
 \headcommand {\beamer@subsectionpages {1}{14}}
-\headcommand {\beamer@subsectionentry {0}{4}{6}{15}{I\&I parametri stazionari + rumore}}
+\headcommand {\beamer@subsectionentry {0}{4}{6}{15}{I\&I parametri non stazionari}}
 \headcommand {\slideentry {4}{6}{0}{15/15}{}{0}}
 \headcommand {\beamer@framepages {15}{15}}
 \headcommand {\beamer@subsectionpages {1}{15}}
 \headcommand {\beamer@subsectionentry {0}{4}{7}{16}{I\&I parametri non stazionari}}
 \headcommand {\slideentry {4}{7}{0}{16/16}{}{0}}
 \headcommand {\beamer@framepages {16}{16}}
+\headcommand {\beamer@sectionpages {1}{16}}
 \headcommand {\beamer@subsectionpages {1}{16}}
-\headcommand {\beamer@subsectionentry {0}{4}{8}{17}{I\&I parametri non stazionari + rumore}}
-\headcommand {\slideentry {4}{8}{0}{17/17}{}{0}}
+\headcommand {\sectionentry {5}{Conclusioni}{17}{Conclusioni}{0}}
+\headcommand {\slideentry {5}{0}{0}{17/17}{}{0}}
 \headcommand {\beamer@framepages {17}{17}}
-\headcommand {\beamer@sectionpages {1}{17}}
+\headcommand {\beamer@partpages {1}{17}}
 \headcommand {\beamer@subsectionpages {1}{17}}
-\headcommand {\sectionentry {5}{Conclusioni}{18}{Conclusioni}{0}}
-\headcommand {\slideentry {5}{0}{0}{18/18}{}{0}}
-\headcommand {\beamer@framepages {18}{18}}
-\headcommand {\beamer@partpages {1}{18}}
-\headcommand {\beamer@subsectionpages {1}{18}}
-\headcommand {\beamer@sectionpages {1}{18}}
-\headcommand {\beamer@documentpages {18}}
-\headcommand {\gdef \inserttotalframenumber {18}}
+\headcommand {\beamer@sectionpages {1}{17}}
+\headcommand {\beamer@documentpages {17}}
+\headcommand {\gdef \inserttotalframenumber {17}}
