@@ -4,7 +4,9 @@
 \geometry{a4paper, top=2cm, bottom=2cm, left=1.5cm, right=1.5cm}
 \graphicspath{{Images/}}
 \usepackage{amsthm}
+\usepackage{amsmath}
 
+\usepackage{verbatim}
 
 \begin{document}
 \newtheorem{definizione}{Definizione}
@@ -43,7 +45,7 @@ I sensori induttivi si basano sulla legge di Faraday: la forza elettromotiva ind
 \end{equation}
 Tuttavia in pratica quello che lo strumento ritorna sono valori di tensione che tramite la relazione:
 \begin{equation}
-    V=-NA\langle \dot{B}\rangle 
+    V=-NA\langle \dot{B}\rangle
 \end{equation}
 Integrando nel tempo si può avere una misuare del flusso del campo magnetico:\begin{equation}
     \Phi=NA\langle B\rangle =-\int Vdt+const
@@ -77,7 +79,7 @@ La carica risultante sulle facce della lastra genera un campo elettrico addizion
 \section{Sistemi di riscaldamento addizionali}
 Il principale meccanismo utilizzato nel tokamak per accellerare le particelle è il riscaldamento ohmico. Tuttavia, non è necessario ad accellerare le particelle quanto dovuto dato che questo tipo di risaldamento risulta inefficace ad alte temperature. Questo difetto è dovuto alla resistitività del plasma che diminuisce con l'aumentare della temperatura.\newline
 Si necessitano di riscaldamenti addizionali per raggiungere le temperature necessarie. Esse sono basate su riscaldamento da particelle \(\alpha\), su onde elettromagnetiche e su iniezione di particelle neutre.
-\subsection{Diagnostiche su atomi neutri}
+\subsection{Diagnostiche su atomi neutri} % Grammarly
 Le diagnostiche basate su atomi neutri nel plasma sono importanti per plasmi confinati elettromagneticamente poiché essi, essendo neutri, attraversano le linee di campo. Possono essere quindi sfruttati per ottenere delle informazioni sul centro del plasma.\newline
 Per creare un fascio neutro si utilizza una miscela da cui si producono gli ioni di deuterio o idrogeno (per maggiore efficienza si sono scelti ioni negativi), a questo punto vengono accellarati da un campo magnetico orizzontale, vengono neutralizzati e poi iniettati all'interno del plasma. Le linee guida per l'iniezione di un fascio neutro sono i seguenti:\begin{itemize}
     \item Le particelle neutre viaggiano inalterate attraverso i campi magnetici;
@@ -105,7 +107,8 @@ Le misure di larghezza fornisco delle informazioni sulla temperatura e l'intensi
 Si ha una onda elettromagnetica incidente su una particella che viene accelerata dai campi elettromagnetici dell'onda. Durante l'urto si ha una emissione di una radiazione detta scattered wave. Questa radiazione viene misurata dagli spettrometri a filtri policromatrici.
 Dato che occorre che il posizionamento delle ottiche sia ottimale, la calibrazione diventa fondamentale per ottenere misurazioni della densità di elettroni. Essa viene effettuata utilizzando altri gas.
 \section{Polarimetro}
-Il polarimetro è necessario per ottenere informazioni sulla densità e corrente di plasma. Si basa principalmente su due fenomeni:\begin{itemize}
+\begin{comment}
+    Il polarimetro è necessario per ottenere informazioni sulla densità e corrente di plasma. Si basa principalmente su due fenomeni:\begin{itemize}
     \item Effetto Faraday: nel plasma in presenza del campo magnetico, il piano di polarizzazione del fascio laser propagato nel campo magnetico ruota. Da informazioni su \textbf{Campo magnetico Poloidale};
     \item Effetto Cotton-Mouton: se il fascio laser si propaga perpendicolarmente al campo magnetico vi è un campo dell'ellitticità della polarizzazione.Da informazioni su \textbf{Campo magnetico toroidale}.
 \end{itemize}
@@ -130,6 +133,80 @@ Esistono materiali che possiedono due inidici di rifrazioe differenti. Questi ma
 Ne è un esempio la calcite che, quando la luce non polarizzata attraversa il materiale viene divisa in due: raggio straordinario E (varia in base alla direzione di propagazione) e raggio ordinario O (è la stessa lungo tutte le direzioni). Inoltre, vi è una direzione detta \textbf{asse ottico}, su quale i raggi ordinari e straordinari hanno la stessa velocità.
 \subsection{Funzionamento}
 Supponiamo di avere una onda luminosa che si propaga lungo la direzione z. Sappiamo che questa è una onda elettromagnetica con le componenti del campo magnetico e elettrico perpendicolari l'una dall'altra. Tramite delle funzioni trigonometriche e passaggi algebriche si arriva allìequazione di una ellisse. Quando questo raggio luminoso attraversa il plasma si nota che l'ellisse viene ruotata di un certo angolo
+\end{comment}
+Il Polarimetro è una diagnostica che consente di avere misure delle componenti del campo magnetico per capire la causa che hanno portato alla rilevazione di tale misure.Queste misure sono fondamentali per la ricostruzione dell'equilibrio del plasma dato che tramite esse è possibile inserire ulteriori vincoli per la risoluzione del problema inverso.\newline
+Il funzionamento del Polarimetro si basa su un fascio laser negli infrarossi che fa ad incidere sul plasma. Da questo urto si hanno informazioni riguardo alla corrente di plasma (campo poloidale) e la densità degli elettroni.\newline
+L'urto del fascio laser con il plasma, dato che quest'ultimo è un mezzo birifrangente (indice di rifrazione differente in base all'angolo di incidenza del fascio) da origine a due effetti:
+\begin{itemize}
+    \item Effetto Faraday: il fascio laser ruota, dovuto al campo magnetico poloidale;
+    \item Effetto Cotton-Mouton: il fascio laser si ellettifica,dovuto al campo magnetico toroidale;
+\end{itemize}
+La birifrangenza del plasma dipende da:
+\begin{itemize}
+    \item densità elettronica;
+    \item campo magnetico;temperatura elettronica
+\end{itemize}
+
+Il Polarimetro per funzionare ha bisogno di una luce polarizzata: una luca in cui i vettori del campo elettrico non si propagano lungo tutte le direzioni, ma lungo una precisa direzione. Tuttavia, la luce di base non è polarizzata e quindi occrre polarizzarla tramite uno strumento detto polarizzatore.
+\subsection{Polarizzatore}
+Il polarizzatore è uno strumento che consente di polarizzare la luce non polarizzata. In particolare, data una sorgente di luge non polarizzata, si interpone lungo le direzioni di propagazione della luce un filtro a bande verticale che permette di far passare solo le componenti del campo elettrico parallele alle fenditure del filtro.
+In generale la polarrizzazione può essere effettuata tramite:\begin{itemize}
+    \item assorbimento;
+    \item riflessione;
+    \item scattering;
+\end{itemize}
+\subsubsection{Assorbimento}
+L'assorbimento è il metodo più comune per polarizzare la luce. Si necessita di una sorgente di luce non polarizzata, un polarizzatore, un analizzatore hardware capace di valutare l'efficienza del polarizzatore. L'efficienza viene considerata come l'angolo formato tra il raggio incidente e uscente all'analizzatore.
+\subsubsection{Polarizzazione tramite doppia rifrazione}
+I materiali birifrangenti possono essere utilizzati per la polarizzare la luce. La loro particolarità è che essi posseggono due indici di rifrazione: quando un fascio di luce passa nel materiale birifrangente si genera il raggio straordinario (E) e raggio ordinario (O) dovuto alla diversa velocità di attraversamento del mezzo.\newline
+Inoltre, il punto in cui coincidono gli indici di rifrazioni è quello che si trova lungo l'asse del mezzo.
+\subsection{Onde elettromagnetiche}
+Le onde elettromagnetiche sono composte da componenti perpendicolari fra loro del campo elettrico e magnetico che si propagano lungo una direzione z. Detto ciò possiamo esprimere l'equazioni di un'onda elettromagnetica che si propagna lungo una direzione come:
+\begin{equation}
+    \overrightarrow{E_{x}}( z,t)=E_{0 x}\cos{(\omega t-kz+\delta_{x})}\overrightarrow{x}\quad \overrightarrow{E_{y}}(z,t)=E_{0 y}\cos{(\omega t-kz+\delta_{y})}\overrightarrow{y}
+\end{equation}
+Si dimostra che unendo queste due equazioni si giugne all'equazione dell'ellisse dipendendo dalla differenza di fase fra le componenti del campo elettrico dell'onda. A questo punto, data l'equazione dell'ellisse si può calcolare la deformazione del fascio tramite l'ellisse di polarizzazione nel piano \emph{xy}: si individuano gli angoli \(\psi\) di orientamento dell'ellisse e \(\chi \) l'elletticità dal fascio iniziale e quello rifratto.
+\subsection{Ellisse di Propagazione e Vettori di Stockes}
+L'ellisse di propagazione da cui si ricava l'ellitticità e l'orientamento può essere ricondotta in una forma più semplice tramite i vettori si Stockes. I parametri di Stokes sono un insieme di valori utili a capire se un'onda è polarizzata linearmente, radialmente etc\dots per poi modellizzare il percorso ottico del polarimetro.\newline
+In particolare è un vettore composto da 4 componenti dipendenti dall'equazione elettromagnetiche delle onde:\newpage
+\begin{figure}[t]
+    \centering
+    \includegraphics[scale=0.4]{2022-05-24-23-36-23.png}% chktex 8
+    \includegraphics[scale=0.4]{2022-05-24-23-38-37.png}% chktex 8
+\end{figure}
+Per calcolare l'effetto del Plasma sul fascio laser occorre tenere conto delle componenti ottiche che ha attraversato il fascio laser. Per vedere questo effetto si calcola:
+\begin{equation}
+    \overrightarrow{S}_{fin}=M_{pol}\cdot \overrightarrow{S}_{in}
+\end{equation}
+In cui:\begin{itemize}
+    \item M:\@matrice che caratterizza il componente ottico;
+    \item S in o fin: polarizzazione del fascio iniziale e finale espressi in vettore di Strokes;
+\end{itemize}
+Ogni elemento ottico viene descritto dalla matrice di Mueller ed è sempre nota.
+\subsection{Sistema Polarimetrico}
+Gli effetti che entrano in gioco nel polarimetro sono espressi come:
+\begin{equation}
+    \psi\propto \int n_{e}\cdot B_{z}dz\quad\text{Rotazione di Faraday}
+\end{equation}
+\begin{equation}
+    \phi\propto \int n_{e}\cdot B_{T}^{2}dz\quad \text{Cotton-Mouton}
+\end{equation}
+L'evoluzione della polarizzazione viene descritta in base alla variazione del vettore di Stokes sull'asse z:
+\begin{equation}
+    \frac{d\overrightarrow{S}}{dZ}=\overrightarrow{\Omega}\times\overrightarrow{S}
+\end{equation}
+In cui \(\Omega\) dipende dalla frequenza, dai due indici di rifrazione del mezzo e il vettore di polarizzazione dell'onda veloce. Non ha risoluzione e può essere risolta tramite una matrice simmetrica simile a quella di Muller sia per i componenti ottici che il plasma.\newline
+Quindi, per sapere l'effetto che hanno i componenti ottici (inclusi il plasma) si moltiplicano tutte le matrici di Muller come da formula per poi ottenere:
+\begin{itemize}
+    \item Angolo di rotazione:
+    \begin{equation}
+    \psi =\frac{1}{2}\arctan{\frac{S_{2}}{S_{1}}}
+    \end{equation}
+    \item Cotton-Mouton: \begin{equation}
+        \arctan{\frac{S_{3}}{S_{2}}}
+    \end{equation}
+\end{itemize}
+
 \section{Interferometro}
 \section{MSE}
 \section{Neutronica}

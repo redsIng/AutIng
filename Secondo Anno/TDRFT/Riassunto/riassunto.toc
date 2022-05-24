@@ -15,18 +15,21 @@
 \contentsline {subsection}{\numberline {4.2}Electron Cyclotron Resonant Heating}{4}{}%
 \contentsline {section}{\numberline {5}Thomson Scattering}{4}{}%
 \contentsline {section}{\numberline {6}Polarimetro}{4}{}%
-\contentsline {subsection}{\numberline {6.1}Assorbimento Selettivo}{5}{}%
-\contentsline {subsection}{\numberline {6.2}Polarizzazione da doppia rifrazione}{5}{}%
-\contentsline {subsection}{\numberline {6.3}Funzionamento}{5}{}%
-\contentsline {section}{\numberline {7}Interferometro}{5}{}%
-\contentsline {section}{\numberline {8}MSE}{5}{}%
-\contentsline {section}{\numberline {9}Neutronica}{5}{}%
-\contentsline {section}{\numberline {10}Disruzioni}{5}{}%
-\contentsline {subsection}{\numberline {10.1}Classificazione diagnostiche disruzione}{6}{}%
-\contentsline {subsection}{\numberline {10.2}Requisiti Hardware}{6}{}%
-\contentsline {subsubsection}{\numberline {10.2.1}Carichi termici}{6}{}%
-\contentsline {subsubsection}{\numberline {10.2.2}Carichi Meccanici}{6}{}%
-\contentsline {subsection}{\numberline {10.3}Locked mode detection AUG}{6}{}%
-\contentsline {subsection}{\numberline {10.4}Imaging for disruptions}{6}{}%
-\contentsline {subsection}{\numberline {10.5}Indicatori di Profilo}{7}{}%
-\contentsline {subsection}{\numberline {10.6}Problema inverso nella fusione}{7}{}%
+\contentsline {subsection}{\numberline {6.1}Polarizzatore}{5}{}%
+\contentsline {subsubsection}{\numberline {6.1.1}Assorbimento}{5}{}%
+\contentsline {subsubsection}{\numberline {6.1.2}Polarizzazione tramite doppia rifrazione}{5}{}%
+\contentsline {subsection}{\numberline {6.2}Onde elettromagnetiche}{5}{}%
+\contentsline {subsection}{\numberline {6.3}Ellisse di Propagazione e Vettori di Stockes}{5}{}%
+\contentsline {subsection}{\numberline {6.4}Sistema Polarimetrico}{6}{}%
+\contentsline {section}{\numberline {7}Interferometro}{6}{}%
+\contentsline {section}{\numberline {8}MSE}{6}{}%
+\contentsline {section}{\numberline {9}Neutronica}{6}{}%
+\contentsline {section}{\numberline {10}Disruzioni}{6}{}%
+\contentsline {subsection}{\numberline {10.1}Classificazione diagnostiche disruzione}{7}{}%
+\contentsline {subsection}{\numberline {10.2}Requisiti Hardware}{7}{}%
+\contentsline {subsubsection}{\numberline {10.2.1}Carichi termici}{7}{}%
+\contentsline {subsubsection}{\numberline {10.2.2}Carichi Meccanici}{7}{}%
+\contentsline {subsection}{\numberline {10.3}Locked mode detection AUG}{8}{}%
+\contentsline {subsection}{\numberline {10.4}Imaging for disruptions}{8}{}%
+\contentsline {subsection}{\numberline {10.5}Indicatori di Profilo}{8}{}%
+\contentsline {subsection}{\numberline {10.6}Problema inverso nella fusione}{8}{}%
