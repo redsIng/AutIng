@@ -107,6 +107,7 @@ Le misure di larghezza fornisco delle informazioni sulla temperatura e l'intensi
 Si ha una onda elettromagnetica incidente su una particella che viene accelerata dai campi elettromagnetici dell'onda. Durante l'urto si ha una emissione di una radiazione detta scattered wave. Questa radiazione viene misurata dagli spettrometri a filtri policromatrici.
 Dato che occorre che il posizionamento delle ottiche sia ottimale, la calibrazione diventa fondamentale per ottenere misurazioni della densità di elettroni. Essa viene effettuata utilizzando altri gas.
 \section{Polarimetro}
+
 \begin{comment}
     Il polarimetro è necessario per ottenere informazioni sulla densità e corrente di plasma. Si basa principalmente su due fenomeni:\begin{itemize}
     \item Effetto Faraday: nel plasma in presenza del campo magnetico, il piano di polarizzazione del fascio laser propagato nel campo magnetico ruota. Da informazioni su \textbf{Campo magnetico Poloidale};
@@ -206,9 +207,38 @@ Quindi, per sapere l'effetto che hanno i componenti ottici (inclusi il plasma) s
         \arctan{\frac{S_{3}}{S_{2}}}
     \end{equation}
 \end{itemize}
-
-\section{Interferometro}
 \section{MSE}
+L'MSE è una diagnostica che permette di avere delle misure interne al plasma tramite un'analisi degli atomi neutri.\newline
+Dato che gli atomi immessi sono neutri non interagiscono con i campi magnetici, ma possono interagire con gli atomi del plasmi così da inferire a delle proprietà del plasma. L'immissione del fascio neutro è anche un sistema di riscaldamento nel NBI.% chktex 13
+\subsection{Motion Stark Effect}
+L'MSE è una diagnostica che utilizza la luce che proviene dai NBI ad idrogneo (utilizzati per il riscaldamento addizinaale) e l'interazione con il plasma. La luce proveniente dall'idrogeno eccitato uò essere osservato all'interno della lunghezza d'onda di Balmer \(\alpha\): la luce emessa è polarizzata e la sua banda risulterà allargata a causa del campo magnetico.
+\subsection{Principi NBI}
+\begin{itemize}
+    \item Le particelle neutre viaggiano inalterate attraverso i campi magnetici;
+    \item Il beam trasferisce l'energia al plasma tramite le collisioni;
+    \item L'assorbimento del beam deve avvenire al centro e non al bordo e questo è dovuto alla potenza del fascio;
+    \item I processi principlai sono:\begin{figure}
+        \includegraphics[scale=0.4]{2022-05-26-23-49-28.png}%chktex 8
+    \end{figure}
+\end{itemize}
+\subsection{Spettroscopia}
+Come abbiamo visto l'MSE si basa sullo spettro della luce emessa dall'interazione del fascio con il plasma.\newline
+Lo spettrometro misura per varie lunghezze d'onda la luce emessa dall'idrogeno. Le varie bande sono dovuto allo shift doppler. Questo fenomeno è vantaggiso poiché permette di distinguere tra le emissioni dell'idrogeno e quelle al bordo.\newline In particolare, l'informazione è contenuta nell'intensità della linea: più è intensa più il plasma è denso in una determinata porzione di plasma. Un altro modo per vedere lo spettrogramma è quello di utilizzare i fasci quantici: l'energia emessa dipende dalla costante di Planck e la frequenza della luce emessa.
+\subsection{Stark Effect}
+L'effetto Stark è quell'effetto che quantifica la separazione delle bande dello spettro dell'idrogeno in presenza di un campo elettrico. (Nel caso in cui si parlasse di campo magnetico si chiama Effetto Zeeman).\newline
+Vedendo uno spettrometro, si vedono più picchi e degli allargamenti delle bande: l'aggiunta dei picchi sono dovuto all'energia con cui entrano i NBI nel plasma che va a diminuire a \(\frac{1}{i}\quad u=1,..,n\). Inoltre, si nota una variazione della lunghezza d'onda della luce è dovuto all'effetto Doppler: il cambio della lunghezza d'onda della radiazione è dovuta al moto relativo tra sorgente e osservatore. Si quantifica:
+\begin{equation}
+    \frac{\Delta\lambda}{\lambda_{0}}=\frac{v}{c}
+\end{equation}
+\subsection{Motional Stark Effect}
+Il contributo dominante per la struttura spettrale di un componente monoenergetico del fascio è dovuto al motional Stark Effect. Questo effetto non è differente dal classico Stark Effect, ma il campo elettrico in question non è vicino al plasma. Tuttavia, sorge dal movimento dell'atomo all'interno del campo magnetico, ma risentirà di un campo elettrico dovuto alla forza di Lorenzt.\newline
+Il suo effetto può essere di due tipo:\begin{itemize}
+    \item Quadratico: si ha quando si considera il momento della carica;
+    \item Lineare
+\end{itemize}
+0:52:30
+\section{Interferometro}
+
 \section{Neutronica}
 \section{Disruzioni}
 Le disruzioni nei Tokamak sono inevitabili. Esse sono una perdita globale di confinamento e controllo del plasma dovuto da impurezze e radiazioni.\newline

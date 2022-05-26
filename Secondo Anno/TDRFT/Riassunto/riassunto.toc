@@ -1,6 +1,6 @@
 \contentsline {section}{\numberline {1}Tokamak}{1}{}%
 \contentsline {subsection}{\numberline {1.1}Struttura}{1}{}%
-\contentsline {subsection}{\numberline {1.2}Confinamento}{1}{}%
+\contentsline {subsection}{\numberline {1.2}Confinamento}{2}{}%
 \contentsline {subsection}{\numberline {1.3}Scarica}{2}{}%
 \contentsline {section}{\numberline {2}Ruolo delle misure magnetiche}{2}{}%
 \contentsline {section}{\numberline {3}Sensori Induttivi}{2}{}%
@@ -21,15 +21,20 @@
 \contentsline {subsection}{\numberline {6.2}Onde elettromagnetiche}{5}{}%
 \contentsline {subsection}{\numberline {6.3}Ellisse di Propagazione e Vettori di Stockes}{5}{}%
 \contentsline {subsection}{\numberline {6.4}Sistema Polarimetrico}{6}{}%
-\contentsline {section}{\numberline {7}Interferometro}{6}{}%
-\contentsline {section}{\numberline {8}MSE}{6}{}%
-\contentsline {section}{\numberline {9}Neutronica}{6}{}%
-\contentsline {section}{\numberline {10}Disruzioni}{6}{}%
-\contentsline {subsection}{\numberline {10.1}Classificazione diagnostiche disruzione}{7}{}%
-\contentsline {subsection}{\numberline {10.2}Requisiti Hardware}{7}{}%
-\contentsline {subsubsection}{\numberline {10.2.1}Carichi termici}{7}{}%
-\contentsline {subsubsection}{\numberline {10.2.2}Carichi Meccanici}{7}{}%
-\contentsline {subsection}{\numberline {10.3}Locked mode detection AUG}{8}{}%
-\contentsline {subsection}{\numberline {10.4}Imaging for disruptions}{8}{}%
-\contentsline {subsection}{\numberline {10.5}Indicatori di Profilo}{8}{}%
-\contentsline {subsection}{\numberline {10.6}Problema inverso nella fusione}{8}{}%
+\contentsline {section}{\numberline {7}MSE}{6}{}%
+\contentsline {subsection}{\numberline {7.1}Motion Stark Effect}{6}{}%
+\contentsline {subsection}{\numberline {7.2}Principi NBI}{7}{}%
+\contentsline {subsection}{\numberline {7.3}Spettroscopia}{7}{}%
+\contentsline {subsection}{\numberline {7.4}Stark Effect}{7}{}%
+\contentsline {subsection}{\numberline {7.5}Motional Stark Effect}{7}{}%
+\contentsline {section}{\numberline {8}Interferometro}{7}{}%
+\contentsline {section}{\numberline {9}Neutronica}{7}{}%
+\contentsline {section}{\numberline {10}Disruzioni}{7}{}%
+\contentsline {subsection}{\numberline {10.1}Classificazione diagnostiche disruzione}{8}{}%
+\contentsline {subsection}{\numberline {10.2}Requisiti Hardware}{8}{}%
+\contentsline {subsubsection}{\numberline {10.2.1}Carichi termici}{8}{}%
+\contentsline {subsubsection}{\numberline {10.2.2}Carichi Meccanici}{8}{}%
+\contentsline {subsection}{\numberline {10.3}Locked mode detection AUG}{9}{}%
+\contentsline {subsection}{\numberline {10.4}Imaging for disruptions}{9}{}%
+\contentsline {subsection}{\numberline {10.5}Indicatori di Profilo}{9}{}%
+\contentsline {subsection}{\numberline {10.6}Problema inverso nella fusione}{9}{}%
