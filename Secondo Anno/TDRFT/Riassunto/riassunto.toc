@@ -27,13 +27,13 @@
 \contentsline {subsection}{\numberline {7.3}Spettroscopia}{7}{}%
 \contentsline {subsection}{\numberline {7.4}Stark Effect}{7}{}%
 \contentsline {subsection}{\numberline {7.5}Motional Stark Effect}{7}{}%
-\contentsline {section}{\numberline {8}Interferometro}{7}{}%
-\contentsline {section}{\numberline {9}Neutronica}{7}{}%
-\contentsline {section}{\numberline {10}Disruzioni}{7}{}%
+\contentsline {section}{\numberline {8}Interferometro}{8}{}%
+\contentsline {section}{\numberline {9}Neutronica}{8}{}%
+\contentsline {section}{\numberline {10}Disruzioni}{8}{}%
 \contentsline {subsection}{\numberline {10.1}Classificazione diagnostiche disruzione}{8}{}%
 \contentsline {subsection}{\numberline {10.2}Requisiti Hardware}{8}{}%
 \contentsline {subsubsection}{\numberline {10.2.1}Carichi termici}{8}{}%
-\contentsline {subsubsection}{\numberline {10.2.2}Carichi Meccanici}{8}{}%
+\contentsline {subsubsection}{\numberline {10.2.2}Carichi Meccanici}{9}{}%
 \contentsline {subsection}{\numberline {10.3}Locked mode detection AUG}{9}{}%
 \contentsline {subsection}{\numberline {10.4}Imaging for disruptions}{9}{}%
 \contentsline {subsection}{\numberline {10.5}Indicatori di Profilo}{9}{}%
