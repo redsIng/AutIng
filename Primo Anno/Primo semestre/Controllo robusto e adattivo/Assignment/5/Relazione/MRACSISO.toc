@@ -1,0 +1,9 @@
+\beamer@sectionintoc {1}{Introduzione}{3}{0}{1}
+\beamer@sectionintoc {2}{Modello teorico}{4}{0}{2}
+\beamer@subsectionintoc {2}{1}{Assunzioni Impianto}{4}{0}{2}
+\beamer@subsectionintoc {2}{2}{Assunzioni del modello di riferimento}{5}{0}{2}
+\beamer@sectionintoc {3}{Modello teorico e implementazione Simulink}{6}{0}{3}
+\beamer@subsectionintoc {3}{1}{Regressore}{6}{0}{3}
+\beamer@subsectionintoc {3}{2}{Controllore}{7}{0}{3}
+\beamer@sectionintoc {4}{Analisi}{8}{0}{4}
+\beamer@sectionintoc {5}{Conclusioni}{13}{0}{5}
