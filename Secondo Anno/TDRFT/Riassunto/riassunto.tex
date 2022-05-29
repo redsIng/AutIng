@@ -243,11 +243,120 @@ Lo stark effect si compone di due regimi:\begin{itemize}
         \item La componente \(\sigma \) con numero quantico pari a +/- 1 alla componente perpendicolare del campo elettrico
     \end{itemize}
 \end{itemize}
-
-
 \section{Interferometro}
-
+L'interferometro è una diagnostica che consente di misurare la densità del plasma. Ancque questa diagnostica come il polarimetro si basa sulle ottiche.\newpage
+\subsection{Onde ottiche}
+Quando si trattano le onde si possono verificare 3 tipi di eventi:\begin{itemize}
+    \item Interferenza;
+    \item Diffrazione: se il fascio laser passa tramite due fenditure, si nota che al passaggio delle fenditure disegna delle figure di diffrazione corrispondente ad una dispersione dell'onda;
+    \item Polarizzazione.
+\end{itemize}
+Affinché sia possibile verificars di questi eventi necessitiamo che il fascio sia:\begin{itemize}
+    \item Coerente: deve mantenere una fase costante;
+    \item Monocromatica: il laser deve avere una singola lunghezza d'onda.
+\end{itemize}
+\subsection{Interferenza}
+Date due sorgenti coerenti e monocromatiche esse possono interagire in due maniere:\begin{itemize}
+    \item Costruttuiva: se l'ampiezza dell'onda risultante è maggiore di quella singola;
+    \item Distruttive: se l'ampiezza dell'onda risultante è meno di una delle due sorgenti.
+\end{itemize}
+Tutte le interferenza associate ai fasci di luce sono associate all'interazione dei campi elettromagnetiche. Visivamente, in un interferometro, il fenomeno di interferenza origina una sequenza di bande chiare e scure corrispondenti rispettivamente a fenomeni di interferenza costruttiva e distruttiva. Queste bande sono ottenute da uno schermo posto ad una certa distanza dalle fenditure: le onde delle due sorgenti corrispondenti alle due fenditure formano una interferenza costruttiva se le onde arrivano sullo schermo in fase (una onda corre più dell'altra) e altrimenti è distruttiva.
+In formule:\begin{itemize}
+    \item Interferenza costruttiva: \(\delta= d\sin{(\theta_{\text{brigth}})}=m\lambda \)
+    \item Interferenza distruttiva  \(\delta= d\sin{(\theta_{\text{dark}})}=(m+\frac{1}{2})\lambda \)
+\end{itemize}
+Da cui possiamo calcolare la posizione delle frange:\begin{itemize}
+    \item \(y_{\text{k}}=L\tan{\theta_{\text{k}}}\quad k =\{\text{brigth,dark}\} \)
+\end{itemize}
+Inoltre, assumendo che la distanza fra gli schermi è molto più grande della distanza tra le fenditure e quest'ultima è molto più grande della lunghezza d'onda si sostituisce la tangente con il seno (condizione di piccolo angolo) che è noto. Così facendo, si ottiene una formula che non dipende dall'angolo:\begin{equation}
+    y_{\text{brigth}}= L\frac{m\lambda}{d}\quad  y_{\text{dark}}= L\frac{(m+\frac{1}{2})\lambda}{d}
+\end{equation}
+Ottenuta la posizione, ora vogliamo caratterizzare l'ampiezza dell'intensità luminosa corrispondente alla frangia rilevata sullo schermo. Dalle equazioni dell'onda:\begin{align}
+    E_{1}&=E_{0}\sin{\omega t}\\
+    E_{2}&=E_{0}\sin{\omega t+\phi}
+\end{align}
+Dal principio di sovrapposizione degli effetti si ottiene:\begin{equation}
+    E_{p}=2E_{0}\cos{\frac{\phi}{2}}\sin{\omega+\frac{\phi}{2}}
+\end{equation}
+La differenza di fase tra le due onde nel punto P dello schermo è:\begin{equation}
+    \delta=r_{1}-r_{2}=d\sin{\theta}
+\end{equation}
+con r percorso generato tra le due fenditure.
+Si può scrivere l'intensità dell'onda sarà proporzionale al quadrato della risultante dell'intensità del campo elettrico. Graficamente:\begin{itemize}
+    \item L'interferenza consiste in bande equispaziate di uguuale intensita.
+    \item Nei picchi interferenza costruttiva;
+    \item Nelle valli interferenza distruttiva.
+\end{itemize}
+\subsection{Diagnostiche}
+Vi sono due possibili configurazioni di diagnostiche utilizzano l'interferenza:\begin{itemize}
+    \item Michelson;
+    \item Mac-Zender;
+\end{itemize}
+\subsubsection{Interferometro di Michelson}
+La sorgente di luce incide su un bisplitter che dividerà il fascio in due. Entrambi i fasci laser attraversando il bisplitter incidono su due specchi M1,M2 posti a distanza L1 e L2 e uno specchio si trova a 90 gradi della sorgente, l'altro parallelamente alla sorgente.\newline
+I due rami riflessi dagli specchi ritornano indietro sul bisplitter e vengono osservati. Ricomponendosi, si ottengono le immagini di interferenza in base alla distanza degli specchi del bisplitter.
+\begin{figure}
+    \includegraphics[scale=0.4]{2022-05-29-15-59-34.png}% chktex 8
+\end{figure}
+Il vantaggio di questo strumento è che non si necessita di calibrazione dato che la misura che viene acquisita è una misura relativa tra i bracci degli specchi: la sorgente è la stessa e viene divisa da un componente ottico (a patto che le ottiche non si siano guastate).
+\subsection{Interferometro nella fusione}
+L'interferometro utilizza dei fasci a frequenze molto lontane da quelle del plasma così da non perturbarlo ed avere delle misure ottimali sulla densità di plasma e insieme al polarimetro sulle componenti del campo magnetico.\newline
+I vantaggi di questa diagnostica sono i seguenti:\begin{itemize}
+    \item Si segue l'evoluzione del plasma istante per istante sulla densità degli elettroni;
+    \item Non si necessita di calibrazione per gli strumenti;
+    \item Non si necessitano di informazioni addizionali da altre diagnostiche.
+\end{itemize}
+\subsubsection{Mach-Zender}
+ \begin{figure}
+     \includegraphics[scale=0.4]{2022-05-29-16-10-11.png}% chktex 8
+ \end{figure}
+ Si ha il fascio laser che viene diviso da un bisplitter: un ramo passa per il plasma e l'altro no. In seguito ripassano per un altro bisplitter per essere ricomposte ed analizzate. Questa configurazione è detta autocalibrante poiché si prende sempre il segnale di riferimento dal fascio che non passa per il plasma.
+ \begin{figure}
+     \includegraphics[scale=0.4]{2022-05-29-16-13-05.png}% chktex 8
+ \end{figure}
+ Il parametro \(n\) di rifrazione del plasma può essere scritta come:\begin{equation}
+     n^{2}=\frac{n_{e}}{n_{c}}
+ \end{equation}
+ La frequenza del plasma dipende da:\begin{itemize}
+     \item Densità elettronica;
+     \item Constante dielettrica nel vuoto;
+     \item Carica elettronica;
+     \item Massa dell'elettrone;
+ \end{itemize}
+ Per una frequenza fissata si definisce la densità di cut-off come la densità per cui la frequenza del fascio laser è uguale alla frequenza di plasma. Se la densità eccede il valore di cutoff, l'onda non è più propagata, ma decade esponenzialmente con la distanza. Ciò risulta che normalmente si trasmette una piccola potenza attraverso il plasma e l'interferometro cessa di funzionare.
+ \subsubsection{Interferometro nel JET}
+ \begin{figure}
+     \includegraphics[scale=0.4]{2022-05-29-16-23-12.png}% chktex 8
+ \end{figure}
+ \subsection{Problemi dell'interferometro: salti di frangia}
+ Le misure interferometriche possono perdere il segnale quando l'onda del fascio è un multiplo elevato del plasma e quindi si perdono le misurazioni della densità del plasma. Per ovviare a questo problema o si ferma la scarica o si continua lo sparo e poi si avvia la fase di ricostruzione del segnale. Tuttavia, il metodo più efficiente è quello di utilizzare il polarimetro per fittare i dati sull'interferometro.
+ \section{Hardware}
+\begin{itemize}
+    \item Lunghezza d'onda: componente principale da cui dipende la scelta di tutte le altre componentistiche:\begin{itemize}
+        \item Onda lunga:\begin{itemize}
+            \item Pro:Migliore risoluzione delle misure;
+            \item Contro: rifrazione;
+        \end{itemize}
+        \item Onde corte:\begin{itemize}
+            \item Pro: bassa rifrazione;
+            \item Contro: Problemi di vibrazioni meccaniche e bassa risoluzione.
+        \end{itemize}
+    \end{itemize};
+    \item Laser: il laser opera nel lontano infrarosso. Devono essere stabili poiché molti laser dipendono dalle condizioni ambientali nel quale operano. Per essere sicuri della stabilità dello strumento si isolano gli strumenti in condizioni ambientali ottimali con un controllo in feedback;
+    \item Ottiche le componenti ottiche devono lavorare in ambienti ad alte temperature, radiazioni e neutroni. Quindi bisogna scegliere i materiali con cui sono relizzate le ottiche avento particolare cura a scegliere dei materiali che non risentono dei campi magnetici;
+    \item Modulatori\begin{figure}
+        \includegraphics[scale=0.4]{2022-05-29-16-41-03.png}% chktex 8
+    \end{figure};
+    \item Rivelatori:\begin{figure}
+        \includegraphics[scale=0.4]{2022-05-29-16-41-40.png}% chktex 8
+    \end{figure};
+    \item Struttura meccanica;
+    \item Controllo dell'atmosfera.
+\end{itemize}
 \section{Neutronica}
+\section{Tomografia}
+\section{Bolometria}
+\section{Spettroscopia}
 \section{Disruzioni}
 Le disruzioni nei Tokamak sono inevitabili. Esse sono una perdita globale di confinamento e controllo del plasma dovuto da impurezze e radiazioni.\newline
 Si compongono di due fasi:

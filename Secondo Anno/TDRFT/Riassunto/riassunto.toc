@@ -1,40 +1,52 @@
-\contentsline {section}{\numberline {1}Tokamak}{1}{}%
-\contentsline {subsection}{\numberline {1.1}Struttura}{1}{}%
+\contentsline {section}{\numberline {1}Tokamak}{2}{}%
+\contentsline {subsection}{\numberline {1.1}Struttura}{2}{}%
 \contentsline {subsection}{\numberline {1.2}Confinamento}{2}{}%
 \contentsline {subsection}{\numberline {1.3}Scarica}{2}{}%
 \contentsline {section}{\numberline {2}Ruolo delle misure magnetiche}{2}{}%
 \contentsline {section}{\numberline {3}Sensori Induttivi}{2}{}%
-\contentsline {subsection}{\numberline {3.1}Rogowski Coil}{2}{}%
+\contentsline {subsection}{\numberline {3.1}Rogowski Coil}{3}{}%
 \contentsline {subsection}{\numberline {3.2}Voltage Loop / Flux Loop}{3}{}%
 \contentsline {subsection}{\numberline {3.3}Pick-Up Coils}{3}{}%
 \contentsline {subsection}{\numberline {3.4}Saddle Coils}{3}{}%
 \contentsline {subsection}{\numberline {3.5}Loop Diamagnetico}{3}{}%
 \contentsline {subsection}{\numberline {3.6}Sensori di Hall}{3}{}%
-\contentsline {section}{\numberline {4}Sistemi di riscaldamento addizionali}{3}{}%
-\contentsline {subsection}{\numberline {4.1}Diagnostiche su atomi neutri}{3}{}%
+\contentsline {section}{\numberline {4}Sistemi di riscaldamento addizionali}{4}{}%
+\contentsline {subsection}{\numberline {4.1}Diagnostiche su atomi neutri}{4}{}%
 \contentsline {subsection}{\numberline {4.2}Electron Cyclotron Resonant Heating}{4}{}%
 \contentsline {section}{\numberline {5}Thomson Scattering}{4}{}%
-\contentsline {section}{\numberline {6}Polarimetro}{4}{}%
+\contentsline {section}{\numberline {6}Polarimetro}{5}{}%
 \contentsline {subsection}{\numberline {6.1}Polarizzatore}{5}{}%
 \contentsline {subsubsection}{\numberline {6.1.1}Assorbimento}{5}{}%
 \contentsline {subsubsection}{\numberline {6.1.2}Polarizzazione tramite doppia rifrazione}{5}{}%
 \contentsline {subsection}{\numberline {6.2}Onde elettromagnetiche}{5}{}%
-\contentsline {subsection}{\numberline {6.3}Ellisse di Propagazione e Vettori di Stockes}{5}{}%
-\contentsline {subsection}{\numberline {6.4}Sistema Polarimetrico}{6}{}%
-\contentsline {section}{\numberline {7}MSE}{6}{}%
-\contentsline {subsection}{\numberline {7.1}Motion Stark Effect}{6}{}%
-\contentsline {subsection}{\numberline {7.2}Principi NBI}{7}{}%
-\contentsline {subsection}{\numberline {7.3}Spettroscopia}{7}{}%
-\contentsline {subsection}{\numberline {7.4}Stark Effect}{7}{}%
-\contentsline {subsection}{\numberline {7.5}Motional Stark Effect}{7}{}%
+\contentsline {subsection}{\numberline {6.3}Ellisse di Propagazione e Vettori di Stockes}{6}{}%
+\contentsline {subsection}{\numberline {6.4}Sistema Polarimetrico}{7}{}%
+\contentsline {section}{\numberline {7}MSE}{7}{}%
+\contentsline {subsection}{\numberline {7.1}Motion Stark Effect}{7}{}%
+\contentsline {subsection}{\numberline {7.2}Principi NBI}{8}{}%
+\contentsline {subsection}{\numberline {7.3}Spettroscopia}{8}{}%
+\contentsline {subsection}{\numberline {7.4}Stark Effect}{8}{}%
+\contentsline {subsection}{\numberline {7.5}Motional Stark Effect}{8}{}%
 \contentsline {section}{\numberline {8}Interferometro}{8}{}%
-\contentsline {section}{\numberline {9}Neutronica}{8}{}%
-\contentsline {section}{\numberline {10}Disruzioni}{8}{}%
-\contentsline {subsection}{\numberline {10.1}Classificazione diagnostiche disruzione}{8}{}%
-\contentsline {subsection}{\numberline {10.2}Requisiti Hardware}{8}{}%
-\contentsline {subsubsection}{\numberline {10.2.1}Carichi termici}{8}{}%
-\contentsline {subsubsection}{\numberline {10.2.2}Carichi Meccanici}{9}{}%
-\contentsline {subsection}{\numberline {10.3}Locked mode detection AUG}{9}{}%
-\contentsline {subsection}{\numberline {10.4}Imaging for disruptions}{9}{}%
-\contentsline {subsection}{\numberline {10.5}Indicatori di Profilo}{9}{}%
-\contentsline {subsection}{\numberline {10.6}Problema inverso nella fusione}{9}{}%
+\contentsline {subsection}{\numberline {8.1}Onde ottiche}{9}{}%
+\contentsline {subsection}{\numberline {8.2}Interferenza}{9}{}%
+\contentsline {subsection}{\numberline {8.3}Diagnostiche}{10}{}%
+\contentsline {subsubsection}{\numberline {8.3.1}Interferometro di Michelson}{10}{}%
+\contentsline {subsection}{\numberline {8.4}Interferometro nella fusione}{10}{}%
+\contentsline {subsubsection}{\numberline {8.4.1}Mach-Zender}{10}{}%
+\contentsline {subsubsection}{\numberline {8.4.2}Interferometro nel JET}{11}{}%
+\contentsline {subsection}{\numberline {8.5}Problemi dell'interferometro: salti di frangia}{11}{}%
+\contentsline {section}{\numberline {9}Hardware}{11}{}%
+\contentsline {section}{\numberline {10}Neutronica}{12}{}%
+\contentsline {section}{\numberline {11}Tomografia}{12}{}%
+\contentsline {section}{\numberline {12}Bolometria}{12}{}%
+\contentsline {section}{\numberline {13}Spettroscopia}{12}{}%
+\contentsline {section}{\numberline {14}Disruzioni}{12}{}%
+\contentsline {subsection}{\numberline {14.1}Classificazione diagnostiche disruzione}{12}{}%
+\contentsline {subsection}{\numberline {14.2}Requisiti Hardware}{13}{}%
+\contentsline {subsubsection}{\numberline {14.2.1}Carichi termici}{13}{}%
+\contentsline {subsubsection}{\numberline {14.2.2}Carichi Meccanici}{13}{}%
+\contentsline {subsection}{\numberline {14.3}Locked mode detection AUG}{13}{}%
+\contentsline {subsection}{\numberline {14.4}Imaging for disruptions}{13}{}%
+\contentsline {subsection}{\numberline {14.5}Indicatori di Profilo}{13}{}%
+\contentsline {subsection}{\numberline {14.6}Problema inverso nella fusione}{13}{}%
