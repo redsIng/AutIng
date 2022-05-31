@@ -45,7 +45,7 @@
     \begin{itemize}
         \item \textbf{Assunzioni dell'impianto} \(G(s)=k\frac{s+b_{0}}{s^{2}+a_{1}s+a_{0}}=k\frac{Z(s)}{R(s)}\):
         \begin{itemize}
-            \item \(Z(s)\) è un polinomio monico di Hurwitz di grado m.
+            \item \(Z(s)\) è un polinomio monico di Hurwitz di grado m.\\
             Condizione necessaria affinché il polinomio \(s+b_{0}\) sia di Hurwitz se i coefficienti del polinomio siano tutti positivi. Quindi:\begin{equation}
                 b_{1}>0, b_{0}>0
             \end{equation}
@@ -113,7 +113,7 @@
                     \omega_{1}^{T}&\omega_{2}^T&y&y
                 \end{bmatrix}^{T}
             \end{equation}\begin{equation}
-                u=\hat{\theta}^T\omega
+                u=\hat{\theta}^T\omega,\quad \dot{\hat{\theta}}=-\Gamma e_{1}\omega,\quad \Gamma=\Gamma^{T}>0
             \end{equation}
         \end{minipage}
         \begin{minipage}[t]{0.45\textwidth}
@@ -134,7 +134,7 @@
         \centering
         \subfloat[\centering Intervallo totale]{{\includegraphics[scale=0.25]{2022-05-28-15-06-46.png}}}% chktex 8
         \hspace{0.2cm}
-        \subfloat[\centering Ingrandimento a tempo finale]{{\includegraphics[scale=0.25]{2022-05-28-15-07-47.png}}}% chktex 8
+        \subfloat[\centering Ingrandimento a convergenza]{{\includegraphics[scale=0.25]{2022-05-28-15-07-47.png}}}% chktex 8
         \hspace{0.2cm}
         \subfloat[\centering Theta]{{\includegraphics[scale=0.25]{2022-05-28-15-09-12.png}}}% chktex 8
     \end{figure}
@@ -148,7 +148,7 @@
         \centering
         \subfloat[\centering Intervallo totale]{{\includegraphics[scale=0.25]{2022-05-28-15-13-28.png}}}% chktex 8
         \hspace{0.2cm}
-        \subfloat[\centering Ingrandimento a tempo finale]{{\includegraphics[scale=0.25]{2022-05-28-15-25-53.png}}}% chktex 8
+        \subfloat[\centering Ingrandimento a convergenza]{{\includegraphics[scale=0.25]{2022-05-28-15-25-53.png}}}% chktex 8
         \hspace{0.2cm}
         \subfloat[\centering Theta]{{\includegraphics[scale=0.25]{2022-05-28-15-16-35.png}}}% chktex 8
     \end{figure}
@@ -162,7 +162,7 @@
         \centering
         \subfloat[\centering Intervallo totale]{{\includegraphics[scale=0.25]{2022-05-28-15-21-18.png}}}% chktex 8
         \hspace{0.2cm}
-        \subfloat[\centering Ingrandimento a tempo finale]{{\includegraphics[scale=0.25]{2022-05-28-15-22-15.png}}}% chktex 8
+        \subfloat[\centering Ingrandimento a convergenza]{{\includegraphics[scale=0.25]{2022-05-28-15-22-15.png}}}% chktex 8
         \hspace{0.2cm}
         \subfloat[\centering Theta]{{\includegraphics[scale=0.25]{2022-05-28-15-22-44.png}}}% chktex 8
     \end{figure}
@@ -176,7 +176,7 @@
         \centering
         \subfloat[\centering Intervallo totale]{{\includegraphics[scale=0.25]{2022-05-28-15-29-13.png}}}% chktex 8
         \hspace{0.2cm}
-        \subfloat[\centering Ingrandimento a tempo finale]{{\includegraphics[scale=0.25]{2022-05-28-15-29-53.png}}}% chktex 8
+        \subfloat[\centering Ingrandimento a convergenza]{{\includegraphics[scale=0.25]{2022-05-28-15-29-53.png}}}% chktex 8
         \hspace{0.2cm}
         \subfloat[\centering Theta]{{\includegraphics[scale=0.25]{2022-05-28-15-30-37.png}}}% chktex 8
     \end{figure}
@@ -184,21 +184,20 @@
 \begin{frame}
     \frametitle{Analisi}
     \begin{itemize}
-        \item \textbf{Parametri:}\(E_{1}=1,E_{2}=1,\omega_{1}=5,\omega_{2}=10,F=diag(70)\)
+        \item \textbf{Parametri:}\(E_{1}=1,E_{2}=1,\omega_{1}=5,\omega_{2}=10,F=diag(1)\)
     \end{itemize}
     \begin{figure}
         \centering
-        \subfloat[\centering Intervallo totale]{{\includegraphics[scale=0.25]{2022-05-28-15-49-19.png}}}% chktex 8
+        \subfloat[\centering Intervallo totale]{{\includegraphics[scale=0.25]{2022-05-31-13-08-40.png}}}% chktex 8
         \hspace{0.2cm}
-        \subfloat[\centering Ingrandimento a tempo finale]{{\includegraphics[scale=0.25]{2022-05-28-15-49-45.png}}}% chktex 8
+        \subfloat[\centering Ingrandimento a tempo finale]{{\includegraphics[scale=0.25]{2022-05-31-13-09-30.png}}}% chktex 8
         \hspace{0.2cm}
-        \subfloat[\centering Theta]{{\includegraphics[scale=0.25]{2022-05-28-15-50-05.png}}}% chktex 8
+        \subfloat[\centering Theta]{{\includegraphics[scale=0.25]{2022-05-31-13-10-04.png}}}% chktex 8
     \end{figure}
 \end{frame}
 \begin{frame}
 	\frametitle{Conclusioni}
 	\section{Conclusioni}
-    L'errore, come ci aspettimo dalla teoria, tende asintoticamente a zero nel tempo di simulazione scelte. Ne fa eccezione l'ultima simulazione proposta in cui, sebbene l'errore sia dimiunuito, non è giunto ancora a 0. Inoltre, i risultati proposti variano notevolemente in base alla scelta in base alle frequenze, le ampiezze scelte ed ai valori di \(\Gamma \). In particolare, a valori bassi di \(\Gamma \) corrisponde un transitorio più regolare con tempi di risposta maggiorni e con stime dei parametri più lente; al contrario, per valori alti di \(\Gamma \) si ha un transitorio meno regolare, con tempi di risposta minori, azioni di controllo più intense e stime dei parametri più veloci.
-    Nell'ultima simulazione la non convergenza dei parametri e dell'errore può esser dovuto ad un problema numerico o ad una instabilità dei poli del sistema.
+    L'errore, come ci aspettimo dalla teoria, tende asintoticamente a zero nel tempo di simulazione scelte. Ne fa eccezione l'ultima simulazione proposta in cui, sebbene l'errore sia dimiunuito, non è giunto ancora a 0. Inoltre, i risultati proposti variano notevolemente in base alla scelta in base alle frequenze, le ampiezze scelte ed ai valori di \(\Gamma \). In particolare, a valori bassi di \(\Gamma \) corrisponde un transitorio più regolare con tempi di risposta maggiori e con stime dei parametri più lente; al contrario, per valori alti di \(\Gamma \) si ha un transitorio meno regolare, con tempi di risposta minori, azioni di controllo più intense e stime dei parametri più veloci.
 \end{frame}
 \end{document}
