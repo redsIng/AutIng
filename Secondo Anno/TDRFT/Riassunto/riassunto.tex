@@ -5,9 +5,13 @@
 \graphicspath{{Images/}}
 \usepackage{amsthm}
 \usepackage{amsmath}
+\usepackage{fixltx2e}
+\usepackage{xcolor}
 
 \usepackage{verbatim}
-
+\def\SPSB#1#2{\rlap{\textsuperscript{\textcolor{black}{#1}}}\SB{#2}}
+\def\SP#1{\textsuperscript{\textcolor{black}{#1}}}
+\def\SB#1{\textsubscript{\textcolor{black}{#1}}}
 \begin{document}
 \newtheorem{definizione}{Definizione}
 
@@ -353,7 +357,21 @@ I vantaggi di questa diagnostica sono i seguenti:\begin{itemize}
     \item Struttura meccanica;
     \item Controllo dell'atmosfera.
 \end{itemize}
-\section{Neutronica}
+\section{Neutronica 1-2-3-4}% chktex 8
+\subsection{Introduzione}
+\begin{itemize}
+    \item \textbf{Struttura Nucleare}:\begin{itemize}
+        \item \textbf{Nucleone}: è il nome dato alla particella \SPSB{A}{Z}X
+        \item \textbf{Nuclide}: è una paricolare compinazione di protoni e neutroni che compongono un nucleo. Vengono usati per distinguire gli isotopi tra i nuclei.
+        \item \textbf{Numero di nucleoni}: Il numero di nucleoni A coincide con il umero di massa ed è definito come la somma dei protoni e dei neutroni nel nucleo. Viene misurato in unità di massa atomica u.
+        \item \textbf{Numero di protoni}: Z è il numero dei protoni nel nucleo;
+        \item \textbf{Isotopi}: Un istopi sono nuclei con lo stesso numero di protoni, ma differente numero di neutroni. Tramite A e Z si riconoscono i vari tipi di isotopi;
+        \item \textbf{Numero di neutroni}: N=A-Z è il numero di neutroni nel nucleo;
+    \end{itemize}
+    \item\textbf{Isotopi}:Un isotopo è atomo con stesso numero di protoni, ma differente numero di neutroni. L'esistenza degli isotopi è una conseguenza dell'esistenza dei neutroni: non vi è un'altra spiegazione per spiegare la differenza di massa fra due isotopi dello stesso elemento. Dato che le masse differiscono, allora si hanno diverse proprietà fisiche.\newline
+    Per l'idrogeno vi sono 3 tipi di isotopi: prozio (stabile), deuterio (stabile) e trizio (instabile, radioattivo). Quelli utilizzati nella fusione sono deuterio e trizio. Il trizio non è molto presente in natura poiché decade velocemente quindi in un Tokamak occorre produrlo artificialmente;
+   
+\end{itemize}
 \section{Tomografia}
 \section{Bolometria}
 \section{Spettroscopia}
@@ -412,4 +430,6 @@ Per la predizione delle disruzione e il controllo in feedback sono necessari gli
 Per questa misura si utilizza un fitting basato su due Gaussiane quando il profilo è cavo: differenze tra i due massimi e normalizzata per la deviazione standard delle  gaussiane. Con questo approccio, più due massimi sono distanti più il profilo sarà cavo.
 \subsection{Problema inverso nella fusione}
 Per quanto riguardo le misure effettuate dall'esterno del plasma, esse vengono utilizzate nella risoluzione di un problema inverso per ottenere delle informazioni dell'interno. Il principale strumento che viene utilizzato è la tomografia.
+Da aggiungere disruzioni 2
+\section{Machine Learning}
 \end{document}
