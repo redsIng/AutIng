@@ -5,17 +5,10 @@
 <\body>
   <\session|maxima|default>
     <\output>
-      \;
+      Lorenzo Rossi Matricola:0301285
 
-      Maxima 5.46.0 https://maxima.sourceforge.io
-
-      using Lisp SBCL 2.2.2
-
-      Distributed under the GNU Public License. See the file COPYING.
-
-      Dedicated to the memory of William Schelter.
-
-      The function bug_report() provides bug reporting information.
+      Assignment 6 - Stabilità Robusta e Prestazioni Robuste
+      \ \ \ \ \ \ \ \ \ 
     </output>
 
     <\input>
@@ -121,11 +114,13 @@
     </unfolded-io>
 
     <\unfolded-io>
-      <with|color|red|(<with|math-font-family|rm|%i>24) >
+      <with|color|red|(<with|math-font-family|rm|%i>13) >
     <|unfolded-io>
       solve_rat_ineq(W2T0\<less\>1/2)
     <|unfolded-io>
-      <math|<with|math-display|true|<text|<with|font-family|tt|color|red|(<with|math-font-family|rm|%o24>)
+      \;
+
+      \ <math|<with|math-display|true|<text|<with|font-family|tt|color|red|(<with|math-font-family|rm|%o13>)
       >><around*|[|<around*|[|k\<less\>1|]>,<around*|[|k\<gtr\><frac|5|3>|]>|]>>>
     </unfolded-io>
 
@@ -221,15 +216,19 @@
     </unfolded-io>
 
     <\unfolded-io>
-      <with|color|red|(<with|math-font-family|rm|%i>23) >
+      <with|color|red|(<with|math-font-family|rm|%i>22) >
     <|unfolded-io>
       <code|solve_rat_ineq>(eq1\<less\>0)
     <|unfolded-io>
-      \;
-
-      \ <math|<with|math-display|true|<text|<with|font-family|tt|color|red|(<with|math-font-family|rm|%o23>)
+      <math|<with|math-display|true|<text|<with|font-family|tt|color|red|(<with|math-font-family|rm|%o22>)
       >><around*|[|<around*|[|k\<less\><frac|5|3>|]>,<around*|[|k\<gtr\><frac|5|3>|]>|]>>>
     </unfolded-io>
+
+    <\input>
+      <with|color|red|(<with|math-font-family|rm|%i>23) >
+    <|input>
+      \;
+    </input>
 
     <\textput>
       Anche in questo caso la soluzione <math|k\<less\><frac|5|3>> deve
@@ -241,6 +240,8 @@
       </equation*>
     </textput>
   </session>
+
+  \;
 </body>
 
 <\initial>
