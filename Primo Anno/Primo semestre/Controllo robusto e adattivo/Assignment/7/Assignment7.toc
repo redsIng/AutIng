@@ -1,0 +1,11 @@
+\beamer@sectionintoc {1}{A0 - Formulazione del sistema}{3}{0}{1}
+\beamer@sectionintoc {2}{A1 - Punti di Equilibrio}{4}{0}{2}
+\beamer@sectionintoc {3}{A2 - Linearizzazione del sistema}{5}{0}{3}
+\beamer@sectionintoc {4}{A3 - Forma standard nello spazio di stato}{6}{0}{4}
+\beamer@sectionintoc {5}{A4 - Controllabilità}{7}{0}{5}
+\beamer@sectionintoc {6}{A5 - Problema di Regolazione}{8}{0}{6}
+\beamer@sectionintoc {7}{A6 - Legge di controllo a full information}{10}{0}{7}
+\beamer@sectionintoc {8}{A7 - Legge di controllo in feedback dall'errore}{12}{0}{8}
+\beamer@sectionintoc {9}{B1 - Legge di controlo full information A5}{14}{0}{9}
+\beamer@sectionintoc {10}{B2+B3 - Simulazioni}{15}{0}{10}
+\beamer@sectionintoc {11}{B4 - Simulazioni}{16}{0}{11}
