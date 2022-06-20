@@ -13,6 +13,7 @@
 \setbeamercolor{palette quaternary}{bg=Mgreen,fg=white}
 \setbeamercolor{structure}{fg=Lgreen} % itemize, enumerate, etc
 \setbeamercolor{section in toc}{fg=Mgreen} % TOC sections
+\usepackage[export]{adjustbox}
 
 \setbeamersize{text margin left=3mm,text margin right=5mm }
 \geometry{paperwidth=420pt, paperheight=300pt}
@@ -44,6 +45,7 @@
 \begin{frame}
 	\frametitle{Introduzione}
 	\section{Introduzione}
+	L'obiettivo di questa tesina è quello di fornire una ricostruzione 3D del plasma in forma analitica.
 	Tramite le equazioni MHD (\emph{MagnetoHydroDynamics}) è possibile considerare il plasma come un fluido conduttore soggetto all'azione di un campo magnetico.
 	\begin{block}{Equilibrio}
 		L'equilibrio è quella situazione in cui tutte le forze agenti su di essa hanno risultante nulla.
@@ -121,6 +123,15 @@
 	Una valida alternativa per ottenere più informazioni sul processo in questione viene fornita dal metodo Physics Informed Neural Network basati sul deep learning.
 \end{frame}
 \begin{frame}
+	\frametitle{Deep Learning}
+	\section{Deep Learning}
+	\begin{block}{Deep Learning}
+		Il deep Learning è una branca del Machine Learning che studia l'apprendimento automatico tramite l'utilizzo di architetture stratificate dette \textbf{neural  network multilayers}.
+	\end{block}
+	L'unità fondamentale di una neural network multilayers è il \textbf{neurone} che esegue una singola operazione non lineare.\\
+Ci sono vari metodi su come strutturare i neuroni in una struttura stratificata. Tuttavia, la scelta più gettonata è quella della \textbf{backpropagation}: i pesi associati ad ogni neurone vengono aggiornati calcolando l'uscita della rete e propagando l'errore all'indietro verso i livell più alti.
+\end{frame}
+\begin{frame}
 	\frametitle{Physics Informed Neural Network}
 	\section{Physics Informed Neural Network}
 	\begin{block}{Physics Informed Neural Network}
@@ -135,17 +146,36 @@
 	\end{itemize}
 \end{frame}
 \begin{frame}
-	\frametitle{PDE Neural Network}
+	\frametitle{PDE Neural Network - Struttura} % chktex 8
 	\section{PDE Neural Network}
-	\vspace{0.1cm}
-		\includegraphics[scale=0.5]{2022-06-07-15-51-42.png}% chktex 8
+	\subsection{Struttura}
+	Per la rete neurare si è scelto di utilizzare:
+	\begin{itemize}
+		\item Rete \textbf{fullyconnect}: ogni neurone di ogni livello è collegato con i neuroni del livello successivo;
+		\item Backpropagation tramite di errore;
+		\item Ogni neurone applica l'input una tangentoide;
+	\end{itemize}
+	\begin{figure}
+		\includegraphics[scale=0.3]{reteOrganizzazione.png}
+	\end{figure}
 
+\end{frame}
+\begin{frame}
+	\frametitle{PDE Neural Network}
+	\subsection{Errore}
+	\vspace{-0.1cm}
+		\begin{figure}
+			\adjustimage{scale=0.37,left}{LossFunction.drawio.png}% chktex 8
+		\end{figure}
 \end{frame}
 \begin{frame}
 	\frametitle{Condizioni al contorno}
 	\section{Condizioni al contorno}
 	La soluzione delle PDE in \(\phi = \{ 0,2\pi \} \) potrebbe portare a soluzione diverse quando queste, per periodicità, devono essere identiche. Per evitare questo comportamento, occorre aggiungere una quinda funzione di costo:\begin{equation*}
-		Loss5 = \frac{mean{(p_{i}-p_{f})}^{2}}{mean{(p_{i})}^{2}}+\frac{mean{(B_{r,i}-B_{r,f})}^{2}}{mean{(B,r_{i})}^{2}}+\frac{mean{(B_{z,i}-B_{z,f})}^{2}}{mean{(B_{z,i})}^{2}}+\frac{mean{(B_{t,i}-B_{t,f})}^{2}}{mean{(B_{t,i})}^{2}}
+		Loss5 = \frac{mean{(p-p_{f})}^{2}}{mean{(p_{f})}^{2}}+\frac{mean{(B_{r}-B_{r,f})}^{2}}{mean{(B,r_{f})}^{2}}+\frac{mean{(B_{z}-B_{z,f})}^{2}}{mean{(B_{z,f})}^{2}}+\frac{mean{(B_{t}-B_{t,f})}^{2}}{mean{(B_{t,f})}^{2}}
+	\end{equation*}
+	\begin{equation*}
+		Loss6 = \frac{mean{(p-p_{i})}^{2}}{mean{(p_{i})}^{2}}+\frac{mean{(B_{r}-B_{r})}^{2}}{mean{(B,r_{i})}^{2}}+\frac{mean{(B_{z}-B_{z,i})}^{2}}{mean{(B_{z,i})}^{2}}+\frac{mean{(B_{t}-B_{t,i})}^{2}}{mean{(B_{t,i})}^{2}}
 	\end{equation*}
 \end{frame}
 \begin{frame}
@@ -153,16 +183,24 @@
 	\section{Risultati}
 		Risultato atteso:
 		\begin{figure}
-			\includegraphics[scale=0.4]{2022-06-07-15-42-03.png}% chktex 8
+			\includegraphics[scale=0.3]{2022-06-20-23-05-27.png}% chktex 8
 		\end{figure}
 \end{frame}
 \begin{frame}
 	\frametitle{Risultati}
-	Risultato della rete neurale:
 	\begin{figure}
-		\includegraphics[scale=0.4]{2022-06-08-18-46-44.png}% chktex 8
-		\caption{Risultato parziale dopo 2400 epoche}
+		\includegraphics[scale=0.26]{2022-06-20-23-07-41.png}% chktex 8
+		\caption{Risultato finale 10000 epoche}
 	\end{figure}
-
+	\vspace{-1cm}
+\footnote{\scriptsize
+Learning eseguito su una macchina Dell XPS 8940:\\
+		\begin{itemize}
+			\item CPU Intel i7-11700 8c/16t @4.8Ghz;%chktex 8
+			\item RAM:32GB DDR4;
+			\item GPU:Nvidia RTX 3070;% chktex 29
+			\item OS:Debian GNU Linux 10 \(\times \)86\_64;%chktex 8
+		\end{itemize}
+}
 \end{frame}
 \end{document}
