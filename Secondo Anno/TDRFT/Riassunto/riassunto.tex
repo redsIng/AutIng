@@ -370,11 +370,141 @@ I vantaggi di questa diagnostica sono i seguenti:\begin{itemize}
     \end{itemize}
     \item\textbf{Isotopi}:Un isotopo è atomo con stesso numero di protoni, ma differente numero di neutroni. L'esistenza degli isotopi è una conseguenza dell'esistenza dei neutroni: non vi è un'altra spiegazione per spiegare la differenza di massa fra due isotopi dello stesso elemento. Dato che le masse differiscono, allora si hanno diverse proprietà fisiche.\newline
     Per l'idrogeno vi sono 3 tipi di isotopi: prozio (stabile), deuterio (stabile) e trizio (instabile, radioattivo). Quelli utilizzati nella fusione sono deuterio e trizio. Il trizio non è molto presente in natura poiché decade velocemente quindi in un Tokamak occorre produrlo artificialmente;
-   
 \end{itemize}
+
+
+
+
+
+
+
+
+
+
+
 \section{Tomografia}
+La tomografia è un esempio di un problema inverso: dall'integrale della linea di vista si vogliono ottenere delle informazioni locali. Un problema inverso è il problema di calcolare da un insieme di osservazioni i fattori causali che li hanno prodotti. Viene detto così, poiché inizia con l'effetto per poi calcolare la causa.\\
+Di norma il problema potrebbe risultare mal posto poiché non sempre esiste una funzione inversa che mi permetta di risalire alla sorgente (il plasma) che mi ha portato a quella determinata soluzione. Inoltre, in molti casi la soluzione non è neanche unica.\newline
+Nella tomografia per il plasma è un tipo di tomografia ad emissione, in cui si calcola:\begin{equation*}
+    g_{s}=\int f ds
+\end{equation*}
+per ogni linea di vista. IN cui f è l'emissione,g è la proiezione della linea di vista.\newline
+Per risolve il problema si discretizza.In particolare si divide la cross section in pixel trasformando il problema integrale in uno matriciale:\begin{equation*}
+    g=Hf
+\end{equation*}
+con H è la matrice delle proiezione, f è l'immagine da ricostruire e g le misure della linea di vista. Noi vogliamo conoscere f, ma la marice H non è invertibile. Per risolvere questa problematica si imposta un problema di minimizzazione con un funzionale di costo che minimizza l'errore tra l'integrale di linea ricostruito e quello empirico: nella matrice di pixel si aumenta l'emissività, si calcola g e si effettua il confronto con le misure effettive. A convergenza le due misure coincidono.
+\begin{equation*}
+    \min{\frac{\chi^{2}}{2}+\alpha R}
+\end{equation*}
+L'obiettivo del funzionale di costo è quello di avere un errore minimo e che la soluzione ottenutia sia regolarizzata cioè deve mantenere un certo livello di smoothness per avere una soluzione reale rispetto al processo che si sta studiando. Un altro metodo per effettuare la ricostruzione è effettuato tramite il Machine Learning ed in particolare con il metodo della \textbf{Maximum Likehood}: si mette un vincolo sulla funzione di distribuzione delle misure. In particolare si osserva che i neutroni e gamma seguono la distribuzione di Poisson (eliminando di conseguenza l'utilizzo del fattore di normalizzazione). Infine, si ha che se la ricostruzione delle proiezioni passanti attraverso un certo pixel sono minori delle misurazioni sperimentali, allora l'emisività di quel pixel viene aumentata e viceversa.\newline
+A livello implementativo il problema viene risolto iterativamente.
+\begin{itemize}
+    \item Il Maximum Likelihood fornisce un algoritmo molto stabile;
+    \item L'inversione tramite ML fornisce un metodo gestibile computazionalmente per calcolare gli intervalli di confidenza della ricostruzione;
+    \item L'approccio ML con phantom permette di ottimizzare i parametri di ricostruzioni per varie categorie di emissività;
+    \item Il tempo di calcolo è compatibile con il tempo che intercorre tra uno sparo e l'altro.
+\end{itemize}
 \section{Bolometria}
+La Bolometria è una diagnostica passiva che misura la potenza totale persa irradiata dal plasma. Questa misura è importante per capire il bilancio di potenza del plasma e il suo confinamento.\newline
+Tra tutto lo spettro si sceglie di misurare le particelle alpha che costituiscono un indicatore delle purezza del plasma. Inoltre, la distribuzione di radiazione emessa e la sua evoluzione nel tempo forniscono, quindi, una informazione della purezza del plasma.\newline
+Nei Tokamak, con la loro parete in berillio e il divertore in tungsteno, sono soggetti ad un'altra emissione di radiazioni che portano alla distruzioni.\newline
+In particolare, per misurare la potenza irradiata si utilizza una resistenza che cambia con la sua temperatura sotto irradiazione. Per realizare questi componenti si richiede\begin{itemize}
+    \item Un sensitività molto elevate (grndezza spettrale);
+    \item Per estendere il livello della sensitività si ricopre il bolometro con la grafite o oro.
+\end{itemize}
+La relazione che lega la temperature con la potenza assorbita è data da:
+\begin{equation*}
+    P=C(\frac{dT}{dt}+\frac{T}{\tau_{c}})
+\end{equation*}
+Questo strumento è molto afflitto da rumore poiché misurando l'integrale della Temperatura si amplificano i rumori portando ad una misura potenzialmente totalmente errata.
+\subsection{Bolometri a filmetallico}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.4]{2022-06-21-16-35-03.png}% chktex 8
+\end{figure}
+Un bolometro a film metallico si presenta con una array di teste composte da dei bolometri. Ogni testa, a livello elettronico è rappresenzato da un ponte di Winston.\\
+Inizialmente, si bilancia il ponte di Winston prima dello sparo; poi quando si forma il plasma si irradiano due resistenze su rami opposti. Questo processo porta ad uno sbilanciamento del ponte che coincide con la misura effettuata. La costante di calibrazione per bilanciare il ponte viene scelta in maniera empirica.\newline
+Per ridurre i rumori, si modulano le tensioni ai capi del ponte. Quindi i segnali all'uscita del ponte è una sinusoide con l'ampiezza dettata dalla misura. Quindi: si sposta la frequenza del segnale tramite i modulatori in una posizione molto lontana dal rumore così da minimizzare l'effetto derivativo dei rumori. Attorno alla frequenza scelta si implementa un filtro passa banda per escludere le frequenze indesiderate.\newline
+Nel Tokamak, i bolometri sono provvisti di piccole fenditure per ogni rivelatore del bolometro per determinare un cono singolo di vista su cui andare poi a derivare e calcolare la perdita di potenza. Questo metodo viene detto tecnica che \emph{pin holes}. La dimensione del cono di vista dipende da:\begin{itemize}
+    \item Dimensione del pin holes;
+    \item Dimensione del rivelatore;
+    \item Distanza relativa tra il rivelatore e il plasma.
+\end{itemize}
+\subsubsection{Problematiche}
+\begin{itemize}
+    \item Rumore magnetico e derivativo;
+    \item Il filo metallico a contatto con la radiazione può subire una trasmutazione che porta alla perdita di segnale;
+    \item La calibrazione deve essere effettuata nel momento dello sparo;
+    \item Sono sensibili ai neutroni;
+    \item Sono sensibili al gas dell'ambiente che lo circonda.
+\end{itemize}
+\section{Bolometri basati su diamanti}
+Un singolo cristallo di diamande basato sui diode forniscono una diagnostica affidabile nei reattori a fusioni. La durabilità e la resistenza alle radiazioni di questa tecnologia sono ben sperimentati e supportati. Infatti, il loro vantaggi è che sono molto più definiti, non si hanno problemi di derivazione poiché non si basano misure integrali.
 \section{Spettroscopia}
+La spettroscopia è una diagnostica chew si basa sullo studio degli spettri delle sostanze. Nel plasma la spettroscopia viene utilizzata per gli spettri delle impurezze.\\
+Può fornire informazioi su:\begin{itemize}
+    \item L'ammontare delle impurezze presenti nel plasma;
+    \item Velocità del plasma;
+    \item Temperatura e densità del plasma;
+\end{itemize}
+Il range di emissione delle particelle parzialmente ionizzate va dal visibile ai raggi x ``hard''. L'emissione delle particelle dipende dalle impurezze presenti e dalla temperatura e densità del plasma: a bassa temperatura si ha nel visibile in seguito, all'aumentare della temperatura, si va ai raggi x.
+\subsection{Informazioni dalla linea spettrale}
+Con la spettroscopia, guardano la linea di emissione possiamo ottenere:\begin{itemize}
+    \item Densità delle impurezze (Area sottesa dalla linea);
+    \item Temperatura (larghezza della linea);
+    \item Velocità media lungo la linea di vista (Shiff dovuto all'effetto doppler. In particolare i picchi risultano spostati dalla linea spettrale normale);
+\end{itemize}
+\begin{center}
+    \begin{figure}[b]
+        \centering
+        \includegraphics[scale=0.4]{2022-06-22-10-52-32.png}% chktex 8
+    \end{figure}
+\end{center}
+\subsection{Misure spettrali}
+Dato che il range di emissione è grande si usano  diversi strumenti di misura:\begin{itemize}
+    \item Spettrometri a grate nel range del visibile;
+    \item Filtri interferenziali;
+    \item Spettrometri UV\@;
+    \item Spettrometri dei raggi Soft X\@;
+\end{itemize}
+\subsection{Line Monitoring}
+Dato che per ogni sostanza si conosce la linea spettrale e vogliamo avere un'idea della forma della zona che emette quella riga, si utilizzano di filtri interferenziali (lamine opportune) che fanno passare una porzione limitata di spettro per osservare una sola riga. Si utilizza una fibra ottica per vedere la riga nel tempo e con un rivelatori è possibile monitorare la regione di spazio in cui avviene l'emissione.
+\subsection{Bilancio delle particelle da \(D_{\alpha } \)}
+Dalla misura dell'\(H_{\alpha}\) è possibile ottenere delle informazioni sul fglusso delle particelli entranti nel pasla e le particelle del tempo di confinamento:
+\begin{figure}
+    \includegraphics[scale=0.4]{2022-06-22-11-18-56.png}% chktex 8
+\end{figure}
+\begin{equation*}
+    I_{\alpha}=\int_{-a}^{a}n_{O}n_{e}X B dr
+\end{equation*}
+\begin{equation*}
+    \Gamma_{i}=\frac{1}{2}\frac{S_{0}}{X B}I_{\alpha}
+\end{equation*}
+\subsection{Spettrometro UV}
+Lo spettrometro UV tramite un tubo da vuoto che guarda direttamente il plasma. Questo strumento è composto da:\begin{itemize}
+    \item Flange per separare i componenti;
+    \item Pinhole per regolare l'angolo di incidenza;
+    \item Grating per convertire l'UV nel visibile;
+    \item SD Camera per analizzare la conversione;
+\end{itemize}
+Dato che guarda direttamente il plasma questo strumento è fondamentale per vedere le impurezze all'interno della scarica da vuoto. In genere le impurezze sono leggere (impediscono l'entrate di impurezze pesanti dal bordo, ma abbassano la temperatura del bordo fino a spegnere o a non far partire la scarica) e impurezze pesanti.
+\subsection{Spettrometro Raggi X}
+Questo tipo di spettroscopia hanno una alta risoluzione. Nei raggi X non esistono grating, ma si utilizza la diffrazione di Bragg in cui i raggi X urtano dei cristalli vicini alla lunghezza d'onda del raggio. Dato che vogliamo avere una focalizzazione, si curvano le lamine di cristallo di un certo raggio (configurazione di Rowland). IN particolare il raggio X incide il cristallo che viene riflesso ad un certo angolo su cui è montato un rilevatore che analizza le lunghezze d'onda rifratte ad angoli diversi.
+\subsection{Bremsstrahlung}
+La Bremsstrahlung non è una emissione di riga, ma studia le emissione spettroscopiche nel visibile. Ha una forte dipendenza dalla temperatura nei raggi X e nel visibile l'emissione è indipendente dalla temeratura e dalla densità:
+\begin{equation*}
+    I_{BS}=Z_{eff}n_{e}^{2}T_{e}^{-\frac{1}{2}}
+\end{equation*}
+In cui Z è la carica media delle impurezze presenti nel plasma.
+Nel caso di alta energia si moltiplica l'espressione precedente per un esponenziale dipendente dalla temperatura.\newline
+\subsection{CSX}
+Gli atomi neutri nel plasma donano elettroni per ionizzare completamente gli ioni delle impurezze producendo ioni simili all'idrogneo. Quando gli elettroni decadono fagli stati eccitati emettono fotoni che possono essere misurati dalla spettroscopia da cui si ottengono misurazioni della temperatura, rotazione e densità delle impurezze.
+La misura CXS è ottenibile sole con un beam attivo ed ha le seguenti capacità:\begin{itemize}
+    \item Le impurezze domninanti, gli stati completamente ionizzati caratterizzati da basso Z pososno essere sutdiati tramite la rivelazione delle raiazioni in casta;
+    \item La risoluzione spaziale può essere ottenuta senza la necessità di invertire le linee di vista vedento perpendicolarmente al beam.
+\end{itemize}
+Nel tokamak si hanno 50 linee di vista che incidono il beam e altre 50 rivolte nella posizione opposta. Per ogni linea di vista si posiziona uno spettrometro dal quale si calcolano le misure necessarie. Per le linee di vista poste fuori dal beam, sono necessarie per la sottrazione del contributo che viene dal bordo del toro.
+
 \section{Disruzioni}
 Le disruzioni nei Tokamak sono inevitabili. Esse sono una perdita globale di confinamento e controllo del plasma dovuto da impurezze e radiazioni.\newline
 Si compongono di due fasi:
@@ -426,21 +556,10 @@ Analizzando lo spettro a bassa frequenza si nota che le instabilità MHD non son
 Si utilizzano delle telecamere nel visibile per avere una idea di quello che accade nella camera da vuoto. Risulta quindi molto importante cercare di ricoprire il maggiorspazio dellla camera da vuoto e del vessel. Tramite queste telecamere è possibile rivelare i MARFE.\newline
 I MARFE sono instabilità termiche che si manifestano come un anello di radiazioni visibili per effetto delle impurezze. In queste zone la temperatura risulta più bassa rispetto al plasma.
 \subsection{Indicatori di Profilo}
-Per la predizione delle disruzione e il controllo in feedback sono necessari gli indicatori di profilo.\\ GLi indicatori di profilo per la predizione devono essere robusti e calcolabili in real time, ma allo stesso tempo devono fornire  un quantitativo sufficiente di informazioni. Uno degli indicatori sul profilo di temperatura è la hollowness cioè quanto il profilo di temperatura è cavo. Questa è una misura particolarmente difficile da quantificare dato che in molti casi si deve effettuare il mirroring dei dati sull'asse magnetico per un problema di coverage e che è resiliente sulle fluttuazioni della temperatura.\newline
+Per la predizione delle disruzione e il controllo in feedback sono necessari gli indicatori di profilo.\\ Gli indicatori di profilo per la predizione devono essere robusti e calcolabili in real time, ma allo stesso tempo devono fornire  un quantitativo sufficiente di informazioni. Uno degli indicatori sul profilo di temperatura è la hollowness cioè quanto il profilo di temperatura è cavo. Questa è una misura particolarmente difficile da quantificare dato che in molti casi si deve effettuare il mirroring dei dati sull'asse magnetico per un problema di coverage e che è resiliente sulle fluttuazioni della temperatura.\newline
 Per questa misura si utilizza un fitting basato su due Gaussiane quando il profilo è cavo: differenze tra i due massimi e normalizzata per la deviazione standard delle  gaussiane. Con questo approccio, più due massimi sono distanti più il profilo sarà cavo.
 \subsection{Problema inverso nella fusione}
 Per quanto riguardo le misure effettuate dall'esterno del plasma, esse vengono utilizzate nella risoluzione di un problema inverso per ottenere delle informazioni dell'interno. Il principale strumento che viene utilizzato è la tomografia.
 Da aggiungere disruzioni 2
-\section{Machine Learning}
 
-
-
-
-
-\begin{equation*}
-    \overset{*}{r}=z_{t}^{'}\alpha+\varepsilon_{t}
-\end{equation*}
-\begin{equation*}
-        \lambda=k_{t}^{'}\beta
-\end{equation*}
 \end{document}

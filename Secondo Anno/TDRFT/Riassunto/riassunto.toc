@@ -40,15 +40,25 @@
 \contentsline {section}{\numberline {10}Neutronica 1-2-3-4}{12}{}%
 \contentsline {subsection}{\numberline {10.1}Introduzione}{12}{}%
 \contentsline {section}{\numberline {11}Tomografia}{12}{}%
-\contentsline {section}{\numberline {12}Bolometria}{12}{}%
-\contentsline {section}{\numberline {13}Spettroscopia}{12}{}%
-\contentsline {section}{\numberline {14}Disruzioni}{12}{}%
-\contentsline {subsection}{\numberline {14.1}Classificazione diagnostiche disruzione}{13}{}%
-\contentsline {subsection}{\numberline {14.2}Requisiti Hardware}{13}{}%
-\contentsline {subsubsection}{\numberline {14.2.1}Carichi termici}{13}{}%
-\contentsline {subsubsection}{\numberline {14.2.2}Carichi Meccanici}{13}{}%
-\contentsline {subsection}{\numberline {14.3}Locked mode detection AUG}{13}{}%
-\contentsline {subsection}{\numberline {14.4}Imaging for disruptions}{14}{}%
-\contentsline {subsection}{\numberline {14.5}Indicatori di Profilo}{14}{}%
-\contentsline {subsection}{\numberline {14.6}Problema inverso nella fusione}{14}{}%
-\contentsline {section}{\numberline {15}Machine Learning}{14}{}%
+\contentsline {section}{\numberline {12}Bolometria}{13}{}%
+\contentsline {subsection}{\numberline {12.1}Bolometri a filmetallico}{13}{}%
+\contentsline {subsubsection}{\numberline {12.1.1}Problematiche}{14}{}%
+\contentsline {section}{\numberline {13}Bolometri basati su diamanti}{14}{}%
+\contentsline {section}{\numberline {14}Spettroscopia}{14}{}%
+\contentsline {subsection}{\numberline {14.1}Informazioni dalla linea spettrale}{14}{}%
+\contentsline {subsection}{\numberline {14.2}Misure spettrali}{15}{}%
+\contentsline {subsection}{\numberline {14.3}Line Monitoring}{15}{}%
+\contentsline {subsection}{\numberline {14.4}Bilancio delle particelle da \(D_{\alpha } \)}{15}{}%
+\contentsline {subsection}{\numberline {14.5}Spettrometro UV}{15}{}%
+\contentsline {subsection}{\numberline {14.6}Spettrometro Raggi X}{15}{}%
+\contentsline {subsection}{\numberline {14.7}Bremsstrahlung}{15}{}%
+\contentsline {subsection}{\numberline {14.8}CSX}{16}{}%
+\contentsline {section}{\numberline {15}Disruzioni}{16}{}%
+\contentsline {subsection}{\numberline {15.1}Classificazione diagnostiche disruzione}{16}{}%
+\contentsline {subsection}{\numberline {15.2}Requisiti Hardware}{17}{}%
+\contentsline {subsubsection}{\numberline {15.2.1}Carichi termici}{17}{}%
+\contentsline {subsubsection}{\numberline {15.2.2}Carichi Meccanici}{17}{}%
+\contentsline {subsection}{\numberline {15.3}Locked mode detection AUG}{17}{}%
+\contentsline {subsection}{\numberline {15.4}Imaging for disruptions}{17}{}%
+\contentsline {subsection}{\numberline {15.5}Indicatori di Profilo}{17}{}%
+\contentsline {subsection}{\numberline {15.6}Problema inverso nella fusione}{17}{}%
