@@ -147,5 +147,52 @@ Per poter risolvere il problema di regolazione a full information dobbiamo fefin
     \end{equation*}
     Dalla stabilità sappiamo che \(\lim_{t\rightarrow\infty} \hat{x}(t)=0\) e dalla regolazione \(\lim_{t\rightarrow\infty}e(t)=0\leftrightarrow C\Pi+Q=0\). Ciò implica che anche per osillazioni di \(d,x\), si regolarizza la soluzione vincolandola sulla bisettrice del piano \(x,d\).
 \end{proof}
-
+Per fornire condizioni neessarie e sufficienti per la osluzione del problema di regolazione a full information occorre enunciare il seguente teorema.
+\begin{theorem}{\textbf{Toerema FBI}}
+    Considerato il problrma di regolazione a full information, supponiamo che la matrice \(S\) dell'esosistema abbia autovalori a parte reale positiva e il sistema \(\begin{cases}
+        \dot{X}=Ax+Bu+Pd \\
+        e=Cx+Qd
+    \end{cases}\) con \(d=0\) sia raggiungibile. Allora esiste una legge di controllo a full information \(u=Kx+Ld\) che risolve il problema di regolazione se e solo se:\begin{equation*}
+        \exists \Pi\Gamma:\begin{cases}
+            \Pi S=A\Pi+B\Gamma+P\\
+            0=C\Pi+Q
+        \end{cases}
+    \end{equation*}
+    \begin{proof}
+        \(\Rightarrow{} \) Supponiamo di aver soddisfatto il problma di regolazione cioè che \(\exists \Pi,\Gamma \) tali che siano soddisfatte i requisiti di stabilità e di regolazione. Allora per il lemma si ha che:\begin{equation*}
+            \exists\Pi\text{tale che:}\begin{cases}
+                (A+BK)\Pi+(P+BL)=A\Pi+B(K\Pi+L)+P\\
+                0=C\Pi+Q
+            \end{cases}
+        \end{equation*}
+        Quindi, noto \(\Pi \), si definisce \(\Gamma=K\Pi+L\).
+        \(\Leftarrow \)Supponiamo che \(\exists\Pi,\Gamma \) che risolvono \(\begin{cases}
+            \Pi S=A\Pi+B\Gamma+P\\
+            0=C\Pi+Q
+        \end{cases}\), dobbiamo dimostrare che sono soddisfatte le ipotesi di stabilità e regolazione:\begin{itemize}
+            \item \textbf{Stabilità:}\(K\) deve garantire stabilità asintotica per \(A+BK\) e in particolare \(K\) esiste sempre dato che abbiamo supposto che il sistema con \(d=0\) è raggiungibile;
+            \item Sia \(L=\Gamma+K\Pi \), allora la coppia \((K,L)\) soddisfa il requisito di regolazione poiché:\begin{equation*}
+                \begin{cases}
+                    \Pi S=(A+BK)\Pi+(P+BL)=A\Pi+B\Gamma+P\\
+                    0=C\Pi+Q
+                \end{cases}
+            \end{equation*}
+        \end{itemize}
+    \end{proof}
+\end{theorem}
+Il teorema appena enunciato implica che il controllo sia nella forma \(u=Kx+(\Gamma-K\Pi)d\) cioè composto da una parte di stabilizzazione e una di regolazione. Tuttavia, la matrice \(K\) esiste sempre, quindi la condizione di risolubilità del problema di regolazione a full information risiede nell'esistenza e nella risoluzione dell'equazione FBI in \(\Pi,\Gamma \). La condizione per cui il problema è risolubile è quindi fornita dal \textbf{lemma di Hautus}.
+\begin{corollary}{\textbf{Lemma di Hautus}}
+    L'equazioni FBI nelle incognite \(\Pi,\Gamma \) sono risolubili \(\forall P,Q
+        \Leftrightarrow rank\left(\begin{bmatrix}
+            sI-A & B \\C & 0
+        \end{bmatrix}\right)=n+p \forall s\in\sigma(S)
+    \)
+\end{corollary}
+Nel caso SISO, si ha che \(m=p=1\), si ha che \(rank\left(\begin{bmatrix}
+    sI-A & B \\C & 0
+\end{bmatrix}\right)=n+1 \forall s \text{zero per} \begin{cases}
+    \dot{x}=Ax+Bu\\
+    e=Cx
+\end{cases}\)  Ovvero gli zeri di \( W(s)=C{(sI-A)}^{-1}B\)\newline
+Ne deriva che il problrema della regolazione a full information per sistemi SISO è risolubile se e solo se gli autovalori del sistema esogne non sono zero di \(W(s) \) con ingresso \(u\) uscita \(e\) e segnale esogeno \(d=0\).
 \end{document}
