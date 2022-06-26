@@ -1,7 +1,7 @@
 \documentclass{article}
 \usepackage{graphicx}
 \usepackage{geometry}
-\geometry{a4paper, top=2cm, bottom=2cm, left=1.5cm, right=1.5cm}
+\geometry{a4paper, top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm}
 \graphicspath{{Images/}}
 \usepackage{amsthm}
 \usepackage{amsmath}
@@ -102,6 +102,155 @@ In particolare, si ha assorbimento dell'onda quando si è in risonanza, tuttavia
     \item X-Mode: perpendicolare al campo magnetico
 \end{itemize}
 Un altro fenomeno che potrebbe risentire il fascio è quello della rifrazione quando si trannano plasmi di alta densità.
+\section{Fisica del Plasma e Equilibrio}
+\subsection{Confinamento Magnetico}
+Il plasma è un mix di particelle cariche di isotopi del plasma di grande quantità per ottenere delle interazioni fra le cariche. In assenza di campo magnetico, il moto delle particelle cariche è su tutte le direzioni. Nel caso in cui si immette un campo magnetico gli elettroni viaggioano sulle linee di cambio in moto elicoidale: la distanza dalla linea di campo e la particella dipende dal raggio di Larmor. La condizione per cui si ha un plasma magnetizzato, che è quello che poi si usa nel tokamak, è quello di avere che la dimensione del sistema sia molto maggiore di quella del raggio di Larmor.
+\subsection{Tokamak}
+Il tokamak è una struttura in cui il plasma assume una struttura toroidale generato da delle bobine toroiali e quello poloidale generato dal plasma stesso.
+\begin{center}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=0.4]{2022-06-26-14-53-25.png}% chktex 8
+    \end{figure}
+\end{center}
+Il campo risultante si avvita lungo il toro. Questa configurazione è autorganizzata nel senso che il campo toroidale è quello immesso da noi, mentre quello poloidale è quello generato dal plasma.
+\subsection{Campi imposti al plasma}
+\begin{center}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=0.4]{2022-06-26-14-59-14.png}% chktex 8
+    \end{figure}
+\end{center}
+Il tokamak si hanno le seguenti bobine:
+\begin{itemize}
+    \item Bobine toroidali che impongono un campo magnetico verticale per regolare la forma e la posizione del plasma;
+    \item Bobina centrale del generatore che devo creare una variazione di flusso attraverso il plasma per produrre il campo elettrico per iniziare la scarica;
+    \item Bobine interne sul divertore per generare il punto a X (ultima superficie chiusa);
+\end{itemize}
+Il plasma risponde a questi campi con correnti poloidali e toroidali: in maniera più forte sul campo poloidale.
+\subsection{Plasma come un fluido}
+La magnetoidrodinamico tratta il plasma come un fluido conduttore descritto da:
+\begin{itemize}
+    \item Densità di corrente:\(\mathbf{j}=ne<v_{i}-v_{e}\);
+    \item Pressione: \(p=n(T_{e}+T_{i})\);
+\end{itemize}
+Entrano in gioco le relazioni delle misure di densità di corrente e pressione per ottenere il campo magnetico. Questa relazione si ottiene tramite le \emph{Equazioni di Maxwell}:\begin{align*}
+    \nabla \cdot B&=0\\
+    \mu_{0}j=\nabla\times B
+\end{align*}
+Inoltre, per descrivere la dinamica si bilanciano le forze in gioco:\begin{equation*}
+    J\times B = \nabla p
+\end{equation*}
+Questa trattazione è detta idel MHD e si utilizza per determinare l'equilibrio del tokamak e per studiare la stabilità.
+\subsection{Simmetria Assiale}
+La simmetria assiale semplifica la struttura magnetica poiché tutte le quantità sono costanti lungo cerchi centrati sull'asse di simmetria.
+\begin{figure}
+    \includegraphics[scale=0.4]{2022-06-26-15-20-02.png}% chktex 8
+\end{figure}
+Quindi, si introducono le coordinate cilindrica con asse di simmetria lungo Z e a distanza R dall'asse, tutte le quantità diventano indipendenti dall'angolo \(\Phi \). Inoltre, tutti i gradienti sono perpendicolare al versore toroidale (tangente al cerchio) ad eccezione il greadiente dell'angolo toroidale:\begin{equation*}
+    \nabla \Phi = \frac{e_{\Phi }}{R}
+\end{equation*}
+Dato un cerchio definito da un punto \(P=(R,Z,\Phi )\) consideriamo il flusso magnetico e la corrente elettrica che lo attraversano e defiamo:\begin{align*}
+    \Psi(R,Z)&\text{=Flusso magnetico poloidale}\\
+    I(R,Z)&\text{=corrente poloidale}
+\end{align*}
+\textbf{Polodiale:}per un dipolo magnetico, riguarda la componente nella direzione definita dai poli.
+Quindi, definiamo il campo magnetico come:\begin{equation*}
+    \mathbf{B}=\frac{1}{2\pi }\nabla\psi\times\nabla\Phi+\frac{\mu_{0}I}{2\pi }\nabla\Phi
+\end{equation*}
+Il prodotto vettoriale rappresenta la parte polodiale che giace sul oiano rosa, mentre la seconda parte è la parte toroidale che è tangente al cerchio.
+\subsection{Funzioni di Flusso}
+Le linee di campo magnetico giacciono su superfici di flusso magnetico costante:
+\begin{align*}
+    \mathbf{B}&=\frac{1}{2\pi }\nabla\psi\times\nabla\Phi+\frac{\mu_{0}I}{2\pi }\nabla\Phi \\
+    \mathbf{B}\cdot\nabla\psi=\frac{1}{2\pi }\nabla\psi\times\nabla\Phi\cdot\nabla\psi+\frac{\mu_{0}I}{2\pi }\nabla\Phi\cdot\nabla\psi=0+0
+\end{align*}
+La parte poloidale fa 0 per i vettori sono perpendicolari, la parte toroidale è zero poiché i due gradienti sono perpendicolari grazie alla proprietà di assi-simmetria.
+Inoltre, la pressione è costante lungo le linee di campo, quindi è una costante sulle superfici di flusso ovvero è una funzione di flusso:\begin{equation*}
+    B\cdot\nabla p=B\cdot j\times B=0
+\end{equation*}
+\begin{equation*}
+    p=p(\Psi)\quad\quad \nabla p=\frac{dp}{d\psi}\nabla\psi
+\end{equation*}
+Da cui si ottiene delle superfici \textbf{isobare}.
+Usando l'equazione di Ampere \(\mu_{0}j=\nabla\times B\) si ottiene:\begin{equation*}
+    j=\frac{1}{2\pi}\nabla I\times \nabla\phi-\frac{R^{2}}{2\pi\mu_{0}}\nabla\cdot\left(\frac{1}{R^{2}}\nabla \psi\right)\nabla\Phi
+\end{equation*}
+Dato che \(j\cdot\nabla p=j\cdot j\times B=0\) si ottiene che:\begin{align*}
+    0&=\frac{1}{2\pi}\nabla I\times \nabla\phi\cdot\nabla p-\frac{R^{2}}{2\pi\mu_{0}}\nabla\cdot\left(\frac{1}{R^{2}}\nabla\psi\right)\nabla\phi\cdot\nabla p\\
+    \nabla I\times\nabla p\cdot\nabla\Phi&=0\\
+    \nabla I\times\nabla p=0
+\end{align*}
+Quindi il gradiente della corrente poloidale è parallelo al gradiente della pressione. Si conclude quindi che la corrente poloidale è una funzione della pressione e quindi del flusso poloidale:\begin{equation*}
+    I=I(\psi)\quad\quad \nabla I=\frac{dI}{d\psi}\nabla\psi
+\end{equation*}
+Riassumendo si ha che:\begin{itemize}
+    \item Le linee di campo scorrono su superfici e non volumi;
+    \item Ciascuna superficie ha un glusso poloidale costante;
+    \item Ciascuna superficie ha pressione costante perché ciasuna linea di campo ha pressione costante: la pressione è una funzione di flusso;
+    \item La corrente poloidale è una funzione di flusso.
+\end{itemize}
+\subsection{Equazione di Grad-Shafranov}
+Sostituendo il campo magnetico e la densità di corrente nell'equazione dell'equilibrio si ottiene:\begin{align*}
+    j\times B&=-\frac{1}{4\pi^{2}\mu_{0}}\nabla\cdot\left(\frac{1}{R^{2}}\nabla\psi\right)\nabla\psi-\frac{\mu_{0}I}{4\pi^{2}R^{2}}\frac{dI}{d\psi}\nabla\psi=\frac{dp}{d\psi}\nabla\psi \\
+    j_{TOR}\times B_{POL}+j_{POL}\times B_{TOR}=\frac{dp}{d\psi}\nabla\psi
+\end{align*}
+Tutti i termini hanno la stessa direzione lungo la superficie di flusso, giungendo all'equazione scalare di Grad-Shafranov:
+\textbf{\begin{equation*}
+    \frac{1}{4\pi^{2}\mu_{0}}\nabla\cdot\left(\frac{1}{R^{2}}\nabla\psi \right)+frac{\mu_{0}I}{4\pi^{2}R^{2}}\frac{dI}{d\psi}=-\frac{dp}{d\psi}
+\end{equation*}}
+Notiamo che:\begin{itemize}
+    \item Il primo termine derivato dalla corrente toroidale è sempre confinante poiché corre principalmente nel plasma, cioè sosisitene la pressione;
+    \item Il termine derviato dalla corrente poloidale non è sempre confinante;
+    \item Il termine di destra dell'equazione è la quantità che dobbiamo confinare;
+\end{itemize}
+In particolare:\begin{itemize}
+    \item Se la corrente poloidale è confinante cioè aiuta la corrente toroidale il plasma avrà un comportamento toroidale;
+    \item Se la corrende poloidale è deconfinante, si oppone all'effetto della corrente toroidale. Il plasma assume un comportamento paramagnetico: la corrente toroidale è sufficiente a confinare la pressione costante.
+\end{itemize}
+Per risolvere l'equazione di Grad-Shafranov si utilizzano i codici di equilibrio in cui si assumono espressioni parametriche per le funzioni di flusso I e p e si ottimizzano i parametri in base alle misure disponibili.
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.4]{2022-06-26-16-35-40.png}% chktex 8
+\end{figure}
+Dall'espressione di Grad-Shafranov in coordinate cilindriche si può ulteriormente semplificare:
+\begin{figure}
+    \includegraphics[scale=0.4]{2022-06-26-16-38-00.png}% chktex 8
+\end{figure}
+Tuttavia questa espresisone non è fisica poiché si diverge in zero o in infinito.
+\subsection{Parametri Grad-Shafranov}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.4]{2022-06-26-16-40-19.png}% chktex 8
+\end{figure}
+\subsection{Instabilità del plasma}
+\subsubsection{Distruzioni}
+Una scarica di un tokamak è così composta:\begin{itemize}
+    \item salita di corrente;
+    \item flat-top;
+    \item discesa;
+\end{itemize}
+In una scarica durante il flat-top o nella discesa può succedere che la corrente si interrompe bruscamente con un current-spike con un crollo a zero della corrente. Queste disruzioni causano carichi termici molto elevati e non gestibili, ma anche forze magnetiche non sostenibili dalle pareti del vessel. L'obiettivo è quello di prevenire o mitigare questo fenomeno.Si procede in due modi:\begin{itemize}
+    \item \textbf{disruption avoidance}: predizione con reti neurali e interventi di controllo;
+    \item \textbf{distruption mitigation}: la distruzione avviene, ma si inietta del gas o dei pellet di deuterio e trizio oppure controllo dei runaway (fascio di elettroni relativistici che possono bucare la parete del tokamak).
+\end{itemize}
+In particolare, durante una distruzione si nota che prima del current spike si identificano i cosiddetti \textbf{tearing mode}: oscillazione delle misure magnetiche con un rallentamento della frequenza fino a giungere a zero (\textbf{mode locking}); allo stesso tempo nel rallentamento della frequenza si ha un aumento dell'ampiezza dei campi magnetici. Ciò implica che l'equilibrio non è più assisimmetrico e l'oscillazione indica che la deformazione della configurazione dell'equilibrio sta ruotando.
+\subsubsection{Edge Localized Mode}
+L'edge localized mode è un modo che avviene al bordo del plasma: la pressione sul bordo del plasma dimuinisce e il flusso termico che giunge nel divertore presentano dei picchi in maniera discontinua. Il carico della potenza è insostenibile poiché potrebbe delaminare il tungsteno che compone il tokamak. Per mitigare questo fenomeno si cerca di provocare questo modo ad intervalli precisi affinché non scarichino tutta la potenza in una volta sola. Per fare questo si iniettano dei pellet di deuterio o spostando la configurazione del plasma con le bobine esterne. Il difetto è che si perde l'energia del plasma.
+\subsubsection{Instabilità Sawtooth}
+La sawtooth instability è una instabilità benigna impulsiva e ciclica che avviene nella regione centrale del plasma. In particolare si ha un accumulo lento e discontinuo di temperatura e una diminuzione repentina.\newline
+Questa instabilità è un indicatore positivo poiché non si hanno disruzini ed è collegata ad una espulsione delle impurità del plasma.
+\subsubsection{Instabilità macroscopiche del plasma}
+Una instabilità è una deformazione persistente o crescente dell'equilibrio. INoltre, è detta macroscopica poiché la struttura che si forma è dell'ordine della dimensione del plasma o microscopiche per quelle nell'ordine del raggio di Larmor.\newline
+Le instabilità macroscopiche possono degradate il confinamento del plasma o anche portare a disruzioni e sono generate principalmente perché il soddisfacimento dei requisiti fusionistici portano alla generazione di questi fenomeni.
+\subsubsection{MHD Waves}
+I modi normai risultanti dal modello linearizzato MHD di un plasma omogenio permettono di capire le instabilità delle possibili instabilità.
+
+
+
+
+
+
 \section{Thomson Scattering}
 Per misurare la temperature e la densità del plasma si sfrutta il fenomeno del Thomson Scattering. In particolare si inietta nel plasma un fascio laser e se ne misura sia la luce diffusa che la larghezza spettrale.\newline
 Le misure di larghezza fornisco delle informazioni sulla temperatura e l'intensità della luce diffusa sulla densità degli elettroni. Le ragioni principali per cui si è introdotta questa diagnostica sono due:\begin{itemize}
