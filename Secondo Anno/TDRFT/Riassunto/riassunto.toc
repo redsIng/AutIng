@@ -12,25 +12,25 @@
 \contentsline {subsection}{\numberline {3.6}Sensori di Hall}{4}{}%
 \contentsline {section}{\numberline {4}Sistemi di riscaldamento addizionali}{4}{}%
 \contentsline {subsection}{\numberline {4.1}Diagnostiche su atomi neutri}{4}{}%
-\contentsline {subsection}{\numberline {4.2}Electron Cyclotron Resonant Heating}{4}{}%
+\contentsline {subsection}{\numberline {4.2}Electron Cyclotron Resonant Heating}{5}{}%
 \contentsline {section}{\numberline {5}Fisica del Plasma e Equilibrio}{5}{}%
 \contentsline {subsection}{\numberline {5.1}Confinamento Magnetico}{5}{}%
 \contentsline {subsection}{\numberline {5.2}Tokamak}{5}{}%
 \contentsline {subsection}{\numberline {5.3}Campi imposti al plasma}{5}{}%
 \contentsline {subsection}{\numberline {5.4}Plasma come un fluido}{6}{}%
 \contentsline {subsection}{\numberline {5.5}Simmetria Assiale}{6}{}%
-\contentsline {subsection}{\numberline {5.6}Funzioni di Flusso}{6}{}%
+\contentsline {subsection}{\numberline {5.6}Funzioni di Flusso}{7}{}%
 \contentsline {subsection}{\numberline {5.7}Equazione di Grad-Shafranov}{7}{}%
 \contentsline {subsection}{\numberline {5.8}Parametri Grad-Shafranov}{8}{}%
 \contentsline {subsection}{\numberline {5.9}Instabilità del plasma}{8}{}%
 \contentsline {subsubsection}{\numberline {5.9.1}Distruzioni}{8}{}%
-\contentsline {subsubsection}{\numberline {5.9.2}Edge Localized Mode}{8}{}%
+\contentsline {subsubsection}{\numberline {5.9.2}Edge Localized Mode}{9}{}%
 \contentsline {subsubsection}{\numberline {5.9.3}Instabilità Sawtooth}{9}{}%
 \contentsline {subsubsection}{\numberline {5.9.4}Instabilità macroscopiche del plasma}{9}{}%
 \contentsline {subsubsection}{\numberline {5.9.5}MHD Waves}{9}{}%
 \contentsline {section}{\numberline {6}Thomson Scattering}{9}{}%
 \contentsline {section}{\numberline {7}Polarimetro}{9}{}%
-\contentsline {subsection}{\numberline {7.1}Polarizzatore}{9}{}%
+\contentsline {subsection}{\numberline {7.1}Polarizzatore}{10}{}%
 \contentsline {subsubsection}{\numberline {7.1.1}Assorbimento}{10}{}%
 \contentsline {subsubsection}{\numberline {7.1.2}Polarizzazione tramite doppia rifrazione}{10}{}%
 \contentsline {subsection}{\numberline {7.2}Onde elettromagnetiche}{10}{}%
@@ -54,26 +54,29 @@
 \contentsline {section}{\numberline {10}Hardware}{15}{}%
 \contentsline {section}{\numberline {11}Neutronica 1-2-3-4}{16}{}%
 \contentsline {subsection}{\numberline {11.1}Introduzione}{16}{}%
-\contentsline {section}{\numberline {12}Tomografia}{16}{}%
+\contentsline {subsection}{\numberline {11.2}Forza nucleare forte}{16}{}%
+\contentsline {subsection}{\numberline {11.3}Energia di Legame}{16}{}%
+\contentsline {subsection}{\numberline {11.4}Reazione di fusione nucleare}{17}{}%
+\contentsline {section}{\numberline {12}Tomografia}{17}{}%
 \contentsline {section}{\numberline {13}Bolometria}{17}{}%
-\contentsline {subsection}{\numberline {13.1}Bolometri a filmetallico}{17}{}%
+\contentsline {subsection}{\numberline {13.1}Bolometri a filmetallico}{18}{}%
 \contentsline {subsubsection}{\numberline {13.1.1}Problematiche}{18}{}%
 \contentsline {section}{\numberline {14}Bolometri basati su diamanti}{18}{}%
-\contentsline {section}{\numberline {15}Spettroscopia}{18}{}%
-\contentsline {subsection}{\numberline {15.1}Informazioni dalla linea spettrale}{18}{}%
-\contentsline {subsection}{\numberline {15.2}Misure spettrali}{18}{}%
+\contentsline {section}{\numberline {15}Spettroscopia}{19}{}%
+\contentsline {subsection}{\numberline {15.1}Informazioni dalla linea spettrale}{19}{}%
+\contentsline {subsection}{\numberline {15.2}Misure spettrali}{19}{}%
 \contentsline {subsection}{\numberline {15.3}Line Monitoring}{19}{}%
 \contentsline {subsection}{\numberline {15.4}Bilancio delle particelle da \(D_{\alpha } \)}{19}{}%
-\contentsline {subsection}{\numberline {15.5}Spettrometro UV}{19}{}%
-\contentsline {subsection}{\numberline {15.6}Spettrometro Raggi X}{19}{}%
-\contentsline {subsection}{\numberline {15.7}Bremsstrahlung}{19}{}%
-\contentsline {subsection}{\numberline {15.8}CSX}{19}{}%
+\contentsline {subsection}{\numberline {15.5}Spettrometro UV}{20}{}%
+\contentsline {subsection}{\numberline {15.6}Spettrometro Raggi X}{20}{}%
+\contentsline {subsection}{\numberline {15.7}Bremsstrahlung}{20}{}%
+\contentsline {subsection}{\numberline {15.8}CSX}{20}{}%
 \contentsline {section}{\numberline {16}Disruzioni}{20}{}%
-\contentsline {subsection}{\numberline {16.1}Classificazione diagnostiche disruzione}{20}{}%
-\contentsline {subsection}{\numberline {16.2}Requisiti Hardware}{20}{}%
-\contentsline {subsubsection}{\numberline {16.2.1}Carichi termici}{20}{}%
+\contentsline {subsection}{\numberline {16.1}Classificazione diagnostiche disruzione}{21}{}%
+\contentsline {subsection}{\numberline {16.2}Requisiti Hardware}{21}{}%
+\contentsline {subsubsection}{\numberline {16.2.1}Carichi termici}{21}{}%
 \contentsline {subsubsection}{\numberline {16.2.2}Carichi Meccanici}{21}{}%
-\contentsline {subsection}{\numberline {16.3}Locked mode detection AUG}{21}{}%
-\contentsline {subsection}{\numberline {16.4}Imaging for disruptions}{21}{}%
-\contentsline {subsection}{\numberline {16.5}Indicatori di Profilo}{21}{}%
-\contentsline {subsection}{\numberline {16.6}Problema inverso nella fusione}{21}{}%
+\contentsline {subsection}{\numberline {16.3}Locked mode detection AUG}{22}{}%
+\contentsline {subsection}{\numberline {16.4}Imaging for disruptions}{22}{}%
+\contentsline {subsection}{\numberline {16.5}Indicatori di Profilo}{22}{}%
+\contentsline {subsection}{\numberline {16.6}Problema inverso nella fusione}{22}{}%

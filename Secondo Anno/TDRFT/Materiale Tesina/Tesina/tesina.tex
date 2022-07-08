@@ -80,7 +80,18 @@
 		\item \(\mu_{0}J=\nabla\times B\)
 		\item \(\nabla\cdot B=0\)
 	\end{itemize}
-
+\footnote{
+	Dato \(f(x,y,z)=f_{1}\overrightarrow{i}+f_{2}\overrightarrow{j}+f_{3}\overrightarrow{k}\) si definiscono:
+	\begin{itemize}
+		\item Gradiente  \(\nabla f = \frac{\partial f}{\partial x}\overrightarrow{i}+\frac{\partial f}{\partial x}\overrightarrow{j}+\frac{\partial f}{\partial x}\overrightarrow{k} \);
+		\item Divergenza \(\nabla\cdot f=\frac{\partial f_{1}}{\partial x}+\frac{\partial f_{2}}{\partial y}+\frac{\partial f_{3}}{\partial z}\);
+		\item Rotore \(\nabla\times f=\left\lvert \begin{matrix}
+			\overrightarrow{i}&\overrightarrow{k}&\overrightarrow{k}\\
+			\frac{\partial}{\partial x}& \frac{\partial}{\partial y}&\frac{\partial}{\partial z}\\
+			f_{1}&f_{2}&f_{3}
+		\end{matrix}\right\rvert \)
+	\end{itemize}
+}
 \end{frame}
 \begin{frame}
 	\frametitle{Grad-Shafranov}
@@ -172,10 +183,10 @@ Ci sono vari metodi su come strutturare i neuroni in una struttura stratificata.
 	\frametitle{Condizioni al contorno}
 	\section{Condizioni al contorno}
 	La soluzione delle PDE in \(\phi = \{ 0,2\pi \} \) potrebbe portare a soluzione diverse quando queste, per periodicità, devono essere identiche. Per evitare questo comportamento, occorre aggiungere una quinda funzione di costo:\begin{equation*}
-		Loss5 = \frac{mean{(p-p_{f})}^{2}}{mean{(p_{f})}^{2}}+\frac{mean{(B_{r}-B_{r,f})}^{2}}{mean{(B,r_{f})}^{2}}+\frac{mean{(B_{z}-B_{z,f})}^{2}}{mean{(B_{z,f})}^{2}}+\frac{mean{(B_{t}-B_{t,f})}^{2}}{mean{(B_{t,f})}^{2}}
+		Loss5 = \frac{mean{(p-p_{f})}^{2}}{mean{(p_{f})}^{2}}+\frac{mean{(B_{r}-B_{r,f})}^{2}}{mean{(B_{r,f})}^{2}}+\frac{mean{(B_{z}-B_{z,f})}^{2}}{mean{(B_{z,f})}^{2}}+\frac{mean{(B_{t}-B_{t,f})}^{2}}{mean{(B_{t,f})}^{2}}
 	\end{equation*}
 	\begin{equation*}
-		Loss6 = \frac{mean{(p-p_{i})}^{2}}{mean{(p_{i})}^{2}}+\frac{mean{(B_{r}-B_{r})}^{2}}{mean{(B,r_{i})}^{2}}+\frac{mean{(B_{z}-B_{z,i})}^{2}}{mean{(B_{z,i})}^{2}}+\frac{mean{(B_{t}-B_{t,i})}^{2}}{mean{(B_{t,i})}^{2}}
+		Loss6 = \frac{mean{(p-p_{i})}^{2}}{mean{(p_{i})}^{2}}+\frac{mean{(B_{r}-B_{r,i})}^{2}}{mean{(B_{r,i})}^{2}}+\frac{mean{(B_{z}-B_{z,i})}^{2}}{mean{(B_{z,i})}^{2}}+\frac{mean{(B_{t}-B_{t,i})}^{2}}{mean{(B_{t,i})}^{2}}
 	\end{equation*}
 \end{frame}
 \begin{frame}
@@ -190,7 +201,7 @@ Ci sono vari metodi su come strutturare i neuroni in una struttura stratificata.
 	\frametitle{Risultati}
 	\begin{figure}
 		\includegraphics[scale=0.26]{2022-06-20-23-07-41.png}% chktex 8
-		\caption{Risultato finale 10000 epoche}
+		\caption{Risultato finale: 10000 epoche (16h di training)}% chktex 8
 	\end{figure}
 	\vspace{-1cm}
 \footnote{\scriptsize
@@ -202,5 +213,15 @@ Learning eseguito su una macchina Dell XPS 8940:\\
 			\item OS:Debian GNU Linux 10 \(\times \)86\_64;%chktex 8
 		\end{itemize}
 }
+\end{frame}
+\begin{frame}
+	\frametitle{Considerazioni}
+	\section{Considerazioni}
+	\begin{itemize}
+		\item Il risultato ottenuto è congruente alla configurazione reale;
+		\item L'addestramento tramite GPU può abbattere notevolmente il tempo di addestramento;
+		\item Le PDE utilizzate assumono che \(\frac{\partial}{\partial\phi }\neq 0\) e quindi la rete neurale potrebbe essere utilizzata anche per configurazioni asimmetriche;
+		\item Una maggiore risoluzione di \(\phi \) può aumentare notevolmente la spesa computazionale.
+	\end{itemize}
 \end{frame}
 \end{document}

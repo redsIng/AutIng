@@ -19,9 +19,9 @@
 \section{Tokamak}
 \subsection{Struttura}
 Il Tokamak si basa su tre gruppi elettromagnetici:\begin{itemize}
-    \item campo toroidale: funge da manicotto e confina il plasma;
-    \item magneti centrale che appartendono al trasformatore e incuono corrente nel plasma che fluisce torodialmente;
-    \item magneti del campo verticale: agiscono in modo da stabilizzare il plasma e vincolarlo al centro del toro.
+	\item campo toroidale: funge da manicotto e confina il plasma;
+	\item magneti centrale che appartendono al trasformatore e incuono corrente nel plasma che fluisce torodialmente;
+	\item magneti del campo verticale: agiscono in modo da stabilizzare il plasma e vincolarlo al centro del toro.
 \end{itemize}
 \subsection{Confinamento}
 Per far avvenire la scarica di plasma, il tokamak deve raggiungere la cosiddetta configurazione di confinamento in cui la risultante del campo magnetico toroidale e poloidale è un campo magnetizo elicoidale: le particelle di plasma si avvitano toroidalmente in superfici isobare di flusso.
@@ -31,39 +31,39 @@ Una volta che è trascorso il breakdown viene aviato il controllo in feedback de
 \section{Ruolo delle misure magnetiche}
 Le misure magnetiche si possono dividere in due macrocategorie:
 \begin{itemize}
-    \item \textbf{Operazioni real time}:\begin{enumerate}
-        \item \textbf{Posizione del plasma e controllo di forma};
-        \item \textbf{Sistema di protezione};
-        \item \textbf{Misurazioni};
-    \end{enumerate}
-    \item \textbf{Analisi offline}:
-    \begin{enumerate}
-        \item Ricostruzioni magnetiche: superfici di flusso e il bordo del plasma. Sono molto impoortanti per correggere e interpretare le informazioni contenuta in una scarica;
-        \item Analisi MHD
-    \end{enumerate}
+	\item \textbf{Operazioni real time}:\begin{enumerate}
+		      \item \textbf{Posizione del plasma e controllo di forma};
+		      \item \textbf{Sistema di protezione};
+		      \item \textbf{Misurazioni};
+	      \end{enumerate}
+	\item \textbf{Analisi offline}:
+	      \begin{enumerate}
+		      \item Ricostruzioni magnetiche: superfici di flusso e il bordo del plasma. Sono molto impoortanti per correggere e interpretare le informazioni contenuta in una scarica;
+		      \item Analisi MHD
+	      \end{enumerate}
 \end{itemize}
 \section{Sensori Induttivi}
 Il tokamak possiede delle diagnostiche basate su sensori induttivi: sono dei sensori che risentono delle variazioni del campo magnetico in forma integrale o derivativa.\\
-I sensori induttivi si basano sulla legge di Faraday: la forza elettromotiva indozza è proporzionale alla derivata del flusso di campo magnetico.\begin{equation}
-    fem=-\frac{d \Phi\langle B\rangle }{dt}
+I sensori induttivi si basano sulla legge di Faraday: la forza elettromotiva indotta è proporzionale alla derivata del flusso di campo magnetico.\begin{equation}
+	fem=-\frac{d \Phi\langle B\rangle }{dt}
 \end{equation}
 Tuttavia in pratica quello che lo strumento ritorna sono valori di tensione che tramite la relazione:
 \begin{equation}
-    V=-NA\langle \dot{B}\rangle
+	V=-NA\langle \dot{B}\rangle
 \end{equation}
 Integrando nel tempo si può avere una misuare del flusso del campo magnetico:\begin{equation}
-    \Phi=NA\langle B\rangle =-\int Vdt+const
+	\Phi=NA\langle B\rangle =-\int Vdt+const
 \end{equation}
 Di seguito si illustreranno i sensori induttivi installati in un tokamak.
 \subsection{Rogowski Coil}
 Le bobine Rogowski sono delle bobine solenoidali che si avvolgono lungo la sezione poloidale del toro. Queste forniscono una misura diretta della corrente che fluisce nel suo centro.\newline L'equazione che la caratterizza è:\begin{equation}
-    \Phi = nA \oint B dl \mu_{0}nAI_p=-\int V dt+const
+	\Phi = nA \oint B dl \mu_{0}nAI_p=-\int V dt+const
 \end{equation}
 Bisogna ricordare che:
 \begin{itemize}
-    \item Le misure di corrente non dipendono sulla forma del rogowski ne dalla distribuzione di corrente nel plasma;
-    \item Il cammino degli avvolgimenti del solenoide devono ritornare sullo stesso asse in cui sono iniziate;
-    \item Le bobine Rogowski possono essere sostituite da un set di bobine tangenti alla camera.
+	\item Le misure di corrente non dipendono sulla forma del rogowski ne dalla distribuzione di corrente nel plasma;
+	\item Il cammino degli avvolgimenti del solenoide devono ritornare sullo stesso asse in cui sono iniziate;
+	\item Le bobine Rogowski possono essere sostituite da un set di bobine tangenti alla camera.
 \end{itemize}
 \subsection{Voltage Loop / Flux Loop}
 Il Voltage Loop è una singolo cavo che avvolge la camera toroidalmente ed ha il compito di misurare la tensione indotta dal trasformatore centrale. La tensione ai capi della bobina vengono inviato ad un DAS che ne calcola il valore.
@@ -80,26 +80,30 @@ Una delle problematiche delle diagnostiche a bobine magnetiche è che le misuraz
 Per questi tipi di campi si è deciso di introdurre delle diagnostiche che si basasserò sull'effetto Hall.\newline
 L'effetto Hall è un fenomeno fisico proprio del plasma in cui si considera il plasma come un semiconduttore solido. In particolare, una lastra di semiconduttore è immersa in un campo magnetico. Una corrente attraversa la lastra e viene affetta dalla forza di Lorentz, deviando perpendicolarmente al prodotto vettoriare tra j e B.\newline
 La carica risultante sulle facce della lastra genera un campo elettrico addizionale che cancella la forza magnetica. Quest'ultimo campo elettrico viene misurato dai sensori.
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.4]{2022-06-29-11-20-10.png}% chktex 8
+\end{figure}
 \section{Sistemi di riscaldamento addizionali}
 Il principale meccanismo utilizzato nel tokamak per accellerare le particelle è il riscaldamento ohmico. Tuttavia, non è necessario ad accellerare le particelle quanto dovuto dato che questo tipo di risaldamento risulta inefficace ad alte temperature. Questo difetto è dovuto alla resistitività del plasma che diminuisce con l'aumentare della temperatura.\newline
 Si necessitano di riscaldamenti addizionali per raggiungere le temperature necessarie. Esse sono basate su riscaldamento da particelle \(\alpha \), su onde elettromagnetiche e su iniezione di particelle neutre.
 \subsection{Diagnostiche su atomi neutri} % Grammarly
 Le diagnostiche basate su atomi neutri nel plasma sono importanti per plasmi confinati elettromagneticamente poiché essi, essendo neutri, attraversano le linee di campo. Possono essere quindi sfruttati per ottenere delle informazioni sul centro del plasma.\newline
 Per creare un fascio neutro si utilizza una miscela da cui si producono gli ioni di deuterio o idrogeno (per maggiore efficienza si sono scelti ioni negativi), a questo punto vengono accellarati da un campo magnetico orizzontale, vengono neutralizzati e poi iniettati all'interno del plasma. Le linee guida per l'iniezione di un fascio neutro sono i seguenti:\begin{itemize}
-    \item Le particelle neutre viaggiano inalterate attraverso i campi magnetici;
-    \item Il beam trasferisce energia al plasma attraverso le collisioni;
-    \item L'assorbimento del fascio deve avvenire al centro del plasma. Se abbiamo fomato un fascio debole allora verrà assorbito nel bordo del plasma; se troppo forte o mal direzionato può bucare la camera da vuoto;
-    \item L'assorbimento del fascio dipende dalla sezione d'urto tra il fascio e il plasma;
+	\item Le particelle neutre viaggiano inalterate attraverso i campi magnetici;
+	\item Il beam trasferisce energia al plasma attraverso le collisioni;
+	\item L'assorbimento del fascio deve avvenire al centro del plasma. Se abbiamo fomato un fascio debole allora verrà assorbito nel bordo del plasma; se troppo forte o mal direzionato può bucare la camera da vuoto;
+	\item L'assorbimento del fascio dipende dalla sezione d'urto tra il fascio e il plasma;
 \end{itemize}
 Schematicamente:
-\begin{figure}
-    \includegraphics[scale=0.4]{2022-05-17-22-03-45.png}% chktex 8
+\begin{figure}[h]
+	\includegraphics[scale=0.4]{2022-05-17-22-03-45.png}% chktex 8
 \end{figure}
 \subsection{Electron Cyclotron Resonant Heating}
 Le cosiddette ECRH sono riscaldamenti addizionali basati su onde radio per trasferire energia da una sorgente esterna al plasma. Quando una onda elettromagnetica si propaga attraverso il plasma, il campo elettrico dell'onda accellera le particella cariche e quindi aumenta il numero di collisioni di queste nel plasma.\newline
 In particolare, si ha assorbimento dell'onda quando si è in risonanza, tuttavia essendo il plasma non uniforme si possono avere anche fenomeni di riflessioni. Ne risulta quindi che la polarizzazione dell'onda gioca un ruolo molto importante sulla forza dell'onda e sulla regione di assorbimento. Vi sono principalmente due distinzioni di polarizzazioni che sono dipendenti dal campo magnetico nel plasma:\begin{itemize}
-    \item O-Mode: parallelo al campo magnetico e inconrano solamente una frequenza di risonanza e un di cut-off;
-    \item X-Mode: perpendicolare al campo magnetico
+	\item O-Mode: parallelo al campo magnetico e inconrano solamente una frequenza di risonanza e un di cut-off;
+	\item X-Mode: perpendicolare al campo magnetico
 \end{itemize}
 Un altro fenomeno che potrebbe risentire il fascio è quello della rifrazione quando si trannano plasmi di alta densità.
 \section{Fisica del Plasma e Equilibrio}
@@ -107,132 +111,128 @@ Un altro fenomeno che potrebbe risentire il fascio è quello della rifrazione qu
 Il plasma è un mix di particelle cariche di isotopi del plasma di grande quantità per ottenere delle interazioni fra le cariche. In assenza di campo magnetico, il moto delle particelle cariche è su tutte le direzioni. Nel caso in cui si immette un campo magnetico gli elettroni viaggioano sulle linee di cambio in moto elicoidale: la distanza dalla linea di campo e la particella dipende dal raggio di Larmor. La condizione per cui si ha un plasma magnetizzato, che è quello che poi si usa nel tokamak, è quello di avere che la dimensione del sistema sia molto maggiore di quella del raggio di Larmor.
 \subsection{Tokamak}
 Il tokamak è una struttura in cui il plasma assume una struttura toroidale generato da delle bobine toroiali e quello poloidale generato dal plasma stesso.
-\begin{center}
-    \begin{figure}
-        \centering
-        \includegraphics[scale=0.4]{2022-06-26-14-53-25.png}% chktex 8
-    \end{figure}
-\end{center}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.4]{2022-06-26-14-53-25.png}% chktex 8
+	\end{figure}
 Il campo risultante si avvita lungo il toro. Questa configurazione è autorganizzata nel senso che il campo toroidale è quello immesso da noi, mentre quello poloidale è quello generato dal plasma.
 \subsection{Campi imposti al plasma}
-\begin{center}
-    \begin{figure}
-        \centering
-        \includegraphics[scale=0.4]{2022-06-26-14-59-14.png}% chktex 8
-    \end{figure}
-\end{center}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.4]{2022-06-26-14-59-14.png}% chktex 8
+	\end{figure}
 Il tokamak si hanno le seguenti bobine:
 \begin{itemize}
-    \item Bobine toroidali che impongono un campo magnetico verticale per regolare la forma e la posizione del plasma;
-    \item Bobina centrale del generatore che devo creare una variazione di flusso attraverso il plasma per produrre il campo elettrico per iniziare la scarica;
-    \item Bobine interne sul divertore per generare il punto a X (ultima superficie chiusa);
+	\item Bobine toroidali che impongono un campo magnetico verticale per regolare la forma e la posizione del plasma;
+	\item Bobina centrale del generatore che devo creare una variazione di flusso attraverso il plasma per produrre il campo elettrico per iniziare la scarica;
+	\item Bobine interne sul divertore per generare il punto a X (ultima superficie chiusa);
 \end{itemize}
 Il plasma risponde a questi campi con correnti poloidali e toroidali: in maniera più forte sul campo poloidale.
 \subsection{Plasma come un fluido}
 La magnetoidrodinamico tratta il plasma come un fluido conduttore descritto da:
 \begin{itemize}
-    \item Densità di corrente:\(\mathbf{j}=ne<v_{i}-v_{e}\);
-    \item Pressione: \(p=n(T_{e}+T_{i})\);
+	\item Densità di corrente:\(\mathbf{j}=ne<v_{i}-v_{e}\);
+	\item Pressione: \(p=n(T_{e}+T_{i})\);
 \end{itemize}
 Entrano in gioco le relazioni delle misure di densità di corrente e pressione per ottenere il campo magnetico. Questa relazione si ottiene tramite le \emph{Equazioni di Maxwell}:\begin{align*}
-    \nabla \cdot B&=0\\
-    \mu_{0}j=\nabla\times B
+	\nabla \cdot B & =0 \\
+	\mu_{0}j=\nabla\times B
 \end{align*}
 Inoltre, per descrivere la dinamica si bilanciano le forze in gioco:\begin{equation*}
-    J\times B = \nabla p
+	J\times B = \nabla p
 \end{equation*}
 Questa trattazione è detta idel MHD e si utilizza per determinare l'equilibrio del tokamak e per studiare la stabilità.
 \subsection{Simmetria Assiale}
 La simmetria assiale semplifica la struttura magnetica poiché tutte le quantità sono costanti lungo cerchi centrati sull'asse di simmetria.
-\begin{figure}
-    \includegraphics[scale=0.4]{2022-06-26-15-20-02.png}% chktex 8
+\begin{figure}[h]
+	\includegraphics[scale=0.4]{2022-06-26-15-20-02.png}% chktex 8
 \end{figure}
 Quindi, si introducono le coordinate cilindrica con asse di simmetria lungo Z e a distanza R dall'asse, tutte le quantità diventano indipendenti dall'angolo \(\Phi \). Inoltre, tutti i gradienti sono perpendicolare al versore toroidale (tangente al cerchio) ad eccezione il greadiente dell'angolo toroidale:\begin{equation*}
-    \nabla \Phi = \frac{e_{\Phi }}{R}
+	\nabla \Phi = \frac{e_{\Phi }}{R}
 \end{equation*}
 Dato un cerchio definito da un punto \(P=(R,Z,\Phi )\) consideriamo il flusso magnetico e la corrente elettrica che lo attraversano e defiamo:\begin{align*}
-    \Psi(R,Z)&\text{=Flusso magnetico poloidale}\\
-    I(R,Z)&\text{=corrente poloidale}
+	\Psi(R,Z) & \text{=Flusso magnetico poloidale} \\
+	I(R,Z)    & \text{=corrente poloidale}
 \end{align*}
 \textbf{Polodiale:}per un dipolo magnetico, riguarda la componente nella direzione definita dai poli.
 Quindi, definiamo il campo magnetico come:\begin{equation*}
-    \mathbf{B}=\frac{1}{2\pi }\nabla\psi\times\nabla\Phi+\frac{\mu_{0}I}{2\pi }\nabla\Phi
+	\mathbf{B}=\frac{1}{2\pi }\nabla\psi\times\nabla\Phi+\frac{\mu_{0}I}{2\pi }\nabla\Phi
 \end{equation*}
 Il prodotto vettoriale rappresenta la parte polodiale che giace sul oiano rosa, mentre la seconda parte è la parte toroidale che è tangente al cerchio.
 \subsection{Funzioni di Flusso}
 Le linee di campo magnetico giacciono su superfici di flusso magnetico costante:
 \begin{align*}
-    \mathbf{B}&=\frac{1}{2\pi }\nabla\psi\times\nabla\Phi+\frac{\mu_{0}I}{2\pi }\nabla\Phi \\
-    \mathbf{B}\cdot\nabla\psi=\frac{1}{2\pi }\nabla\psi\times\nabla\Phi\cdot\nabla\psi+\frac{\mu_{0}I}{2\pi }\nabla\Phi\cdot\nabla\psi=0+0
+	\mathbf{B} & =\frac{1}{2\pi }\nabla\psi\times\nabla\Phi+\frac{\mu_{0}I}{2\pi }\nabla\Phi \\
+	\mathbf{B}\cdot\nabla\psi=\frac{1}{2\pi }\nabla\psi\times\nabla\Phi\cdot\nabla\psi+\frac{\mu_{0}I}{2\pi }\nabla\Phi\cdot\nabla\psi=0+0
 \end{align*}
 La parte poloidale fa 0 per i vettori sono perpendicolari, la parte toroidale è zero poiché i due gradienti sono perpendicolari grazie alla proprietà di assi-simmetria.
 Inoltre, la pressione è costante lungo le linee di campo, quindi è una costante sulle superfici di flusso ovvero è una funzione di flusso:\begin{equation*}
-    B\cdot\nabla p=B\cdot j\times B=0
+	B\cdot\nabla p=B\cdot j\times B=0
 \end{equation*}
 \begin{equation*}
-    p=p(\Psi)\quad\quad \nabla p=\frac{dp}{d\psi}\nabla\psi
+	p=p(\Psi)\quad\quad \nabla p=\frac{dp}{d\psi}\nabla\psi
 \end{equation*}
 Da cui si ottiene delle superfici \textbf{isobare}.
 Usando l'equazione di Ampere \(\mu_{0}j=\nabla\times B\) si ottiene:\begin{equation*}
-    j=\frac{1}{2\pi}\nabla I\times \nabla\phi-\frac{R^{2}}{2\pi\mu_{0}}\nabla\cdot\left(\frac{1}{R^{2}}\nabla \psi\right)\nabla\Phi
+	j=\frac{1}{2\pi}\nabla I\times \nabla\phi-\frac{R^{2}}{2\pi\mu_{0}}\nabla\cdot\left(\frac{1}{R^{2}}\nabla \psi\right)\nabla\Phi
 \end{equation*}
 Dato che \(j\cdot\nabla p=j\cdot j\times B=0\) si ottiene che:\begin{align*}
-    0&=\frac{1}{2\pi}\nabla I\times \nabla\phi\cdot\nabla p-\frac{R^{2}}{2\pi\mu_{0}}\nabla\cdot\left(\frac{1}{R^{2}}\nabla\psi\right)\nabla\phi\cdot\nabla p\\
-    \nabla I\times\nabla p\cdot\nabla\Phi&=0\\
-    \nabla I\times\nabla p=0
+	0                                     & =\frac{1}{2\pi}\nabla I\times \nabla\phi\cdot\nabla p-\frac{R^{2}}{2\pi\mu_{0}}\nabla\cdot\left(\frac{1}{R^{2}}\nabla\psi\right)\nabla\phi\cdot\nabla p \\
+	\nabla I\times\nabla p\cdot\nabla\Phi & =0                                                                                                                                                      \\
+	\nabla I\times\nabla p=0
 \end{align*}
 Quindi il gradiente della corrente poloidale è parallelo al gradiente della pressione. Si conclude quindi che la corrente poloidale è una funzione della pressione e quindi del flusso poloidale:\begin{equation*}
-    I=I(\psi)\quad\quad \nabla I=\frac{dI}{d\psi}\nabla\psi
+	I=I(\psi)\quad\quad \nabla I=\frac{dI}{d\psi}\nabla\psi
 \end{equation*}
 Riassumendo si ha che:\begin{itemize}
-    \item Le linee di campo scorrono su superfici e non volumi;
-    \item Ciascuna superficie ha un glusso poloidale costante;
-    \item Ciascuna superficie ha pressione costante perché ciasuna linea di campo ha pressione costante: la pressione è una funzione di flusso;
-    \item La corrente poloidale è una funzione di flusso.
+	\item Le linee di campo scorrono su superfici e non volumi;
+	\item Ciascuna superficie ha un glusso poloidale costante;
+	\item Ciascuna superficie ha pressione costante perché ciasuna linea di campo ha pressione costante: la pressione è una funzione di flusso;
+	\item La corrente poloidale è una funzione di flusso.
 \end{itemize}
 \subsection{Equazione di Grad-Shafranov}
 Sostituendo il campo magnetico e la densità di corrente nell'equazione dell'equilibrio si ottiene:\begin{align*}
-    j\times B&=-\frac{1}{4\pi^{2}\mu_{0}}\nabla\cdot\left(\frac{1}{R^{2}}\nabla\psi\right)\nabla\psi-\frac{\mu_{0}I}{4\pi^{2}R^{2}}\frac{dI}{d\psi}\nabla\psi=\frac{dp}{d\psi}\nabla\psi \\
-    j_{TOR}\times B_{POL}+j_{POL}\times B_{TOR}=\frac{dp}{d\psi}\nabla\psi
+	j\times B & =-\frac{1}{4\pi^{2}\mu_{0}}\nabla\cdot\left(\frac{1}{R^{2}}\nabla\psi\right)\nabla\psi-\frac{\mu_{0}I}{4\pi^{2}R^{2}}\frac{dI}{d\psi}\nabla\psi=\frac{dp}{d\psi}\nabla\psi \\
+	j_{TOR}\times B_{POL}+j_{POL}\times B_{TOR}=\frac{dp}{d\psi}\nabla\psi
 \end{align*}
 Tutti i termini hanno la stessa direzione lungo la superficie di flusso, giungendo all'equazione scalare di Grad-Shafranov:
 \textbf{\begin{equation*}
-    \frac{1}{4\pi^{2}\mu_{0}}\nabla\cdot\left(\frac{1}{R^{2}}\nabla\psi \right)+frac{\mu_{0}I}{4\pi^{2}R^{2}}\frac{dI}{d\psi}=-\frac{dp}{d\psi}
-\end{equation*}}
+		\frac{1}{4\pi^{2}\mu_{0}}\nabla\cdot\left(\frac{1}{R^{2}}\nabla\psi \right)+\frac{\mu_{0}I}{4\pi^{2}R^{2}}\frac{dI}{d\psi}=-\frac{dp}{d\psi}
+	\end{equation*}}
 Notiamo che:\begin{itemize}
-    \item Il primo termine derivato dalla corrente toroidale è sempre confinante poiché corre principalmente nel plasma, cioè sosisitene la pressione;
-    \item Il termine derviato dalla corrente poloidale non è sempre confinante;
-    \item Il termine di destra dell'equazione è la quantità che dobbiamo confinare;
+	\item Il primo termine derivato dalla corrente toroidale è sempre confinante poiché corre principalmente nel plasma, cioè sosisitene la pressione;
+	\item Il termine derviato dalla corrente poloidale non è sempre confinante;
+	\item Il termine di destra dell'equazione è la quantità che dobbiamo confinare;
 \end{itemize}
 In particolare:\begin{itemize}
-    \item Se la corrente poloidale è confinante cioè aiuta la corrente toroidale il plasma avrà un comportamento toroidale;
-    \item Se la corrende poloidale è deconfinante, si oppone all'effetto della corrente toroidale. Il plasma assume un comportamento paramagnetico: la corrente toroidale è sufficiente a confinare la pressione costante.
+	\item Se la corrente poloidale è confinante cioè aiuta la corrente toroidale il plasma avrà un comportamento toroidale;
+	\item Se la corrende poloidale è deconfinante, si oppone all'effetto della corrente toroidale. Il plasma assume un comportamento paramagnetico: la corrente toroidale è sufficiente a confinare la pressione costante.
 \end{itemize}
 Per risolvere l'equazione di Grad-Shafranov si utilizzano i codici di equilibrio in cui si assumono espressioni parametriche per le funzioni di flusso I e p e si ottimizzano i parametri in base alle misure disponibili.
 \begin{figure}
-    \centering
-    \includegraphics[scale=0.4]{2022-06-26-16-35-40.png}% chktex 8
+	\centering
+	\includegraphics[scale=0.4]{2022-06-26-16-35-40.png}% chktex 8
 \end{figure}
 Dall'espressione di Grad-Shafranov in coordinate cilindriche si può ulteriormente semplificare:
 \begin{figure}
-    \includegraphics[scale=0.4]{2022-06-26-16-38-00.png}% chktex 8
+	\includegraphics[scale=0.4]{2022-06-26-16-38-00.png}% chktex 8
 \end{figure}
 Tuttavia questa espresisone non è fisica poiché si diverge in zero o in infinito.
 \subsection{Parametri Grad-Shafranov}
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.4]{2022-06-26-16-40-19.png}% chktex 8
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{2022-06-26-16-40-19.png}% chktex 8
 \end{figure}
 \subsection{Instabilità del plasma}
 \subsubsection{Distruzioni}
 Una scarica di un tokamak è così composta:\begin{itemize}
-    \item salita di corrente;
-    \item flat-top;
-    \item discesa;
+	\item salita di corrente;
+	\item flat-top;
+	\item discesa;
 \end{itemize}
 In una scarica durante il flat-top o nella discesa può succedere che la corrente si interrompe bruscamente con un current-spike con un crollo a zero della corrente. Queste disruzioni causano carichi termici molto elevati e non gestibili, ma anche forze magnetiche non sostenibili dalle pareti del vessel. L'obiettivo è quello di prevenire o mitigare questo fenomeno.Si procede in due modi:\begin{itemize}
-    \item \textbf{disruption avoidance}: predizione con reti neurali e interventi di controllo;
-    \item \textbf{distruption mitigation}: la distruzione avviene, ma si inietta del gas o dei pellet di deuterio e trizio oppure controllo dei runaway (fascio di elettroni relativistici che possono bucare la parete del tokamak).
+	\item \textbf{disruption avoidance}: predizione con reti neurali e interventi di controllo;
+	\item \textbf{distruption mitigation}: la distruzione avviene, ma si inietta del gas o dei pellet di deuterio e trizio oppure controllo dei runaway (fascio di elettroni relativistici che possono bucare la parete del tokamak).
 \end{itemize}
 In particolare, durante una distruzione si nota che prima del current spike si identificano i cosiddetti \textbf{tearing mode}: oscillazione delle misure magnetiche con un rallentamento della frequenza fino a giungere a zero (\textbf{mode locking}); allo stesso tempo nel rallentamento della frequenza si ha un aumento dell'ampiezza dei campi magnetici. Ciò implica che l'equilibrio non è più assisimmetrico e l'oscillazione indica che la deformazione della configurazione dell'equilibrio sta ruotando.
 \subsubsection{Edge Localized Mode}
@@ -253,31 +253,31 @@ I modi normai risultanti dal modello linearizzato MHD di un plasma omogenio perm
 
 \section{Thomson Scattering}
 Per misurare la temperature e la densità del plasma si sfrutta il fenomeno del Thomson Scattering. In particolare si inietta nel plasma un fascio laser e se ne misura sia la luce diffusa che la larghezza spettrale.\newline
-Le misure di larghezza fornisco delle informazioni sulla temperatura e l'intensità della luce diffusa sulla densità degli elettroni. Le ragioni principali per cui si è introdotta questa diagnostica sono due:\begin{itemize}
-    \item è un metodo che non perturba l'equilibrio del plasma poiché si richiede solo l'accesso alle radiazioni del plasma;
-    \item permette di avere delle informazioni dettagliate sulla funzione di distribuzione degli elettroni.
+Guardando uno spettro, le misure di larghezza fornisco delle informazioni sulla temperatura e l'intensità della luce diffusa sulla densità degli elettroni. Le ragioni principali per cui si è introdotta questa diagnostica sono due:\begin{itemize}
+	\item è un metodo che non perturba l'equilibrio del plasma poiché si richiede solo l'accesso alle radiazioni del plasma;
+	\item permette di avere delle informazioni dettagliate sulla funzione di distribuzione degli elettroni.
 \end{itemize}
 Si ha una onda elettromagnetica incidente su una particella che viene accelerata dai campi elettromagnetici dell'onda. Durante l'urto si ha una emissione di una radiazione detta scattered wave. Questa radiazione viene misurata dagli spettrometri a filtri policromatrici.
 Dato che occorre che il posizionamento delle ottiche sia ottimale, la calibrazione diventa fondamentale per ottenere misurazioni della densità di elettroni. Essa viene effettuata utilizzando altri gas.
 \section{Polarimetro}
 
 \begin{comment}
-    Il polarimetro è necessario per ottenere informazioni sulla densità e corrente di plasma. Si basa principalmente su due fenomeni:\begin{itemize}
-    \item Effetto Faraday: nel plasma in presenza del campo magnetico, il piano di polarizzazione del fascio laser propagato nel campo magnetico ruota. Da informazioni su \textbf{Campo magnetico Poloidale};
-    \item Effetto Cotton-Mouton: se il fascio laser si propaga perpendicolarmente al campo magnetico vi è un campo dell'ellitticità della polarizzazione.Da informazioni su \textbf{Campo magnetico toroidale}.
+Il polarimetro è necessario per ottenere informazioni sulla densità e corrente di plasma. Si basa principalmente su due fenomeni:\begin{itemize}
+	\item Effetto Faraday: nel plasma in presenza del campo magnetico, il piano di polarizzazione del fascio laser propagato nel campo magnetico ruota. Da informazioni su \textbf{Campo magnetico Poloidale};
+	\item Effetto Cotton-Mouton: se il fascio laser si propaga perpendicolarmente al campo magnetico vi è un campo dell'ellitticità della polarizzazione.Da informazioni su \textbf{Campo magnetico toroidale}.
 \end{itemize}
 Il plasma nel campo magnetico si comporta come un mezzo dielettrico con indici di rifrazione diverse in base alle componenti del campo magnetico. In particolare, il pasma è birifrangente e questa proprietà dipende da:\begin{itemize}
-    \item Densità elettronica;
-    \item Il campo magnetico;
-    \item Temperatura elettronica.
+	\item Densità elettronica;
+	\item Il campo magnetico;
+	\item Temperatura elettronica.
 \end{itemize}
 \begin{definizione}
-    Un'onda è detta polarizzata linearmente se la risultante del campo elettrico vibra nella stessa direzione in un particolare punto.
+	Un'onda è detta polarizzata linearmente se la risultante del campo elettrico vibra nella stessa direzione in un particolare punto.
 \end{definizione}
 La polarizzazione può essere ottenuta da:\begin{itemize}
-    \item assorbimento selettivo;
-    \item Riflessione;
-    \item Scattering;
+	\item assorbimento selettivo;
+	\item Riflessione;
+	\item Scattering;
 \end{itemize}
 \subsection{Assorbimento Selettivo}
 Nell'assorbimento selettivo, un fascio non polarizzato attraversa una lente di polarizzazione che fa passare solo le componenti del campo magnetico su un asse. Poi queste componenti incidono su un analizzatore: il raggio incidente con quello rifratto formerà un angolo che viene misurato.
@@ -292,22 +292,22 @@ Il Polarimetro è una diagnostica che consente di avere misure delle componenti 
 Il funzionamento del Polarimetro si basa su un fascio laser negli infrarossi che fa ad incidere sul plasma. Da questo urto si hanno informazioni riguardo alla corrente di plasma (campo poloidale) e la densità degli elettroni.\newline
 L'urto del fascio laser con il plasma, dato che quest'ultimo è un mezzo birifrangente (indice di rifrazione differente in base all'angolo di incidenza del fascio) da origine a due effetti:
 \begin{itemize}
-    \item Effetto Faraday: il fascio laser ruota, dovuto al campo magnetico poloidale;
-    \item Effetto Cotton-Mouton: il fascio laser si ellettifica,dovuto al campo magnetico toroidale;
+	\item Effetto Faraday: il fascio laser ruota, dovuto al campo magnetico poloidale;
+	\item Effetto Cotton-Mouton: il fascio laser si ellettifica,dovuto al campo magnetico toroidale;
 \end{itemize}
 La birifrangenza del plasma dipende da:
 \begin{itemize}
-    \item densità elettronica;
-    \item campo magnetico;temperatura elettronica
+	\item densità elettronica;
+	\item campo magnetico;temperatura elettronica
 \end{itemize}
 
 Il Polarimetro per funzionare ha bisogno di una luce polarizzata: una luca in cui i vettori del campo elettrico non si propagano lungo tutte le direzioni, ma lungo una precisa direzione. Tuttavia, la luce di base non è polarizzata e quindi occrre polarizzarla tramite uno strumento detto polarizzatore.
 \subsection{Polarizzatore}
 Il polarizzatore è uno strumento che consente di polarizzare la luce non polarizzata. In particolare, data una sorgente di luge non polarizzata, si interpone lungo le direzioni di propagazione della luce un filtro a bande verticale che permette di far passare solo le componenti del campo elettrico parallele alle fenditure del filtro.
 In generale la polarrizzazione può essere effettuata tramite:\begin{itemize}
-    \item assorbimento;
-    \item riflessione;
-    \item scattering;
+	\item assorbimento;
+	\item riflessione;
+	\item scattering;
 \end{itemize}
 \subsubsection{Assorbimento}
 L'assorbimento è il metodo più comune per polarizzare la luce. Si necessita di una sorgente di luce non polarizzata, un polarizzatore, un analizzatore hardware capace di valutare l'efficienza del polarizzatore. L'efficienza viene considerata come l'angolo formato tra il raggio incidente e uscente all'analizzatore.
@@ -317,48 +317,48 @@ Inoltre, il punto in cui coincidono gli indici di rifrazioni è quello che si tr
 \subsection{Onde elettromagnetiche}
 Le onde elettromagnetiche sono composte da componenti perpendicolari fra loro del campo elettrico e magnetico che si propagano lungo una direzione z. Detto ciò possiamo esprimere l'equazioni di un'onda elettromagnetica che si propagna lungo una direzione come:
 \begin{equation}
-    \overrightarrow{E_{x}}( z,t)=E_{0 x}\cos{(\omega t-kz+\delta_{x})}\overrightarrow{x}\quad \overrightarrow{E_{y}}(z,t)=E_{0 y}\cos{(\omega t-kz+\delta_{y})}\overrightarrow{y}
+	\overrightarrow{E_{x}}( z,t)=E_{0 x}\cos{(\omega t-kz+\delta_{x})}\overrightarrow{x}\quad \overrightarrow{E_{y}}(z,t)=E_{0 y}\cos{(\omega t-kz+\delta_{y})}\overrightarrow{y}
 \end{equation}
 Si dimostra che unendo queste due equazioni si giugne all'equazione dell'ellisse dipendendo dalla differenza di fase fra le componenti del campo elettrico dell'onda. A questo punto, data l'equazione dell'ellisse si può calcolare la deformazione del fascio tramite l'ellisse di polarizzazione nel piano \emph{xy}: si individuano gli angoli \(\psi \) di orientamento dell'ellisse e \(\chi \) l'elletticità dal fascio iniziale e quello rifratto.
 \subsection{Ellisse di Propagazione e Vettori di Stockes}
 L'ellisse di propagazione da cui si ricava l'ellitticità e l'orientamento può essere ricondotta in una forma più semplice tramite i vettori si Stockes. I parametri di Stokes sono un insieme di valori utili a capire se un'onda è polarizzata linearmente, radialmente etc\dots per poi modellizzare il percorso ottico del polarimetro.\newline
 In particolare è un vettore composto da 4 componenti dipendenti dall'equazione elettromagnetiche delle onde:\newpage
 \begin{figure}[t]
-    \centering
-    \includegraphics[scale=0.4]{2022-05-24-23-36-23.png}% chktex 8
-    \includegraphics[scale=0.4]{2022-05-24-23-38-37.png}% chktex 8
+	\centering
+	\includegraphics[scale=0.4]{2022-05-24-23-36-23.png}% chktex 8
+	\includegraphics[scale=0.4]{2022-05-24-23-38-37.png}% chktex 8
 \end{figure}
 Per calcolare l'effetto del Plasma sul fascio laser occorre tenere conto delle componenti ottiche che ha attraversato il fascio laser. Per vedere questo effetto si calcola:
 \begin{equation}
-    \overrightarrow{S}_{fin}=M_{pol}\cdot \overrightarrow{S}_{in}
+	\overrightarrow{S}_{fin}=M_{pol}\cdot \overrightarrow{S}_{in}
 \end{equation}
 In cui:\begin{itemize}
-    \item M:\@matrice che caratterizza il componente ottico;
-    \item S in o fin: polarizzazione del fascio iniziale e finale espressi in vettore di Strokes;
+	\item M:\@matrice che caratterizza il componente ottico;
+	\item S in o fin: polarizzazione del fascio iniziale e finale espressi in vettore di Strokes;
 \end{itemize}
 Ogni elemento ottico viene descritto dalla matrice di Mueller ed è sempre nota.
 \subsection{Sistema Polarimetrico}
 Gli effetti che entrano in gioco nel polarimetro sono espressi come:
 \begin{equation}
-    \psi\propto \int n_{e}\cdot B_{z}dz\quad\text{Rotazione di Faraday}
+	\psi\propto \int n_{e}\cdot B_{z}dz\quad\text{Rotazione di Faraday}
 \end{equation}
 \begin{equation}
-    \phi\propto \int n_{e}\cdot B_{T}^{2}dz\quad \text{Cotton-Mouton}
+	\phi\propto \int n_{e}\cdot B_{T}^{2}dz\quad \text{Cotton-Mouton}
 \end{equation}
 L'evoluzione della polarizzazione viene descritta in base alla variazione del vettore di Stokes sull'asse z:
 \begin{equation}
-    \frac{d\overrightarrow{S}}{dZ}=\overrightarrow{\Omega}\times\overrightarrow{S}
+	\frac{d\overrightarrow{S}}{dZ}=\overrightarrow{\Omega}\times\overrightarrow{S}
 \end{equation}
 In cui \(\Omega \) dipende dalla frequenza, dai due indici di rifrazione del mezzo e il vettore di polarizzazione dell'onda veloce. Non ha risoluzione e può essere risolta tramite una matrice simmetrica simile a quella di Muller sia per i componenti ottici che il plasma.\newline
 Quindi, per sapere l'effetto che hanno i componenti ottici (inclusi il plasma) si moltiplicano tutte le matrici di Muller come da formula per poi ottenere:
 \begin{itemize}
-    \item Angolo di rotazione:
-    \begin{equation}
-    \psi =\frac{1}{2}\arctan{\frac{S_{2}}{S_{1}}}
-    \end{equation}
-    \item Cotton-Mouton: \begin{equation}
-        \arctan{\frac{S_{3}}{S_{2}}}
-    \end{equation}
+	\item Angolo di rotazione:
+	      \begin{equation}
+		      \psi =\frac{1}{2}\arctan{\frac{S_{2}}{S_{1}}}
+	      \end{equation}
+	\item Cotton-Mouton: \begin{equation}
+		      \arctan{\frac{S_{3}}{S_{2}}}
+	      \end{equation}
 \end{itemize}
 \section{MSE}
 L'MSE è una diagnostica che permette di avere delle misure interne al plasma tramite un'analisi degli atomi neutri.\newline
@@ -367,12 +367,12 @@ Dato che gli atomi immessi sono neutri non interagiscono con i campi magnetici, 
 L'MSE è una diagnostica che utilizza la luce che proviene dai NBI ad idrogneo (utilizzati per il riscaldamento addizinaale) e l'interazione con il plasma. La luce proveniente dall'idrogeno eccitato uò essere osservato all'interno della lunghezza d'onda di Balmer \(\alpha \): la luce emessa è polarizzata e la sua banda risulterà allargata a causa del campo magnetico.
 \subsection{Principi NBI}
 \begin{itemize}
-    \item Le particelle neutre viaggiano inalterate attraverso i campi magnetici;
-    \item Il beam trasferisce l'energia al plasma tramite le collisioni;
-    \item L'assorbimento del beam deve avvenire al centro e non al bordo e questo è dovuto alla potenza del fascio;
-    \item I processi principlai sono:\begin{figure}
-        \includegraphics[scale=0.4]{2022-05-26-23-49-28.png}%chktex 8
-    \end{figure}
+	\item Le particelle neutre viaggiano inalterate attraverso i campi magnetici;
+	\item Il beam trasferisce l'energia al plasma tramite le collisioni;
+	\item L'assorbimento del beam deve avvenire al centro e non al bordo e questo è dovuto alla potenza del fascio;
+	\item I processi principlai sono:\begin{figure}
+		      \includegraphics[scale=0.4]{2022-05-26-23-49-28.png}%chktex 8
+	      \end{figure}
 \end{itemize}
 \subsection{Spettroscopia}
 Come abbiamo visto l'MSE si basa sullo spettro della luce emessa dall'interazione del fascio con il plasma.\newline
@@ -381,260 +381,266 @@ Lo spettrometro misura per varie lunghezze d'onda la luce emessa dall'idrogeno. 
 L'effetto Stark è quell'effetto che quantifica la separazione delle bande dello spettro dell'idrogeno in presenza di un campo elettrico. (Nel caso in cui si parlasse di campo magnetico si chiama Effetto Zeeman).\newline
 Vedendo uno spettrometro, si vedono più picchi e degli allargamenti delle bande: l'aggiunta dei picchi sono dovuto all'energia con cui entrano i NBI nel plasma che va a diminuire a \(\frac{1}{i}\quad u=1,..,n\). Inoltre, si nota una variazione della lunghezza d'onda della luce è dovuto all'effetto Doppler: il cambio della lunghezza d'onda della radiazione è dovuta al moto relativo tra sorgente e osservatore. Si quantifica:
 \begin{equation}
-    \frac{\Delta\lambda}{\lambda_{0}}=\frac{v}{c}
+	\frac{\Delta\lambda}{\lambda_{0}}=\frac{v}{c}
 \end{equation}
 \subsection{Motional Stark Effect}
 Il contributo dominante per la struttura spettrale di un componente monoenergetico del fascio è dovuto al motional Stark Effect. Questo effetto non è differente dal classico Stark Effect, ma il campo elettrico in question non è vicino al plasma. Tuttavia, sorge dal movimento dell'atomo all'interno del campo magnetico, ma risentirà di un campo elettrico dovuto alla forza di Lorenzt.\newline
 Il suo effetto può essere di due tipo:\begin{itemize}
-    \item Quadratico: si ha quando si considera il momento della carica;
-    \item Lineare
+	\item Quadratico: si ha quando si considera il momento della carica;
+	\item Lineare
 \end{itemize}
 Lo stark effect si compone di due regimi:\begin{itemize}
-    \item Per la maggioranza degli aotmi lo stark effect è quadratico in particolare rispetto al campo elettrico. Questo perché il momento del dipolo elettrico dell'atomo è proporzionale all'applicazione del campo e all'energia della perturbazione.
-    \item Lineare: quando si è in presenza di campi elettrici forti in cui questa energia è comparaile alla divisione dello spettro dei livelli di energia (numero quantico) di un atomo non perturbato. Le barre si dividono in barre sigma e pi greco nella serie di balmer in cui la loro altezza rappresenta l'intensità dello spettro e si differenziano in polarizzazione.In particolare:\begin{itemize}
-        \item La componente \(\pi \) relativo al numero quantico 0 risulta in un'onda polarizzata nella componente parallela del campo elettrico;
-        \item La componente \(\sigma \) con numero quantico pari a +/- 1 alla componente perpendicolare del campo elettrico
-    \end{itemize}
+	\item Per la maggioranza degli aotmi lo stark effect è quadratico in particolare rispetto al campo elettrico. Questo perché il momento del dipolo elettrico dell'atomo è proporzionale all'applicazione del campo e all'energia della perturbazione.
+	\item Lineare: quando si è in presenza di campi elettrici forti in cui questa energia è comparaile alla divisione dello spettro dei livelli di energia (numero quantico) di un atomo non perturbato. Le barre si dividono in barre sigma e pi greco nella serie di balmer in cui la loro altezza rappresenta l'intensità dello spettro e si differenziano in polarizzazione.In particolare:\begin{itemize}
+		      \item La componente \(\pi \) relativo al numero quantico 0 risulta in un'onda polarizzata nella componente parallela del campo elettrico;
+		      \item La componente \(\sigma \) con numero quantico pari a +/- 1 alla componente perpendicolare del campo elettrico
+	      \end{itemize}
 \end{itemize}
 \section{Interferometro}
 L'interferometro è una diagnostica che consente di misurare la densità del plasma. Ancque questa diagnostica come il polarimetro si basa sulle ottiche.\newpage
 \subsection{Onde ottiche}
 Quando si trattano le onde si possono verificare 3 tipi di eventi:\begin{itemize}
-    \item Interferenza;
-    \item Diffrazione: se il fascio laser passa tramite due fenditure, si nota che al passaggio delle fenditure disegna delle figure di diffrazione corrispondente ad una dispersione dell'onda;
-    \item Polarizzazione.
+	\item Interferenza;
+	\item Diffrazione: se il fascio laser passa tramite due fenditure, si nota che al passaggio delle fenditure disegna delle figure di diffrazione corrispondente ad una dispersione dell'onda;
+	\item Polarizzazione.
 \end{itemize}
 Affinché sia possibile verificars di questi eventi necessitiamo che il fascio sia:\begin{itemize}
-    \item Coerente: deve mantenere una fase costante;
-    \item Monocromatica: il laser deve avere una singola lunghezza d'onda.
+	\item Coerente: deve mantenere una fase costante;
+	\item Monocromatica: il laser deve avere una singola lunghezza d'onda.
 \end{itemize}
 \subsection{Interferenza}
 Date due sorgenti coerenti e monocromatiche esse possono interagire in due maniere:\begin{itemize}
-    \item Costruttuiva: se l'ampiezza dell'onda risultante è maggiore di quella singola;
-    \item Distruttive: se l'ampiezza dell'onda risultante è meno di una delle due sorgenti.
+	\item Costruttuiva: se l'ampiezza dell'onda risultante è maggiore di quella singola;
+	\item Distruttive: se l'ampiezza dell'onda risultante è meno di una delle due sorgenti.
 \end{itemize}
 Tutte le interferenza associate ai fasci di luce sono associate all'interazione dei campi elettromagnetiche. Visivamente, in un interferometro, il fenomeno di interferenza origina una sequenza di bande chiare e scure corrispondenti rispettivamente a fenomeni di interferenza costruttiva e distruttiva. Queste bande sono ottenute da uno schermo posto ad una certa distanza dalle fenditure: le onde delle due sorgenti corrispondenti alle due fenditure formano una interferenza costruttiva se le onde arrivano sullo schermo in fase (una onda corre più dell'altra) e altrimenti è distruttiva.
 In formule:\begin{itemize}
-    \item Interferenza costruttiva: \(\delta= d\sin{(\theta_{\text{brigth}})}=m\lambda \)
-    \item Interferenza distruttiva  \(\delta= d\sin{(\theta_{\text{dark}})}=(m+\frac{1}{2})\lambda \)
+	\item Interferenza costruttiva: \(\delta= d\sin{(\theta_{\text{brigth}})}=m\lambda \)
+	\item Interferenza distruttiva  \(\delta= d\sin{(\theta_{\text{dark}})}=(m+\frac{1}{2})\lambda \)
 \end{itemize}
 Da cui possiamo calcolare la posizione delle frange:\begin{itemize}
-    \item \(y_{\text{k}}=L\tan{\theta_{\text{k}}}\quad k =\{\text{brigth,dark}\} \)
+	\item \(y_{\text{k}}=L\tan{\theta_{\text{k}}}\quad k =\{\text{brigth,dark}\} \)
 \end{itemize}
 Inoltre, assumendo che la distanza fra gli schermi è molto più grande della distanza tra le fenditure e quest'ultima è molto più grande della lunghezza d'onda si sostituisce la tangente con il seno (condizione di piccolo angolo) che è noto. Così facendo, si ottiene una formula che non dipende dall'angolo:\begin{equation}
-    y_{\text{brigth}}= L\frac{m\lambda}{d}\quad  y_{\text{dark}}= L\frac{(m+\frac{1}{2})\lambda}{d}
+	y_{\text{brigth}}= L\frac{m\lambda}{d}\quad  y_{\text{dark}}= L\frac{(m+\frac{1}{2})\lambda}{d}
 \end{equation}
 Ottenuta la posizione, ora vogliamo caratterizzare l'ampiezza dell'intensità luminosa corrispondente alla frangia rilevata sullo schermo. Dalle equazioni dell'onda:\begin{align}
-    E_{1}&=E_{0}\sin{\omega t}\\
-    E_{2}&=E_{0}\sin{\omega t+\phi}
+	E_{1} & =E_{0}\sin{\omega t}      \\
+	E_{2} & =E_{0}\sin{\omega t+\phi}
 \end{align}
 Dal principio di sovrapposizione degli effetti si ottiene:\begin{equation}
-    E_{p}=2E_{0}\cos{\frac{\phi}{2}}\sin{\omega+\frac{\phi}{2}}
+	E_{p}=2E_{0}\cos{\frac{\phi}{2}}\sin{\omega+\frac{\phi}{2}}
 \end{equation}
 La differenza di fase tra le due onde nel punto P dello schermo è:\begin{equation}
-    \delta=r_{1}-r_{2}=d\sin{\theta}
+	\delta=r_{1}-r_{2}=d\sin{\theta}
 \end{equation}
 con r percorso generato tra le due fenditure.
 Si può scrivere l'intensità dell'onda sarà proporzionale al quadrato della risultante dell'intensità del campo elettrico. Graficamente:\begin{itemize}
-    \item L'interferenza consiste in bande equispaziate di uguuale intensita.
-    \item Nei picchi interferenza costruttiva;
-    \item Nelle valli interferenza distruttiva.
+	\item L'interferenza consiste in bande equispaziate di uguuale intensita.
+	\item Nei picchi interferenza costruttiva;
+	\item Nelle valli interferenza distruttiva.
 \end{itemize}
 \subsection{Diagnostiche}
 Vi sono due possibili configurazioni di diagnostiche utilizzano l'interferenza:\begin{itemize}
-    \item Michelson;
-    \item Mac-Zender;
+	\item Michelson;
+	\item Mac-Zender;
 \end{itemize}
 \subsubsection{Interferometro di Michelson}
 La sorgente di luce incide su un bisplitter che dividerà il fascio in due. Entrambi i fasci laser attraversando il bisplitter incidono su due specchi M1,M2 posti a distanza L1 e L2 e uno specchio si trova a 90 gradi della sorgente, l'altro parallelamente alla sorgente.\newline
 I due rami riflessi dagli specchi ritornano indietro sul bisplitter e vengono osservati. Ricomponendosi, si ottengono le immagini di interferenza in base alla distanza degli specchi del bisplitter.
-\begin{figure}
-    \includegraphics[scale=0.4]{2022-05-29-15-59-34.png}% chktex 8
+\begin{figure}[h]
+	\includegraphics[scale=0.4]{2022-05-29-15-59-34.png}% chktex 8
 \end{figure}
 Il vantaggio di questo strumento è che non si necessita di calibrazione dato che la misura che viene acquisita è una misura relativa tra i bracci degli specchi: la sorgente è la stessa e viene divisa da un componente ottico (a patto che le ottiche non si siano guastate).
 \subsection{Interferometro nella fusione}
 L'interferometro utilizza dei fasci a frequenze molto lontane da quelle del plasma così da non perturbarlo ed avere delle misure ottimali sulla densità di plasma e insieme al polarimetro sulle componenti del campo magnetico.\newline
 I vantaggi di questa diagnostica sono i seguenti:\begin{itemize}
-    \item Si segue l'evoluzione del plasma istante per istante sulla densità degli elettroni;
-    \item Non si necessita di calibrazione per gli strumenti;
-    \item Non si necessitano di informazioni addizionali da altre diagnostiche.
+	\item Si segue l'evoluzione del plasma istante per istante sulla densità degli elettroni;
+	\item Non si necessita di calibrazione per gli strumenti;
+	\item Non si necessitano di informazioni addizionali da altre diagnostiche.
 \end{itemize}
 \subsubsection{Mach-Zender}
- \begin{figure}
-     \includegraphics[scale=0.4]{2022-05-29-16-10-11.png}% chktex 8
- \end{figure}
- Si ha il fascio laser che viene diviso da un bisplitter: un ramo passa per il plasma e l'altro no. In seguito ripassano per un altro bisplitter per essere ricomposte ed analizzate. Questa configurazione è detta autocalibrante poiché si prende sempre il segnale di riferimento dal fascio che non passa per il plasma.
- \begin{figure}
-     \includegraphics[scale=0.4]{2022-05-29-16-13-05.png}% chktex 8
- \end{figure}
- Il parametro \(n\) di rifrazione del plasma può essere scritta come:\begin{equation}
-     n^{2}=\frac{n_{e}}{n_{c}}
- \end{equation}
- La frequenza del plasma dipende da:\begin{itemize}
-     \item Densità elettronica;
-     \item Constante dielettrica nel vuoto;
-     \item Carica elettronica;
-     \item Massa dell'elettrone;
- \end{itemize}
- Per una frequenza fissata si definisce la densità di cut-off come la densità per cui la frequenza del fascio laser è uguale alla frequenza di plasma. Se la densità eccede il valore di cutoff, l'onda non è più propagata, ma decade esponenzialmente con la distanza. Ciò risulta che normalmente si trasmette una piccola potenza attraverso il plasma e l'interferometro cessa di funzionare.
- \subsubsection{Interferometro nel JET}
- \begin{figure}
-     \includegraphics[scale=0.4]{2022-05-29-16-23-12.png}% chktex 8
- \end{figure}
- \subsection{Problemi dell'interferometro: salti di frangia}
- Le misure interferometriche possono perdere il segnale quando l'onda del fascio è un multiplo elevato del plasma e quindi si perdono le misurazioni della densità del plasma. Per ovviare a questo problema o si ferma la scarica o si continua lo sparo e poi si avvia la fase di ricostruzione del segnale. Tuttavia, il metodo più efficiente è quello di utilizzare il polarimetro per fittare i dati sull'interferometro.
- \section{Hardware}
+\begin{figure}
+	\includegraphics[scale=0.4]{2022-05-29-16-10-11.png}% chktex 8
+\end{figure}
+Si ha il fascio laser che viene diviso da un bisplitter: un ramo passa per il plasma e l'altro no. In seguito ripassano per un altro bisplitter per essere ricomposte ed analizzate. Questa configurazione è detta autocalibrante poiché si prende sempre il segnale di riferimento dal fascio che non passa per il plasma.
+\begin{figure}
+	\includegraphics[scale=0.4]{2022-05-29-16-13-05.png}% chktex 8
+\end{figure}
+Il parametro \(n\) di rifrazione del plasma può essere scritta come:\begin{equation}
+	n^{2}=\frac{n_{e}}{n_{c}}
+\end{equation}
+La frequenza del plasma dipende da:\begin{itemize}
+	\item Densità elettronica;
+	\item Constante dielettrica nel vuoto;
+	\item Carica elettronica;
+	\item Massa dell'elettrone;
+\end{itemize}
+Per una frequenza fissata si definisce la densità di cut-off come la densità per cui la frequenza del fascio laser è uguale alla frequenza di plasma. Se la densità eccede il valore di cutoff, l'onda non è più propagata, ma decade esponenzialmente con la distanza. Ciò risulta che normalmente si trasmette una piccola potenza attraverso il plasma e l'interferometro cessa di funzionare.
+\subsubsection{Interferometro nel JET}
+\begin{figure}
+	\includegraphics[scale=0.4]{2022-05-29-16-23-12.png}% chktex 8
+\end{figure}
+\subsection{Problemi dell'interferometro: salti di frangia}
+Le misure interferometriche possono perdere il segnale quando l'onda del fascio è un multiplo elevato del plasma e quindi si perdono le misurazioni della densità del plasma. Per ovviare a questo problema o si ferma la scarica o si continua lo sparo e poi si avvia la fase di ricostruzione del segnale. Tuttavia, il metodo più efficiente è quello di utilizzare il polarimetro per fittare i dati sull'interferometro.
+\section{Hardware}
 \begin{itemize}
-    \item Lunghezza d'onda: componente principale da cui dipende la scelta di tutte le altre componentistiche:\begin{itemize}
-        \item Onda lunga:\begin{itemize}
-            \item Pro:Migliore risoluzione delle misure;
-            \item Contro: rifrazione;
-        \end{itemize}
-        \item Onde corte:\begin{itemize}
-            \item Pro: bassa rifrazione;
-            \item Contro: Problemi di vibrazioni meccaniche e bassa risoluzione.
-        \end{itemize}
-    \end{itemize};
-    \item Laser: il laser opera nel lontano infrarosso. Devono essere stabili poiché molti laser dipendono dalle condizioni ambientali nel quale operano. Per essere sicuri della stabilità dello strumento si isolano gli strumenti in condizioni ambientali ottimali con un controllo in feedback;
-    \item Ottiche le componenti ottiche devono lavorare in ambienti ad alte temperature, radiazioni e neutroni. Quindi bisogna scegliere i materiali con cui sono relizzate le ottiche avento particolare cura a scegliere dei materiali che non risentono dei campi magnetici;
-    \item Modulatori\begin{figure}
-        \includegraphics[scale=0.4]{2022-05-29-16-41-03.png}% chktex 8
-    \end{figure};
-    \item Rivelatori:\begin{figure}
-        \includegraphics[scale=0.4]{2022-05-29-16-41-40.png}% chktex 8
-    \end{figure};
-    \item Struttura meccanica;
-    \item Controllo dell'atmosfera.
+	\item Lunghezza d'onda: componente principale da cui dipende la scelta di tutte le altre componentistiche:\begin{itemize}
+		      \item Onda lunga:\begin{itemize}
+			            \item Pro:Migliore risoluzione delle misure;
+			            \item Contro: rifrazione;
+		            \end{itemize}
+		      \item Onde corte:\begin{itemize}
+			            \item Pro: bassa rifrazione;
+			            \item Contro: Problemi di vibrazioni meccaniche e bassa risoluzione.
+		            \end{itemize}
+	      \end{itemize}
+	\item Laser: il laser opera nel lontano infrarosso. Devono essere stabili poiché molti laser dipendono dalle condizioni ambientali nel quale operano. Per essere sicuri della stabilità dello strumento si isolano gli strumenti in condizioni ambientali ottimali con un controllo in feedback;
+	\item Ottiche le componenti ottiche devono lavorare in ambienti ad alte temperature, radiazioni e neutroni. Quindi bisogna scegliere i materiali con cui sono relizzate le ottiche avento particolare cura a scegliere dei materiali che non risentono dei campi magnetici;
+	\item Modulatori\begin{figure}
+		      \includegraphics[scale=0.4]{2022-05-29-16-41-03.png}% chktex 8
+	      \end{figure};
+	\item Rivelatori:\begin{figure}
+		      \includegraphics[scale=0.4]{2022-05-29-16-41-40.png}% chktex 8
+	      \end{figure};
+	\item Struttura meccanica;
+	\item Controllo dell'atmosfera.
 \end{itemize}
 \section{Neutronica 1-2-3-4}% chktex 8
 \subsection{Introduzione}
 \begin{itemize}
-    \item \textbf{Struttura Nucleare}:\begin{itemize}
-        \item \textbf{Nucleone}: è il nome dato alla particella \SPSB{A}{Z}X
-        \item \textbf{Nuclide}: è una paricolare compinazione di protoni e neutroni che compongono un nucleo. Vengono usati per distinguire gli isotopi tra i nuclei.
-        \item \textbf{Numero di nucleoni}: Il numero di nucleoni A coincide con il umero di massa ed è definito come la somma dei protoni e dei neutroni nel nucleo. Viene misurato in unità di massa atomica u.
-        \item \textbf{Numero di protoni}: Z è il numero dei protoni nel nucleo;
-        \item \textbf{Isotopi}: Un istopi sono nuclei con lo stesso numero di protoni, ma differente numero di neutroni. Tramite A e Z si riconoscono i vari tipi di isotopi;
-        \item \textbf{Numero di neutroni}: N=A-Z è il numero di neutroni nel nucleo;
-    \end{itemize}
-    \item\textbf{Isotopi}:Un isotopo è atomo con stesso numero di protoni, ma differente numero di neutroni. L'esistenza degli isotopi è una conseguenza dell'esistenza dei neutroni: non vi è un'altra spiegazione per spiegare la differenza di massa fra due isotopi dello stesso elemento. Dato che le masse differiscono, allora si hanno diverse proprietà fisiche.\newline
-    Per l'idrogeno vi sono 3 tipi di isotopi: prozio (stabile), deuterio (stabile) e trizio (instabile, radioattivo). Quelli utilizzati nella fusione sono deuterio e trizio. Il trizio non è molto presente in natura poiché decade velocemente quindi in un Tokamak occorre produrlo artificialmente;
+	\item \textbf{Struttura Nucleare}:\begin{itemize}
+		      \item \textbf{Nucleone}: è il nome dato alla particella \SPSB{A}{Z}X
+		      \item \textbf{Nuclide}: è una paricolare compinazione di protoni e neutroni che compongono un nucleo. Vengono usati per distinguire gli isotopi tra i nuclei.
+		      \item \textbf{Numero di nucleoni}: Il numero di nucleoni A coincide con il umero di massa ed è definito come la somma dei protoni e dei neutroni nel nucleo. Viene misurato in unità di massa atomica u.
+		      \item \textbf{Numero di protoni}: Z è il numero dei protoni nel nucleo;
+		      \item \textbf{Isotopi}: Un istopi sono nuclei con lo stesso numero di protoni, ma differente numero di neutroni. Tramite A e Z si riconoscono i vari tipi di isotopi;
+		      \item \textbf{Numero di neutroni}: N=A-Z è il numero di neutroni nel nucleo;
+	      \end{itemize}
+	      \item\textbf{Isotopi}:Un isotopo è atomo con stesso numero di protoni, ma differente numero di neutroni. L'esistenza degli isotopi è una conseguenza dell'esistenza dei neutroni: non vi è un'altra spiegazione per spiegare la differenza di massa fra due isotopi dello stesso elemento. Dato che le masse differiscono, allora si hanno diverse proprietà fisiche.\newline
+	      Per l'idrogeno vi sono 3 tipi di isotopi: prozio H (stabile), deuterio \SPSB{2}{1}H (stabile) e trizio \SPSB{3}{1}H (instabile, radioattivo). Quelli utilizzati nella fusione sono deuterio e trizio. Il trizio non è molto presente in natura poiché decade velocemente quindi in un Tokamak occorre produrlo artificialmente;
 \end{itemize}
-
-
-
-
-
-
-
-
-
-
-
+\subsection{Forza nucleare forte}
+La forza nucleare forte è quella forza che mantiene il nucleo compatto. Le forze nucleare forti agiscono a corto raggio; mentre a lungo raggio agiscono le forze Coulumbiane.\newline
+Finché la forza nucleare forte agente fra i nucleoni vince sulla forza Coulumbiana, il nucleo viene detto stabile. Inoltre, gli atomi nel nuclo sono stabile in base alla presenza di un numero opportuno di neutroni per diluire la concentrazione delle cariche positive dovute alla presenza dei protoni.
+\subsection{Energia di Legame}
+L'energia di legame è quell'energia che deve essere applicata al nucleo per separarlo in particelle libere o unirlo in un unico nucleo. Questo è il motivo per cui si può ottenere dalla fusione energia accumulabile.\newline
+Alla variazione di energia di energia si associa una variazione di massa. Infatti, dall'equazione di Newton\begin{equation*}
+	E=mc^{2}
+\end{equation*}
+Quando i nucleoni si legano per formare un nucleo, la massa del nucleo risultante è minore della somma delle masse dei costituenti protoni e neutroni. Questa differenza viene detta \textbf{difetto di massa}.
+Il difetto di massa viene trasformato in energia e rilasciato durante la formazione del nucleo sotto forma di calore/luce etc\dots L'energia di legame ha come minimo 1MeV e come massimo in corrispondenza del ferro a 9MeV:quindi è una quantità che varia in mbase al numero di massa.\newline
+Tutti gli elementi con numero di massa minore del ferro sono usati nella fusione mentre quelli che un numero di massa maggiore sono utilizzati per la fissione. Dal punto di vista di energia di legame, se è alta si dovrà impiegare molto lavoro per dividere il nucleo e quindi quel nucleo viene detto stabile.
+\subsection{Reazione di fusione nucleare}
+La fusione nucleare è una reazione nucleare nel quale due o più atomi collidono ad alta velocità e si uniscono in un nucleo di un nuovo elemento. Durante questo processo, la materia non viene conservata: una piccola massa viene convertita in energia. La differenza tra fusione nucleare e fissione nucleare è che nella fusione nucleare si ha due nuclei che scontrandosi si uniscono in un nuovo elemento; nella fissione un neutrone impatta con un atomo rilasciando prodotti di fissione e altri neutroni. Il processo di fusione dipende dalla \textbf{cross section} sezione d'urto: quantifica la probabilità che uno specifico processo abbia luogo. Maggiore è la sezione d'urto e più è probabile che avvenga una determinata reazione.\newline
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.4]{2022-06-29-11-00-26.png}% chktex 8
+\end{figure}
 \section{Tomografia}
 La tomografia è un esempio di un problema inverso: dall'integrale della linea di vista si vogliono ottenere delle informazioni locali. Un problema inverso è il problema di calcolare da un insieme di osservazioni i fattori causali che li hanno prodotti. Viene detto così, poiché inizia con l'effetto per poi calcolare la causa.\\
 Di norma il problema potrebbe risultare mal posto poiché non sempre esiste una funzione inversa che mi permetta di risalire alla sorgente (il plasma) che mi ha portato a quella determinata soluzione. Inoltre, in molti casi la soluzione non è neanche unica.\newline
 Nella tomografia per il plasma è un tipo di tomografia ad emissione, in cui si calcola:\begin{equation*}
-    g_{s}=\int f ds
+	g_{s}=\int f ds
 \end{equation*}
 per ogni linea di vista. IN cui f è l'emissione,g è la proiezione della linea di vista.\newline
 Per risolve il problema si discretizza.In particolare si divide la cross section in pixel trasformando il problema integrale in uno matriciale:\begin{equation*}
-    g=Hf
+	g=Hf
 \end{equation*}
 con H è la matrice delle proiezione, f è l'immagine da ricostruire e g le misure della linea di vista. Noi vogliamo conoscere f, ma la marice H non è invertibile. Per risolvere questa problematica si imposta un problema di minimizzazione con un funzionale di costo che minimizza l'errore tra l'integrale di linea ricostruito e quello empirico: nella matrice di pixel si aumenta l'emissività, si calcola g e si effettua il confronto con le misure effettive. A convergenza le due misure coincidono.
 \begin{equation*}
-    \min{\frac{\chi^{2}}{2}+\alpha R}
+	\min{\frac{\chi^{2}}{2}+\alpha R}
 \end{equation*}
 L'obiettivo del funzionale di costo è quello di avere un errore minimo e che la soluzione ottenutia sia regolarizzata cioè deve mantenere un certo livello di smoothness per avere una soluzione reale rispetto al processo che si sta studiando. Un altro metodo per effettuare la ricostruzione è effettuato tramite il Machine Learning ed in particolare con il metodo della \textbf{Maximum Likehood}: si mette un vincolo sulla funzione di distribuzione delle misure. In particolare si osserva che i neutroni e gamma seguono la distribuzione di Poisson (eliminando di conseguenza l'utilizzo del fattore di normalizzazione). Infine, si ha che se la ricostruzione delle proiezioni passanti attraverso un certo pixel sono minori delle misurazioni sperimentali, allora l'emisività di quel pixel viene aumentata e viceversa.\newline
 A livello implementativo il problema viene risolto iterativamente.
 \begin{itemize}
-    \item Il Maximum Likelihood fornisce un algoritmo molto stabile;
-    \item L'inversione tramite ML fornisce un metodo gestibile computazionalmente per calcolare gli intervalli di confidenza della ricostruzione;
-    \item L'approccio ML con phantom permette di ottimizzare i parametri di ricostruzioni per varie categorie di emissività;
-    \item Il tempo di calcolo è compatibile con il tempo che intercorre tra uno sparo e l'altro.
+	\item Il Maximum Likelihood fornisce un algoritmo molto stabile;
+	\item L'inversione tramite ML fornisce un metodo gestibile computazionalmente per calcolare gli intervalli di confidenza della ricostruzione;
+	\item L'approccio ML con phantom permette di ottimizzare i parametri di ricostruzioni per varie categorie di emissività;
+	\item Il tempo di calcolo è compatibile con il tempo che intercorre tra uno sparo e l'altro.
 \end{itemize}
 \section{Bolometria}
 La Bolometria è una diagnostica passiva che misura la potenza totale persa irradiata dal plasma. Questa misura è importante per capire il bilancio di potenza del plasma e il suo confinamento.\newline
 Tra tutto lo spettro si sceglie di misurare le particelle alpha che costituiscono un indicatore delle purezza del plasma. Inoltre, la distribuzione di radiazione emessa e la sua evoluzione nel tempo forniscono, quindi, una informazione della purezza del plasma.\newline
 Nei Tokamak, con la loro parete in berillio e il divertore in tungsteno, sono soggetti ad un'altra emissione di radiazioni che portano alla distruzioni.\newline
 In particolare, per misurare la potenza irradiata si utilizza una resistenza che cambia con la sua temperatura sotto irradiazione. Per realizare questi componenti si richiede\begin{itemize}
-    \item Un sensitività molto elevate (grndezza spettrale);
-    \item Per estendere il livello della sensitività si ricopre il bolometro con la grafite o oro.
+	\item Un sensitività molto elevate (grndezza spettrale);
+	\item Per estendere il livello della sensitività si ricopre il bolometro con la grafite o oro.
 \end{itemize}
 La relazione che lega la temperature con la potenza assorbita è data da:
 \begin{equation*}
-    P=C(\frac{dT}{dt}+\frac{T}{\tau_{c}})
+	P=C(\frac{dT}{dt}+\frac{T}{\tau_{c}})
 \end{equation*}
 Questo strumento è molto afflitto da rumore poiché misurando l'integrale della Temperatura si amplificano i rumori portando ad una misura potenzialmente totalmente errata.
 \subsection{Bolometri a filmetallico}
 \begin{figure}
-    \centering
-    \includegraphics[scale=0.4]{2022-06-21-16-35-03.png}% chktex 8
+	\centering
+	\includegraphics[scale=0.4]{2022-06-21-16-35-03.png}% chktex 8
 \end{figure}
 Un bolometro a film metallico si presenta con una array di teste composte da dei bolometri. Ogni testa, a livello elettronico è rappresenzato da un ponte di Winston.\\
 Inizialmente, si bilancia il ponte di Winston prima dello sparo; poi quando si forma il plasma si irradiano due resistenze su rami opposti. Questo processo porta ad uno sbilanciamento del ponte che coincide con la misura effettuata. La costante di calibrazione per bilanciare il ponte viene scelta in maniera empirica.\newline
 Per ridurre i rumori, si modulano le tensioni ai capi del ponte. Quindi i segnali all'uscita del ponte è una sinusoide con l'ampiezza dettata dalla misura. Quindi: si sposta la frequenza del segnale tramite i modulatori in una posizione molto lontana dal rumore così da minimizzare l'effetto derivativo dei rumori. Attorno alla frequenza scelta si implementa un filtro passa banda per escludere le frequenze indesiderate.\newline
 Nel Tokamak, i bolometri sono provvisti di piccole fenditure per ogni rivelatore del bolometro per determinare un cono singolo di vista su cui andare poi a derivare e calcolare la perdita di potenza. Questo metodo viene detto tecnica che \emph{pin holes}. La dimensione del cono di vista dipende da:\begin{itemize}
-    \item Dimensione del pin holes;
-    \item Dimensione del rivelatore;
-    \item Distanza relativa tra il rivelatore e il plasma.
+	\item Dimensione del pin holes;
+	\item Dimensione del rivelatore;
+	\item Distanza relativa tra il rivelatore e il plasma.
 \end{itemize}
 \subsubsection{Problematiche}
 \begin{itemize}
-    \item Rumore magnetico e derivativo;
-    \item Il filo metallico a contatto con la radiazione può subire una trasmutazione che porta alla perdita di segnale;
-    \item La calibrazione deve essere effettuata nel momento dello sparo;
-    \item Sono sensibili ai neutroni;
-    \item Sono sensibili al gas dell'ambiente che lo circonda.
+	\item Rumore magnetico e derivativo;
+	\item Il filo metallico a contatto con la radiazione può subire una trasmutazione che porta alla perdita di segnale;
+	\item La calibrazione deve essere effettuata nel momento dello sparo;
+	\item Sono sensibili ai neutroni;
+	\item Sono sensibili al gas dell'ambiente che lo circonda.
 \end{itemize}
 \section{Bolometri basati su diamanti}
 Un singolo cristallo di diamande basato sui diode forniscono una diagnostica affidabile nei reattori a fusioni. La durabilità e la resistenza alle radiazioni di questa tecnologia sono ben sperimentati e supportati. Infatti, il loro vantaggi è che sono molto più definiti, non si hanno problemi di derivazione poiché non si basano misure integrali.
 \section{Spettroscopia}
 La spettroscopia è una diagnostica chew si basa sullo studio degli spettri delle sostanze. Nel plasma la spettroscopia viene utilizzata per gli spettri delle impurezze.\\
 Può fornire informazioi su:\begin{itemize}
-    \item L'ammontare delle impurezze presenti nel plasma;
-    \item Velocità del plasma;
-    \item Temperatura e densità del plasma;
+	\item L'ammontare delle impurezze presenti nel plasma;
+	\item Velocità del plasma;
+	\item Temperatura e densità del plasma;
 \end{itemize}
 Il range di emissione delle particelle parzialmente ionizzate va dal visibile ai raggi x ``hard''. L'emissione delle particelle dipende dalle impurezze presenti e dalla temperatura e densità del plasma: a bassa temperatura si ha nel visibile in seguito, all'aumentare della temperatura, si va ai raggi x.
 \subsection{Informazioni dalla linea spettrale}
 Con la spettroscopia, guardano la linea di emissione possiamo ottenere:\begin{itemize}
-    \item Densità delle impurezze (Area sottesa dalla linea);
-    \item Temperatura (larghezza della linea);
-    \item Velocità media lungo la linea di vista (Shiff dovuto all'effetto doppler. In particolare i picchi risultano spostati dalla linea spettrale normale);
+	\item Densità delle impurezze (Area sottesa dalla linea);
+	\item Temperatura (larghezza della linea);
+	\item Velocità media lungo la linea di vista (Shiff dovuto all'effetto doppler. In particolare i picchi risultano spostati dalla linea spettrale normale);
 \end{itemize}
 \begin{center}
-    \begin{figure}[b]
-        \centering
-        \includegraphics[scale=0.4]{2022-06-22-10-52-32.png}% chktex 8
-    \end{figure}
+	\begin{figure}[b]
+		\centering
+		\includegraphics[scale=0.4]{2022-06-22-10-52-32.png}% chktex 8
+	\end{figure}
 \end{center}
 \subsection{Misure spettrali}
 Dato che il range di emissione è grande si usano  diversi strumenti di misura:\begin{itemize}
-    \item Spettrometri a grate nel range del visibile;
-    \item Filtri interferenziali;
-    \item Spettrometri UV\@;
-    \item Spettrometri dei raggi Soft X\@;
+	\item Spettrometri a grate nel range del visibile;
+	\item Filtri interferenziali;
+	\item Spettrometri UV\@;
+	\item Spettrometri dei raggi Soft X\@;
 \end{itemize}
 \subsection{Line Monitoring}
 Dato che per ogni sostanza si conosce la linea spettrale e vogliamo avere un'idea della forma della zona che emette quella riga, si utilizzano di filtri interferenziali (lamine opportune) che fanno passare una porzione limitata di spettro per osservare una sola riga. Si utilizza una fibra ottica per vedere la riga nel tempo e con un rivelatori è possibile monitorare la regione di spazio in cui avviene l'emissione.
 \subsection{Bilancio delle particelle da \(D_{\alpha } \)}
 Dalla misura dell'\(H_{\alpha}\) è possibile ottenere delle informazioni sul fglusso delle particelli entranti nel pasla e le particelle del tempo di confinamento:
 \begin{figure}
-    \includegraphics[scale=0.4]{2022-06-22-11-18-56.png}% chktex 8
+	\includegraphics[scale=0.4]{2022-06-22-11-18-56.png}% chktex 8
 \end{figure}
 \begin{equation*}
-    I_{\alpha}=\int_{-a}^{a}n_{O}n_{e}X B dr
+	I_{\alpha}=\int_{-a}^{a}n_{O}n_{e}X B dr
 \end{equation*}
 \begin{equation*}
-    \Gamma_{i}=\frac{1}{2}\frac{S_{0}}{X B}I_{\alpha}
+	\Gamma_{i}=\frac{1}{2}\frac{S_{0}}{X B}I_{\alpha}
 \end{equation*}
 \subsection{Spettrometro UV}
 Lo spettrometro UV tramite un tubo da vuoto che guarda direttamente il plasma. Questo strumento è composto da:\begin{itemize}
-    \item Flange per separare i componenti;
-    \item Pinhole per regolare l'angolo di incidenza;
-    \item Grating per convertire l'UV nel visibile;
-    \item SD Camera per analizzare la conversione;
+	\item Flange per separare i componenti;
+	\item Pinhole per regolare l'angolo di incidenza;
+	\item Grating per convertire l'UV nel visibile;
+	\item SD Camera per analizzare la conversione;
 \end{itemize}
 Dato che guarda direttamente il plasma questo strumento è fondamentale per vedere le impurezze all'interno della scarica da vuoto. In genere le impurezze sono leggere (impediscono l'entrate di impurezze pesanti dal bordo, ma abbassano la temperatura del bordo fino a spegnere o a non far partire la scarica) e impurezze pesanti.
 \subsection{Spettrometro Raggi X}
@@ -642,15 +648,15 @@ Questo tipo di spettroscopia hanno una alta risoluzione. Nei raggi X non esiston
 \subsection{Bremsstrahlung}
 La Bremsstrahlung non è una emissione di riga, ma studia le emissione spettroscopiche nel visibile. Ha una forte dipendenza dalla temperatura nei raggi X e nel visibile l'emissione è indipendente dalla temeratura e dalla densità:
 \begin{equation*}
-    I_{BS}=Z_{eff}n_{e}^{2}T_{e}^{-\frac{1}{2}}
+	I_{BS}=Z_{eff}n_{e}^{2}T_{e}^{-\frac{1}{2}}
 \end{equation*}
 In cui Z è la carica media delle impurezze presenti nel plasma.
 Nel caso di alta energia si moltiplica l'espressione precedente per un esponenziale dipendente dalla temperatura.\newline
 \subsection{CSX}
 Gli atomi neutri nel plasma donano elettroni per ionizzare completamente gli ioni delle impurezze producendo ioni simili all'idrogneo. Quando gli elettroni decadono fagli stati eccitati emettono fotoni che possono essere misurati dalla spettroscopia da cui si ottengono misurazioni della temperatura, rotazione e densità delle impurezze.
 La misura CXS è ottenibile sole con un beam attivo ed ha le seguenti capacità:\begin{itemize}
-    \item Le impurezze domninanti, gli stati completamente ionizzati caratterizzati da basso Z pososno essere sutdiati tramite la rivelazione delle raiazioni in casta;
-    \item La risoluzione spaziale può essere ottenuta senza la necessità di invertire le linee di vista vedento perpendicolarmente al beam.
+	\item Le impurezze domninanti, gli stati completamente ionizzati caratterizzati da basso Z pososno essere sutdiati tramite la rivelazione delle raiazioni in casta;
+	\item La risoluzione spaziale può essere ottenuta senza la necessità di invertire le linee di vista vedento perpendicolarmente al beam.
 \end{itemize}
 Nel tokamak si hanno 50 linee di vista che incidono il beam e altre 50 rivolte nella posizione opposta. Per ogni linea di vista si posiziona uno spettrometro dal quale si calcolano le misure necessarie. Per le linee di vista poste fuori dal beam, sono necessarie per la sottrazione del contributo che viene dal bordo del toro.
 
@@ -658,44 +664,44 @@ Nel tokamak si hanno 50 linee di vista che incidono il beam e altre 50 rivolte n
 Le disruzioni nei Tokamak sono inevitabili. Esse sono una perdita globale di confinamento e controllo del plasma dovuto da impurezze e radiazioni.\newline
 Si compongono di due fasi:
 \begin{itemize}
-    \item Termal quence: perdita di tutta l'energia cinetica e termica;
-    \item Current quence: decadimento di corrente
+	\item Termal quence: perdita di tutta l'energia cinetica e termica;
+	\item Current quence: decadimento di corrente
 \end{itemize}
 In particolare, si ha una fase lontana dalla disruzione non si ha un indizio della disruzione. Dopo di che, si ha un segnale di precorso nelle bobine magnetiche che indica l'inizio di una anomalia. Passata questa fase, si hanno delle anomalie sul profilo di temperatura e corrente così da innescare il termal quence e quindi l'inizio di una disruzione, perdendo di conseguenza il controllo.\newline
 Il problema principale di questo fenomeno è che avvenuta la disruzione si danneggiano i dispositivi e si introducono impurezze nel vessel che diminuiscono il tempo operativo del Tokamak. I danni principali sono:
 \begin{itemize}
-    \item Carichi termici;
-    \item Estinzione della corrente rapida porta a carichi magnetici molto elevati dovuto alle correnti indotte (Eddy current);
-    \item Elettroni di runaway nella fase di current quenche: in questa fase il plasma perde la densità, così vengono accellarati notevolmente divenendo un fascio di elettroni incontrollato in assenza di collisioni per limitarne la velocità.
+	\item Carichi termici;
+	\item Estinzione della corrente rapida porta a carichi magnetici molto elevati dovuto alle correnti indotte (Eddy current);
+	\item Elettroni di runaway nella fase di current quenche: in questa fase il plasma perde la densità, così vengono accellarati notevolmente divenendo un fascio di elettroni incontrollato in assenza di collisioni per limitarne la velocità.
 \end{itemize}
 \subsection{Classificazione diagnostiche disruzione}
 L'obiettivo delle diagnostiche per le disruzioni è quello di predizioni, spiegazione e controllo. Si dividono in:
 \begin{itemize}
-    \item monitorazione delle conseguenze;
-    \item misura della disruzione;
-    \item investigazione della fisica della disruzione;
-    \item predizione delle disruzione
+	\item monitorazione delle conseguenze;
+	\item misura della disruzione;
+	\item investigazione della fisica della disruzione;
+	\item predizione delle disruzione
 \end{itemize}
 Queste diagnostiche fanno parte del sistema di controllo e quindi è necessario che l'hardware siano affidabili, disponibili, forniscano un risoluzione spaziale e temporale per prevenire il fenomeno e devono coprire tutti i punti della camera da vuoto. Inoltre, al livello di processamento deve essere in real-time ed avere capacità predittive.
 Una scarica disruttiva presenta la seguente nomenclatura:
 \begin{itemize}
-    \item Avoidance: la fase lontana di disruzione;
-    \item Prevenzione: azione correttiva per evitare l'instabilità;
-    \item Mitigazione: nel caso in cui la prevenzione non è abbastanza d avviene la disruzione si riducono i carichi abbassando lentamente la corrente e l'energia termica. In questo fase possono avvenire i run-away. Si immettono pellet di gas per ridurre il carico termico o degli shattered pellet.
+	\item Avoidance: la fase lontana di disruzione;
+	\item Prevenzione: azione correttiva per evitare l'instabilità;
+	\item Mitigazione: nel caso in cui la prevenzione non è abbastanza d avviene la disruzione si riducono i carichi abbassando lentamente la corrente e l'energia termica. In questo fase possono avvenire i run-away. Si immettono pellet di gas per ridurre il carico termico o degli shattered pellet.
 \end{itemize}
 \subsection{Requisiti Hardware}
 \subsubsection{Carichi termici}
 Il problema principale sono i carichi termici che dipendono dalla potenza deposita, dalla superfice e dal tempo. Le misure che si utilizzano sono:\begin{itemize}
-    \item Camere termiche;
-    \item Spettrometria;
-    \item Bolometria
+	\item Camere termiche;
+	\item Spettrometria;
+	\item Bolometria
 \end{itemize}
 La problematica di queste misure è che il carico termico non sono toroidalmente simmetrici.
 \subsubsection{Carichi Meccanici}
 Le misure che si utilizza sono:\begin{itemize}
-    \item bobine in posizioni differenti per eseguire una ricostruzione dell'equilibrio;
-    \item Misure delle correnti toroidali del vessel (Halo currents);
-    \item Accelerometria per misurare gli spostamenti della camera da vuoto
+	\item bobine in posizioni differenti per eseguire una ricostruzione dell'equilibrio;
+	\item Misure delle correnti toroidali del vessel (Halo currents);
+	\item Accelerometria per misurare gli spostamenti della camera da vuoto
 \end{itemize}
 \subsection{Locked mode detection AUG}
 Siamo nella fase di mitigazioni per cui dobbiamo predirre con un margine di predizioni basso, ma molto accurato.\newline

@@ -60,21 +60,21 @@ Nella teoria di regolazione ci si riferisce principalemnte a due tipi di problem
 \begin{definition}{\textbf{Problema di regolazione a full information}}\\
 	Considerato il sistema:\(\begin{cases}
 		\dot{x}=Ax+Bu+Pd \\
-		e=Cx+d
-	\end{cases}\) affetto da disturbi generati dall'esosistema \(\dot{d}=Sd\) interconnesso con il controllore \(u=K x+L d\). Il \textbf{problema di regolazione a informazione completta} è quello di determinare le matrici \(K,L\) dek controllore tali che siano soddisfatte:
+		e=Cx+Qd
+	\end{cases}\) affetto da disturbi generati dall'esosistema \(\dot{d}=Sd\) interconnesso con il controllore \(u=K x+L d\). Il \textbf{problema di regolazione a informazione completa} è quello di determinare le matrici \(K,L\) dek controllore tali che siano soddisfatte:
     \begin{itemize}
 		\item \textbf{\emph{Stabilità} (S)}:Il sistema \(\dot{x}=(A+BK)x\) sia asintoticamente stabile;
 		\item \textbf{\emph{Regolazione} (R)}: tutte le traiettorie del sistema \(\begin{cases}
 			      \dot{d}=Sd              \\
-			      \dot{x}=(A+BK)x+(BL+O)d \\
-			      e=Cx+QD
+			      \dot{x}=(A+BK)x+(BL+P)d \\
+			      e=Cx+Qd
 		      \end{cases}\) siano tali che \(\lim_{t\rightarrow\infty}e(t)=0\)
 	\end{itemize}
 \end{definition}
 \begin{definition}{\textbf{Problema di regolazione con retroazione dall'errore}}\\
     Considerato il sistema:\(\begin{cases}
 		\dot{x}=Ax+Bu+Pd \\
-		e=Cx+d
+		e=Cx+Qd
 	\end{cases}\) affetto da disturbi generati dall'esosistema \(\dot{d}=Sd\) interconnesso con il controllore \(\begin{cases}
         \dot{\chi}=F\chi + Ge\\
         u=H\chi
@@ -82,7 +82,7 @@ Nella teoria di regolazione ci si riferisce principalemnte a due tipi di problem
     \begin{itemize}
         \item \textbf{\emph{Stabilità} (S)}: Il sistema \(\begin{cases}
             \dot{x}=Ax+BH\chi \\
-            \dot{\chi}=F\chi+GC\chi
+            \dot{\chi}=F\chi+GCx
         \end{cases}\) sia asintoticamente stabile;
         \item \textbf{\emph{Regolazione} (R)}: tutte le traiettorie del sistema \(\begin{cases}
             \dot{d}=Sd\\
@@ -93,10 +93,31 @@ Nella teoria di regolazione ci si riferisce principalemnte a due tipi di problem
     \end{itemize}
 \end{definition}
 \section*{Problema di regolazione a Full Information}
-Per poter risolvere il problema di regolazione a full information dobbiamo fefinire le seguenti ipotesi strutturali:\begin{itemize}
+Per poter risolvere il problema di regolazione a full information dobbiamo definire le seguenti ipotesi strutturali:\begin{itemize}
     \item Sia \(S\) la matrice dell'esosistema e \(\lambda\in\sigma{(S)}\), allora \(\forall\lambda\in\sigma{(S)},Re(\lambda)\geq 0\): ciò implica che \(\nexists d(0) \) tale che \(d(t)\) converge asintoticamente a zero. Se così non fosse \(d(t)\) non influisce sul comportamento asintotico del sistema e quindi basterebbe solamente stabilizzare il sistema per raggiungere l'obbiettico;
     \item Il sistema \(\dot{d}=Sd\) con \(d=0\) è raggiungibile: ciò implica che è possibile assegnare arbitrariamente gli autovalori di \(A+BK\)
 \end{itemize}
+In maniera preliminare dimostriamo l'equazione di Sylvester.
+\begin{corollary}{\textbf{Equazione di Sylvester}}\\
+    Sia \(A\in\mathbb{C}^{n\times n},B\in\mathbb{C}^{n\times n},C\in\mathbb{C}^{n\times n}\), l'equazione di Sylvester è una equazione matriciale lineare nella forma \(AX+XB=C\) con \(X\in\mathbb{C}^{n\times n}\). Valgono i seguenti enunciati:\begin{itemize}
+        \item L'equazione di Sylvester ha soluzione se e solo se \(A\) e \(-B\) non hanno nessun autovalore in comune;
+        \item L'equazione di Sylvester ha un'unica soluzione se \(A\) e \(-B\) non hanno autovalori in comune o un'unfinità di soluzioni composte da \(X=X_{0}+\hat{X}\) con \(X_{0}\) ottenuta da \(AX+XB=0\)
+    \end{itemize}
+    \begin{proof}
+        L'equazione di Sylvester è equivalente al sistema lineare \(Gx=c\) in cui \(x= vec(X)=\begin{bmatrix}
+            x_{11}\\x_{12}\\\vdots \\x_{21}\\x_{22}\\\vdots
+        \end{bmatrix}\) e \(c=vec(X)=\begin{bmatrix}
+            c_{11}\\c_{12}\\\vdots \\c_{21}\\c_{22}\\\vdots
+        \end{bmatrix}\) e \(G=(I_{n}\bigotimes A)+(B^{T}\bigotimes I_{n})\). In particolare \(\bigotimes \) è detto \textbf{prodotto di Kronecker}:\(A\bigotimes B=\begin{bmatrix}
+            a_{11}B&\cdots  &a_{1m}B\\
+            \vdots & \vdots &\vdots \\
+            a_{m1}B& \cdots & a_{mmB}
+        \end{bmatrix}\). Questo sistema ha una unica soluzione se e solo se \(G\) non è singolare. Per una proprietà dell'operazione del \textbf{prodotto di Kronecker}, gli autovalori di \(G=(I_{n}\bigotimes A)+(B^{T}\bigotimes I_{n})\) sono \(\lambda_{A}+\lambda_{B},\forall \lambda_{A}\in\sigma{(A)},\lambda_{B}\in\sigma{(B)}\). Quindi, per non essere singolare non deve esistere nessun autovalore \(\lambda_{G}=0\). Quindi:
+        \begin{equation*}
+            \lambda_{A}+\lambda_{B}\neq 0\rightarrow \lambda_{A}\neq-\lambda_{B}\rightarrow \lambda_{A}\neq\lambda_{B}\forall \lambda_{A}\in\sigma{A},\lambda_{B}\in\sigma{B}
+        \end{equation*}
+    \end{proof}
+\end{corollary}
 \begin{theorem}
     Considerato il problema di regolazione a full information, supponiamo che \(\forall\lambda\in\sigma{(S)}:Re(\lambda)\geq 0\) e che \(\exists K,L\) tali che il sistema \(\dot{x}=(A+BK)x\) sia asintoticamente stabile, allora la condizione di regolazione è soddisfatta se e solo se \(\exists \Pi\in\mathbb{R}^{n\times r}\) tali che soddisfano le equazioni\begin{equation*}
         \begin{cases}
@@ -105,24 +126,12 @@ Per poter risolvere il problema di regolazione a full information dobbiamo fefin
         \end{cases}
     \end{equation*}
 \end{theorem}
-\begin{corollary}{\textbf{Equazione di Sylvester}}\\
-    Sia \(A\in\mathbb{C}^{m\times m},B\in\mathbb{C}^{n\times n},C\in\mathbb{C}^{m\times n}\), l'equazione di Sylvester è una equazione matriciale lineare nella forma \(AX+BX=C\) con \(X\in\mathbb{C}^{m\times n}\). Valgoono i seguenti enunciati:\begin{itemize}
-        \item L'equazione di Sylvester ha soluzione se e solo se \(A\) e \(-B\) non hanno nessun autovalore in comune;
-        \item L'equazione di Sylvester ha un'unica soluzione se \(A\) e \(-B\) non hanno autovalori in comune o un'unfinità di soluzioni composte da \(X=X_{0}+\hat{X}\) con \(X_{0}\) ottenuta da \(AX+XB=0\)
-    \end{itemize}
-    \begin{proof}{Equazione di Sylvester}
-        Gli autovalori di \(G=(I_{n}\bigotimes A)+(B^{T}\bigotimes I_{n})\) sono \(\lambda_{A}+\lambda_{B},\forall \lambda_{A}\in\sigma{(A)},\lambda_{B}\in\sigma{(B)}\). Inoltre ha un'unica soluzione se G non è singolare e quindi se non esiste nessun autovalore \(\lambda_{G}=0\). Quindi:
-        \begin{equation*}
-            \lambda_{A}+\lambda_{B}\neq 0\rightarrow \lambda_{A}\neq-\lambda_{B}\rightarrow \lambda_{A}\neq\lambda_{B}\forall \lambda_{A}\in\sigma{A},\lambda_{B}\in\sigma{B}
-        \end{equation*}
-    \end{proof}
-\end{corollary}
-\begin{proof}{\textbf{Teorema Regolazione Full Information}}
+\begin{proof}
     Consideriamo il sistema \(\begin{cases}
         \dot{d}=Sd              \\
-        \dot{x}=(A+BK)x+(BL+O)d \\
+        \dot{x}=(A+BK)x+(P+BL)d \\
         e=Cx+QD
-    \end{cases}\) e il cambio di coordinate \(\hat{d}=d,\hat{x}=x-\Pi d\) con \(\Pi \) soluzione dell'equazione di Sylvester \( \begin{cases}
+    \end{cases}\) e il cambio di coordinate \(\hat{d}=d,\hat{x}=x-\Pi d\)  con \(\Pi \) soluzione dell'equazione di Sylvester \( \begin{cases}
         \Pi S=(A+BK)\Pi+(P+BL)\\
         0=C\Pi+Q
     \end{cases}\).\newline
@@ -135,7 +144,7 @@ Per poter risolvere il problema di regolazione a full information dobbiamo fefin
     Riscrivendo il sistema nelle nuove coordinate:
     \begin{equation*}
         \begin{cases}
-            \dot{\hat{x}}=\Pi S\dot{\hat{d}}=(A+BK)\hat{x}+(A+BK)\Pi\hat{d}+(BL+P)\hat{d}\\
+            \dot{\hat{x}}-\Pi \dot{\hat{d}}=(A+BK)\hat{x}+(A+BK)\Pi\hat{d}+(BL+P)\hat{d}\\
             \hat{e}=C\hat{x}+C\Pi\hat{d}+Q\hat{d}\\
             \dot{\hat{d}}=S\hat{d}
         \end{cases}
@@ -150,28 +159,28 @@ Per poter risolvere il problema di regolazione a full information dobbiamo fefin
 Per fornire condizioni neessarie e sufficienti per la osluzione del problema di regolazione a full information occorre enunciare il seguente teorema.
 \begin{theorem}{\textbf{Toerema FBI}}
     Considerato il problrma di regolazione a full information, supponiamo che la matrice \(S\) dell'esosistema abbia autovalori a parte reale positiva e il sistema \(\begin{cases}
-        \dot{X}=Ax+Bu+Pd \\
+        \dot{x}=Ax+Bu+Pd \\
         e=Cx+Qd
     \end{cases}\) con \(d=0\) sia raggiungibile. Allora esiste una legge di controllo a full information \(u=Kx+Ld\) che risolve il problema di regolazione se e solo se:\begin{equation*}
-        \exists \Pi\Gamma:\begin{cases}
+        \exists \Pi,\Gamma:\begin{cases}
             \Pi S=A\Pi+B\Gamma+P\\
             0=C\Pi+Q
         \end{cases}
     \end{equation*}
     \begin{proof}
-        \(\Rightarrow{} \) Supponiamo di aver soddisfatto il problma di regolazione cioè che \(\exists \Pi,\Gamma \) tali che siano soddisfatte i requisiti di stabilità e di regolazione. Allora per il lemma si ha che:\begin{equation*}
-            \exists\Pi\text{tale che:}\begin{cases}
+        \(\Rightarrow{} \) Supponiamo di aver soddisfatto il problema di regolazione cioè che \(\exists \Pi,\Gamma \) tali che siano soddisfatte i requisiti di stabilità e di regolazione. Allora per il lemma si ha che:\begin{equation*}
+            \exists\Pi\text{  tale che:}\begin{cases}
                 (A+BK)\Pi+(P+BL)=A\Pi+B(K\Pi+L)+P\\
                 0=C\Pi+Q
             \end{cases}
         \end{equation*}
-        Quindi, noto \(\Pi \), si definisce \(\Gamma=K\Pi+L\).
+        Quindi, noto \(\Pi \), si definisce \(\Gamma=K\Pi+L\).\newline
         \(\Leftarrow \)Supponiamo che \(\exists\Pi,\Gamma \) che risolvono \(\begin{cases}
             \Pi S=A\Pi+B\Gamma+P\\
             0=C\Pi+Q
         \end{cases}\), dobbiamo dimostrare che sono soddisfatte le ipotesi di stabilità e regolazione:\begin{itemize}
             \item \textbf{Stabilità:}\(K\) deve garantire stabilità asintotica per \(A+BK\) e in particolare \(K\) esiste sempre dato che abbiamo supposto che il sistema con \(d=0\) è raggiungibile;
-            \item Sia \(L=\Gamma+K\Pi \), allora la coppia \((K,L)\) soddisfa il requisito di regolazione poiché:\begin{equation*}
+            \item Sia \(L=\Gamma-K\Pi \), allora la coppia \((K,L)\) soddisfa il requisito di regolazione poiché:\begin{equation*}
                 \begin{cases}
                     \Pi S=(A+BK)\Pi+(P+BL)=A\Pi+B\Gamma+P\\
                     0=C\Pi+Q

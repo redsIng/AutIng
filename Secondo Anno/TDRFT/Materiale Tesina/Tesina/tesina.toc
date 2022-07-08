@@ -9,3 +9,4 @@
 \beamer@subsectionintoc {7}{2}{Errore}{11}{0}{7}
 \beamer@sectionintoc {8}{Condizioni al contorno}{12}{0}{8}
 \beamer@sectionintoc {9}{Risultati}{13}{0}{9}
+\beamer@sectionintoc {10}{Considerazioni}{15}{0}{10}
