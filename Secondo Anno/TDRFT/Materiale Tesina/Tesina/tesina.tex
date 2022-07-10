@@ -52,7 +52,8 @@
 	\end{block}
 	La ricostruzione dell'equilibrio del plasma è necessaria al miglioramento dell'efficienza fusionistica e alla protezione delle componenti che costituiscono il Tokamak.
 \end{frame}
-\begin{frame}
+\begin{comment}
+	\begin{frame}
 	\frametitle{Dinamica del plasma}
 	\section{Dinamica del plasma}
 	La dinamica del plasma viene descritta da:
@@ -66,6 +67,7 @@
 		\item Energy (1):\(\frac{d}{dt}(\frac{p}{\rho^{\gamma}})\);
 	\end{itemize}
 \end{frame}
+\end{comment}
 \begin{frame}
 	\frametitle{Equilibrio del plasma}
 	\section{Equilibrio del plasma}
@@ -139,8 +141,14 @@
 	\begin{block}{Deep Learning}
 		Il deep Learning è una branca del Machine Learning che studia l'apprendimento automatico tramite l'utilizzo di architetture stratificate dette \textbf{neural  network multilayers}.
 	\end{block}
-	L'unità fondamentale di una neural network multilayers è il \textbf{neurone} che esegue una singola operazione non lineare.\\
-Ci sono vari metodi su come strutturare i neuroni in una struttura stratificata. Tuttavia, la scelta più gettonata è quella della \textbf{backpropagation}: i pesi associati ad ogni neurone vengono aggiornati calcolando l'uscita della rete e propagando l'errore all'indietro verso i livell più alti.
+	\begin{itemize}
+		\item L'unità fondamentale di una neural network multilayers è il \textbf{neurone} che esegue una singola operazione non lineare.
+		\item Ogni neurone viene connesso con uno o più neuroni in base all'organizzazione della rete;
+		\item L'architettura più utilizzata è di una rete stratificata in feedforwar\begin{itemize}
+			\item La connessione tra neuorni avviene solo tra livelli adiacenti
+		\end{itemize}
+		\item Utilizzo della \textbf{backpropagation}: i pesi associati ad ogni neurone vengono aggiornati calcolando l'uscita della rete e propagando l'errore all'indietro verso i livell più alti
+	\end{itemize}
 \end{frame}
 \begin{frame}
 	\frametitle{Physics Informed Neural Network}
@@ -160,7 +168,7 @@ Ci sono vari metodi su come strutturare i neuroni in una struttura stratificata.
 	\frametitle{PDE Neural Network - Struttura} % chktex 8
 	\section{PDE Neural Network}
 	\subsection{Struttura}
-	Per la rete neurare si è scelto di utilizzare:
+	Per la rete neurale si è scelto di utilizzare:
 	\begin{itemize}
 		\item Rete \textbf{fullyconnect}: ogni neurone di ogni livello è collegato con i neuroni del livello successivo;
 		\item Backpropagation tramite di errore;
