@@ -118,6 +118,7 @@
 			\frac{\partial^{2}\psi}{\partial r^{2}}-\frac{1}{r}\frac{\partial \psi}{\partial r}+\frac{\partial^{2}\psi}{\partial z^{2}} & =-\mu_{0}r^{2}\frac{d p}{d \psi}-\frac{1}{2}\frac{d F^{2}}{d\psi}
 		\end{align*}
 	\end{block}
+
 \end{frame}
 \begin{frame}
 	\frametitle{Limitazioni}
@@ -143,9 +144,10 @@
 	\end{block}
 	\begin{itemize}
 		\item L'unità fondamentale di una neural network multilayers è il \textbf{neurone} che esegue una singola operazione non lineare.
-		\item Ogni neurone viene connesso con uno o più neuroni in base all'organizzazione della rete;
-		\item L'architettura più utilizzata è di una rete stratificata in feedforwar\begin{itemize}
-			\item La connessione tra neuorni avviene solo tra livelli adiacenti
+		\item Ogni neurone viene connesso con uno o più neuroni a seconda dell'organizzazione della rete;
+		\item L'architettura più utilizzata è di una rete stratificata in feedforward\begin{itemize}
+			\item La connessione tra i neuroni avviene solo tra livelli adiacenti
+			\item Ad ogni connessione si associa un peso
 		\end{itemize}
 		\item Utilizzo della \textbf{backpropagation}: i pesi associati ad ogni neurone vengono aggiornati calcolando l'uscita della rete e propagando l'errore all'indietro verso i livell più alti
 	\end{itemize}
@@ -168,11 +170,11 @@
 	\frametitle{PDE Neural Network - Struttura} % chktex 8
 	\section{PDE Neural Network}
 	\subsection{Struttura}
-	Per la rete neurale si è scelto di utilizzare:
+	L'architettura della rete neurale utilizzata per risolvere analiticamente le PDE del plasma è la seguente:
 	\begin{itemize}
 		\item Rete \textbf{fullyconnect}: ogni neurone di ogni livello è collegato con i neuroni del livello successivo;
 		\item Backpropagation tramite di errore;
-		\item Ogni neurone applica l'input una tangentoide;
+		\item Ogni neurone applica all'input la tangentoide \(o_{j}=\frac{e^{net_{j}}-e^{-net_{j}}}{e^{net_{j}}+e^{-net_{j}}}\);
 	\end{itemize}
 	\begin{figure}
 		\includegraphics[scale=0.3]{reteOrganizzazione.png}
