@@ -28,7 +28,7 @@
 \title{Tokamak 3D Equilibrium Reconstruction}
 \subtitle{A Deep Learning approach}
 \author{Lorenzo Rossi}
-\institute{Università di Rome "Tor Vergata"} % chktex 18
+\institute{Università di Roma "Tor Vergata"} % chktex 18
 \begin{document}
 \begin{frame}
 	\titlepage{}
@@ -45,14 +45,13 @@
 \begin{frame}
 	\frametitle{Introduzione}
 	\section{Introduzione}
-	L'obiettivo di questa tesina è quello di fornire una ricostruzione 3D del plasma in forma analitica.
-	Tramite le equazioni MHD (\emph{MagnetoHydroDynamics}) è possibile considerare il plasma come un fluido conduttore soggetto all'azione di un campo magnetico.
-	\begin{block}{Equilibrio}
-		L'equilibrio è quella situazione in cui tutte le forze agenti su di essa hanno risultante nulla.
-	\end{block}
-	La ricostruzione dell'equilibrio del plasma è necessaria al miglioramento dell'efficienza fusionistica e alla protezione delle componenti che costituiscono il Tokamak.
+	\begin{itemize}
+		\item L'obiettivo di questa tesina è quello di fornire uno strumento per la ricostruzione in 3D dell'equilibrio del plasma tramite la risoluzione numerica delle PDE caratterizzanti il plasma;
+		\item La ricostruzione dell'equilibrio del plasma è necessaria al miglioramento dell'efficienza fusionistica e alla protezione delle componenti che costituiscono il Tokamak.
+		\item Le equazioni MHD (\emph{MagnetoHydroDynamics}) descrivono la dinamica del Plasma e il suo equilibrio;
+
+	\end{itemize}
 \end{frame}
-\begin{comment}
 	\begin{frame}
 	\frametitle{Dinamica del plasma}
 	\section{Dinamica del plasma}
@@ -66,8 +65,10 @@
 		\item Magnetic divergence (1):\(\nabla\cdot B=0\);
 		\item Energy (1):\(\frac{d}{dt}(\frac{p}{\rho^{\gamma}})\);
 	\end{itemize}
+	\footnote{\scriptsize\begin{itemize}
+			\item \((\cdot)\triangleq  numero di equazioni\)
+		\end{itemize}}
 \end{frame}
-\end{comment}
 \begin{frame}
 	\frametitle{Equilibrio del plasma}
 	\section{Equilibrio del plasma}
@@ -78,9 +79,9 @@
 	\end{itemize}
 	Si ottiene:
 	\begin{itemize}
-		\item \(J\times B=\nabla p\)
-		\item \(\mu_{0}J=\nabla\times B\)
-		\item \(\nabla\cdot B=0\)
+		\item Equazione del momento del plasma in equilibrio \(J\times B=\nabla p\);
+		\item Legge di Ampere \(\nabla\times B=\mu_{0}J\)
+		\item Equazione della divergenza \(\nabla\cdot B=0\)
 	\end{itemize}
 \footnote{
 	Dato \(f(x,y,z)=f_{1}\overrightarrow{i}+f_{2}\overrightarrow{j}+f_{3}\overrightarrow{k}\) si definiscono:
@@ -128,7 +129,7 @@
 		\end{figure}
 	\end{minipage}
 	\begin{minipage}[t]{0.45\textwidth}
-		Sebbene questo metodo consenta di ricostruire efficientemente l'equilibrio del plasma. Tuttavia:\begin{itemize}
+		Questo metodo consente di ricostruire efficientemente l'equilibrio del plasma. Tuttavia:\begin{itemize}
 			\item Il plasma non è sempre in regime stazionario;
 			\item La simmetria toroidale non è sempre rispettata.
 		\end{itemize}
@@ -162,8 +163,8 @@
 		\item Permettono di risolvere numericamente equazioni differenziali molto complesse;
 		\item Le soluzioni delle PDE minimizzano una funzione di costo dipendente dalle equazioni fisiche;
 		\item La funzione di costo deve essere ben modellata per aderire al modello preso in considerazione;
+		\item Si necessitano di condizioni al contorno ben strutturate;
 		\item Processo di training elevato;
-		\item Si necessitano di condizioni al contorno;
 	\end{itemize}
 \end{frame}
 \begin{frame}
@@ -172,9 +173,9 @@
 	\subsection{Struttura}
 	L'architettura della rete neurale utilizzata per risolvere analiticamente le PDE del plasma è la seguente:
 	\begin{itemize}
-		\item Rete \textbf{fullyconnect}: ogni neurone di ogni livello è collegato con i neuroni del livello successivo;
-		\item Backpropagation tramite di errore;
+		\item Rete neurale \textbf{feedforward fullyconnect}: ogni neurone di ogni livello è collegato con i neuroni del livello successivo;
 		\item Ogni neurone applica all'input la tangentoide \(o_{j}=\frac{e^{net_{j}}-e^{-net_{j}}}{e^{net_{j}}+e^{-net_{j}}}\);
+		\item Backpropagation tramite di errore;
 	\end{itemize}
 	\begin{figure}
 		\includegraphics[scale=0.3]{reteOrganizzazione.png}
@@ -192,12 +193,22 @@
 \begin{frame}
 	\frametitle{Condizioni al contorno}
 	\section{Condizioni al contorno}
-	La soluzione delle PDE in \(\phi = \{ 0,2\pi \} \) potrebbe portare a soluzione diverse quando queste, per periodicità, devono essere identiche. Per evitare questo comportamento, occorre aggiungere una quinda funzione di costo:\begin{equation*}
-		Loss5 = \frac{mean{(p-p_{f})}^{2}}{mean{(p_{f})}^{2}}+\frac{mean{(B_{r}-B_{r,f})}^{2}}{mean{(B_{r,f})}^{2}}+\frac{mean{(B_{z}-B_{z,f})}^{2}}{mean{(B_{z,f})}^{2}}+\frac{mean{(B_{t}-B_{t,f})}^{2}}{mean{(B_{t,f})}^{2}}
-	\end{equation*}
-	\begin{equation*}
-		Loss6 = \frac{mean{(p-p_{i})}^{2}}{mean{(p_{i})}^{2}}+\frac{mean{(B_{r}-B_{r,i})}^{2}}{mean{(B_{r,i})}^{2}}+\frac{mean{(B_{z}-B_{z,i})}^{2}}{mean{(B_{z,i})}^{2}}+\frac{mean{(B_{t}-B_{t,i})}^{2}}{mean{(B_{t,i})}^{2}}
-	\end{equation*}
+	La soluzione delle PDE in \(\phi = \{ 0,2\pi \} \) potrebbe portare a soluzione diverse quando queste, per periodicità, devono essere identiche. Per evitare questo comportamento, occorre aggiungere una quinda funzione di costo:\scriptsize\begin{align*}
+		Loss5 &= \frac{mean{(p-p_{f})}^{2}}{mean{(p_{f})}^{2}}+\frac{mean{(B_{r}-B_{r,f})}^{2}}{mean{(B_{r,f})}^{2}}+\frac{mean{(B_{z}-B_{z,f})}^{2}}{mean{(B_{z,f})}^{2}}+\frac{mean{(B_{t}-B_{t,f})}^{2}}{mean{(B_{t,f})}^{2}}+\\
+		&+\frac{{mean(J_{z}-J_{z,f})}^{2}
+		}{{mean(J_{z,f})}^{2}
+		}+\frac{{mean(J_{r}-J_{r,f})}^{2}
+		}{{mean(J_{r,f})}^{2}}+\frac{{mean(J_{\phi}-J_{\phi ,f})}^{2}
+		}{{mean(J_{\phi ,f})}^{2}}
+	\end{align*}
+	\begin{align*}
+		Loss6 &= \frac{mean{(p-p_{i})}^{2}}{mean{(p_{i})}^{2}}+\frac{mean{(B_{r}-B_{r,i})}^{2}}{mean{(B_{r,i})}^{2}}+\frac{mean{(B_{z}-B_{z,i})}^{2}}{mean{(B_{z,i})}^{2}}+\frac{mean{(B_{t}-B_{t,i})}^{2}}{mean{(B_{t,i})}^{2}}+\\
+		&+\frac{{mean(J_{z}-J_{z,i})}^{2}
+		}{{mean(J_{z,i})}^{2}
+		}+\frac{{mean(J_{r}-J_{r,i})}^{2}
+		}{{mean(J_{r,i})}^{2}}+\frac{{mean(J_{\phi}-J_{\phi ,i})}^{2}
+		}{{mean(J_{\phi ,i})}^{2}}
+	\end{align*}
 \end{frame}
 \begin{frame}
 	\frametitle{Risultati}
