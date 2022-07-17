@@ -57,6 +57,9 @@ Il controllore \(u(t)\) necessario per la regolazione a zero può essere ottenut
         \end{figure}
 \end{itemize}
 Nella teoria di regolazione ci si riferisce principalemnte a due tipi di problemi.
+\begin{definition}{\textbf{Differenze}}\\
+    La differenza con un problema di controllo \(H_{\infty }\) è che nel problema \(H_{\infty }\) si vuole attenuare l'effetto del disturbo \(d\) sul segnale di prestazioni \(z\) in termini di guadagno \(L_{2}\) progettando un controllore che garantisca stabilità asintotica del sistema a ciclo e un guadagno \(L_{2}\) intresso-uscita minore di \(\gamma \); nel prolma di regolazione si impone una struttura sulla forma del segnale \(d\) e si richiede che si abbia un errore asintoticamente nullo.
+\end{definition}
 \begin{definition}{\textbf{Problema di regolazione a full information}}\\
 	Considerato il sistema:\(\begin{cases}
 		\dot{x}=Ax+Bu+Pd \\
@@ -204,4 +207,109 @@ Nel caso SISO, si ha che \(m=p=1\), si ha che \(rank\left(\begin{bmatrix}
     e=Cx
 \end{cases}\)  Ovvero gli zeri di \( W(s)=C{(sI-A)}^{-1}B\)\newline
 Ne deriva che il problrema della regolazione a full information per sistemi SISO è risolubile se e solo se gli autovalori del sistema esogne non sono zero di \(W(s) \) con ingresso \(u\) uscita \(e\) e segnale esogeno \(d=0\).
+\section*{Problema di regolazione con retroazione dall'errore}
+Per poter risolvere il problema di regolazione error feedback dobbiamo definire le seguenti ipotesi strutturali:\begin{itemize}
+    \item Sia \(S\) la matrice dell'esosistema e \(\lambda\in\sigma{(S)}\), allora \(\forall\lambda\in\sigma{(S)},Re(\lambda)\geq 0\): ciò implica che \(\nexists d(0) \) tale che \(d(t)\) converge asintoticamente a zero. Se così non fosse \(d(t)\) non influisce sul comportamento asintotico del sistema e quindi basterebbe solamente stabilizzare il sistema per raggiungere l'obbiettico;
+    \item Il sistema \(\dot{d}=Sd\) con \(d=0\) è raggiungibile: ciò implica che è possibile assegnare arbitrariamente gli autovalori di \(A+BK\)
+    \item Il sistema \(\begin{bmatrix}
+        \dot{x}\\\dot{d}
+    \end{bmatrix}=\begin{bmatrix}
+        A & P \\ 0 &S
+    \end{bmatrix}\begin{bmatrix}
+        x\\ d
+    \end{bmatrix}, e=\begin{bmatrix}
+        C & Q
+    \end{bmatrix}\begin{bmatrix}
+        x\\d
+    \end{bmatrix}
+    \) sia osservabile (se rilassato va bene anche la determinabilità). Ciò implica che la coppia \((A,C)\) è osservabile.
+\end{itemize}
+\begin{definition}{\textbf{Teorema}}\\
+    Consideriamo il problema di regolazione in feedback dall'errore e supponiamo che le assuzioni siano soddisfatte. Allora, \(\exists \) un controllo in feedback dall'errore descritto da:\(\begin{cases}
+        \dot{\chi }=F\chi+Ge\\
+        u=H\chi
+    \end{cases}\) che risolve il problema di relazione in error feedback se e solo se \(\exists \Pi,\Gamma \) tali che siano soddisfatte le equazioni:
+    \begin{equation*}
+        \begin{cases}
+            \Pi S==A\Pi+B\Gamma+P\\
+            0=C\Pi+Q
+        \end{cases}
+    \end{equation*}
+\end{definition}
+\begin{proof}
+    \(\Rightarrow \) La necessità è uguale a quella del problema in full information;\newline
+    \(\Leftarrow \) Supponaimo che \(\exists \Pi,\Gamma \) che soddistano il lemma di Hautus e quindi il problema in full information, Allora il controllore fornito sarà nella forma \(u=kx+Ld\) per cui \(\dot{x}=(A+BK)x\) sia asintoticamente stabile. Tuttavia, non è implementabile poiche si hanno solo misure di \(e(t)\). Quindi, cerchiamo di costruire asintoticamente delle stime \(\psi,\delta \) di \(x(t),d(t)\) ed implementiamo la legge di controllo \(u=K\psi+(\Gamma-K\Pi)\delta \).\newline In particolare, si considera un osservatore del tipo:\begin{equation*}
+        \begin{bmatrix}
+            \dot{\psi }\\
+            \dot{\delta}
+        \end{bmatrix}=\begin{bmatrix}
+            A & O \\ 0 & S
+        \end{bmatrix}\begin{bmatrix}
+            \psi \\\delta
+        \end{bmatrix}+\begin{bmatrix}
+            G_{1}\\G_{2}
+        \end{bmatrix}\left(\begin{bmatrix}
+            C&Q
+        \end{bmatrix}\begin{bmatrix}
+            \psi \\\delta
+        \end{bmatrix}-e\right)+\begin{bmatrix}
+            B\\0
+        \end{bmatrix}\begin{bmatrix}
+            K & \Gamma-K\Pi
+        \end{bmatrix}\begin{bmatrix}
+            \psi \\\Gamma
+        \end{bmatrix}
+    \end{equation*}
+    La stima degli errori \(e_{x}=x-\psi , e_{d}=d-\delta \) sono descritti dalla dinamica:\begin{equation*}
+        \begin{bmatrix}
+            \dot{e_{x}}\\\dot{e_{d}}
+        \end{bmatrix}=\left(\begin{bmatrix}
+            A & P\\ 0 &S
+        \end{bmatrix}+\begin{bmatrix}
+            G_{1}\\G_{2}
+        \end{bmatrix}\begin{bmatrix}
+            C & Q
+        \end{bmatrix}\right)\begin{bmatrix}
+            e_{x}\\e_{d}
+        \end{bmatrix}
+    \end{equation*}
+    Poiché  per la terza assunzione \(\exists G_{1},G_{2}\) che assegnano gli autovalori del sistema di errore.\newline La legge di controllo può essere riscritta come \begin{equation*}
+        u=Kx+(\Gamma-K\Pi)d-(Ke_{x}+(\Gamma-K\Pi)e_{d})
+    \end{equation*}
+    Il requisito di stabilità viene soddisfatto poiché il sistema  a ciclo chiuso è asintoticamente stabile dato che il primo e il secondo termine sono dovuti al full information vano a zero e il terzo per le impotesi fatti va anche a lui a zero. Di conseguenza si soddisfa anche la condizione di regolazione.
+\end{proof}
+\section*{Principio del modello interno}
+Il controllore che risolve il problema di regolazione in feedback dall'errore è descritto da:\begin{equation*}
+    \chi=\begin{bmatrix}
+        \psi \\\delta
+    \end{bmatrix}, F =\begin{bmatrix}
+        A+G_{1}C+BK&P+G_{1}Q+B(\Gamma-K\Pi)\\
+        G_{2}C&S+G_{2}Q
+    \end{bmatrix}, H = \begin{bmatrix}
+        K&\Gamma-K\Pi
+    \end{bmatrix}
+\end{equation*}
+Questa legge di controllo soddista il requisito di stabilità e di regolazione.
+\begin{definition}{\textbf{Principio del modello interno}}\\
+    \(\exists\Sigma:rank(\Sigma )=r \) è tale che \(F\Sigma = \Sigma S\). In particoalre, qualsiasi autovalore di S è anche autovalore di F.
+\end{definition}
+\begin{proof}
+    Sia \(\begin{bmatrix}
+        \Pi \\ I
+    \end{bmatrix}\) e sia \(rank(\Sigma )=r\), per costruzione si ha che:\begin{equation*}
+        F\Sigma=\begin{bmatrix}
+            A+G_{1}C+BK&P+G_{1}Q+B(\Gamma-K\Pi)\\
+            G_{2}C&S+G_{2}Q
+        \end{bmatrix}\begin{bmatrix}
+            \Pi \\ I
+        \end{bmatrix}=\begin{bmatrix}
+            \Pi S\\S
+        \end{bmatrix}=\Sigma S
+    \end{equation*}
+    Ore, sia \(\lambda \) autovalore di S e \(v\) il suo corrispondente autovettore. Allora valore che:\begin{equation*}
+        Sv = \lambda v\rightarrow F\Sigma v = \Sigma S v = \lambda\Sigma v
+    \end{equation*}
+    Cioè è un autovalore di F.
+\end{proof}
+Il principio del modello interno può essere visto nel seguente modo:\textbf{la legge di controllo deve possedere una copia dell'esosistema}.
 \end{document}

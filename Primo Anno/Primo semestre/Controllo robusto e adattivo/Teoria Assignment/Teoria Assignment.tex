@@ -14,16 +14,39 @@
 \begin{document}
 \newtheorem{definizione}{Definizione}
 \tableofcontents
-\section{Assignment 1}
+\section{Assignment 1 - Stima dei parametri}% chktex 8
+Dato un sistema, l'obiettivo della stima dei parametri è quello di generare un'uscita stimata dipendente dall'aggiornamento della stima dei parametri del sistema che sia vicina all'uscita reale del sistema per un tempo sufficientemente elevato. Si prosegue in questa maniera:
+\begin{enumerate}
+    \item Parametrizzazione del modello;
+    \item Generazione della legge di aggiornamento delle stime dei parametri;
+    \item Progettazione di un segnale di ingresso che garantisce convergenza dei parametri stimati ai valori veri.
+\end{enumerate}
 
-\section{Assignment 2}
+\section{Assignment 2 - Gradiente e DREM}% chktex 8
+\begin{itemize}
+    \item \textbf{Parametrizzazione del sistema:}La parametrizzazione di un modello dinamico è un metodo utilie alla progettazione di stimatori, osservatori e controllori adattativi ed in particolare si parametrizza l'incetezza dovuta a stati non misurati o a parametri non noti.\\ Nella parametrizzazione con parametri lineari si vede il modello come un sistema di \(n\) equazioni differenziali \(y^{(n)}=\theta^{T}y\) in cui le misure del lhs (\emph{left-hand-side}) e rhs (\emph{right-hand-side}) servono a stimare i parametri \(\theta \). Per essere realizzabile bisogna introdurre un filtro \textbf{stabile} \(\frac{1}{\Lambda{(s)}}\);
+    \item \textbf{Graiente:} Nel metodo del gradiente si definisce un errore di stima che deve minimizzare un indice di costo per ottenere convergenza dei parametri stimati a parametri veri.\newline Considerata la parametrizzazione \(z=W(s)\theta^{T}\psi \) e dato che \(\theta \) è costante si ha che \(z=\theta^{T}\phi \) con \(\phi=W(s)\psi \). Inoltre, in questo metodo è necessario supporre che \(\psi\in L_{\infty }\) e che \(W(s)\) sia stabile per avere che \(\phi\in L_{\infty}\).% chktex 13
+    Quindi, il costo istantaneo da minimizzare è \(J(\hat{\theta })=\frac{\epsilon^{2}}{2}=\frac{z-\hat{\theta }}{2}\).% chktex 13
+     Il difetto di questo metodo è che la convergenza dei parametri è accoppiata: durante l'evoluzione del sistema, con un segnale persistentemente eccitante, si potrebbe avere per molteplici istanti la convergenza dei parametri a zero. Un metodo che risolve questa problematica è il metodo del gradiente con proiezione o il DREM.% chktex 13
+    \item \textbf{DREM:}DREM sta per \emph{Dynamic Regression Extensione and Mixing}, questo è un metodo che permette di disaccoppiare gli algoritmi di stima dei parametri per ogni componente. Inizialmente, si introduce un filtro H lineare del tipo \(H_{i}(s)=\frac{b_{i}}{s+\tau_{i}}\)
+\end{itemize}
 
-\section{Assignment 3}
-
-\section{Assignment 4}
-
-\section{Assignment 5}
-
+\section{Assignment 3 - I\&I}% chktex 8
+Nell'approccio I\&I (\emph{Immersion \& Invariance}) l'obiettivo è quello di stimare l'ampiezza, la fase e la frequenza di un segnale. Si utilizzano gli errori di stima dello stato e dei parametri e l'obiettivo è quello di minimizzarli.
+\section{Assignment 4 - MRAC e I\&I}% chktex 8
+L'approccio \textbf{MRAC} (\emph{Model Reference Adaptive Control}) è un approccio che utlizza un modello di riferimento \(W_{s}(s)\) per generare la traiettoria che si desidera da far seguire. Quindi, si definire l'errore di traiettoria tra l'uscita dell'impianto e quella del modello. Il controllo dell'impianto è effettuato tramite un controllore parametrizzato posto in retroazione con l'impiano. I parametri dell controllore venogno stimati on-line tramite techine adattative utilizzando segnali misurabili e l'errore di traiettoria. Si può avere un approccio diretto quando i parametri sono aggiornati online oppure indiretto quando i parametri vengono aggiornati online e da questi si ottengono algebricamente i parametri del controllore.\newline Inoltre, vi è la possibilità di effettuare un approccio MRAC normalizzato che,quindi, permette di stimare i parametri quando essi sono illimitati, ma si ha una diminuzione dell'azione di controllo. In alternativa, l'approccio non normalizzaato in cui si cerca di modificare il controllore che permetta l'utilizzo del teorema della passività.
+\section{Assignment 5 - MRAC SISO}% chktex 8
+Nell'MRAC SISO si considera un sistema lineare con funzione di trasferimento che deve inseguire un modello di riferimento. Per adempire a questo obiettivbo occorre effetture le seguenti assunzioni sul sistema:\begin{itemize}
+    \item Il numeraore della funzione di trasferimento deve essere di Hurwitz di grado n;
+    \item Il limite superiore del denominatore della funzione di trasferimento deve essere n;
+    \item il grado relativo deve essere m-n;
+    \item Il segno del guadagno ad alta frequenza K è noto.
+\end{itemize}
+Per quanto riguarda le assuzioni del modello di riferimento deve valere che:\begin{itemize}
+    \item Il numeratore e denominatore della funzione di trasferimento devono essere monici di Hurwitz e il suo grado relativo deve essere ed
+\end{itemize}
+Inoltre, il sistema è a fgase minima e può essere instabile (Sono concesse cancellazioni polo/zero).\newline
+I parametri del controllore non sono lineari.
 \section{Assignment 6}
 
 \section{Assignment 7}
