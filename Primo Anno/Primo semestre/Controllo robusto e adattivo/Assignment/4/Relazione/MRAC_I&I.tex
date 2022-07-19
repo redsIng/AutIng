@@ -46,8 +46,8 @@
 		\item \textbf{Modello di riferimento:}\(\dot{x_{m}}=-a_{m}x_{m}\);
 		\item \textbf{Sistema:}\(\dot{x}=ax+u\);
 		\item \textbf{Controllore adattativo I\&I:}\begin{itemize}
-			      \item \emph{\(\beta\) quadratic:}\(\dot{x}=-a_{m}x-xz,\dot{z}=-x^{2}z,\dot{\hat{a}}=a_{m}x^{2},a_{est}=\hat{a}+\frac{x^{2}}{2}\)
-			      \item \emph{\(\beta\) logarithmic:}\(\dot{x}=-a_{m}x-xz,\dot{z}=-\frac{a_{m}x^{2}}{1+x^{2}},\dot{\hat{a}}=a_{m}\frac{x^{2}}{1+x^{2}},a_{est}=\hat{a}+\frac{1}{2}\log{(1+x^{2})}\)
+			      \item \emph{\(\beta \) quadratic:}\(\dot{x}=-a_{m}x-xz,\dot{z}=-x^{2}z,\dot{\hat{a}}=a_{m}x^{2},a_{est}=\hat{a}+\frac{x^{2}}{2}\)
+			      \item \emph{\(\beta \) logarithmic:}\(\dot{x}=-a_{m}x-xz,\dot{z}=-\frac{a_{m}x^{2}}{1+x^{2}}z,\dot{\hat{a}}=a_{m}\frac{x^{2}}{1+x^{2}},a_{est}=\hat{a}+\frac{1}{2}\log{(1+x^{2})}\)
 		      \end{itemize}
 		\item \textbf{Controllore MRAC:}\(\dot{\tilde{k}}=\gamma \varepsilon_{1}x,u=-\tilde{k}x,\varepsilon_{1}=x-\hat{x}\)
 	\end{itemize}
@@ -77,9 +77,9 @@
 \begin{frame}
 	\frametitle{Simulink-2}% chktex 8
 	\subsection{Controllo Adattativo I\&I}
-	\subsubsection{\(\beta\) quadratic}
+	\subsubsection{\(\beta \) quadratic}
 	\begin{itemize}
-		\item \textbf{I\&I \(\beta\) quadratic:}
+		\item \textbf{I\&I \(\beta \) quadratic:}
 		\begin{figure}
 			\includegraphics[scale=0.3]{2022-05-19-18-34-21.png}% chktex 8
 		\end{figure}
@@ -87,9 +87,9 @@
 \end{frame}
 \begin{frame}
 	\frametitle{Simulink -3}% chktex 8
-	\subsubsection{\(\beta\) logarithmic}
+	\subsubsection{\(\beta \) logarithmic}
 	\begin{itemize}
-		\item \textbf{I\&I \(\beta\) logarithmic:}
+		\item \textbf{I\&I \(\beta \) logarithmic:}
    \begin{figure}
 	  \includegraphics[scale=0.3]{2022-05-19-18-38-24.png} % chktex 8
   \end{figure}
@@ -117,31 +117,31 @@
 	\section{Analisi}
 	\subsection{MRAC Parametri stazionari}
 	\begin{minipage}[t]{0.45\textwidth}
-		\textbf{\(\gamma\) = 1}
+		\textbf{\(\gamma \) = 1}
 		\begin{figure}
 			\includegraphics[scale=0.25]{2022-05-20-10-29-19.png} % chktex 8
 		\end{figure}
 	\end{minipage}
 	\begin{minipage}[t]{0.45\textwidth}
-		\textbf{\(\gamma\) = 5}
+		\textbf{\(\gamma \) = 5}
 		\begin{figure}
 			\includegraphics[scale=0.25]{2022-05-20-10-33-35.png} % chktex 8
 		\end{figure}
 	\end{minipage}
 	\vspace{0.1cm}
-	\\Al variare del parametro \(\gamma\) del controllore adattativo MRAC si nota che il tempo di convergenza per stimare lo stato rimane invariato a circa 5s. Per valore di \(\gamma\) maggiori, si nota che l'errore presenta una sottoelongazione e la stima di \(k\) una leggera sovraelongazione.
+	\\Al variare del parametro \(\gamma \) del controllore adattativo MRAC si nota che il tempo di convergenza per stimare lo stato rimane invariato a circa 5s. Per valore di \(\gamma \) maggiori, si nota che l'errore presenta una sottoelongazione e la stima di \(k\) una leggera sovraelongazione.
 \end{frame}
 \begin{frame}
 	\frametitle{MRAC Parametri stazionari con rumore}
 	\subsection{MRAC Parametri stazionari + rumore}
 	\begin{minipage}[t]{0.45\textwidth}
-		\textbf{\(\gamma\) = 1}
+		\textbf{\(\gamma \) = 1}
 		\begin{figure}
 			\includegraphics[scale=0.25]{2022-05-20-11-03-08.png} % chktex 8
 		\end{figure}
 	\end{minipage}
 	\begin{minipage}[t]{0.45\textwidth}
-		\textbf{\(\gamma\) = 5}
+		\textbf{\(\gamma \) = 5}
 		\begin{figure}
 			\includegraphics[scale=0.25]{2022-05-20-11-04-01.png} % chktex 8
 		\end{figure}
@@ -190,31 +190,31 @@
 	\frametitle{I\&I parametri stazionari}
 	\subsection{I\&I parametri stazionari}
 	\begin{minipage}[t]{0.45\textwidth}
-		\textbf{\(\beta\) quadratic}
+		\textbf{\(\beta \) quadratic}
 		\begin{figure}
 			\includegraphics[scale=0.35]{2022-05-21-10-25-55.png} % chktex 8
 		\end{figure}
 	\end{minipage}
 	\begin{minipage}[t]{0.45\textwidth}
-		\textbf{\(\beta\) logarithmic}
+		\textbf{\(\beta \) logarithmic}
 		\begin{figure}
 			\includegraphics[scale=0.35]{2022-05-21-10-27-23.png} % chktex 8
 		\end{figure}
 	\end{minipage}
 	\vspace{0.1cm}\\
-	Sia l'algoritmo I\&I con \(\beta\) quadratic e logarithmic arrivano a convergenza con prestazioni simili ad eccezione dell'errore che presenza una sovraelongazione leggermente più arcuata.
+	Sia l'algoritmo I\&I con \(\beta \) quadratic e logarithmic arrivano a convergenza con prestazioni simili ad eccezione dell'errore che presenza una sovraelongazione leggermente più arcuata.
 \end{frame}
 \begin{frame}
 	\frametitle{I\&I parametri stazionari con rumore}
 	\subsection{I\&I parametri stazionari + rumore}
 	\begin{minipage}[t]{0.45\textwidth}
-		\textbf{\(\beta\) quadratic}
+		\textbf{\(\beta \) quadratic}
 		\begin{figure}
 			\includegraphics[scale=0.35]{2022-05-21-10-34-18.png} % chktex 8
 		\end{figure}
 	\end{minipage}
 	\begin{minipage}[t]{0.45\textwidth}
-		\textbf{\(\beta\) logarithmic}
+		\textbf{\(\beta \) logarithmic}
 		\begin{figure}
 			\includegraphics[scale=0.35]{2022-05-21-10-30-59.png} % chktex 8
 		\end{figure}
@@ -226,37 +226,37 @@
 	\frametitle{I\&I parametri non stazionari}
 	\subsection{I\&I parametri non stazionari}
 	\begin{minipage}[t]{0.45\textwidth}
-		\textbf{\(\beta\) quadratic \( a=1+\frac{1}{10}\sin{(10t)}\)}
+		\textbf{\(\beta \) quadratic \( a=1+\frac{1}{10}\sin{(10t)}\)}
 		\begin{figure}
 			\includegraphics[scale=0.35]{2022-05-21-10-38-05.png} % chktex 8
 		\end{figure}
 	\end{minipage}
 	\begin{minipage}[t]{0.45\textwidth}
-		\textbf{\(\beta\) logarithmic \( a=1+\frac{1}{10}\sin{(10t)}\)}
+		\textbf{\(\beta \) logarithmic \( a=1+\frac{1}{10}\sin{(10t)}\)}
 		\begin{figure}
 			\includegraphics[scale=0.35]{2022-05-21-10-39-00.png} % chktex 8
 		\end{figure}
 	\end{minipage}
 	\vspace{0.1cm}\\
-	Si ha convergenza per entrambe le scelte di \(\beta\) con tempi, rispettivamente, di 5 e 6s circa. Nel secondo caso, l'errore ha un valore iniziale più alto.
+	Si ha convergenza per entrambe le scelte di \(\beta \) con tempi, rispettivamente, di 5 e 6s circa. Nel secondo caso, l'errore ha un valore iniziale più alto.
 \end{frame}
 \begin{frame}
 	\frametitle{I\&I parametri non stazionari}
 	\subsection{I\&I parametri non stazionari}
 	\begin{minipage}[t]{0.45\textwidth}
-		\textbf{\(\beta\) quadratic \(a=1+10\sin{(\frac{t}{10})}\)}
+		\textbf{\(\beta \) quadratic \(a=1+10\sin{(\frac{t}{10})}\)}
 		\begin{figure}
 			\includegraphics[scale=0.35]{2022-05-21-10-54-48.png} % chktex 8
 		\end{figure}
 	\end{minipage}
 	\begin{minipage}[t]{0.45\textwidth}
-		\textbf{\(\beta\) logarithmic \( a=1+10\sin{(\frac{t}{10})}\)}
+		\textbf{\(\beta \) logarithmic \( a=1+10\sin{(\frac{t}{10})}\)}
 		\begin{figure}
 			\includegraphics[scale=0.35]{2022-05-21-10-53-30.png} % chktex 8
 		\end{figure}
 	\end{minipage}
 	\vspace{0.1cm}\\
-	Dato che la variazione di \(a\) è maggiore, i tempi di convergenza per la stima e l'errore risulta aumentata a 20s e l'azione di controllo è elevata. Inoltre, l'andamento generale con \(\beta\) logarithmic è più regolare rispetto al \(\beta\) quadratic.
+	Dato che la variazione di \(a\) è maggiore, i tempi di convergenza per la stima e l'errore risulta aumentata a 20s e l'azione di controllo è elevata. Inoltre, l'andamento generale con \(\beta \) logarithmic è più regolare rispetto al \(\beta \) quadratic.
 \end{frame}
 \begin{frame}
 	\frametitle{Conclusioni}
@@ -264,7 +264,7 @@
 	\begin{itemize}
 		\item Per piccole variazioni del parametro \(a\) entrambi i modelli presentano prestazioni simili;
   \item Per variazioni elevate del parametro \(a\) si richiede un'azione di controllo maggiore,ma si giunge a convergenza;
-  \item In presenza di rumore il modello MRAC fornisce prestazioni migliori e con un'azione di controllo più contenuta e una stima più precisa del modello I\&I;
+  \item In presenza di rumore il modello MRAC fornisce prestazioni migliori e con un'azione di controllo più contenuta e una stima più precisa del modello I\&I\@;
 \item Il modello I\&I logarithmic permette di ottenere un andamento più regolare rispetto al quadratic;
 	\end{itemize}
 \end{frame}
